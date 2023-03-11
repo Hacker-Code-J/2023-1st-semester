@@ -1,0 +1,449 @@
+\documentclass[12pt,openany]{book}
+
+\usepackage{amsmath,amsthm,amsfonts,amscd} % Packages for mathematics
+
+% Colors
+\usepackage[dvipsnames]{xcolor}
+\definecolor{titleblue}{RGB}{0,53,128}
+\definecolor{chaptergray}{RGB}{140,140,140}
+\definecolor{sectiongray}{RGB}{180,180,180}
+
+% Fonts
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{newpxtext,newpxmath}
+\usepackage{sectsty}
+\allsectionsfont{\sffamily\color{titleblue}\mdseries}
+
+% Page layout
+\usepackage{geometry}
+\geometry{a4paper,left=1.5in,right=1in,top=1in,bottom=1in,heightrounded}
+\usepackage{fancyhdr}
+\fancyhf{}
+\fancyhead[LE,RO]{\thepage}
+\fancyhead[LO]{\nouppercase{\rightmark}}
+\fancyhead[RE]{\nouppercase{\leftmark}}
+\renewcommand{\headrulewidth}{0.5pt}
+\renewcommand{\footrulewidth}{0pt}
+
+% Chapter formatting
+\usepackage{titlesec}
+\titleformat{\chapter}[display]
+{\normalfont\sffamily\Huge\bfseries\color{titleblue}}{\chaptertitlename\ \thechapter}{20pt}{\Huge}
+\titleformat{\section}
+{\normalfont\sffamily\Large\bfseries\color{chaptergray}}{\thesection}{1em}{}
+\titleformat{\subsection}
+{\normalfont\sffamily\large\bfseries\color{sectiongray}}{\thesubsection}{1em}{}
+
+% Table of contents formatting
+\usepackage{tocloft}
+\renewcommand{\cftchapfont}{\sffamily\color{titleblue}\bfseries}
+\renewcommand{\cftsecfont}{\sffamily\color{chaptergray}}
+\renewcommand{\cftsubsecfont}{\sffamily\color{sectiongray}}
+\renewcommand{\cftchapleader}{\cftdotfill{\cftdotsep}}
+
+% Hyperlinks
+\usepackage{hyperref}
+\hypersetup{
+	colorlinks=true,
+	linkcolor=titleblue,
+	filecolor=black,      
+	urlcolor=titleblue,
+}
+
+%---------------------------My Preamble
+\usepackage{enumerate}
+\usepackage{graphicx}
+\usepackage{tikz-cd}
+
+%Tcolorbox
+\usepackage[most]{tcolorbox}
+\tcbset{enhanced, colback=white,colframe=black,fonttitle=\bfseries,arc=4mm,boxrule=1pt,shadow={2mm}{-1mm}{0mm}{black!50}}
+
+%White box with black text and shadow
+%\begin{tcolorbox}[colback=white,colframe=black,fonttitle=\bfseries,title=Black Shadow Box,arc=4mm,boxrule=1pt,shadow={2mm}{-1mm}{0mm}{black!50}]
+%	This is a white box with black text and a subtle shadow. The shadow adds some depth and dimension to the box without overpowering the design.
+%\end{tcolorbox}
+
+%Theorem
+\newtheorem{axiom}{Axiom}[section]
+\newtheorem{theorem}{Theorem}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{corollary}{Corollary}[theorem]
+\newtheorem{lemma}[theorem]{Lemma}
+
+\newtheorem{definition}{Definition}
+\newtheorem{remark}{Remark}
+\newtheorem{exercise}{Exercise}[section]
+
+%New Command
+\newcommand{\set}[1]{\left\{#1\right\}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\F}{\mathbb{F}}
+\newcommand{\nbhd}{\mathcal{N}}
+
+\newcommand{\inv}[1]{#1^{-1}}
+
+\newcommand{\ie}{\textnormal{i.e.}}
+\newcommand{\eg}{\textnormal{e.g.}}
+
+\newcommand{\of}[1]{\left( #1 \right)} 
+\newcommand{\abs}[1]{\left\lvert #1 \right\rvert}
+\newcommand{\norm}[1]{\left\| #1 \right\|}
+
+\newcommand{\sol}{\textcolor{magenta}{\bf Sol}}
+
+% Begin document
+\begin{document}
+	
+	% Title page
+	\begin{titlepage}
+		\begin{center}
+			{\Huge\textsf{\textbf{Abstract Algebra}}\par}
+			\vspace{0.5in}
+			{\Large Ji Yong-Hyeon\par}
+			\vspace{1in}
+			%\includegraphics[width=3in]{algebra.png}\par
+			\vspace{1in}
+			{\large Ji Yong-Hyeon\par}
+			{\large \today\par}
+		\end{center}
+	\end{titlepage}
+	
+	% Table of contents
+	\tableofcontents
+	
+	% Chapters
+	\mainmatter
+	
+	\chapter{Public Key Cryptography in a Nutshell: Classification and Security Notions}
+	
+	\section{PKE}
+	Signature, Key Establishment
+	
+	Onewayness Trapdoor, IND-CCA2, EUF-CMA
+	
+	
+	\newpage
+	\chapter{IFP-based Primitives}
+	
+	\section{Textbook RSA}
+	
+	RSA is a public-key cryptosystem that uses the mathematics of prime numbers to secure communication over the internet. It is widely used in various applications, such as digital signatures, secure email, and online banking.
+	
+	The RSA cryptosystem is based on the following mathematical concepts:
+	
+	
+	\begin{itemize}
+		\item Modular arithmetic:
+		- a mod b (remainder when a is divided by b)
+		- Euler's totient function phi(n) (number of positive integers less than n that are coprime to n)
+		\item Prime factorization:
+		- finding the unique prime factors of a given integer
+		\item The Chinese Remainder Theorem:
+		- a theorem that provides a solution to a system of linear congruences with pairwise relatively prime moduli
+		\item Fermat's Little Theorem:
+		- a theorem that states that if p is a prime number and a is an integer not divisible by p, then $a^{(p-1)}$ is congruent to 1 modulo p.
+		\item Euler's Theorem:
+		- a generalization of Fermat's Little Theorem that states that if a and n are coprime, then $a^{(\phi(n))}$ is congruent to 1 modulo n.
+	\end{itemize}
+	
+	\subsection{The RSA Algorithm}
+	
+	\subsubsection{Key Generation}
+	To generate an RSA key pair, we follow these steps:
+	\begin{enumerate}
+		\item Choose two large prime numbers $p$ and $q$.
+		\item Compute $n = pq$ and $\phi(n) = (p-1)(q-1)$.
+		\item Choose an integer $e$ such that $1 < e < \phi(n)$ and $\gcd(e, \phi(n)) = 1$.
+		\item Compute $d$ such that $de \equiv 1 \pmod{\phi(n)}$.
+	\end{enumerate}
+	The public key is $(n, e)$, and the private key is $d$.
+	
+	\subsubsection{Encryption}
+	To encrypt a message $M$, we use the public key $(n, e)$ and compute:
+	$$C = M^e \pmod{n}$$
+	The ciphertext $C$ is then sent to the recipient.
+	
+	\subsubsection{Decryption}
+	To decrypt the ciphertext $C$, we use the private key $d$ and compute:
+	$$M = C^d \pmod{n}$$
+	The plaintext $M$ is then recovered.
+	
+	\subsection{Security}
+	RSA is secure because it is based on the difficulty of factoring large integers. If an attacker can factor $n$ into its prime factors $p$ and $q$, then they can compute $\phi(n)$ and derive the private key. However, factoring large numbers is currently considered computationally infeasible, making RSA a secure choice for many applications.
+	
+	\subsection{Conclusion}
+	RSA is a widely used public-key cryptosystem that uses prime numbers to secure communication over the internet. It is based on the difficulty of factoring large integers and is currently considered secure for many applications.
+	
+
+	\section{RSA-CRT}
+	
+	RSA-CRT is a modified version of the RSA public-key cryptosystem that leverages the Chinese Remainder Theorem to enhance the speed of the decryption process.
+	
+	RSA-CRT works by first generating two large primes, $p$ and $q$, and computing the modulus $n=pq$. Then, the public and private keys are generated using the usual RSA key generation algorithm.
+	
+	When encrypting a message, the sender uses the recipient's public key to encrypt the message, as in standard RSA. However, when decrypting a message, the recipient first computes two intermediate values, $m_1$ and $m_2$, using the Chinese Remainder Theorem. These values are then combined to obtain the original message.
+	
+	The Chinese Remainder Theorem states that given a system of linear congruences with pairwise relatively prime moduli, there exists a unique solution modulo the product of the moduli. In the case of RSA-CRT, the two moduli are $p$ and $q$, which are both primes, and the system of congruences is:
+	
+	$$\begin{aligned} m \equiv c^d \pmod{p}\ m \equiv c^d \pmod{q}\end{aligned}$$
+	
+	where $c$ is the encrypted message, $d$ is the recipient's private key, and $m$ is the decrypted message.
+	
+	The two intermediate values, $m_1$ and $m_2$, are computed as:
+	
+	$$\begin{aligned} m_1 &\equiv c^d \pmod{p}\ m_2 &\equiv c^d \pmod{q}\end{aligned}$$
+	
+	These values can be computed efficiently using modular exponentiation, which is much faster than using the standard RSA decryption algorithm to compute $m$ directly.
+	
+	Finally, the original message can be recovered by combining $m_1$ and $m_2$ using the Chinese Remainder Theorem:
+	
+	$$m \equiv m_1 + q((m_2 - m_1)q^{-1} \bmod p) \pmod n$$
+	
+	where $q^{-1}$ is the modular inverse of $q$ modulo $p$. This formula allows the recipient to efficiently compute the original message without having to compute the expensive modular exponentiation step for the entire modulus $n$.
+	
+	\begin{tcolorbox}[colback=white!10!white,colframe=blue!50!black,title=RSA-CRT Algorithm]
+		\begin{enumerate}
+			\item Generate two large primes $p$ and $q$, and compute $n = pq$.
+			\item Generate the public and private keys using the usual RSA key generation algorithm. That is, \begin{enumerate}
+				\item Compute the totient of n, $\phi(n) = (p - 1)(q - 1)$.
+				\item Choose an integer $e$ such that \[
+				1 < e < \phi(n)\quad \text{and}\quad \gcd(e, \phi(n)) = 1.
+				\] This is the public key exponent.
+				\item Compute the private key exponent $d$ such that \[
+				d\equiv\inv{e} \pmod{\phi(n)}.
+				\] This can be done efficiently using the Extended Euclidean Algorithm.
+			\end{enumerate}
+			The public key is $(n, e)$, and the private key is $(n, d)$.
+			\item To encrypt a message $\mathcal{M}$, use the recipient's public key to compute \[
+			\mathcal{C} = \mathcal{M}^e \mod{n}.
+			\]
+			\item To decrypt a message $\mathcal{C}$, compute the two intermediate values: \begin{enumerate}
+				\item $m_1 = \mathcal{C}^d \mod p$.
+				\item $m_2 = \mathcal{C}^d \mod q$.
+			\end{enumerate}
+			\item Combine the two intermediate values using the Chinese Remainder Theorem to obtain the original message $\mathcal{M}$: \[
+			\mathcal{M} = m_1+q\of{\of{m_2-m_1}\inv{q}\mod p}\pmod{n}.
+			\]
+		\end{enumerate}
+	\end{tcolorbox}
+
+	\begin{tcolorbox}[title=Chinese Remainder Theorem]
+		\begin{theorem}
+			Given a system of linear congruences with pairwise relatively prime moduli:
+			\begin{align*}
+				x&\equiv a_1 \pmod{m_1}\\
+				x&\equiv a_2 \pmod{m_2}\\
+				&\vdots \\
+				x&\equiv a_n \pmod{m_1},
+			\end{align*}
+			
+			there exists a unique solution $x$ modulo $M = m_1m_2\cdots m_n$:
+			\begin{align*}
+			x&\equiv a_1b_1M_1+a_2b_2M_2+\cdots a_nb_nM_n\pmod{M}, \ie,\\ x&\equiv\sum_{i=1}^{n}a_ib_iM_i\pmod{M}
+			\end{align*}\[
+			\] where $M_i=M/m_i$ and $b_i$ is the inverse of $M_i$ modulo $m_i$.
+		\end{theorem}
+	\end{tcolorbox}
+		
+	\section{Fermat's Little Theorem}
+	
+	\begin{tcolorbox}[title=Fermat's Little Theorem]
+		\begin{theorem}
+			Let $p$ is a prime number and $a$ is an integer not divisible by $p$, then \[
+			a^{p-1}\equiv1 \pmod{p}.
+			\] In other words, if we take any non-zero integer $a$ and raise it to the power $p-1$, then divide the result by a prime $p$, the remainder will always be 1. This theorem is widely used in number theory and cryptography.
+		\end{theorem}
+	\end{tcolorbox}
+	\begin{proof}
+		We use mathematical induction and binomial theorem. \begin{enumerate}
+			\item (Basic Step) Let $a=1$, then $1^{p-1}=1\equiv\pmod{p}$, which is true.
+			\item (Inductive Step) Suppose that the theorem holds for some integer $a$. We need to show that it also holds for $a+1$. We can express $(a+1)^{p}$ as: \[
+			\of{a+1}^p=\sum_{i=0}^{p}\binom{p}{i}a^{i} 1^{p-i}
+			\]
+		\end{enumerate}
+	\end{proof}
+	Using the binomial theorem. Since $p$ is a prime number, we know that $\binom{p}{i}$ is divisible by $p$ for $0<i<p$, hence:
+	
+	$$(a+1)^{p} \equiv a^{p} + 1^{p} \equiv a + 1 \pmod{p}$$
+	
+	The last step follows from the fact that $a^{p-1} \equiv 1 \pmod{p}$. Therefore, we have shown that:
+	
+	$$(a+1)^{p-1} \equiv 1 \pmod{p}$$
+	
+	which completes the proof of Fermat's Little Theorem.
+	
+	\begin{proof}
+		We use the group theory of the multiplicative group of integers modulo a prime $p$.
+
+		Let $p$ be a prime number, and let $a$ be an integer that is not divisible by $p$. Consider the set of integers modulo $p$, denoted by $\mathbb{Z}/p\mathbb{Z}$. This set forms a group under multiplication, denoted by $(\mathbb{Z}/p\mathbb{Z})^{\times}$. Since $p$ is prime, the group $(\mathbb{Z}/p\mathbb{Z})^{\times}$ has order $p-1$, which means that it contains $p-1$ distinct elements.
+		
+		Now consider the subset of $(\mathbb{Z}/p\mathbb{Z})^{\times}$ consisting of the multiples of $a$, denoted by $S_a = {a, 2a, 3a, \ldots, (p-1)a}$. Since $a$ is not divisible by $p$, the set $S_a$ consists of distinct elements. We claim that $S_a$ is a permutation of the elements of $(\mathbb{Z}/p\mathbb{Z})^{\times}$.
+		
+		To prove this claim, we need to show that every element of $(\mathbb{Z}/p\mathbb{Z})^{\times}$ can be expressed as a multiple of $a$ modulo $p$. Suppose for the sake of contradiction that there exists an element $b \in (\mathbb{Z}/p\mathbb{Z})^{\times}$ that cannot be expressed as $b = ka \pmod{p}$ for any integer $k$. Then the integers $1a, 2a, \ldots, (p-1)a$ would not be distinct modulo $p$, which contradicts our assumption that $S_a$ consists of distinct elements. Therefore, $S_a$ is a permutation of the elements of $(\mathbb{Z}/p\mathbb{Z})^{\times}$.
+		
+		Since $S_a$ is a permutation of the elements of $(\mathbb{Z}/p\mathbb{Z})^{\times}$, we can multiply all the elements of $S_a$ together to obtain:
+		
+		$$a \cdot 2a \cdot \ldots \cdot (p-1)a \equiv 1 \cdot 2 \cdot \ldots \cdot (p-1) \pmod{p}$$
+		
+		which simplifies to:
+		
+		$$(p-1)!a^{p-1} \equiv (p-1)! \pmod{p}$$
+		
+		Since $p$ does not divide $(p-1)!$, we can cancel out $(p-1)!$ from both sides to obtain:
+		
+		$$a^{p-1} \equiv 1 \pmod{p}$$
+		
+		This completes the proof of Fermat's Little Theorem using the theory of abstract algebra.
+	\end{proof}
+	
+	\newpage
+	\section{Euler's Theorem}
+	
+	Euler's Theorem is a generalization of Fermat's Little Theorem. It states that if $a$ and $n$ are two positive integers that are coprime, then:
+	
+	$$a^{\varphi(n)} \equiv 1 \pmod{n}$$
+	
+	where $\varphi(n)$ is Euler's totient function, which gives the number of positive integers less than or equal to $n$ that are coprime with $n$. Euler's Theorem is useful in cryptography for testing the primality of large numbers and for computing modular exponentiations efficiently.
+	
+	Proof: We can prove Euler's Theorem using the fact that the totient function is multiplicative, which means that if $m$ and $n$ are two coprime positive integers, then:
+	
+	$$\varphi(mn) = \varphi(m) \varphi(n)$$
+	
+	We can use this property to reduce the theorem to the case where $n$ is a prime power $p^k$, where $p$ is a prime and $k$ is a positive integer. If $k=1$, then Euler's Theorem reduces to Fermat's Little Theorem. Otherwise, we can use the Chinese Remainder Theorem to combine the solutions of $a^{\varphi(p^k)} \equiv 1 \pmod{p^k}$ for all prime powers $p^k$ that divide $n$. Since the exponents $\varphi(p^k)$ are powers of $p$, we can use repeated squaring to compute the modular exponentiations efficiently. This completes the proof of Euler's Theorem.
+	
+	\begin{proof}
+		Euler's Theorem is a generalization of Fermat's Little Theorem and states that if $a$ and $n$ are two coprime positive integers, then
+		
+		$$a^{\varphi(n)} \equiv 1 \pmod{n}$$
+		
+		where $\varphi(n)$ is Euler's totient function, which gives the number of positive integers less than or equal to $n$ that are coprime with $n$.
+		
+		To prove Euler's Theorem, we first define a group $G$ of integers modulo $n$ that are coprime with $n$. This group is denoted as:
+		
+		$$G = {a \in \mathbb{Z}_n | gcd(a,n)=1}$$
+		
+		Next, we define the function $f(a) = ra \pmod{n}$ where $r$ is a fixed integer coprime with $n$. It can be shown that $f$ is a permutation of $G$ and that the order of the group $G$ is $\varphi(n)$.
+		
+		Now, we consider the product of all elements in $G$:
+		
+		$$P = \prod_{a \in G} f(a) = \prod_{a \in G} ra \pmod{n}$$
+		
+		We can rewrite this product as:
+		
+		$$P = r^{\varphi(n)} \prod_{a \in G} a \pmod{n}$$
+		
+		Since $a$ is coprime with $n$, we know that $a$ has a unique inverse $b$ in the group $G$ such that $ab \equiv 1 \pmod{n}$. Therefore, we can rewrite the product as:
+		
+		$$P = r^{\varphi(n)} \prod_{a \in G} a \prod_{a \in G} b = r^{\varphi(n)} \prod_{a \in G} 1 = r^{\varphi(n)}$$
+		
+		where we used the fact that $ab \equiv 1 \pmod{n}$ and that $a$ and $b$ are both in the group $G$.
+		
+		On the other hand, we can rearrange the terms in the product as:
+		
+		$$P = \prod_{a \in G} f(a) = \prod_{a \in G} (ar) \pmod{n} = r^{\varphi(n)} \prod_{a \in G} a \pmod{n}$$
+		
+		where we used the fact that $ar$ is also in the group $G$ since $r$ is coprime with $n$.
+		
+		Equating the two expressions for $P$, we get:
+		
+		$$r^{\varphi(n)} \prod_{a \in G} a \equiv r^{\varphi(n)} \prod_{a \in G} a \pmod{n}$$
+		
+		Dividing both sides by $\prod_{a \in G} a$, we obtain:
+		
+		$$r^{\varphi(n)} \equiv 1 \pmod{n}$$
+		
+		which is Euler's Theorem.
+	\end{proof}
+	
+	\section{Primality Test}
+	
+	A primality test is a method used to determine if a given positive integer is a prime number or a composite number. There are various primality tests, and they differ in their speed, accuracy, and the range of numbers they can handle.
+	
+	One of the simplest and most well-known primality tests is the trial division method. This method involves dividing the number by each integer from 2 up to the square root of the number, checking if any of the divisors evenly divide the number. If no divisor is found, then the number is prime. However, this method becomes impractical for very large numbers, as the number of potential divisors to check grows with the number being tested.
+	
+	Another primality test is the Fermat primality test. This test is based on Fermat's Little Theorem, which states that if $p$ is a prime number and $a$ is any integer not divisible by $p$, then $a^{p-1} \equiv 1 \pmod p$. The Fermat primality test uses this theorem to check if a number is prime by randomly selecting values of $a$ and checking if the equation holds for each value. If the equation fails for any $a$, then the number is composite. If the equation holds for many values of $a$, the number is likely prime, but there is still a small chance it could be composite.
+	
+	The Miller-Rabin primality test is a more sophisticated primality test that is based on the same idea as the Fermat test but is more efficient and has a higher probability of correctly identifying composite numbers. The Miller-Rabin test involves selecting a random value $a$ and then repeatedly squaring it and checking if the resulting values satisfy the equation $a^{d} \equiv 1 \pmod n$ or $a^{2^rd} \equiv -1 \pmod n$ for some values of $r$ and $d$. If the equation holds for many values of $r$ and $d$, the number is likely prime, but if the equation fails for any $r$ or $d$, the number is composite.
+	
+	There are also deterministic primality tests that can determine with certainty whether a number is prime or composite. One example is the AKS primality test, which is based on a polynomial-time algorithm and can handle very large numbers. However, deterministic tests are generally more complex and slower than probabilistic tests.
+	
+	\section{EEA}
+	\section{CRT}
+	
+	\newpage
+	IFP-based Schemes
+	
+	RSA-OAEP, RSA-PSS
+	
+	Random Oracle Model
+	
+	
+	How to Implement IFP-based Schemes Part 1
+	
+	Integer Multiplication, Division, (Modular) Exponentiation
+	
+	
+	How to Implement IFP-based Schemes Part 2
+	
+	Barrett Reduction, Montgomery Reduction
+	
+	
+	How to Solve IFP Part 1
+	
+	Birthday Bound, Floyd's Cycle Detection
+	
+	Pollard’s p-1 method, Pollard’s rho method
+	
+	
+	How to Solve IFP Part 2
+	
+	Quadratic Residue mod p (Legendre symbol), Square Roots modulo p
+	
+	QS, GNFS
+	
+	
+	Midterm Exam. (04.20.)
+	
+	
+	DLP-based Schemes
+	
+	DH, DSA, KCDSA
+	
+	
+	How to Solve DLP Part 1
+	
+	Baby-Step/Giant-Step Algorithm, Pollard’s rho method
+	
+	
+	How to Solve DLP Part 2
+	
+	Pohlig-Hellman Algorithm, Index Calculus Method
+	
+	
+	Elliptic Curve Cryptography Part 1
+	
+	Projective Space, Elliptic Curve, Elliptic Curve Group
+	
+	ECDH, ECDSA, EC-KCDSA
+	
+	
+	Elliptic Curve Cryptography Part 2
+	
+	Addition, Doubling
+	
+	NIST Curves, Curve25519
+	
+	
+	Post-Quantum Cryptography
+	
+	NIST PQC, KpqC
+	
+	
+	% End document
+\end{document}
