@@ -1,0 +1,91 @@
+\documentclass{article}
+
+% Packages for formatting
+\usepackage[margin=1in]{geometry}
+\usepackage{fancyhdr}
+\usepackage{enumitem}
+\usepackage{graphicx}
+\usepackage{kotex}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{algorithm}
+
+% Header and footer formatting
+\pagestyle{fancy}
+\fancyhf{}
+\rhead{Name: 20192250 지용현}%\rule{3cm}{0.4pt}}
+\lhead{\textbf{Assignment \#1}}
+\rfoot{\large Department of Information Security, Cryptogrphy and Mathematics, Kookmin Uni.\includegraphics[height=1.5cm]{school_logo.jpg}}
+
+\begin{document}
+
+\begin{center}
+    $\underset{\LARGE\textbf{(Public Key Cryptography)}}{\huge\textbf{공개키 암호}}$
+\end{center}
+
+\begin{itemize}
+	\item RSA의 개인키의 크기를 줄이시오. \begin{proof}
+		Recall that RSA-CRT algorithm :  \iffalse\begin{algorithm}[H]
+			\SetAlgoLined
+			\KwIn{A public key $(n,e)$, a ciphertext $c$, and the primes $p$ and $q$ such that $n = pq$.}
+			\KwOut{The plaintext message corresponding to the ciphertext.}
+			$d_p \leftarrow e^{-1} \bmod{(p-1)}$;
+			$d_q \leftarrow e^{-1} \bmod{(q-1)}$;
+			$q_{inv} \leftarrow q^{-1} \bmod{p}$;
+			$m_1 \leftarrow c^{d_p} \bmod{p}$;
+			$m_2 \leftarrow c^{d_q} \bmod{q}$;
+			$h \leftarrow (q_{inv}(m_1 - m_2) \bmod{p})$;
+			$m \leftarrow m_2 + qh$;
+			\Return{$m$}
+			\caption{RSA-CRT Decryption Algorithm}
+		\end{algorithm}
+		\fi
+		Suppose we have a system of $k$ linear congruences:
+		
+		\begin{align*}
+		x &\equiv a_1 \pmod{n_1} \
+		x &\equiv a_2 \pmod{n_2} \
+		&\vdots \
+		x &\equiv a_k \pmod{n_k}
+		\end{align*}
+		
+		where $n_1, n_2, \dots, n_k$ are pairwise coprime. Let $N = n_1 n_2 \cdots n_k$. Then, for each $i = 1, 2, \dots, k$, let $N_i = N/n_i$ and let $d_i$ be the inverse of $N_i$ modulo $n_i$, i.e., $d_iN_i \equiv 1 \pmod{n_i}$. Then the unique solution of the system of congruences is given by:
+		
+		$$x = \sum_{i=1}^{k} a_i N_i d_i \pmod{N}$$
+		
+		To prove this, first note that for each $i$, the condition $n_i \mid (x-a_i)$ implies that $n_i \mid (x-a_j)$ for all $j \neq i$. Therefore, if $y$ is any integer that satisfies the system of congruences, then we have $y \equiv x \pmod{n_i}$ for all $i$. In particular, $y-x$ is divisible by each $n_i$, so $N \mid (y-x)$. Thus, any two solutions of the system of congruences differ by a multiple of $N$.
+		
+		Now, we need to show that $x$ is a solution to the system of congruences. For each $i$, we have:
+		
+		\begin{align*}
+		x &\equiv \sum_{j=1}^{k} a_j N_j d_j \pmod{n_i} \
+		&= a_i N_i d_i + \sum_{j \neq i} a_j N_j d_j \pmod{n_i} \
+		&\equiv a_i N_i d_i \pmod{n_i} \
+		\end{align*}
+		
+		since $n_i$ divides $N_j$ for all $j \neq i$. Thus, $x$ satisfies the $i$-th congruence. Therefore, $x$ is a solution to the system of congruences.
+		
+		Finally, we need to show that $x$ is the unique solution modulo $N$. Suppose $y$ is another solution. Then $y \equiv x \pmod{n_i}$ for all $i$, so $y-x$ is divisible by each $n_i$, and hence by $N$. Therefore, $y \equiv x \pmod{N}$. Thus, any two solutions of the system of congruences are congruent modulo $N$, so $x$ is the unique solution modulo $N$.
+	\end{proof}
+\end{itemize}
+
+\noindent \textbf{Instructions:}
+\begin{enumerate}[label=\alph*.]
+    \item Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec pulvinar mauris in nisi fringilla, eu dictum mi laoreet. Vestibulum et lobortis libero.
+    \item Suspendisse eget massa in augue eleifend egestas. Nam pulvinar euismod enim ac tristique.
+    \item Proin auctor, arcu sit amet venenatis hendrerit, nisi quam maximus justo, nec tincidunt mauris nibh nec risus. Vivamus commodo sed mauris vel dapibus.
+\end{enumerate}
+
+\noindent \textbf{Questions:}
+
+\begin{enumerate}[label=\textbf{\arabic*.}]
+    \item \textbf{Brightness (X points)} - Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec pulvinar mauris in nisi fringilla, eu dictum mi laoreet. Vestibulum et lobortis libero.
+    \item \textbf{Color (X points)} - Suspendisse eget massa in augue eleifend egestas. Nam pulvinar euismod enim ac tristique.
+    \item \textbf{Contrast (X points)} - Proin auctor, arcu sit amet venenatis hendrerit, nisi quam maximus justo, nec tincidunt mauris nibh nec risus. Vivamus commodo sed mauris vel dapibus.
+    \item \textbf{Motion (X points)} - Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec pulvinar mauris in nisi fringilla, eu dictum mi laoreet. Vestibulum et lobortis libero.
+    \item \textbf{Depth (X points)} - Suspendisse eget massa in augue eleifend egestas. Nam pulvinar euismod enim ac tristique.
+\end{enumerate}
+
+\noindent \textbf{Submission instructions:} Submit your completed assignment by emailing it to \texttt{example@email.com} by the due date.
+
+\end{document}
