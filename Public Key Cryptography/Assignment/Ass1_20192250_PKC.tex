@@ -10,6 +10,10 @@
 \usepackage{amsthm}
 \usepackage{algorithm}
 
+%Tcolorbox
+\usepackage[most]{tcolorbox}
+\tcbset{enhanced, colback=white,colframe=black,fonttitle=\bfseries,arc=4mm,boxrule=1pt,shadow={2mm}{-1mm}{0mm}{black!50}}
+
 % Header and footer formatting
 \pagestyle{fancy}
 \fancyhf{}
@@ -17,15 +21,46 @@
 \lhead{\textbf{Assignment \#1}}
 \rfoot{\large Department of Information Security, Cryptogrphy and Mathematics, Kookmin Uni.\includegraphics[height=1.5cm]{school_logo.jpg}}
 
+\newtheorem{theorem}{Theorem}
+\newtheorem*{theorem*}{Theorem}
+
+\newcommand{\ie}{\textnormal{i.e.}}
+\newcommand{\rsa}{\mathsf{RSA}}
+\newcommand{\rsacrt}{\mathsf{RSA}\textendash\mathsf{CRT}}
+\newcommand{\inv}[1]{#1^{-1}}
+
+
 \begin{document}
 
 \begin{center}
-    $\underset{\LARGE\textbf{(Public Key Cryptography)}}{\huge\textbf{공개키 암호}}$
+	$\underset{\LARGE\textbf{(Public Key Cryptography)}}{\huge\textbf{공개키 암호}}$
 \end{center}
 
 \begin{itemize}
-	\item RSA의 개인키의 크기를 줄이시오. \begin{proof}
-		Recall that RSA-CRT algorithm :  \iffalse\begin{algorithm}[H]
+	\item RSA의 개인키의 크기를 줄이시오. \begin{proof}[\normalfont\bf\textcolor{magenta}{[답변]}]
+		Recall that Chinese Remainder Theorem ($\mathsf{CRT}$) : 
+		\begin{tcolorbox}[title=Chinese Remainder Theorem (CRT)]
+			\begin{theorem*}
+				Given a system of $k$ linear congruences:
+				\begin{align*}
+					x&\equiv a_1 \pmod{m_1}\\
+					x&\equiv a_2 \pmod{m_2}\\
+					&\vdots \\
+					x&\equiv a_k \pmod{m_k}
+				\end{align*} where $m_1,m_2,\dots, m_k$ are pairwise coprime. Let $M=\prod_{i=1}^km_i$. Then, the unique solution of the system of congruences is give by \begin{align*}
+				x&=\sum_{i=1}^ka_iM_i\pmod{M}b_i\\
+				&=a_1M_1
+			\end{align*} where $M_i=M/m_i$ and $ b_i\equiv\inv{M_i}\pmod{m_i}$
+				
+				there exists a unique solution $x$ modulo $M = m_1m_2\cdots m_n$:
+				\begin{align*}
+					x&\equiv a_1b_1M_1+a_2b_2M_2+\cdots a_nb_nM_n\pmod{M}, \ie,\\ x&\equiv\sum_{i=1}^{n}a_ib_iM_i\pmod{M}
+				\end{align*}\[
+				\] where $M_i=M/m_i$ and $b_i$ is the inverse of $M_i$ modulo $m_i$.
+			\end{theorem*}
+		\end{tcolorbox}
+		
+		and that $\rsacrt$ algorithm :  \iffalse\begin{algorithm}[H]
 			\SetAlgoLined
 			\KwIn{A public key $(n,e)$, a ciphertext $c$, and the primes $p$ and $q$ such that $n = pq$.}
 			\KwOut{The plaintext message corresponding to the ciphertext.}
@@ -43,10 +78,10 @@
 		Suppose we have a system of $k$ linear congruences:
 		
 		\begin{align*}
-		x &\equiv a_1 \pmod{n_1} \
-		x &\equiv a_2 \pmod{n_2} \
-		&\vdots \
-		x &\equiv a_k \pmod{n_k}
+			x &\equiv a_1 \pmod{n_1} \
+			x &\equiv a_2 \pmod{n_2} \
+			&\vdots \
+			x &\equiv a_k \pmod{n_k}
 		\end{align*}
 		
 		where $n_1, n_2, \dots, n_k$ are pairwise coprime. Let $N = n_1 n_2 \cdots n_k$. Then, for each $i = 1, 2, \dots, k$, let $N_i = N/n_i$ and let $d_i$ be the inverse of $N_i$ modulo $n_i$, i.e., $d_iN_i \equiv 1 \pmod{n_i}$. Then the unique solution of the system of congruences is given by:
@@ -58,9 +93,9 @@
 		Now, we need to show that $x$ is a solution to the system of congruences. For each $i$, we have:
 		
 		\begin{align*}
-		x &\equiv \sum_{j=1}^{k} a_j N_j d_j \pmod{n_i} \
-		&= a_i N_i d_i + \sum_{j \neq i} a_j N_j d_j \pmod{n_i} \
-		&\equiv a_i N_i d_i \pmod{n_i} \
+			x &\equiv \sum_{j=1}^{k} a_j N_j d_j \pmod{n_i} \
+			&= a_i N_i d_i + \sum_{j \neq i} a_j N_j d_j \pmod{n_i} \
+			&\equiv a_i N_i d_i \pmod{n_i} \
 		\end{align*}
 		
 		since $n_i$ divides $N_j$ for all $j \neq i$. Thus, $x$ satisfies the $i$-th congruence. Therefore, $x$ is a solution to the system of congruences.
@@ -71,19 +106,19 @@
 
 \noindent \textbf{Instructions:}
 \begin{enumerate}[label=\alph*.]
-    \item Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec pulvinar mauris in nisi fringilla, eu dictum mi laoreet. Vestibulum et lobortis libero.
-    \item Suspendisse eget massa in augue eleifend egestas. Nam pulvinar euismod enim ac tristique.
-    \item Proin auctor, arcu sit amet venenatis hendrerit, nisi quam maximus justo, nec tincidunt mauris nibh nec risus. Vivamus commodo sed mauris vel dapibus.
+	\item Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec pulvinar mauris in nisi fringilla, eu dictum mi laoreet. Vestibulum et lobortis libero.
+	\item Suspendisse eget massa in augue eleifend egestas. Nam pulvinar euismod enim ac tristique.
+	\item Proin auctor, arcu sit amet venenatis hendrerit, nisi quam maximus justo, nec tincidunt mauris nibh nec risus. Vivamus commodo sed mauris vel dapibus.
 \end{enumerate}
 
 \noindent \textbf{Questions:}
 
 \begin{enumerate}[label=\textbf{\arabic*.}]
-    \item \textbf{Brightness (X points)} - Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec pulvinar mauris in nisi fringilla, eu dictum mi laoreet. Vestibulum et lobortis libero.
-    \item \textbf{Color (X points)} - Suspendisse eget massa in augue eleifend egestas. Nam pulvinar euismod enim ac tristique.
-    \item \textbf{Contrast (X points)} - Proin auctor, arcu sit amet venenatis hendrerit, nisi quam maximus justo, nec tincidunt mauris nibh nec risus. Vivamus commodo sed mauris vel dapibus.
-    \item \textbf{Motion (X points)} - Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec pulvinar mauris in nisi fringilla, eu dictum mi laoreet. Vestibulum et lobortis libero.
-    \item \textbf{Depth (X points)} - Suspendisse eget massa in augue eleifend egestas. Nam pulvinar euismod enim ac tristique.
+	\item \textbf{Brightness (X points)} - Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec pulvinar mauris in nisi fringilla, eu dictum mi laoreet. Vestibulum et lobortis libero.
+	\item \textbf{Color (X points)} - Suspendisse eget massa in augue eleifend egestas. Nam pulvinar euismod enim ac tristique.
+	\item \textbf{Contrast (X points)} - Proin auctor, arcu sit amet venenatis hendrerit, nisi quam maximus justo, nec tincidunt mauris nibh nec risus. Vivamus commodo sed mauris vel dapibus.
+	\item \textbf{Motion (X points)} - Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec pulvinar mauris in nisi fringilla, eu dictum mi laoreet. Vestibulum et lobortis libero.
+	\item \textbf{Depth (X points)} - Suspendisse eget massa in augue eleifend egestas. Nam pulvinar euismod enim ac tristique.
 \end{enumerate}
 
 \noindent \textbf{Submission instructions:} Submit your completed assignment by emailing it to \texttt{example@email.com} by the due date.
