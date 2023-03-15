@@ -1,0 +1,168 @@
+\documentclass{article}
+
+% Packages for formatting
+\usepackage[margin=1in]{geometry}
+\usepackage{fancyhdr}
+\usepackage{enumitem}
+\usepackage{graphicx}
+\usepackage{kotex}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{algorithm2e,setspace}
+\usepackage{algpseudocode}
+\usepackage{xcolor}
+\usepackage{amssymb}
+
+% Define colors
+\definecolor{blue1}{HTML}{0077c2}
+\definecolor{blue2}{HTML}{00a5e6}
+\definecolor{blue3}{HTML}{b3e0ff}
+\definecolor{blue4}{HTML}{00293c}
+\definecolor{blue5}{HTML}{e6f7ff}
+\usepackage{color,soul}
+\usepackage{soul}
+\newcommand{\mathcolorbox}[2]{\colorbox{#1}{$\displaystyle #2$}}
+%Tcolorbox
+\usepackage[most]{tcolorbox}
+\tcbset{enhanced, colback=white,colframe=black,fonttitle=\bfseries,arc=4mm,boxrule=1pt,shadow={2mm}{-1mm}{0mm}{black!50}}
+
+% Header and footer formatting
+\pagestyle{fancy}
+\fancyhf{}
+\rhead{Student ID: 20192250\quad Name: 지용현}%\rule{3cm}{0.4pt}}
+\lhead{\textcolor{blue2}{\textbf{PKC Assignment \#1}}}
+% Define footer
+\newcommand{\footer}[1]{
+	\begin{flushright}
+		\vspace{2em}
+		\includegraphics[width=2cm]{school_logo.jpg} \\
+		\vspace{1em}
+		\textcolor{blue2}{\small\textbf{#1}}
+	\end{flushright}
+}
+%\rfoot{\large Department of Information Security, Cryptogrphy and Mathematics, Kookmin Uni.\includegraphics[height=1.5cm]{school_logo.jpg}}
+
+\newtheorem{theorem}{Theorem}
+\newtheorem*{theorem*}{Theorem}
+
+\newcommand{\ie}{\textnormal{i.e.}}
+\newcommand{\rsa}{\mathsf{RSA}}
+\newcommand{\rsacrt}{\mathsf{RSA}\textendash\mathsf{CRT}}
+\newcommand{\inv}[1]{#1^{-1}}
+
+\begin{document}
+
+\begin{center}
+	$\underset{\LARGE\textbf{(Public Key Cryptography)}}{\huge\textbf{공개키 암호}}$
+\end{center}
+\begin{itemize}
+	\item[\normalfont\bf\textcolor{magenta}{Q}.] $\rsa$의 개인키의 크기를 줄이시오. \begin{proof}[\normalfont\bf\textcolor{magenta}{Answer}]
+		Recall that Chinese Remainder Theorem ($\mathsf{CRT}$) : 
+		\iffalse
+		\begin{tcolorbox}[title=Chinese Remainder Theorem (CRT) - Special Case]
+			\begin{theorem*}
+				Given a system of $k$ linear congruences:
+				\begin{align*}
+					x&\equiv a_1 \pmod{m_1}\\
+					x&\equiv a_2 \pmod{m_2}\\
+					&\vdots \\
+					x&\equiv a_k \pmod{m_k}
+				\end{align*} where $m_1,m_2,\dots, m_k$ are pairwise coprime. Let $M=\prod_{i=1}^km_i$. Then, the unique solution of the system of congruences is give by \begin{align*}
+					x&=\sum_{i=1}^ka_iM_ib_i\pmod{M}\\
+					&=a_1M_1b_1+a_2M_2b_2+\cdots+a_kM_kb_k\pmod{M}.
+				\end{align*} where $M_i=M/m_i$ and $ b_i\equiv\inv{M_i}\pmod{m_i}$.
+			\end{theorem*}
+		\end{tcolorbox}\fi
+		\begin{tcolorbox}[title=Chinese Remainder Theorem (CRT) - Special Case]
+		\begin{theorem*}
+			Consider a system of two linear congruences:
+			\begin{align*}
+				x&\equiv a_1 \pmod{p}\\
+				x&\equiv a_2 \pmod{q}
+			\end{align*} where $p,q$ are coprime. Let $N=pq$. Then, the unique solution of the system of congruences is give by \begin{align*}
+				\mathcolorbox{-blue}{x=a_1qq_p^{-1}+a_2pp_q^{-1}\mod{N}}
+			\end{align*} where $q_p^{-1}=\inv{q}\mod{p}$ and $p_{q}^{-1}=\inv{p}\mod{q}$.
+		\end{theorem*}
+		\tcblower
+		Recall that Bézout's identity : $
+		a,b\in\mathbb{Z}\implies\exists x,y\in\mathbb{Z}:\gcd(a,b)=ax+by.
+		$ Especially, \[
+		\text{$p,q$ are coprime}\implies\exists x,y\in\mathbb{Z}: px+qy=1.
+		\] Let $p,q$ are coprime. Then $\exists x,y\in\mathbb{Z}:px+qy=1$ and so \[
+		px=(-y)q+1\quad\leadsto\quad px\equiv1\pmod{q}\quad\leadsto\quad x=p^{-1}\mod{q}.
+		\] Similarly, $y=q^{-1}\mod{p}$. Thus we have $px+qy=1\leadsto pp_{q}^{-1}+qq_{p}^{-1}=1$. Consequently, \begin{align*}
+			\mathcolorbox{-blue}{x=a_1qq_p^{-1}+a_2pp_q^{-1}\mod{N}} &\leftrightsquigarrow x=a_1qq_p^{-1}+a_2(1-qq_{p}^{-1})\mod{N}\\
+			&\leftrightsquigarrow \mathcolorbox{-red}{x=(a_1-a_2)qq_p^{-1}+a_2\mod{N}}\\
+		\end{align*}
+	\end{tcolorbox}
+	continue on next page.
+		\newpage
+		and that $\rsa$-$\mathsf{CRT}$ algorithm : \\
+		\RestyleAlgo{ruled}
+		\SetKwComment{Comment}{/* }{ */}
+		\begin{algorithm}[H]
+			\caption{$\mathsf{RSA}$-$\mathsf{CRT}$ Algorithm}
+			\KwData{The security parameter $k$, a public key $(N,e)$, a ciphertext $\mathcal{C}$.}
+			\KwResult{The plaintext message $\mathcal{M}$ corresponding to the ciphertext $\mathcal{C}$.}
+			\vspace{4pt}
+			\vspace{4pt}
+			\SetKwFunction{KeyGen}{KeyGen}
+			\SetKwProg{Fn}{Function}{:}{}
+			\Comment{Key Generation}
+			\Fn{\KeyGen$(k)$}{
+				$p, q \gets$ random prime numbers of $k/2$ bits each \tcp*{Generate two primes}
+				$N \gets pq$ \tcp*{Compute modulus}
+				$\phi(N) \gets (p-1)(q-1)$ \tcp*{Compute Euler's phi function}
+				$e \gets$ integer s.t. $1 < e < \phi(n)\land \gcd(e, \phi(n)) = 1$ \tcp*{Choose encryption exponent}
+				$\mathcolorbox{-green}{d_p\leftarrow e^{-1} \mod p-1}$ \tcp*{Compute decryption exponent for $p$}
+				$\mathcolorbox{-green}{d_q \leftarrow e^{-1} \mod q-1}$ \tcp*{Compute decryption exponent for $q$}
+				$q_{inv} \gets q^{-1} \mod p$ \tcp*{Compute $q$ inverse modulo $p$}
+				Set the $\rsa$ public key as $(N,e)$\;
+				Set the $\rsa$ secret key as $(p,q,d_p,d_q,q_{inv})$\;
+				\iffalse
+				$N \gets \text{length of } A$;
+				$low \gets 0$;
+				$high \gets n-1$;
+				\While{$low \leq high$}{
+					$mid \gets \lfloor (low + high) / 2 \rfloor$;
+					\If{$A[mid] < x$}{
+						$low \gets mid + 1$;
+					} \ElseIf{$A[mid] > x$}{
+						$high \gets mid - 1$;
+					} \Else{
+						\KwRet mid;
+					}
+				}\fi
+			}
+			\textbf{End Function}\\
+			\vspace{4pt}
+			\vspace{4pt}
+			\Comment{Encryption}
+			\SetKwFunction{Enc}{Enc}
+			\Fn{\Enc$(N,e,\mathcal{M})$}{
+				$\mathcal{C}\gets\mathcal{M}^e\mod N$ \tcp*{Encrypt with $e$ and $N$}
+			}
+			\textbf{End Function}\\
+			\vspace{4pt}
+			\vspace{4pt}
+			\Comment{Decryption}
+			\SetKwFunction{Dec}{Dec}
+			\Fn{\Dec$(\mathcal{C})$}{
+				$m_1 \gets \mathcal{C}^{d_p} \mod p$ \tcp*{Decrypt with $d_p$ and $p$}
+				$m_2 \gets \mathcal{C}^{d_q} \mod q$ \tcp*{Decrypt with $d_q$ and $q$}
+				$t \gets q_{inv}(m_1 - m_2)$ \tcp*{Reconstruct the message using CRT}
+				$m \leftarrow m_2 + qt\mod N$ \tcp*{$\mathcolorbox{-red}{m=(m_1-m_2)qq_{inv}+m_2\mod N}$}
+			}
+			\textbf{End Function}\\
+			\vspace{2.5pt}
+			\KwRet{$m$}\;
+		\end{algorithm}
+	
+		위 알고리즘을 통해 $d_p$, $d_q$, $p$ 및 $q$를 사용하여 공개 키 $(N,e)$로 암호화된 메시지를 복호화할 수 있다는 걸 알 수 있습니다. $d_p$와 $d_q$는 전체 $d$보다 훨씬 작기 때문에 $\rsa$ 개인 키의 길이가 줄어듭니다.
+		
+		따라서 $\rsa$-$\mathsf{CRT}$는 복호화 지수 $d$를 두 부분으로 분할하여 $\rsa$ 개인 키의 길이를 줄이며 $\rsa$의 복호화 지수를 더 쉽게 계산할 수 있도록 합니다.
+	\end{proof}
+\end{itemize}
+
+	\footer{Department of Information Security, Cryptography and Mathematics, Kookmin University}
+\end{document}
