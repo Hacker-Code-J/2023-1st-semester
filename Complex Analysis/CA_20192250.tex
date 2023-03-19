@@ -136,21 +136,21 @@
 			\vspace{1in}
 			%\includegraphics[width=3in]{Exponentials_of_complex_number_within_unit_circle-2.png}
 			\begin{tikzpicture}[scale=1.8,>=Stealth]
-			% draw axes
-			\draw[->, thick, blue] (-2,0) -- (2,0) node[below right, black] {$\Re(z)$};
-			\draw[->, thick, blue] (0,-2) -- (0,2) node[above left, black] {$\Im(z)$};
-			
-			% draw unit circle
-			\draw[black, thick] (0,0) circle (1cm);
-			
-			% draw point
-			\filldraw[red] (1,1) circle (0.08cm) node[anchor=south west, black] {$z = a + ib$};
-			
-			% draw radius
-			\draw[dashed, thick, red] (0,0) -- (1,1) node[midway, above left, black] {$r$};
-			
-			% draw angle
-			\draw[->, thick, orange] (0.3,0) arc (0:45:0.3) node[midway, right, black] {$\theta$};
+				% draw axes
+				\draw[->, thick, blue] (-2,0) -- (2,0) node[below right, black] {$\Re(z)$};
+				\draw[->, thick, blue] (0,-2) -- (0,2) node[above left, black] {$\Im(z)$};
+				
+				% draw unit circle
+				\draw[black, thick] (0,0) circle (1cm);
+				
+				% draw point
+				\filldraw[red] (1,1) circle (0.08cm) node[anchor=south west, black] {$z = a + ib$};
+				
+				% draw radius
+				\draw[dashed, thick, red] (0,0) -- (1,1) node[midway, above left, black] {$r$};
+				
+				% draw angle
+				\draw[->, thick, orange] (0.3,0) arc (0:45:0.3) node[midway, right, black] {$\theta$};
 			\end{tikzpicture}\par
 			\vspace{1in}
 			{\large Ji Yong-Hyeon\par}
@@ -178,8 +178,8 @@
 	\end{tcolorbox}
 	\begin{remark}
 		$f$ is discontinuous at $\alpha$ if and only if \begin{align*}
-		&\exists\varepsilon>0\quad\text{s.t.}\quad\forall\delta>0:\abs{x-\alpha}<\delta\ \text{but}\ \abs{f(x)-f(\alpha)}\geq\varepsilon\\
-		\iff &\exists\varepsilon>0\quad\text{s.t.}\quad\forall\delta>0:\nbhd_\varepsilon\left(f(\alpha)\right)\subset f\left(\nbhd_\delta(\alpha)\right).
+			&\exists\varepsilon>0\quad\text{s.t.}\quad\forall\delta>0:\abs{x-\alpha}<\delta\ \text{but}\ \abs{f(x)-f(\alpha)}\geq\varepsilon\\
+			\iff &\exists\varepsilon>0\quad\text{s.t.}\quad\forall\delta>0:\nbhd_\varepsilon\left(f(\alpha)\right)\subset f\left(\nbhd_\delta(\alpha)\right).
 		\end{align*}
 	\end{remark}
 	
@@ -212,7 +212,7 @@
 	The formal definition of continuity of a function $f(x)$ at a point $x_0$ is:
 	
 	\begin{align*}
-	\lim_{x \to x_0}f(x) &= f(x_0)\
+		\lim_{x \to x_0}f(x) &= f(x_0)\
 	\end{align*}
 	
 	That is, the limit of $f(x)$ as $x$ approaches $x_0$ exists and is equal to $f(x_0)$.
@@ -251,10 +251,10 @@
 	\end{tcolorbox}
 	\begin{proof}
 		By hypothesis, $f'(\alpha)$ exists. We have, then, \begin{align*}
-		\lim_{x\to\alpha}\left(f(x)-f(\alpha)\right)&=\lim_{x\to\alpha}\left[\frac{f(x)-f(\alpha)}{(x-\alpha)}(x-\alpha)\right]\\
-		&=\lim_{x\to\alpha}\frac{f(x)-f(\alpha)}{(x-\alpha)}\cdot\lim_{x\to\alpha}(x-\alpha)\\
-		&=f'(\alpha)\cdot0\\
-		&=0.
+			\lim_{x\to\alpha}\left(f(x)-f(\alpha)\right)&=\lim_{x\to\alpha}\left[\frac{f(x)-f(\alpha)}{(x-\alpha)}(x-\alpha)\right]\\
+			&=\lim_{x\to\alpha}\frac{f(x)-f(\alpha)}{(x-\alpha)}\cdot\lim_{x\to\alpha}(x-\alpha)\\
+			&=f'(\alpha)\cdot0\\
+			&=0.
 		\end{align*} Hence $\lim\limits_{x\to\alpha}f(x)=f(\alpha)$.
 	\end{proof}
 	
@@ -270,13 +270,13 @@
 	The absolute value or modulus of a complex number is the distance between the origin and the point representing the complex number on the complex plane. It is defined as:
 	
 	\begin{align*}
-	|a+bi| &= \sqrt{a^2 + b^2}
+		|a+bi| &= \sqrt{a^2 + b^2}
 	\end{align*}
 	
 	The argument or phase of a complex number is the angle that the line connecting the origin to the point representing the complex number makes with the positive real axis. It is defined as:
 	
 	\begin{align*}
-	\theta &= \operatorname{arg}(a+bi) = \operatorname{arctan}\left(\frac{b}{a}\right)
+		\theta &= \operatorname{arg}(a+bi) = \operatorname{arctan}\left(\frac{b}{a}\right)
 	\end{align*}
 	
 	The complex number system is important in mathematics, physics, engineering, and many other fields. It is used to represent quantities that have both a magnitude and a direction, such as electrical currents and electromagnetic waves. Complex numbers also have applications in signal processing, control theory, and cryptography, among others.
@@ -285,8 +285,8 @@
 	\section{The Field of Complex Numbers}
 	
 	The set of complex numbers, denoted by $\C$, is defined as the collection of all ordered pairs $(x,y)$ where $x,y\in\R$. The operations of addition and multiplication are defined by:\begin{align*}
-	(x_1,y_1)+(x_2+y_2)&=(x_1+x_2,y_1+y_2),\\
-	(x_1,y_1)\cdot(x_2+y_2)&=(x_1x_2-y_1y_2,x_1y_2+x_2y_1).\\
+		(x_1,y_1)+(x_2+y_2)&=(x_1+x_2,y_1+y_2),\\
+		(x_1,y_1)\cdot(x_2+y_2)&=(x_1x_2-y_1y_2,x_1y_2+x_2y_1).\\
 	\end{align*}
 	
 	We verify that the axioms for a field are met by the definitions given for $\C$: \begin{itemize}
@@ -300,17 +300,17 @@
 	\] Additionally, \[
 	(x,y)\in\C\implies\exists(-x,-y)\in\C:[(x,y)+(-x,-y)=(0,0)=(-x,-y)+(x,y)].
 	\] In condition (F2), the multiplicative identity is (1,0), and the multiplicative inverse of any complex number (x,y) in $\C\setminus\set{(0,0)}$ is determined by \begin{align}
-	\of{\frac{x}{x^2+y^2},\frac{-y}{x^2+y^2}}.
+		\of{\frac{x}{x^2+y^2},\frac{-y}{x^2+y^2}}.
 	\end{align}
 	
 	\begin{exercise}
 		Verify that (1.1) is indeed the inverse of $(x,y)\in\C\setminus\set{(0,0)}$.
 		\begin{proof}[\sol]
 			Let $(x,y)\in\C$. Then \begin{align*}
-			(x,y)\cdot\of{\frac{x}{x^2+y^2},\frac{-y}{x^2+y^2}}
-			&=\of{\frac{x^2}{x^2+y^2}-\frac{-y^2}{x^2+y^2},\frac{-xy}{x^2+y^2}+\frac{xy}{x^2+y^2}}\\
-			&=\of{\frac{x^2+y^2}{x^2+y^2},\frac{-xy+xy}{x^2+y^2}}\\
-			&=(1,0).
+				(x,y)\cdot\of{\frac{x}{x^2+y^2},\frac{-y}{x^2+y^2}}
+				&=\of{\frac{x^2}{x^2+y^2}-\frac{-y^2}{x^2+y^2},\frac{-xy}{x^2+y^2}+\frac{xy}{x^2+y^2}}\\
+				&=\of{\frac{x^2+y^2}{x^2+y^2},\frac{-xy+xy}{x^2+y^2}}\\
+				&=(1,0).
 			\end{align*}
 		\end{proof}
 	\end{exercise}
@@ -325,46 +325,46 @@
 	\section{Geometric Representation of Complex Numbers}
 	\begin{center}
 		\begin{tikzpicture}[scale=0.8]
-		% draw axes
-		\draw[->] (-4,0) -- (4,0) node[right] {$\Re(z)$};
-		\draw[->] (0,-4) -- (0,4) node[above] {$\Im(z)$};
-		% draw point
-		\filldraw[black] (1.5,2) circle (2pt) node[anchor=south west] {$(x,y)$};
-		% add arrow
-		\draw[->] (0,0) -- (1.5,2) node[midway,above left] {};
-		
+			% draw axes
+			\draw[->] (-4,0) -- (4,0) node[right] {$\Re(z)$};
+			\draw[->] (0,-4) -- (0,4) node[above] {$\Im(z)$};
+			% draw point
+			\filldraw[black] (1.5,2) circle (2pt) node[anchor=south west] {$(x,y)$};
+			% add arrow
+			\draw[->] (0,0) -- (1.5,2) node[midway,above left] {};
+			
 		\end{tikzpicture}
 	\end{center}
 	
 	\begin{center}
 		\begin{tikzpicture}[scale=2]
-		% axes
-		\draw[->] (-1.5,0) -- (1.5,0) node[right] {$\text{Re}$};
-		\draw[->] (0,-1.5) -- (0,1.5) node[above] {$\text{Im}$};
-		
-		% z1
-		\draw[->,thick] (0,0) -- (1,1) node[above right] {$z_1$};
-		\draw[dotted] (1,1) -- (1,0) node[midway,right] {$\operatorname{Im}(z_1)$};
-		\draw[dotted] (1,1) -- (0,1) node[midway,above] {$\operatorname{Re}(z_1)$};
-		\draw (0.3,0) arc (0:45:0.3) node[midway,right] {$\theta_1$};
-		
-		% z2
-		\draw[->,thick] (0,0) -- (0.5,-1) node[below right] {$z_2$};
-		\draw[dotted] (0.5,-1) -- (0.5,0) node[midway,right] {$\operatorname{Im}(z_2)$};
-		\draw[dotted] (0.5,-1) -- (0,-1) node[midway,below] {$\operatorname{Re}(z_2)$};
-		\draw (-0.3,0) arc (180:225:0.3) node[midway,left] {$\theta_2$};
-		
-		% z1*z2
-		\draw[->,thick] (0,0) -- (0.5,1.5) node[above] {$z_1 \cdot z_2$};
-		\draw[dotted] (0.5,1.5) -- (0.5,0) node[midway,right] {$\operatorname{Im}(z_1\cdot z_2)$};
-		\draw[dotted] (0.5,1.5) -- (0,1.5) node[midway,above] {$\operatorname{Re}(z_1\cdot z_2)$};
-		\draw (0.6,0) arc (0:67:0.6) node[midway,right] {$\theta_1+\theta_2$};
-		
-		% braces
-		%\draw[decorate,decoration={brace,amplitude=5pt},xshift=-4pt,yshift=0pt]
-		%(0.5,0) -- (0.5,1.5) node [black,midway,xshift=-8pt] {$r_1 r_2$};
-		%\draw[decorate,decoration={brace,amplitude=5pt},xshift=0pt,yshift=4pt]
-		%(0,1.5) -- (0.5,1.5) node [black,midway,yshift=10pt] {$r_1 r_2$};
+			% axes
+			\draw[->] (-1.5,0) -- (1.5,0) node[right] {$\text{Re}$};
+			\draw[->] (0,-1.5) -- (0,1.5) node[above] {$\text{Im}$};
+			
+			% z1
+			\draw[->,thick] (0,0) -- (1,1) node[above right] {$z_1$};
+			\draw[dotted] (1,1) -- (1,0) node[midway,right] {$\operatorname{Im}(z_1)$};
+			\draw[dotted] (1,1) -- (0,1) node[midway,above] {$\operatorname{Re}(z_1)$};
+			\draw (0.3,0) arc (0:45:0.3) node[midway,right] {$\theta_1$};
+			
+			% z2
+			\draw[->,thick] (0,0) -- (0.5,-1) node[below right] {$z_2$};
+			\draw[dotted] (0.5,-1) -- (0.5,0) node[midway,right] {$\operatorname{Im}(z_2)$};
+			\draw[dotted] (0.5,-1) -- (0,-1) node[midway,below] {$\operatorname{Re}(z_2)$};
+			\draw (-0.3,0) arc (180:225:0.3) node[midway,left] {$\theta_2$};
+			
+			% z1*z2
+			\draw[->,thick] (0,0) -- (0.5,1.5) node[above] {$z_1 \cdot z_2$};
+			\draw[dotted] (0.5,1.5) -- (0.5,0) node[midway,right] {$\operatorname{Im}(z_1\cdot z_2)$};
+			\draw[dotted] (0.5,1.5) -- (0,1.5) node[midway,above] {$\operatorname{Re}(z_1\cdot z_2)$};
+			\draw (0.6,0) arc (0:67:0.6) node[midway,right] {$\theta_1+\theta_2$};
+			
+			% braces
+			%\draw[decorate,decoration={brace,amplitude=5pt},xshift=-4pt,yshift=0pt]
+			%(0.5,0) -- (0.5,1.5) node [black,midway,xshift=-8pt] {$r_1 r_2$};
+			%\draw[decorate,decoration={brace,amplitude=5pt},xshift=0pt,yshift=4pt]
+			%(0,1.5) -- (0.5,1.5) node [black,midway,yshift=10pt] {$r_1 r_2$};
 		\end{tikzpicture}
 	\end{center}
 	
@@ -391,16 +391,16 @@
 		\] \begin{proof}[\sol]
 			Note that $\abs{\frac{z-a}{1-\bar{a}z}} = \frac{\abs{z-a}}{\abs{1-\bar{a}z}}$. We have:
 			\begin{align*}
-			\abs{1-\bar{a}z}^2 &= (1-\bar{a}z)(1-\bar{a}z) \\
-			&= 1 - \bar{a}z - a\bar{z} + \abs{a}^2 \abs{z}^2 \\
-			&= (1-\abs{a}^2) - (\bar{a}z + a\bar{z}) + \abs{a}^2 \abs{z}^2 \\
-			&= (1-\abs{a}^2) - 2\Re(\bar{a}z) + \abs{a}^2 \abs{z}^2 \\
-			&= (1-\abs{a}^2)(1-\abs{z}^2),
+				\abs{1-\bar{a}z}^2 &= (1-\bar{a}z)(1-\bar{a}z) \\
+				&= 1 - \bar{a}z - a\bar{z} + \abs{a}^2 \abs{z}^2 \\
+				&= (1-\abs{a}^2) - (\bar{a}z + a\bar{z}) + \abs{a}^2 \abs{z}^2 \\
+				&= (1-\abs{a}^2) - 2\Re(\bar{a}z) + \abs{a}^2 \abs{z}^2 \\
+				&= (1-\abs{a}^2)(1-\abs{z}^2),
 			\end{align*} where we used the fact that $\abs{a}^2 = a\bar{a}$ and $\Re(\bar{a}z) = \frac{1}{2}(\bar{a}z + a\bar{z})$. Thus, we have:
 			$$\abs{\frac{z-a}{1-\bar{a}z}} = \frac{\abs{z-a}}{\abs{1-\bar{a}z}} = \frac{\abs{z-a}}{\sqrt{1-\abs{a}^2}\sqrt{1-\abs{z}^2}} \leq 1$$
 			since \begin{align*}
-			\abs{a}<1\leadsto 1-\abs{a}^2> 0 \\
-			\abs{z}\leq 1\leadsto 1-\abs{z}^2\geq 0
+				\abs{a}<1\leadsto 1-\abs{a}^2> 0 \\
+				\abs{z}\leq 1\leadsto 1-\abs{z}^2\geq 0
 			\end{align*}$\abs{a}<1$ and $\abs{z}\leq 1$ imply that $1-\abs{a}^2\geq 0$ and $1-\abs{z}^2\geq 0$, and therefore, $\sqrt{1-\abs{a}^2}\geq 0$ and $\sqrt{1-\abs{z}^2}\geq 0$.
 			
 			Thus, we have shown that $\abs{\frac{z-a}{1-\bar{a}z}}\leq 1$.
@@ -420,9 +420,9 @@
 	\begin{tcolorbox}[colback=white,colframe=defcolor,arc=5pt,title={\color{white}\bf Continuity of Complex function}]
 		\begin{definition}
 			Let $f: \Omega \subseteq \mathbb{C} \rightarrow \mathbb{C}$ be a complex function and $z_0 \in \Omega$. We say that $f(z)$ is continuous at $z_0$ if for every $\epsilon > 0$, there exists a $\delta > 0$ such that for all $z \in \Omega$ with $|z - z_0| < \delta$, we have $|f(z) - f(z_0)| < \epsilon$.
-		
+			
 			Equivalently, $f(z)$ is continuous at $z_0$ if and only if $\lim_{z \to z_0} f(z) = f(z_0)$.
-		
+			
 			We say that $f(z)$ is continuous on $\Omega$ if $f(z)$ is continuous at every point in $\Omega$.
 		\end{definition}
 	\end{tcolorbox}
@@ -444,8 +444,8 @@
 	\begin{tcolorbox}[title=Path-connected;]
 		\begin{definition}
 			An open set $U\subset\C$ is called \textbf{path-connected} if \begin{align*}
-			\forall z_1,z_2\in U:\exists\text{a stepwise path}\ \gamma:[a,b]\to\C\ \text{s.t.}\ \gamma(a)=z_1,\gamma(b)=z_2\ \text{and}\\
-			t\in[a,b]\implies\gamma(t)\in U.
+				\forall z_1,z_2\in U:\exists\text{a stepwise path}\ \gamma:[a,b]\to\C\ \text{s.t.}\ \gamma(a)=z_1,\gamma(b)=z_2\ \text{and}\\
+				t\in[a,b]\implies\gamma(t)\in U.
 			\end{align*}
 		\end{definition}
 	\end{tcolorbox}
@@ -458,16 +458,16 @@
 		\begin{definition}
 			The \textbf{complex exponential function} is defined as
 			\begin{equation*}
-			\exp{z} =\exp{(x+iy)} \triangleq e^{x}(\cos y + i\sin y),
+				\exp{z} =\exp{(x+iy)} \triangleq e^{x}(\cos y + i\sin y),
 			\end{equation*}
 			where $x,y\in\R$ and $i$ is the imaginary unit, $i^2=-1$.
 		\end{definition}
 	\end{tcolorbox}
 	\begin{remark}
 		Recall that Taylor series $e^x=\sum_{n=0}^\infty\frac{1}{n!}x^n$. Note that \begin{align*}
-		e^{iy}&=1+iy+\frac{1}{2!}(iy)^2+\frac{1}{3!}(iy)^3+\frac{1}{4!}(iy)^4+\frac{1}{5!}(iy)^5+\cdots\\
-		&=\Re\of{1-\frac{1}{2!}y^2+\frac{1}{4!}y^4-\cdots}+\Im\of{y-\frac{1}{3!}y^3+\frac{1}{5!}y^5-\cdots}\\
-		&=\cos y+i\sin y.
+			e^{iy}&=1+iy+\frac{1}{2!}(iy)^2+\frac{1}{3!}(iy)^3+\frac{1}{4!}(iy)^4+\frac{1}{5!}(iy)^5+\cdots\\
+			&=\Re\of{1-\frac{1}{2!}y^2+\frac{1}{4!}y^4-\cdots}+\Im\of{y-\frac{1}{3!}y^3+\frac{1}{5!}y^5-\cdots}\\
+			&=\cos y+i\sin y.
 		\end{align*} Then $e^{iy}=\cos y+i\sin y$. Thus, we have $
 		\exp z=e^x(\cos y+i\sin y)=e^{x+iy}.
 		$
@@ -487,9 +487,9 @@
 	\begin{proof}
 		\begin{itemize}
 			\item[(2)] Let $z_1=x_1+iy_1$ and $z_2=x_2+iy_2$. Then \begin{align*}
-			\exp\of{z_1+z_2}=\exp\of{x_1+x_2+i(y_1+y_2)}&=e^{x_1+x_2+i(y_1+y_2)}\\
-			&=e^{x_1+iy_1}e^{x_2+iy_2}\\
-			&=\of{\exp z_1}\of{\exp z_2}.
+				\exp\of{z_1+z_2}=\exp\of{x_1+x_2+i(y_1+y_2)}&=e^{x_1+x_2+i(y_1+y_2)}\\
+				&=e^{x_1+iy_1}e^{x_2+iy_2}\\
+				&=\of{\exp z_1}\of{\exp z_2}.
 			\end{align*}
 			\item[(3)] $1=\exp 0=\of{\exp z}\of{\exp (-z)}$.
 			\item[(4)] $\exp (z+2\pi)=e^z\of{\cos 2\pi+i\sin 2\pi}=\exp z(1+i\cdot 0)=\exp z$.
@@ -503,16 +503,46 @@
 	\exp\of{ix}=\cos x+i\sin x\quad\text{and}\quad\exp\of{-ix}=\cos x-i\sin x.
 	\] This gives
 	\begin{equation*}
-	\sin(x) = \frac{e^{ix} - e^{-ix}}{2i}
+		\sin(x) = \frac{e^{ix} - e^{-ix}}{2i}
 	\end{equation*} and
 	
 	\begin{equation*}
-	\cos(x) = \frac{e^{ix} + e^{-ix}}{2}.
+		\cos(x) = \frac{e^{ix} + e^{-ix}}{2}.
 	\end{equation*}
 	
 	\newpage
 	\subsection{Logarithm function}
 	
+	\begin{tcolorbox}[colback=white,colframe=defcolor,arc=5pt,title={\color{white}\bf Principal Agrugment}]
+		\begin{definition}
+			The \textbf{principal argument} of a complex number $z$, denoted by $\operatorname{Arg}(z)$, is defined to be the unique value $\theta \in (-\pi, \pi]$ such that $$
+			z=\abs{z}e^{i\theta}=\abs{z}\of{\cos\theta+i\sin\theta}.
+			$$
+		\end{definition}
+	\end{tcolorbox}
+
+	The principal logarithm satisfies the following properties:
+	
+	\begin{itemize}
+		\item $\operatorname{Log}(z_1 z_2) = \operatorname{Log}(z_1) + \operatorname{Log}(z_2)$ for all $z_1, z_2 \in \mathbb{C} \setminus (-\infty,0]$.
+		\item $\operatorname{Log}(e^z) = z$ for all $z \in \mathbb{C}$.
+		\item $\exp(\operatorname{Log}(z)) = z$ for all $z \in \mathbb{C} \setminus (-\infty,0]$.
+	\end{itemize}
+	\begin{tikzpicture}[scale=2]
+		% Draw axes
+		\draw[->] (-1.5,0) -- (1.5,0) node[right] {$\Re(z)$};
+		\draw[->] (0,-1.5) -- (0,1.5) node[above] {$\Im(z)$};
+		% Define clipping region
+		\clip (0,0) circle (1);
+		% Draw annulus
+		\fill[gray!50] (0,0) circle ({1/sqrt(2)}) arc ({45}:{60}:{1/sqrt(2)}) -- (0,0);
+		\fill[white] (0,0) circle ({1/sqrt(2)}) arc ({45}:{60}:{1/sqrt(2)});
+		% Label annulus
+		\node at ({1/sqrt(2)*cos(15)},{1/sqrt(2)*sin(15)}) {$\frac{\pi}{4}$};
+		\node at ({1/sqrt(2)*cos(52.5)},{1/sqrt(2)*sin(52.5)}) {$\frac{\pi}{3}$};
+	\end{tikzpicture}
+	However, it's important to note that the principal logarithm is not continuous on the entire complex plane, since there is a branch cut along the negative real axis.
+
 	The logarithm function is an important function in complex analysis that is defined as follows:
 	
 	Let $z$ be a non-zero complex number. Then the logarithm of $z$, denoted by $\log z$, is defined to be any complex number $w$ such that $e^w = z$.
@@ -523,21 +553,11 @@
 	
 	Note that the complex logarithm is not continuous on the entire complex plane, since there is a branch cut along the negative real axis. However, it is analytic on any simply connected domain that does not contain the origin.
 	
-	The principal argument of a complex number $z$, denoted by $\operatorname{Arg}(z)$, is defined to be the unique value $\theta \in (-\pi, \pi]$ such that $z = |z| e^{i\theta}$.
+
 	
 	The principal logarithm of a complex number $z$, denoted by $\operatorname{Log}(z)$, is defined to be the complex number $w = \ln |z| + i \operatorname{Arg}(z)$.
 	
 	Note that the principal logarithm is a single-valued function defined on the domain $\mathbb{C} \setminus (-\infty,0]$.
-	
-	The principal logarithm satisfies the following properties:
-	
-	\begin{itemize}
-		\item $\operatorname{Log}(z_1 z_2) = \operatorname{Log}(z_1) + \operatorname{Log}(z_2)$ for all $z_1, z_2 \in \mathbb{C} \setminus (-\infty,0]$.
-		\item $\operatorname{Log}(e^z) = z$ for all $z \in \mathbb{C}$.
-		\item $\exp(\operatorname{Log}(z)) = z$ for all $z \in \mathbb{C} \setminus (-\infty,0]$.
-	\end{itemize}
-	
-	However, it's important to note that the principal logarithm is not continuous on the entire complex plane, since there is a branch cut along the negative real axis.
 	
 	
 	
@@ -545,50 +565,50 @@
 	
 	\newpage
 	\begin{tikzpicture}[  node distance=1.5cm,  block/.style={    draw,    rectangle,    minimum width=2cm,    minimum height=1.5cm,    align=center  },  arrow/.style={    ->,    shorten >=2pt,    shorten <=2pt,  }]
-	% Nodes
-	\node[block] (G) {$G$};
-	\node[block, below=of G] (H) {$H$};
-	\node[block, below=of H] (K) {$K$};
-	\node[block, right=of G] (GH) {$G \times H$};
-	\node[block, right=of GH] (GK) {$G \times K$};
-	\node[block, below=of GH] (HK) {$H \times K$};
-	\node[block, below=of HK] (GHK) {$G \times H \times K$};
-	% Arrows
-	\draw[arrow] (G) -- (GH) node[midway,above] {$\varphi_G$};
-	\draw[arrow] (H) -- (GH) node[midway,left] {$\varphi_H$};
-	\draw[arrow] (K) -- (GK) node[midway,left] {$\varphi_K$};
-	\draw[arrow] (GH) -- (GK) node[midway,above] {$\varphi_{GK}$};
-	\draw[arrow] (GH) -- (HK) node[midway,left] {$\varphi_{HK}$};
-	\draw[arrow] (HK) -- (GHK) node[midway,above] {$\varphi_{GHK}$};
-	% Labels
-	\node[left=of G] {$G$};
-	\node[left=of H] {$H$};
-	\node[left=of K] {$K$};
-	\node[right=of GK] {$G \times K / \varphi_{HK}(H \times K)$};
-	\node[below=of GH] {$G \times H / \varphi_{GK}(G \times K)$};
-	\node[below=of HK] {$H \times K / \varphi_{GH}(G \times H)$};
-	\node[below=of GHK] {$G \times H \times K / (\varphi_G(G) \times \varphi_H(H) \times \varphi_K(K))$};
+		% Nodes
+		\node[block] (G) {$G$};
+		\node[block, below=of G] (H) {$H$};
+		\node[block, below=of H] (K) {$K$};
+		\node[block, right=of G] (GH) {$G \times H$};
+		\node[block, right=of GH] (GK) {$G \times K$};
+		\node[block, below=of GH] (HK) {$H \times K$};
+		\node[block, below=of HK] (GHK) {$G \times H \times K$};
+		% Arrows
+		\draw[arrow] (G) -- (GH) node[midway,above] {$\varphi_G$};
+		\draw[arrow] (H) -- (GH) node[midway,left] {$\varphi_H$};
+		\draw[arrow] (K) -- (GK) node[midway,left] {$\varphi_K$};
+		\draw[arrow] (GH) -- (GK) node[midway,above] {$\varphi_{GK}$};
+		\draw[arrow] (GH) -- (HK) node[midway,left] {$\varphi_{HK}$};
+		\draw[arrow] (HK) -- (GHK) node[midway,above] {$\varphi_{GHK}$};
+		% Labels
+		\node[left=of G] {$G$};
+		\node[left=of H] {$H$};
+		\node[left=of K] {$K$};
+		\node[right=of GK] {$G \times K / \varphi_{HK}(H \times K)$};
+		\node[below=of GH] {$G \times H / \varphi_{GK}(G \times K)$};
+		\node[below=of HK] {$H \times K / \varphi_{GH}(G \times H)$};
+		\node[below=of GHK] {$G \times H \times K / (\varphi_G(G) \times \varphi_H(H) \times \varphi_K(K))$};
 	\end{tikzpicture}
 	
 	\begin{tikzpicture}[  node distance=2cm,  block/.style={    draw,    rectangle,    minimum width=3cm,    minimum height=1.5cm,    align=center  },  arrow/.style={    ->,    shorten >=2pt,    shorten <=2pt,  }]
-	% Nodes
-	\node[block] (Z) {$\mathbb{Z}$};
-	\node[block, below=of Z] (Zn) {$\mathbb{Z}/n\mathbb{Z}$};
-	\node[block, below=of Zn] (Zp) {$\mathbb{Z}/p\mathbb{Z}$};
-	\node[block, right=of Z] (Zm) {$\mathbb{Z}/m\mathbb{Z}$};
-	\node[block, right=of Zm] (Zmp) {$\mathbb{Z}/mp\mathbb{Z}$};
-	% Arrows
-	\draw[arrow] (Z) -- (Zn) node[midway,right] {$\pi_n$};
-	\draw[arrow] (Zn) -- (Zp) node[midway,right] {$\pi_p$};
-	\draw[arrow] (Z) -- (Zm) node[midway,above] {$\pi_m$};
-	\draw[arrow] (Zm) -- (Zmp) node[midway,above] {$\pi_{mp}$};
-	\draw[arrow] (Zn) -- (Zmp) node[midway,below] {$\phi_{n,p}$};
-	% Labels
-	\node[left=of Z] {$\mathbb{Z}$};
-	\node[left=of Zn] {$\mathbb{Z}/n\mathbb{Z}$};
-	\node[left=of Zp] {$\mathbb{Z}/p\mathbb{Z}$};
-	\node[right=of Zmp] {$\mathbb{Z}/mp\mathbb{Z}$};
-	\node[below=of Zn] {$\mathbb{Z}/np\mathbb{Z}$};
+		% Nodes
+		\node[block] (Z) {$\mathbb{Z}$};
+		\node[block, below=of Z] (Zn) {$\mathbb{Z}/n\mathbb{Z}$};
+		\node[block, below=of Zn] (Zp) {$\mathbb{Z}/p\mathbb{Z}$};
+		\node[block, right=of Z] (Zm) {$\mathbb{Z}/m\mathbb{Z}$};
+		\node[block, right=of Zm] (Zmp) {$\mathbb{Z}/mp\mathbb{Z}$};
+		% Arrows
+		\draw[arrow] (Z) -- (Zn) node[midway,right] {$\pi_n$};
+		\draw[arrow] (Zn) -- (Zp) node[midway,right] {$\pi_p$};
+		\draw[arrow] (Z) -- (Zm) node[midway,above] {$\pi_m$};
+		\draw[arrow] (Zm) -- (Zmp) node[midway,above] {$\pi_{mp}$};
+		\draw[arrow] (Zn) -- (Zmp) node[midway,below] {$\phi_{n,p}$};
+		% Labels
+		\node[left=of Z] {$\mathbb{Z}$};
+		\node[left=of Zn] {$\mathbb{Z}/n\mathbb{Z}$};
+		\node[left=of Zp] {$\mathbb{Z}/p\mathbb{Z}$};
+		\node[right=of Zmp] {$\mathbb{Z}/mp\mathbb{Z}$};
+		\node[below=of Zn] {$\mathbb{Z}/np\mathbb{Z}$};
 	\end{tikzpicture}
 	
 	% End document
