@@ -55,6 +55,8 @@
 \usepackage{tikz-cd}
 \usetikzlibrary{positioning}
 
+
+
 % Header and footer formatting
 \pagestyle{fancy}
 \fancyhf{}
@@ -70,6 +72,9 @@
 	\end{flushright}
 }
 %\rfoot{\large Department of Information Security, Cryptogrphy and Mathematics, Kookmin Uni.\includegraphics[height=1.5cm]{school_logo.jpg}}
+\fancyhead{}
+\fancyfoot{}
+\fancyfoot[C]{-\thepage-}
 
 \newcommand{\ie}{\textnormal{i.e.}}
 \newcommand{\rsa}{\mathsf{RSA}}
@@ -82,6 +87,7 @@
 \newtheorem*{theorem*}{Theorem}
 \newtheorem{proposition}[theorem]{Proposition}
 \newtheorem{corollary}{Corollary}[theorem]
+\newtheorem*{corollary*}{Corollary}
 \newtheorem{lemma}[theorem]{Lemma}
 \newtheorem*{lemma*}{Lemma}
 
@@ -100,19 +106,16 @@
 \newcommand{\F}{\mathbb{F}}
 \newcommand{\nbhd}{\mathcal{N}}
 
-\newcommand{\of}[1]{\left( #1 \right)} 
+\newcommand{\of}[1]{\left( #1 \right)}
 
 \begin{document}
-	
+	\pagenumbering{arabic}
 	\begin{center}
 		\huge\textbf{Public Key Cryptography}\\
 		\vspace{0.5em}
 	\end{center}
 	
-	%\tableofcontents
-	
-	\section{Review of Chinese Remainder Theorem and Fermat's Little Theorem}
-	\subsection{Chinese Remainder Theorem ($\mathsf{CRT}$)}
+	\section{Chinese Remainder Theorem ($\mathsf{CRT}$)}
 	
 	\begin{tcolorbox}[colback=white,colframe=lemcolor,arc=5pt,title={\color{white}\bf Bézout's Identity}]
 		\begin{lemma*}
@@ -187,9 +190,7 @@
 	\end{proof}
 	\newpage
 	
-	\section{Special Case of $\mathsf{CRT}$ and $\rsa$-$\mathsf{CRT}$ Algorithm}
-	
-	\subsection{Two Linear Congruences for $\mathsf{CRT}$}
+	\section{Special Case of $\mathsf{CRT}$}
 	
 	\iffalse
 	\begin{tcolorbox}[title=Chinese Remainder Theorem (CRT) - Special Case]
@@ -206,8 +207,8 @@
 			\end{align*} where $M_i=M/m_i$ and $ b_i\equiv\inv{M_i}\pmod{m_i}$.
 		\end{theorem*}
 	\end{tcolorbox}\fi
-	\begin{tcolorbox}[title=Chinese Remainder Theorem (CRT) - Special Case]
-		\begin{theorem*}
+	\begin{tcolorbox}[colback=white,colframe=corcolor,arc=5pt,title={\color{white}\bf $\mathsf{CRT}$ - Special Case}]
+		\begin{corollary*}
 			Consider a system of two linear congruences:
 			\begin{align*}
 			x&\equiv a_1 \pmod{p}\\
@@ -215,8 +216,9 @@
 			\end{align*} where $p,q$ are coprime. Let $N=pq$. Then, the unique solution of the system of congruences is give by \begin{align*}
 			\mathcolorbox{-blue}{x=a_1qq_p^{-1}+a_2pp_q^{-1}\mod{N}}
 			\end{align*} where $q_p^{-1}=\inv{q}\mod{p}$ and $p_{q}^{-1}=\inv{p}\mod{q}$.
-		\end{theorem*}
-		\tcblower
+		\end{corollary*}
+	\end{tcolorbox}
+	\begin{remark}
 		Recall that Bézout's identity : $
 		a,b\in\mathbb{Z}\implies\exists x,y\in\mathbb{Z}:\gcd(a,b)=ax+by.
 		$ Especially, \[
@@ -227,10 +229,10 @@
 		\mathcolorbox{-blue}{x=a_1qq_p^{-1}+a_2pp_q^{-1}\mod{N}} &\leftrightsquigarrow x=a_1qq_p^{-1}+a_2(1-qq_{p}^{-1})\mod{N}\\
 		&\leftrightsquigarrow \mathcolorbox{-red}{x=(a_1-a_2)qq_p^{-1}+a_2\mod{N}}\\
 		\end{align*}
-	\end{tcolorbox}
+	\end{remark}
 	
 	\newpage
-	\subsection{$\rsa$-$\mathsf{CRT}$ Algorithm}
+	\section{$\rsa$-$\mathsf{CRT}$ Algorithm}
 	
 	\RestyleAlgo{ruled}
 	\SetKwComment{Comment}{/* }{ */}
