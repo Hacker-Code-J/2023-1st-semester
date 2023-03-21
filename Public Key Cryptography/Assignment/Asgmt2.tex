@@ -166,7 +166,52 @@
 	
 	
 	\subsection{Fermat's Little Theorem ($\mathsf{FLT}$)}
+	\textbf{Proof:}
 	
+	Let's consider a system of $k$ linear congruences:
+	
+	\begin{align*}
+	x &\equiv a_1 \pmod{m_1}, \\
+	x &\equiv a_2 \pmod{m_2}, \\
+	&\vdots \\
+	x &\equiv a_k \pmod{m_k}.
+	\end{align*}
+	
+	We are given that $m_1, m_2, \dots, m_k$ are pairwise coprime. The Chinese Remainder Theorem states that there exists a unique solution modulo $M$, where $M = m_1m_2\dots m_k$.
+	
+	To prove the existence of a solution, we will construct it.
+	
+	For each $i = 1, 2, \dots, k$, let $M_i = \frac{M}{m_i}$, so $M = M_1m_1 = M_2m_2 = \dots = M_km_k$. Since $m_i$ is coprime with all other $m_j$ ($i \neq j$), we know that $M_i$ is coprime with $m_i$.
+	
+	Now, for each $i$, we can find integers $y_i$ and $z_i$ such that:
+	
+	$$
+	M_i y_i + m_i z_i = \gcd(M_i, m_i) = 1.
+	$$
+	
+	By the Extended Euclidean Algorithm, we know that such $y_i$ and $z_i$ exist.
+	
+	Now, let's construct the solution $x$:
+	
+	$$
+	x = a_1 M_1 y_1 + a_2 M_2 y_2 + \dots + a_k M_k y_k.
+	$$
+	
+	We can check that this $x$ satisfies the given system of congruences:
+	
+	For each $i = 1, 2, \dots, k$, we have:
+	
+	$$
+	x \equiv a_i M_i y_i \pmod{m_i}.
+	$$
+	
+	Since $M_i y_i \equiv 1 \pmod{m_i}$, it follows that:
+	
+	$$
+	x \equiv a_i \pmod{m_i}.
+	$$
+	
+	Thus, we have shown that a solution $x$ exists for the given system of linear congruences.
 	\newpage
 	
 	\section{Special Case of $\mathsf{CRT}$ and $\rsa$-$\mathsf{CRT}$ Algorithm}
@@ -310,144 +355,7 @@
 		Hence, from Remark, we have \[
 		\mathcal{M}=(m_1-m_2)qq_{inv}+m_2\mod pq.
 		\]
-		
-		\newpage
-		Now, let's consider the following expression:
-		
-		$$m^{ed} = m^{1 + k(p-1)(q-1)}$$
-		
-		Using the binomial theorem, we can expand this expression:
-		
-		$$m^{1 + k(p-1)(q-1)} = m^1 \cdot (m^{(p-1)(q-1)})^k$$
-		
-		By Fermat's Little Theorem, we have:
-		
-		$$m^{p-1} \equiv 1 \pmod{p}$$
-		
-		Since $q-1$ is also an integer, we can raise both sides of the congruence to the power of $q-1$:
-		
-		$$(m^{p-1})^{q-1} \equiv 1^{q-1} \pmod{p}$$
-		
-		Thus, we have:
-		
-		$$m^{(p-1)(q-1)} \equiv 1 \pmod{p}$$
-		
-		So, our expanded expression becomes:
-		
-		$$m^{1 + k(p-1)(q-1)} \equiv m^1 \cdot 1^k \equiv m \pmod{p}$$
-		
-		Now, let's look at the given expressions for $c$ and $m_p$:
-		
-		$$c \equiv m^e \pmod{(p-1)(q-1)}$$
-		$$m_p \equiv c^{d_p} \pmod{p}$$
-		
-		Since $d_p = d \pmod p$, we can substitute $d_p$ with $d$ in the expression for $m_p$:
-		
-		$$m_p \equiv c^d \pmod{p}$$
-		
-		From the expression for $c$, we have:
-		
-		$$c^d \equiv (m^e)^d \equiv m^{ed} \pmod{(p-1)(q-1)}$$
-		
-		However, this congruence is modulo $(p-1)(q-1)$, and we want to show the congruence modulo $p$. To do this, we can use the fact that we already proved:
-		
-		$$m^{ed} \equiv m \pmod{p}$$
-		
-		Since $m^{ed} \equiv m \pmod{p}$, and $c^d \equiv m^{ed} \pmod{(p-1)(q-1)}$, we can conclude that:
-		
-		$$m_p \equiv c^d \equiv m^{ed} \pmod{p}$$
-		
-		Thus, we have proved the desired result.
 	\end{proof}
 	
-	We want to prove that if $\gcd(m, p) \neq 1$, then $m_p \equiv m \pmod{p}$.
-	
-	Since $\gcd(m, p) \neq 1$, and $p$ is a prime, we must have $m \equiv 0 \pmod p$.
-	
-	Now, let's consider the expression for $c$:
-	
-	$$c \equiv m^e \pmod{(p-1)(q-1)}$$
-	
-	Since $m \equiv 0 \pmod p$, we have:
-	
-	$$c \equiv 0^e \pmod{(p-1)(q-1)}$$
-	
-	And therefore, $c \equiv 0 \pmod p$.
-	
-	Now, consider the expression for $m_p$:
-	
-	$$m_p \equiv c^{d_p} \pmod p$$
-	
-	Since $c \equiv 0 \pmod p$, we have:
-	
-	$$m_p \equiv 0^{d_p} \pmod p$$
-	
-	Now, since $d_p = d \pmod p$, we have $0 < d_p < p$. Therefore, $0^{d_p} \equiv 0 \pmod p$, and we get:
-	
-	$$m_p \equiv 0 \pmod p$$
-	
-	Since we have $m_p \equiv 0 \pmod p$ and $m \equiv 0 \pmod p$, it follows that:
-	
-	$$m_p \equiv m \pmod p$$
-	
-	Thus, we have proved the desired result.
-	
-	\newpage
-	We want to prove that if $\gcd(m, p) \neq 1$, then $m_p \equiv m \pmod{p}$.
-	
-	Since $\gcd(m, p) \neq 1$, and $p$ is a prime, we must have $m \equiv 0 \pmod p$.
-	
-	Now, let's consider the expression for $c$:
-	
-	$$c \equiv m^e \pmod{pq}$$
-	
-	Since $m \equiv 0 \pmod p$, $m = kp$ for some integer $k$. Then, we can write:
-	
-	$$c \equiv (kp)^e \pmod{pq}$$
-	
-	Now we expand the expression using the binomial theorem:
-	
-	$$c \equiv (kp)^e \equiv k^e \cdot p^e \pmod{pq}$$
-	
-	Since $p^e$ is a multiple of $p$, it follows that $c \equiv k^e \cdot p^e \pmod{p}$. And because $m \equiv 0 \pmod{p}$, we can say that $c \equiv 0 \pmod{p}$.
-	
-	Now, consider the expression for $m_p$:
-	
-	$$m_p \equiv c^{d_p} \pmod p$$
-	
-	Since $c \equiv 0 \pmod p$, we have:
-	
-	$$m_p \equiv 0^{d_p} \pmod p$$
-	
-	Now, since $d_p = d \pmod p$, we have $0 < d_p < p$. Therefore, $0^{d_p} \equiv 0 \pmod p$, and we get:
-	
-	$$m_p \equiv 0 \pmod p$$
-	
-	Since we have $m_p \equiv 0 \pmod p$ and $m \equiv 0 \pmod p$, it follows that:
-	
-	$$m_p \equiv m \pmod p$$
-	
-	Thus, we have proved the desired result.\\
-	---------------------------------------------\\
-	When we have a congruence like $c \equiv m^e \pmod{pq}$, it means that $pq$ divides $(c - m^e)$. That is, there is an integer $k$ such that:
-	
-	$$c - m^e = k \cdot pq$$
-	
-	Now, if we reduce this congruence modulo $p$, we have:
-	
-	$$c - m^e \equiv k \cdot pq \pmod p$$
-	
-	Since $p$ divides $pq$, we can say that $k \cdot pq \equiv 0 \pmod p$. Therefore, we have:
-	
-	$$c - m^e \equiv 0 \pmod p$$
-	
-	This can be written as:
-	
-	$$c \equiv m^e \pmod p$$
-	
-	So, when we reduce a congruence modulo $p$, we are essentially looking at the remainder when the number is divided by $p$. In this case, we are dividing $(c - m^e)$ by $p$, which means we are looking at the remainder of $(c - m^e)$ when divided by $p$. This gives us the value of $c$ modulo $p$.
-	
-	I hope this explanation helps. Let me know if you have any further questions.
-	\newpage
 	\footer{Department of Information Security, Cryptography and Mathematics, Kookmin University}
 \end{document}
