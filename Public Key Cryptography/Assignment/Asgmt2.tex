@@ -35,6 +35,9 @@
 \usepackage{color,soul}
 \usepackage{soul}
 \newcommand{\mathcolorbox}[2]{\colorbox{#1}{$\displaystyle #2$}}
+\usepackage{cancel}
+\newcommand\crossout[3][black]{\renewcommand\CancelColor{\color{#1}}\cancelto{#2}{#3}}
+\newcommand\ncrossout[2][black]{\renewcommand\CancelColor{\color{#1}}\cancel{#2}}
 
 
 % Chapter formatting
@@ -133,85 +136,55 @@
 			&\vdots \\
 			x&\equiv a_k \pmod{m_k}
 			\end{align*} where \textcolor{magenta}{$m_1,m_2,\dots, m_k$ are pairwise coprime}. Let $M=\prod_{i=1}^km_i$. Then, the \textcolor{red}{unique} \textcolor{blue}{solution} of the system of congruences is give by \begin{align*}
-			X&=\sum_{i=1}^ka_iM_ib_i\pmod{M}\\
-			&=a_1M_1b_1+a_2M_2b_2+\cdots+a_kM_kb_k\pmod{M}.
+			X&\equiv\sum_{i=1}^ka_iM_ib_i\pmod{M}\\
+			&\equiv a_1M_1b_1+a_2M_2b_2+\cdots+a_kM_kb_k\pmod{M}.
 			\end{align*} where $M_i=M/m_i$ and $ b_i\equiv\inv{M_i}\pmod{m_i}$.
 		\end{theorem*}
 	\end{tcolorbox}
 	\begin{proof}
-		(\textcolor{blue}{Existence}) Let $M=m_1m_2\cdots m_k$ and $M_i=M/m_i$. Then, for all $i,j\in[1,k]$ with $i\neq j$, \[
-		\textcolor{magenta}{\gcd\of{m_i,m_j}=1}\implies\gcd\of{m_i, M_i}=1\implies \exists b_i: b_iM_i\equiv1\pmod{m_i}. 
-		\] Then we claim that $X=\sum_{i=1}^k a_i b_i M_i$ is a solution to the system of linear congruences: \begin{align*}
-		X-a_i=\of{\sum_{j=1}^k a_j b_j M_j} - a_i&=\sum_{\substack{j=1\\ j\neq i}}^k a_j b_j M_j + a_ib_iM_i-a_i
-		=\sum_{j=1,j\neq i}^k a_j b_j M_j + a_i(b_iM_i - 1)
+		(\textcolor{blue}{Existence}) Define \begin{align*}
+		M&:=\prod_{i=1}^km_i=m_1m_2\cdots m_k\quad\text{and}\\
+		M_i&:=\frac{M}{m_i}=m_1m_2\cdots m_{i-1}m_{i+1}\cdots m_k.
+		\end{align*} By Bézout's identity, we know that \[
+		\exists b_i,c_i\in\Z: M_ib_i+m_ic_i=\gcd\of{M_i,m_i}=1.
+		\] because $M_i$ has not $m_i$ as factor. Then we have \[
+		\begin{cases}
+		M_ib_i\equiv 1\pmod{m_i}\quad\cdots\cdots(1)\\
+		M_ib_i\equiv 0\pmod{m_j}\ \text{for $j\neq i$}\quad\cdots\cdots(2).
+		\end{cases}
+		\] Note that \begin{itemize}
+			\item[(1)] $M_ib_i+m_ic_i=1\Leftrightarrow M_ib_i=(-c_i)m_i+1\Leftrightarrow M_1b_i\equiv 1\pmod{m_i}$.
+			\item[(2)] \begin{align*}
+			\textcolor{magenta}{\forall i,j\ \text{with}\ i\neq j:\gcd\of{m_i,m_j}=1}&\implies m_j\in\set{m_1,m_2,\cdots,m_{i-1},m_{i+1},\cdots,m_k}\\
+			&\implies m_j\mid M_i\quad\because M_i=m_1m_2\cdots m_{i-1}m_{i+1}\cdots m_k\\
+			&\implies m_j\mid M_i-0\\
+			&\implies M_i\equiv 0\pmod{m_j}.
+			\end{align*}
+		\end{itemize}Then we claim that $X=\sum_{i=1}^k a_i M_ib_i$ is a solution to the system of linear congruences: \begin{align*}
+		X-a_i=\of{\sum_{j=1}^k a_j M_jb_j} - a_i=\sum_{\substack{j=1\\ j\neq i}}^k a_jM_jb_j + a_iM_ib_i-a_i
+		&=\sum_{j=1,j\neq i}^k a_j M_jb_j + a_i(M_ib_i - 1)\\
+		&\equiv\left[\sum_{j=1,j\neq i}^k a_j\cdot\of{\crossout[red]{0}{M_jb_j }}\right]+ a_i(M_ib_i - 1)\pmod{m_i}\quad\text{by (2)}\\
+		&\equiv a_i\crossout[red]{0}{(M_ib_i - 1)}\quad\pmod{m_i}\quad\text{by (1)}\\
+		&\equiv 0\pmod{m_i}.
 		\end{align*}
-		Now, we know that $
-		b_iM_i-1\equiv 0\pmod{m_i}$ since $b_iM_i\equiv 1\pmod{m_i}$. Then we get \[
-		X-a_i\equiv \sum_{\substack{j=1\\ j\neq i}}^k a_j b_j M_j \pmod{m_i}.
-		\]
-		Now, since $\gcd\of{m_i, M_j}=1$ and $M_j$ are coprime for all $j \neq i$, we know that $a_j b_j M_j \equiv 0 \pmod{m_i}$ for all $j \neq i$. Therefore, we have:
-		
+		Therefore, we have:
 		$$X-a_i \equiv 0 \pmod{m_i}$$
-		
-		Therefore, $X$ satisfies all of the linear congruences.
-		
-		Next, we will show that $X$ is unique modulo $M$. Suppose that $X'$ is another solution to the system of linear congruences. Then for any $i=1,2,\cdots, k$, we have:
-		
-		$$X \equiv X' \pmod{m_i} \implies m_i | (X-X')$$
-		
-		Since $m_i$ are pairwise coprime, we have $M=\operatorname{lcm}(m_1, m_2, \ldots, m_k)$, which implies that $M$ divides $X-X'$. Therefore, $X$ and $X'$ are congruent modulo $M$, and so $X$ is unique modulo $M$.\\
+		Hence $X$ satisfies all of the linear congruence.\\
 		\\
-		(\textcolor{red}{Uniqueness})
+		(\textcolor{red}{Uniqueness}) Let $X_0,X_1$ are roots of the system of linear equations. Then \begin{align*}
+		X_0\equiv &a_1\equiv X_1\pmod{m_1},\\
+		X_0\equiv &a_2\equiv X_1\pmod{m_2},\\
+		&\vdots\\
+		X_0\equiv &a_k\equiv X_1\pmod{m_k}
+		\end{align*} and so \begin{align*}
+		m_1&\mid X_0-X_1,\\
+		m_2&\mid X_0-X_1,\\
+		&\vdots\\
+		m_k&\mid X_0-X_1.
+		\end{align*} Hence $m_1m_2\cdots m_k\mid X_0-X_1$, \ie, \[
+		X_1\equiv X_2\pmod{M=m_1m_2\cdots m_k}.
+		\]
 	\end{proof}
-	
-	
-	\subsection{Fermat's Little Theorem ($\mathsf{FLT}$)}
-	\textbf{Proof:}
-	
-	Let's consider a system of $k$ linear congruences:
-	
-	\begin{align*}
-	x &\equiv a_1 \pmod{m_1}, \\
-	x &\equiv a_2 \pmod{m_2}, \\
-	&\vdots \\
-	x &\equiv a_k \pmod{m_k}.
-	\end{align*}
-	
-	We are given that $m_1, m_2, \dots, m_k$ are pairwise coprime. The Chinese Remainder Theorem states that there exists a unique solution modulo $M$, where $M = m_1m_2\dots m_k$.
-	
-	To prove the existence of a solution, we will construct it.
-	
-	For each $i = 1, 2, \dots, k$, let $M_i = \frac{M}{m_i}$, so $M = M_1m_1 = M_2m_2 = \dots = M_km_k$. Since $m_i$ is coprime with all other $m_j$ ($i \neq j$), we know that $M_i$ is coprime with $m_i$.
-	
-	Now, for each $i$, we can find integers $y_i$ and $z_i$ such that:
-	
-	$$
-	M_i y_i + m_i z_i = \gcd(M_i, m_i) = 1.
-	$$
-	
-	By the Extended Euclidean Algorithm, we know that such $y_i$ and $z_i$ exist.
-	
-	Now, let's construct the solution $x$:
-	
-	$$
-	x = a_1 M_1 y_1 + a_2 M_2 y_2 + \dots + a_k M_k y_k.
-	$$
-	
-	We can check that this $x$ satisfies the given system of congruences:
-	
-	For each $i = 1, 2, \dots, k$, we have:
-	
-	$$
-	x \equiv a_i M_i y_i \pmod{m_i}.
-	$$
-	
-	Since $M_i y_i \equiv 1 \pmod{m_i}$, it follows that:
-	
-	$$
-	x \equiv a_i \pmod{m_i}.
-	$$
-	
-	Thus, we have shown that a solution $x$ exists for the given system of linear congruences.
 	\newpage
 	
 	\section{Special Case of $\mathsf{CRT}$ and $\rsa$-$\mathsf{CRT}$ Algorithm}
