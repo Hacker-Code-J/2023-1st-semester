@@ -39,6 +39,7 @@
 \newcommand\crossout[3][black]{\renewcommand\CancelColor{\color{#1}}\cancelto{#2}{#3}}
 \newcommand\ncrossout[2][black]{\renewcommand\CancelColor{\color{#1}}\cancel{#2}}
 
+\usepackage{hyperref}
 
 % Chapter formatting
 \definecolor{titleblue}{RGB}{0,53,128}
@@ -59,20 +60,20 @@
 
 % Header and footer formatting
 \pagestyle{fancy}
+\fancyhead{}
 \fancyhf{}
 \rhead{Student ID: 20192250\quad Name: 지용현}%\rule{3cm}{0.4pt}}
 \lhead{\textcolor{blue2}{\textbf{PKC Assignment \#2}}}
 % Define footer
 \newcommand{\footer}[1]{
-	\begin{flushright}
-		\vspace{2em}
-		\includegraphics[width=2cm]{school_logo.jpg} \\
-		\vspace{1em}
-		\textcolor{blue2}{\small\textbf{#1}}
-	\end{flushright}
+\begin{flushright}
+	\vspace{2em}
+	\includegraphics[width=2cm]{school_logo.jpg} \\
+	\vspace{1em}
+	\textcolor{blue2}{\small\textbf{#1}}
+\end{flushright}
 }
 %\rfoot{\large Department of Information Security, Cryptogrphy and Mathematics, Kookmin Uni.\includegraphics[height=1.5cm]{school_logo.jpg}}
-\fancyhead{}
 \fancyfoot{}
 \fancyfoot[C]{-\thepage-}
 
@@ -93,7 +94,7 @@
 
 \theoremstyle{definition}
 \newtheorem{definition}{Definition}
-\newtheorem*{remark}{Remark}
+\newtheorem{remark}{Remark}
 \newtheorem{exercise}{Exercise}[section]
 
 %New Command
@@ -109,228 +110,222 @@
 \newcommand{\of}[1]{\left( #1 \right)}
 
 \begin{document}
-	\pagenumbering{arabic}
-	\begin{center}
-		\huge\textbf{Public Key Cryptography}\\
-		\vspace{0.5em}
-	\end{center}
-	
-	\section{Chinese Remainder Theorem ($\mathsf{CRT}$)}
-	
-	\begin{tcolorbox}[colback=white,colframe=lemcolor,arc=5pt,title={\color{white}\bf Bézout's Identity}]
-		\begin{lemma*}
-			$a,b\in\Z\implies\exists x,y\in\Z:\gcd\of{a,b}=ax+by$.
-		\end{lemma*}
-	\end{tcolorbox}
-	\begin{remark}
-		Let $a,b\in\Z$ and $\gcd\of{a,b}=1$. Bézout's identity guarantees $\exists x,y\in\Z:ax+by=1$ and so \[
-		ax+by=1\implies ax=(-y)b+1\implies ax\equiv1\pmod{b}.
-		\] That is, \[
-		\mathcolorbox{-blue}{\gcd\of{a,b}=1\implies\exists x\in\Z:ax\equiv1\pmod{b}}.
-		\] Similarly, if $a$ and $b$ are coprime, $b$ has a mutiplicative inverse modulo $a$.
-	\end{remark}
-	
-	\begin{tcolorbox}[colback=white,colframe=thmcolor,arc=5pt,title={\color{white}\bf Chinese Remainder Theorem ($\mathsf{CRT}$)}]
-		\begin{theorem*}
-			Given a system of $k$ linear congruences:
-			\begin{align*}
+\pagenumbering{arabic}
+\begin{center}
+	\huge\textbf{Public Key Cryptography}\\
+	\vspace{0.5em}
+\end{center}
+
+\section{Chinese Remainder Theorem ($\mathsf{CRT}$)}
+
+\begin{tcolorbox}[colback=white,colframe=lemcolor,arc=5pt,title={\hypertarget{lem}{}\color{white}\bf Bézout's Identity}]
+	\begin{lemma*}
+		$a,b\in\Z\implies\exists x,y\in\Z:\gcd\of{a,b}=ax+by$.
+	\end{lemma*}
+\end{tcolorbox}
+
+\begin{tcolorbox}[colback=white,colframe=thmcolor,arc=5pt,title={\color{white}\bf Chinese Remainder Theorem ($\mathsf{CRT}$)}]
+	\begin{theorem*}
+		Given a system of $k$ linear congruences:
+		\begin{align*}
 			x&\equiv a_1 \pmod{m_1}\\
 			x&\equiv a_2 \pmod{m_2}\\
 			&\vdots \\
 			x&\equiv a_k \pmod{m_k}
-			\end{align*} where \textcolor{magenta}{$m_1,m_2,\dots, m_k$ are pairwise coprime}. Let $M=\prod_{i=1}^km_i$. Then, the \textcolor{red}{unique} \textcolor{blue}{solution} of the system of congruences is give by \begin{align*}
+		\end{align*} where \textcolor{magenta}{$m_1,m_2,\dots, m_k$ are pairwise coprime}. Let $M=\prod_{i=1}^km_i$. Then, the \textcolor{red}{unique} \textcolor{blue}{solution} of the system of congruences is given by \begin{align*}
 			X&\equiv\sum_{i=1}^ka_iM_ib_i\pmod{M}\\
 			&\equiv a_1M_1b_1+a_2M_2b_2+\cdots+a_kM_kb_k\pmod{M}.
-			\end{align*} where $M_i=M/m_i$ and $ b_i\equiv\inv{M_i}\pmod{m_i}$.
-		\end{theorem*}
-	\end{tcolorbox}
-	\begin{proof}
-		(\textcolor{blue}{Existence}) Define \begin{align*}
+		\end{align*} where $M_i=M/m_i$ and $ b_i\equiv\inv{M_i}\pmod{m_i}$.
+	\end{theorem*}
+\end{tcolorbox}
+\begin{proof}
+	(\textcolor{blue}{Existence}) Define \begin{align*}
 		M&:=\prod_{i=1}^km_i=m_1m_2\cdots m_k\quad\text{and}\\
 		M_i&:=\frac{M}{m_i}=m_1m_2\cdots m_{i-1}m_{i+1}\cdots m_k.
-		\end{align*} By Bézout's identity, we know that \[
-		\exists b_i,c_i\in\Z: M_ib_i+m_ic_i=\gcd\of{M_i,m_i}=1.
-		\] because $M_i$ has not $m_i$ as factor. Then we have \[
-		\begin{cases}
-		M_ib_i\equiv 1\pmod{m_i}\quad\cdots\cdots(1)\\
-		M_ib_i\equiv 0\pmod{m_j}\ \text{for $j\neq i$}\quad\cdots\cdots(2).
-		\end{cases}
-		\] Note that \begin{itemize}
-			\item[(1)] $M_ib_i+m_ic_i=1\Leftrightarrow M_ib_i=(-c_i)m_i+1\Leftrightarrow M_1b_i\equiv 1\pmod{m_i}$.
-			\item[(2)] \begin{align*}
-			\textcolor{magenta}{\forall i,j\ \text{with}\ i\neq j:\gcd\of{m_i,m_j}=1}&\implies m_j\in\set{m_1,m_2,\cdots,m_{i-1},m_{i+1},\cdots,m_k}\\
+	\end{align*} By Bézout's identity, we know that \[
+	\exists b_i,c_i\in\Z: M_ib_i+m_ic_i=\gcd\of{M_i,m_i}=1.
+	\] because $M_i$ has not $m_i$ as factor. Note that \begin{itemize}
+		\item[(1)] $M_ib_i+m_ic_i=1\Leftrightarrow M_ib_i=(-c_i)m_i+1\Leftrightarrow M_1b_i\equiv 1\pmod{m_i}$.
+		\item[(2)] Let $i,j\in\set{1,2,\cdots, k}$ with $i\neq j$. Then\begin{align*}
+			\textcolor{magenta}{\gcd\of{m_i,m_j}=1}&\implies m_j\in\set{m_1,m_2,\cdots,m_{i-1},m_{i+1},\cdots,m_k}\\
 			&\implies m_j\mid M_i\quad\because M_i=m_1m_2\cdots m_{i-1}m_{i+1}\cdots m_k\\
 			&\implies m_j\mid M_i-0\\
 			&\implies M_i\equiv 0\pmod{m_j}.
-			\end{align*}
-		\end{itemize}Then we claim that $X=\sum_{i=1}^k a_i M_ib_i$ is a solution to the system of linear congruences: \begin{align*}
+		\end{align*}
+	\end{itemize} 
+	Thus, we have \[
+	\begin{cases}
+		M_ib_i\equiv 1\pmod{m_i}\quad\cdots\cdots(1)\\
+		M_ib_i\equiv 0\pmod{m_j}\ \text{for $j\neq i$}\quad\cdots\cdots(2).
+	\end{cases}
+	\] 
+	Then we claim that $X=\sum_{i=1}^k a_i M_ib_i$ is a solution to the system of linear congruences: \begin{align*}
 		X-a_i=\of{\sum_{j=1}^k a_j M_jb_j} - a_i=\sum_{\substack{j=1\\ j\neq i}}^k a_jM_jb_j + a_iM_ib_i-a_i
 		&=\sum_{j=1,j\neq i}^k a_j M_jb_j + a_i(M_ib_i - 1)\\
 		&\equiv\left[\sum_{j=1,j\neq i}^k a_j\cdot\of{\crossout[red]{0}{M_jb_j }}\right]+ a_i(M_ib_i - 1)\pmod{m_i}\quad\text{by (2)}\\
 		&\equiv a_i\crossout[red]{0}{(M_ib_i - 1)}\quad\pmod{m_i}\quad\text{by (1)}\\
 		&\equiv 0\pmod{m_i}.
-		\end{align*}
-		Therefore, we have:
-		$$X-a_i \equiv 0 \pmod{m_i}$$
-		Hence $X$ satisfies all of the linear congruence.\\
-		\\
-		(\textcolor{red}{Uniqueness}) Let $X_0,X_1$ are roots of the system of linear equations. Then \begin{align*}
-		X_0\equiv &a_1\equiv X_1\pmod{m_1},\\
-		X_0\equiv &a_2\equiv X_1\pmod{m_2},\\
-		&\vdots\\
-		X_0\equiv &a_k\equiv X_1\pmod{m_k}
-		\end{align*} and so \begin{align*}
-		m_1&\mid X_0-X_1,\\
-		m_2&\mid X_0-X_1,\\
-		&\vdots\\
-		m_k&\mid X_0-X_1.
-		\end{align*} Hence $m_1m_2\cdots m_k\mid X_0-X_1$, \ie, \[
-		X_1\equiv X_2\pmod{M=m_1m_2\cdots m_k}.
-		\]
-	\end{proof}
-	\newpage
-	
-	\section{Special Case of $\mathsf{CRT}$}
-	
-	\iffalse
-	\begin{tcolorbox}[title=Chinese Remainder Theorem (CRT) - Special Case]
-		\begin{theorem*}
-			Given a system of $k$ linear congruences:
-			\begin{align*}
+	\end{align*}
+	Therefore, we have:
+	$$X-a_i \equiv 0 \pmod{m_i}$$
+	Hence $X$ satisfies all of the linear congruence.\\
+	\\
+	(\textcolor{red}{Uniqueness}) Let $X_0,X_1$ are roots of the system of linear equations. Let $1\leq i\leq k$. Then \begin{align*}
+		X_0\equiv &a_i\equiv X_1\pmod{m_i}
+	\end{align*} and so \begin{align*}
+		m_i&\mid X_0-X_1.
+	\end{align*} Hence $m_1m_2\cdots m_k\mid X_0-X_1$, \ie, \[
+	X_1\equiv X_2\pmod{M=m_1m_2\cdots m_k}.
+	\]
+\end{proof}
+\vspace{4pt}
+\section{Special Case of $\mathsf{CRT}$}
+
+\iffalse
+\begin{tcolorbox}[title=Chinese Remainder Theorem (CRT) - Special Case]
+	\begin{theorem*}
+		Given a system of $k$ linear congruences:
+		\begin{align*}
 			x&\equiv a_1 \pmod{m_1}\\
 			x&\equiv a_2 \pmod{m_2}\\
 			&\vdots \\
 			x&\equiv a_k \pmod{m_k}
-			\end{align*} where $m_1,m_2,\dots, m_k$ are pairwise coprime. Let $M=\prod_{i=1}^km_i$. Then, the unique solution of the system of congruences is give by \begin{align*}
+		\end{align*} where $m_1,m_2,\dots, m_k$ are pairwise coprime. Let $M=\prod_{i=1}^km_i$. Then, the unique solution of the system of congruences is give by \begin{align*}
 			x&=\sum_{i=1}^ka_iM_ib_i\pmod{M}\\
 			&=a_1M_1b_1+a_2M_2b_2+\cdots+a_kM_kb_k\pmod{M}.
-			\end{align*} where $M_i=M/m_i$ and $ b_i\equiv\inv{M_i}\pmod{m_i}$.
-		\end{theorem*}
-	\end{tcolorbox}\fi
-	\begin{tcolorbox}[colback=white,colframe=corcolor,arc=5pt,title={\color{white}\bf $\mathsf{CRT}$ - Special Case}]
-		\begin{corollary*}
-			Consider a system of two linear congruences:
-			\begin{align*}
+		\end{align*} where $M_i=M/m_i$ and $ b_i\equiv\inv{M_i}\pmod{m_i}$.
+	\end{theorem*}
+\end{tcolorbox}\fi
+\begin{tcolorbox}[colback=white,colframe=corcolor,arc=5pt,title={\color{white}\bf $\mathsf{CRT}$ - Special Case}]
+	\begin{corollary*}
+		Consider a system of two linear congruences:
+		\begin{align*}
 			x&\equiv a_1 \pmod{p}\\
 			x&\equiv a_2 \pmod{q}
-			\end{align*} where $p,q$ are coprime. Let $N=pq$. Then, the unique solution of the system of congruences is give by \begin{align*}
-			\mathcolorbox{-blue}{x=a_1qq_p^{-1}+a_2pp_q^{-1}\mod{N}}
-			\end{align*} where $q_p^{-1}=\inv{q}\mod{p}$ and $p_{q}^{-1}=\inv{p}\mod{q}$.
-		\end{corollary*}
-	\end{tcolorbox}
-	\begin{remark}
-		Recall that Bézout's identity : $
-		a,b\in\mathbb{Z}\implies\exists x,y\in\mathbb{Z}:\gcd(a,b)=ax+by.
-		$ Especially, \[
-		\text{$p,q$ are coprime}\implies\exists x,y\in\mathbb{Z}: px+qy=1.
-		\] Let $p,q$ are coprime. Then $\exists x,y\in\mathbb{Z}:px+qy=1$ and so \[
-		px=(-y)q+1\quad\leadsto\quad px\equiv1\pmod{q}\quad\leadsto\quad x=p^{-1}\mod{q}.
-		\] Similarly, $y=q^{-1}\mod{p}$. Thus we have $px+qy=1\leadsto pp_{q}^{-1}+qq_{p}^{-1}=1$. Consequently, \begin{align*}
-		\mathcolorbox{-blue}{x=a_1qq_p^{-1}+a_2pp_q^{-1}\mod{N}} &\leftrightsquigarrow x=a_1qq_p^{-1}+a_2(1-qq_{p}^{-1})\mod{N}\\
-		&\leftrightsquigarrow \mathcolorbox{-red}{x=(a_1-a_2)qq_p^{-1}+a_2\mod{N}}\\
-		\end{align*}
-	\end{remark}
-	
-	\newpage
-	\section{$\rsa$-$\mathsf{CRT}$ Algorithm}
-	
-	\RestyleAlgo{ruled}
-	\SetKwComment{Comment}{/* }{ */}
-	\begin{algorithm}[H]
-		\caption{$\mathsf{RSA}$-$\mathsf{CRT}$ Algorithm}
-		\KwData{The security parameter $k$, a public key $(N,e)$, a ciphertext $\mathcal{C}$.}
-		\KwResult{The plaintext message $\mathcal{M}$ corresponding to the ciphertext $\mathcal{C}$.}
-		\vspace{4pt}
-		\vspace{4pt}
-		\SetKwFunction{KeyGen}{KeyGen}
-		\SetKwProg{Fn}{Function}{:}{}
-		\Comment{Key Generation}
-		\Fn{\KeyGen$(1^k)$}{
-			$p, q \gets$ random prime numbers of $k/2$ bits each \tcp*{Generate two primes}
-			$N \gets pq$ \tcp*{Compute modulus}
-			$\phi(N) \gets (p-1)(q-1)$ \tcp*{Compute Euler's phi function}
-			$e \gets$ integer $e\in\of{1,\phi(N)}$ s.t. $\gcd(e, \phi(n)) = 1$ \tcp*{Choose encryption exponent}
-			$d \gets$ integer $d\in\of{1,\phi(N)}$ s.t. $ed\equiv 1\pmod{\phi\of{N}}$ \tcp*{Compute decryption exponent}
-			$\mathcolorbox{-green}{d_p\leftarrow d \mod p-1}$ \tcp*{Compute decryption exponent for $p$}
-			$\mathcolorbox{-green}{d_q \leftarrow d \mod q-1}$ \tcp*{Compute decryption exponent for $q$}
-			$q_{inv} \gets$ integer $q_{inv}\in(1, p-1)$ s.t. $qq_{inv}\equiv1 \pmod{p}$ \tcp*{Compute $q$ inverse modulo $p$}
-			Set the $\rsa$ public key as $(N,e)$\;
-			Set the $\rsa$ secret key as $(p,q,d_p,d_q,q_{inv})$\;
-		}
-		\textbf{End Function}\\
-		\vspace{4pt}
-		\vspace{4pt}
-		\Comment{Encryption}
-		\SetKwFunction{Enc}{Enc}
-		\Fn{\Enc$(N,e,\mathcal{M})$}{
-			$\mathcal{C}\gets\mathcal{M}^e\mod N$ \tcp*{Encrypt with $e$ and $N$}
-		}
-		\textbf{End Function}\\
-		\vspace{4pt}
-		\vspace{4pt}
-		\Comment{Decryption}
-		\SetKwFunction{Dec}{Dec}
-		\Fn{\Dec$(\mathcal{C})$}{
-			$m_1 \gets \mathcal{C}^{d_p} \mod p$ \tcp*{Decrypt with $d_p$ and $p$}
-			$m_2 \gets \mathcal{C}^{d_q} \mod q$ \tcp*{Decrypt with $d_q$ and $q$}
-			$t \gets q_{inv}(m_1 - m_2)$ \tcp*{Reconstruct the message using CRT}
-			$m \leftarrow m_2 + qt\mod N$ \tcp*{$\mathcolorbox{-red}{m=(m_1-m_2)qq_{inv}+m_2\mod N}$}
-			\KwRet{$m$}\;
-		}
-		\textbf{End Function}\\
-		\vspace{2.5pt}
-	\end{algorithm}
-	\begin{proof}[Proof of Decryption]
-		Note that \begin{align*}
+		\end{align*} where $p,q$ are coprime. Let $N=pq$. Then, the unique solution of the system of congruences is given by \begin{align*}
+			\mathcolorbox{-green}{x=a_1qq_p^{-1}+a_2pp_q^{-1}\mod{N}}
+		\end{align*} where $q_p^{-1}=\inv{q}\mod{p}$ and $p_{q}^{-1}=\inv{p}\mod{q}$.
+	\end{corollary*}
+\end{tcolorbox}
+\iffalse
+\begin{remark}
+	Let $a,b\in\Z$ and $\gcd\of{a,b}=1$. Bézout's identity guarantees $\exists x,y\in\Z:ax+by=1$ and so \[
+	ax+by=1\implies ax=(-y)b+1\implies ax\equiv1\pmod{b}.
+	\] That is, \[
+	\mathcolorbox{-blue}{\gcd\of{a,b}=1\implies\exists x\in\Z:ax\equiv1\pmod{b}}.
+	\] Similarly, if $a$ and $b$ are coprime, $b$ has a mutiplicative inverse modulo $a$.
+\end{remark}
+\fi
+
+\newpage
+\begin{remark}\hypertarget{rmk1}{}
+	Recall that \hyperlink{lem}{Bézout's identity} : $
+	a,b\in\mathbb{Z}\implies\exists x,y\in\mathbb{Z}:\gcd(a,b)=ax+by.
+	$ Especially, \[
+	\text{$p,q$ are coprime}\implies\exists x,y\in\mathbb{Z}: px+qy=1.
+	\] Since $p,q$ are coprime, we know that $\exists x,y\in\mathbb{Z}:px+qy=1$ and so \[
+	px=(-y)q+1\quad\implies\quad px\equiv1\pmod{q}\quad\implies\quad x=p^{-1}\mod{q}.
+	\] Similarly, $y=q^{-1}\mod{p}$. Thus we have $px+qy=1\implies pp_{q}^{-1}+qq_{p}^{-1}=1$. Consequently, \begin{align*}
+		\hypertarget{crt}{}\mathcolorbox{-green}{x=a_1qq_p^{-1}+a_2pp_q^{-1}\mod{N}} &\implies x=a_1qq_p^{-1}+a_2(1-qq_{p}^{-1})\mod{N}\\
+		&\implies \mathcolorbox{-red}{x=(a_1-a_2)qq_p^{-1}+a_2\mod{N}}.
+	\end{align*}
+\end{remark}
+\vspace{4pt}
+\section{$\rsa$-$\mathsf{CRT}$ Algorithm}
+
+\RestyleAlgo{ruled}
+\SetKwComment{Comment}{/* }{ */}
+\begin{algorithm}[H]
+	\caption{$\mathsf{RSA}$-$\mathsf{CRT}$ Algorithm}
+	\KwData{The security parameter $k$, a public key $(N,e)$, a ciphertext $\mathcal{C}$.}
+	\KwResult{The plaintext message $\mathcal{M}$ corresponding to the ciphertext $\mathcal{C}$.}
+	\vspace{4pt}
+	\vspace{4pt}
+	\SetKwFunction{KeyGen}{KeyGen}
+	\SetKwProg{Fn}{Function}{:}{}
+	\Comment{Key Generation}
+	\Fn{\KeyGen$(1^k)$}{
+		$p, q \gets$ random prime numbers of $k/2$ bits each \tcp*{Generate two primes}
+		$N \gets pq$ \tcp*{Compute modulus}
+		$\phi(N) \gets (p-1)(q-1)$ \tcp*{Compute Euler's phi function}
+		$e \gets$ integer $e\in\of{1,\phi(N)}$ s.t. $\gcd(e, \phi(N)) = 1$ \tcp*{Choose encryption exponent}
+		$d \gets$ integer $d\in\of{1,\phi(N)}$ s.t. $ed\equiv 1\pmod{\phi\of{N}}$ \tcp*{Compute decryption exponent}
+		${d_p\leftarrow d \mod p-1}$ \tcp*{Compute decryption exponent for $p$}
+		${d_q \leftarrow d \mod q-1}$ \tcp*{Compute decryption exponent for $q$}
+		$q_{inv} \gets$ integer $q_{inv}\in(1, p-1)$ s.t. $qq_{inv}\equiv1 \pmod{p}$ \tcp*{Compute $q$ inverse modulo $p$}
+		Set the $\rsa$ public key as $(N,e)$\;
+		Set the $\rsa$ secret key as $(p,q,d_p,d_q,q_{inv})$\;
+	}
+	\textbf{End Function}\\
+	\vspace{4pt}
+	\vspace{4pt}
+	\Comment{Encryption}
+	\SetKwFunction{Enc}{Enc}
+	\Fn{\Enc$(N,e,\mathcal{M})$}{
+		$\mathcal{C}\gets\mathcal{M}^e\mod N$ \tcp*{Encrypt with $e$ and $N$}
+	}
+	\textbf{End Function}\\
+	\vspace{4pt}
+	\vspace{4pt}
+	\Comment{Decryption}
+	\SetKwFunction{Dec}{Dec}
+	\Fn{\Dec$(\mathcal{C})$}{
+		$m_1 \gets \mathcal{C}^{d_p} \mod p$ \tcp*{Decrypt with $d_p$ and $p$}
+		$m_2 \gets \mathcal{C}^{d_q} \mod q$ \tcp*{Decrypt with $d_q$ and $q$}
+		$m \leftarrow (m_1 - m_2)qq_{inv}+m_2\mod N$ \tcp*{{$\mathcolorbox{-red}{m=(m_1-m_2)qq_{inv}+m_2\mod N}$}}
+		\KwRet{$m$}\;
+	}
+	\textbf{End Function}\\
+	\vspace{2.5pt}
+\end{algorithm}
+\newpage
+\begin{proof}[Proof of Decryption]
+	Note that \begin{align*}
 		ed\equiv 1\pmod{(p-1)(q-1)}&\implies\exists k\in\Z:ed=1+k(p-1)(q-1),\\
 		d_p=d\mod p-1&\implies\exists k_p\in\Z: d=(p-1)k_p+d_p.
-		\end{align*}
-		Consider $m_1:=\mathcal{C}^{d_p}\mod p$. From $\mathcal{C}=\mathcal{M}^e\mod pq$, we have \begin{align*}
-		\mathcal{C}\equiv\mathcal{M}^e\pmod{pq} &\Leftrightarrow pq\mid \mathcal{C}-\mathcal{M}^e\\
-		&\Leftrightarrow \mathcal{C}-\mathcal{M}^e=k_{N}\cdot pq\ \text{for some $k_{N}\in\Z$}\\
-		&\Leftrightarrow \mathcal{C}-\mathcal{M}^e=\of{k_{N}p}\cdot q\\
+	\end{align*}
+	\hypertarget{ref1}{}Consider $m_1:=\mathcal{C}^{d_p}\mod p$. From $\mathcal{C}=\mathcal{M}^e\mod pq$, we have \begin{align*}
+		\mathcal{C}\equiv\mathcal{M}^e\pmod{pq} \Leftrightarrow pq\mid \mathcal{C}-\mathcal{M}^e&\Leftrightarrow \mathcal{C}-\mathcal{M}^e=k_{N}\cdot pq\ \text{for some $k_{N}\in\Z$}\\
+		&\Leftrightarrow \mathcal{C}-\mathcal{M}^e=\of{k_{N}q}\cdot p\\
 		&\Leftrightarrow {p\mid \mathcal{C}-\mathcal{M}^e}\\
 		&\Leftrightarrow \mathcolorbox{-blue}{\mathcal{C}\equiv\mathcal{M}^e\pmod{p}}.
-		\end{align*} Then \begin{align*}
+	\end{align*} Then \begin{align*}
 		m_1=\mathcal{C}^{d_p}\mod p
-		&=\of{\mathcal{M}^e}^{d_p}\mod p\\
-		&=\of{\mathcal{M}^e}^{d-(p-1)k_p}\mod p\\
-		&=\of{\mathcolorbox{magenta}{\mathcal{M}^{ed}}}\cdot\mathcolorbox{cyan}{\mathcal{M}^{-e(p-1)k_p}}\mod p.
-		\end{align*} Clearly, either $\gcd\of{\mathcal{M},p}=1$ or
-		$\gcd\of{\mathcal{M},p}\neq 1$:
-		\begin{itemize}
-			\item[] \begin{tcolorbox}[colback=white,colframe=black,arc=5pt,title={\color{white}\bf }]
-				\textbf{(Case I)} Let $\gcd\of{\mathcal{M},p}=1$. By \textcolor{red}{Fermat's little theorem}, we get \[
-				\mathcolorbox{cyan}{\mathcal{M}^{-e(p-1)k_p}}=\of{\textcolor{red}{\mathcal{M}^{p-1}}}^{-ek_p}\textcolor{red}{\equiv} \textcolor{red}{1}^{-ek_p}=1\textcolor{red}{\pmod{p}}.
-				\] Thus, \begin{align*}
-				m_1=\mathcal{C}^{d_p}\mod p&=\of{{\mathcal{M}^{ed}}}\cdot{\mathcal{M}^{-e(p-1)k_p}}\mod p\\&=\of{{\mathcal{M}^{ed}}}\cdot 1\mod p\\
+		=\of{\mathcal{M}^e}^{d-(p-1)k_p}\mod p=\of{{\mathcal{M}^{ed}}}\cdot{\mathcal{M}^{-e(p-1)k_p}}\mod p.
+	\end{align*} Clearly, either $\gcd\of{\mathcal{M},p}=1$ or
+	$\gcd\of{\mathcal{M},p}\neq 1$:
+	\begin{itemize}
+		\item[] \begin{tcolorbox}[colback=white,colframe=black,arc=5pt,title={\color{white}\bf }]
+			\textbf{(Case I)} Let $\gcd\of{\mathcal{M},p}=1$. By \textcolor{magenta}{Fermat's little theorem}, we get \[
+			{\mathcal{M}^{-e(p-1)k_p}}=\of{\textcolor{magenta}{\mathcal{M}^{p-1}}}^{-ek_p}\textcolor{magenta}{\equiv} \textcolor{magenta}{1}^{-ek_p}=1\textcolor{magenta}{\pmod{p}}.
+			\] Thus, \begin{align*}
+				m_1=\mathcal{C}^{d_p}\mod p&=\of{{\mathcal{M}^{ed}}}\cdot\crossout[red]{1}{\mathcal{M}^{-e(p-1)k_p}}\mod p\quad\text{by FLT}\\
 				&\equiv\mathcal{M}^{k(p-1)(q-1)+1}\pmod{p}\\
-				&\equiv\of{\mathcal{M}^{p-1}}^{k(q-1)}\cdot\mathcal{M}\pmod{p}\\
-				&\equiv 1^{k(q-1)}\cdot\mathcal{M}\pmod{p}\quad\text{by FLT}\\
+				&\equiv\of{\crossout[red]{1}{\mathcal{M}^{p-1}}}^{k(q-1)}\cdot\mathcal{M}\pmod{p}\quad\text{by FLT}\\
 				&\equiv\mathcal{M}\pmod{p}.
-				\end{align*} That is, $m_1\equiv\mathcal{M}\pmod{p}$.
-			\end{tcolorbox}
-			\item[] \begin{tcolorbox}[colback=white,colframe=black,arc=5pt,title={\color{white}\bf }]
-				\textbf{(Case II)} Let $\gcd\of{\mathcal{M},p}\neq 1$, \ie, $\exists l\in\Z:\mathcal{M}=pl$ since $p$ is a primes\footnote{Since $p$ is a prime, $p$ has factors $1$ and $p$ only. Then $\gcd\of{\mathcal{M},p}\neq 1$ means that $p$ is only common factor.}. Then we have \[
-				\mathcal{M}=pl\implies p\mid\mathcal{M}-0\implies\mathcal{M}\equiv 0\pmod{p}.
-				\] Recall that $\mathcolorbox{-blue}{\mathcal{C}\equiv\mathcal{M}^e\pmod{p}}$. Then $\mathcal{C}\equiv\mathcal{M}^e\equiv 0^e=0\pmod{p}$ and so\[
-				m_1=\mathcal{C}^{d_p}\mod p=0^{d_p}\mod p= 0\mod p=0.
-				\] That is, $m_1\equiv 0\pmod{p}$. Therefore \[
-				\begin{cases}
+			\end{align*} That is, $m_1\equiv\mathcal{M}\pmod{p}$.
+		\end{tcolorbox}
+		\item[] \begin{tcolorbox}[colback=white,colframe=black,arc=5pt,title={\color{white}\bf }]
+			\textbf{(Case II)} Let $\gcd\of{\mathcal{M},p}\neq 1$, \ie, $\exists l\in\Z:\mathcal{M}=pl$ since $p$ is a primes\footnote{Since $p$ is a prime, $p$ has factors $1$ and $p$ only. Then $\gcd\of{\mathcal{M},p}\neq 1$ means that $p$ is only common factor.}. Then we have \[
+			\mathcal{M}=pl\implies p\mid\mathcal{M}-0\implies\mathcal{M}\equiv 0\pmod{p}.
+			\] Recall that {$\mathcolorbox{-blue}{\mathcal{C}\equiv\mathcal{M}^e\pmod{p}}$}. Then $\mathcal{C}\equiv\mathcal{M}^e\equiv 0^e=0\pmod{p}$ and so\[
+			m_1=\mathcal{C}^{d_p}\mod p=0^{d_p}\mod p= 0\mod p=0.
+			\] That is, $m_1\equiv 0\pmod{p}$. Therefore \[
+			\begin{cases}
 				\mathcal{M}\equiv 0\pmod{p}\\
 				m_1\equiv 0\pmod{p}
-				\end{cases}\implies m_1\equiv\mathcal{M}\pmod{p}.
-				\] 
-			\end{tcolorbox}
-		\end{itemize} 
-		Here, we obtain $m_1\equiv\mathcal{M}\pmod{p}$. Similarly, we have $m_2\equiv\mathcal{M}\pmod{q}$. Then, the plaintext message $\mathcal{M}$ is a solution to the following system of two linear congruences: \begin{align*}
+			\end{cases}\implies m_1\equiv\mathcal{M}\pmod{p}.
+			\] 
+		\end{tcolorbox}
+	\end{itemize} 
+	Here, we obtain $m_1\equiv\mathcal{M}\pmod{p}$. Similarly, we have $m_2\equiv\mathcal{M}\pmod{q}$. Then, the plaintext message $\mathcal{M}$ is a solution to the following system of two linear congruences: \begin{align*}
 		\mathcal{M}&\equiv m_1\pmod{p},\\
 		\mathcal{M}&\equiv m_2\pmod{q}.
-		\end{align*}
-		Hence, from Remark, we have \[
-		\mathcal{M}=(m_1-m_2)qq_{inv}+m_2\mod pq.
-		\]
-	\end{proof}
-	
-	\footer{Department of Information Security, Cryptography and Mathematics, Kookmin University}
+	\end{align*}
+	Then, \hyperlink{rmk1}{\textbf{Remark 1}} guarantees that \[
+	\mathcal{M}=(m_1-m_2)qq_{inv}+m_2\mod pq.
+	\]
+\end{proof}
+
+\footer{Department of Information Security, Cryptography and Mathematics, Kookmin University}
 \end{document}
