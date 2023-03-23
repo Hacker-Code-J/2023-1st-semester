@@ -95,6 +95,7 @@
 
 \theoremstyle{definition}
 \newtheorem{definition}{Definition}
+\newtheorem*{definition*}{Definition}
 \newtheorem{remark}{Remark}
 \newtheorem{exercise}{Exercise}[section]
 
@@ -121,88 +122,29 @@
 \noindent We want to prove that \[
 \gcd\of{a^{j!}-1,N}=N\implies\gcd\of{a^{(j+1)!}-1,N}=N.
 \]
-\subsection*{Proof 1}
 \begin{proof}
-	Let $\gcd\of{a^{j!}-1,N}=N$ then \begin{align*}
-	\gcd\of{a^{j!}-1,N}=N&\implies N\mid a^{j!}-1\quad\because d=\gcd(a,b)\Rightarrow d\mid a\land d\mid b\\
-	&\implies a^{j!}\equiv 1\pmod{N}.
-	\end{align*} Note that \[
+	Note that
+	\begin{tcolorbox}[colback=white,colframe=defcolor,arc=5pt,title={\hypertarget{lem}{}\color{white}\bf }]
+		\begin{definition*}
+			Let $a,b\in\Z$ and $n\in\Z_{>1}$. Then \[
+			a\equiv b\pmod{n}\overset{\text{def.}}{\iff} n\mid a-b.
+			\]
+		\end{definition*}
+	\end{tcolorbox}
+	
+	\noindent Let $\gcd\of{a^{j!}-1,N}=N$ then \begin{align*}
+		\gcd\of{a^{j!}-1,N}=N&\implies N\mid a^{j!}-1\quad\because d=\gcd(a,b)\Rightarrow d\mid a\land d\mid b\\
+		&\implies a^{j!}\equiv 1\pmod{N},
+	\end{align*} and so \[
 	a^{(j+1)!}=\of{a^{j!}}^{(j+1)}\equiv 1^{j+1}=1\pmod{N}.
 	\] Thus \begin{align*}
-	a^{(j+1)!}\equiv 1\pmod{N}&\implies a^{(j+1)!}-1\equiv 0\pmod{N}\\
-	&\implies N\mid a^{(j+1)!}-1
-	\end{align*}
+		a^{(j+1)!}\equiv 1\pmod{N}
+		&\implies N\mid a^{(j+1)!}-1\\
+		&\implies \exists k\in\Z:a^{(j+1)!}-1=Nk.
+	\end{align*} Hence, we have \[
+	\gcd\of{a^{(j+1)!}-1,N}=\gcd\of{Nk,N}=N.
+\]
 \end{proof}
-
-\subsection*{Proof 2}
-\begin{proof}
-	content...
-\end{proof}
-
-
-\section{Chinese Remainder Theorem ($\mathsf{CRT}$)}
-
-\begin{tcolorbox}[colback=white,colframe=lemcolor,arc=5pt,title={\hypertarget{lem}{}\color{white}\bf Bézout's Identity}]
-	\begin{lemma*}
-		$a,b\in\Z\implies\exists x,y\in\Z:\gcd\of{a,b}=ax+by$.
-	\end{lemma*}
-\end{tcolorbox}
-
-\begin{tcolorbox}[colback=white,colframe=thmcolor,arc=5pt,title={\color{white}\bf Chinese Remainder Theorem ($\mathsf{CRT}$)}]
-	\begin{theorem*}
-		Given a system of $k$ linear congruences:
-		\begin{align*}
-			x&\equiv a_1 \pmod{m_1}\\
-			x&\equiv a_2 \pmod{m_2}\\
-			&\vdots \\
-			x&\equiv a_k \pmod{m_k}
-		\end{align*} where \textcolor{magenta}{$m_1,m_2,\dots, m_k$ are pairwise coprime}. Let $M=\prod_{i=1}^km_i$. Then, the \textcolor{red}{unique} \textcolor{blue}{solution} of the system of congruences is given by \begin{align*}
-			X&\equiv\sum_{i=1}^ka_iM_ib_i\pmod{M}\\
-			&\equiv a_1M_1b_1+a_2M_2b_2+\cdots+a_kM_kb_k\pmod{M}.
-		\end{align*} where $M_i=M/m_i$ and $ b_i\equiv\inv{M_i}\pmod{m_i}$.
-	\end{theorem*}
-\end{tcolorbox}
-\begin{proof}
-	(\textcolor{blue}{Existence}) Define \begin{align*}
-		M&:=\prod_{i=1}^km_i=m_1m_2\cdots m_k\quad\text{and}\\
-		M_i&:=\frac{M}{m_i}=m_1m_2\cdots m_{i-1}m_{i+1}\cdots m_k.
-	\end{align*} By Bézout's identity, we know that \[
-	\exists b_i,c_i\in\Z: M_ib_i+m_ic_i=\gcd\of{M_i,m_i}=1.
-	\] because $M_i$ has not $m_i$ as factor. Note that \begin{itemize}
-		\item[(1)] $M_ib_i+m_ic_i=1\Leftrightarrow M_ib_i=(-c_i)m_i+1\Leftrightarrow M_1b_i\equiv 1\pmod{m_i}$.
-		\item[(2)] Let $i,j\in\set{1,2,\cdots, k}$ with $i\neq j$. Then\begin{align*}
-			\textcolor{magenta}{\gcd\of{m_i,m_j}=1}&\implies m_j\in\set{m_1,m_2,\cdots,m_{i-1},m_{i+1},\cdots,m_k}\\
-			&\implies m_j\mid M_i\quad\because M_i=m_1m_2\cdots m_{i-1}m_{i+1}\cdots m_k\\
-			&\implies m_j\mid M_i-0\\
-			&\implies M_i\equiv 0\pmod{m_j}.
-		\end{align*}
-	\end{itemize} 
-	Thus, we have \[
-	\begin{cases}
-		M_ib_i\equiv 1\pmod{m_i}\quad\cdots\cdots(1)\\
-		M_ib_i\equiv 0\pmod{m_j}\ \text{for $j\neq i$}\quad\cdots\cdots(2).
-	\end{cases}
-	\] 
-	Then we claim that $X=\sum_{i=1}^k a_i M_ib_i$ is a solution to the system of linear congruences: \begin{align*}
-		X-a_i=\of{\sum_{j=1}^k a_j M_jb_j} - a_i=\sum_{\substack{j=1\\ j\neq i}}^k a_jM_jb_j + a_iM_ib_i-a_i
-		&=\sum_{j=1,j\neq i}^k a_j M_jb_j + a_i(M_ib_i - 1)\\
-		&\equiv\left[\sum_{j=1,j\neq i}^k a_j\cdot\of{\crossout[red]{0}{M_jb_j }}\right]+ a_i(M_ib_i - 1)\pmod{m_i}\quad\text{by (2)}\\
-		&\equiv a_i\crossout[red]{0}{(M_ib_i - 1)}\quad\pmod{m_i}\quad\text{by (1)}\\
-		&\equiv 0\pmod{m_i}.
-	\end{align*}
-	Therefore, we have:
-	$$X-a_i \equiv 0 \pmod{m_i}$$
-	Hence $X$ satisfies all of the linear congruence.\\
-	\\
-	(\textcolor{red}{Uniqueness}) Let $X_0,X_1$ are roots of the system of linear equations. Let $1\leq i\leq k$. Then \begin{align*}
-		X_0\equiv &a_i\equiv X_1\pmod{m_i}
-	\end{align*} and so \begin{align*}
-		m_i&\mid X_0-X_1.
-	\end{align*} Hence $m_1m_2\cdots m_k\mid X_0-X_1$, \ie, \[
-	X_1\equiv X_2\pmod{M=m_1m_2\cdots m_k}.
-	\]
-\end{proof}
-
 
 \footer{Department of Information Security, Cryptography and Mathematics, Kookmin University}
 \end{document}
