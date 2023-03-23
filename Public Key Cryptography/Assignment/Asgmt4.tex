@@ -1,0 +1,208 @@
+
+\documentclass{article}
+
+% Packages for formatting
+\usepackage[margin=1in]{geometry}
+\usepackage{fancyhdr}
+\usepackage{enumitem}
+\usepackage{graphicx}
+\usepackage{kotex}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{algorithm2e,setspace}
+\usepackage{algpseudocode}
+\usepackage{xcolor}
+\usepackage{amssymb}
+
+% Fonts
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{newpxtext,newpxmath}
+\usepackage{sectsty}
+
+% Define colors
+\definecolor{blue1}{HTML}{0077c2}
+\definecolor{blue2}{HTML}{00a5e6}
+\definecolor{blue3}{HTML}{b3e0ff}
+\definecolor{blue4}{HTML}{00293c}
+\definecolor{blue5}{HTML}{e6f7ff}
+
+\definecolor{thmcolor}{RGB}{231, 76, 60}
+\definecolor{defcolor}{RGB}{52, 152, 219}
+\definecolor{lemcolor}{RGB}{155, 89, 182}
+\definecolor{corcolor}{RGB}{46, 204, 113}
+\definecolor{procolor}{RGB}{241, 196, 15}
+
+\usepackage{color,soul}
+\usepackage{soul}
+\newcommand{\mathcolorbox}[2]{\colorbox{#1}{$\displaystyle #2$}}
+\usepackage{cancel}
+\newcommand\crossout[3][black]{\renewcommand\CancelColor{\color{#1}}\cancelto{#2}{#3}}
+\newcommand\ncrossout[2][black]{\renewcommand\CancelColor{\color{#1}}\cancel{#2}}
+
+\usepackage{hyperref}
+
+% Chapter formatting
+\definecolor{titleblue}{RGB}{0,53,128}
+\usepackage{titlesec}
+\titleformat{\section}
+{\normalfont\sffamily\Large\bfseries\color{titleblue!100!gray}}{\thesection}{1em}{}
+\titleformat{\subsection}
+{\normalfont\sffamily\large\bfseries\color{titleblue!50!gray}}{\thesubsection}{1em}{}
+
+%Tcolorbox
+\usepackage[most]{tcolorbox}
+
+%Tikzpicture
+\usepackage{tikz-cd}
+\usetikzlibrary{positioning}
+
+
+
+% Header and footer formatting
+\pagestyle{fancy}
+\fancyhead{}
+\fancyhf{}
+\rhead{Student ID: 20192250\quad Name: 지용현}%\rule{3cm}{0.4pt}}
+\lhead{\textcolor{blue2}{\textbf{PKC Assignment \#4}}}
+% Define footer
+\newcommand{\footer}[1]{
+\begin{flushright}
+	\vspace{2em}
+	\includegraphics[width=2cm]{school_logo.jpg} \\
+	\vspace{1em}
+	\textcolor{blue2}{\small\textbf{#1}}
+\end{flushright}
+}
+%\rfoot{\large Department of Information Security, Cryptogrphy and Mathematics, Kookmin Uni.\includegraphics[height=1.5cm]{school_logo.jpg}}
+\fancyfoot{}
+\fancyfoot[C]{-\thepage-}
+
+\newcommand{\ie}{\textnormal{i.e.}}
+\newcommand{\rsa}{\mathsf{RSA}}
+\newcommand{\rsacrt}{\mathsf{RSA}\textendash\mathsf{CRT}}
+\newcommand{\inv}[1]{#1^{-1}}
+
+\usepackage{amsthm}
+\newtheorem{axiom}{Axiom}[section]
+\newtheorem{theorem}{Theorem}
+\newtheorem*{theorem*}{Theorem}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{corollary}{Corollary}[theorem]
+\newtheorem*{corollary*}{Corollary}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem*{lemma*}{Lemma}
+
+\theoremstyle{definition}
+\newtheorem{definition}{Definition}
+\newtheorem{remark}{Remark}
+\newtheorem{exercise}{Exercise}[section]
+
+%New Command
+\newcommand{\set}[1]{\left\{#1\right\}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\F}{\mathbb{F}}
+\newcommand{\nbhd}{\mathcal{N}}
+
+\newcommand{\of}[1]{\left( #1 \right)}
+
+\begin{document}
+\pagenumbering{arabic}
+\begin{center}
+	\huge\textbf{Public Key Cryptography}\\
+	\vspace{0.5em}
+\end{center}
+
+
+\noindent We want to prove that \[
+\gcd\of{a^{j!}-1,N}=N\implies\gcd\of{a^{(j+1)!}-1,N}=N.
+\]
+\subsection*{Proof 1}
+\begin{proof}
+	Let $\gcd\of{a^{j!}-1,N}=N$ then \begin{align*}
+	\gcd\of{a^{j!}-1,N}=N&\implies N\mid a^{j!}-1\quad\because d=\gcd(a,b)\Rightarrow d\mid a\land d\mid b\\
+	&\implies a^{j!}\equiv 1\pmod{N}.
+	\end{align*} Note that \[
+	a^{(j+1)!}=\of{a^{j!}}^{(j+1)}\equiv 1^{j+1}=1\pmod{N}.
+	\] Thus \begin{align*}
+	a^{(j+1)!}\equiv 1\pmod{N}&\implies a^{(j+1)!}-1\equiv 0\pmod{N}\\
+	&\implies N\mid a^{(j+1)!}-1
+	\end{align*}
+\end{proof}
+
+\subsection*{Proof 2}
+\begin{proof}
+	content...
+\end{proof}
+
+
+\section{Chinese Remainder Theorem ($\mathsf{CRT}$)}
+
+\begin{tcolorbox}[colback=white,colframe=lemcolor,arc=5pt,title={\hypertarget{lem}{}\color{white}\bf Bézout's Identity}]
+	\begin{lemma*}
+		$a,b\in\Z\implies\exists x,y\in\Z:\gcd\of{a,b}=ax+by$.
+	\end{lemma*}
+\end{tcolorbox}
+
+\begin{tcolorbox}[colback=white,colframe=thmcolor,arc=5pt,title={\color{white}\bf Chinese Remainder Theorem ($\mathsf{CRT}$)}]
+	\begin{theorem*}
+		Given a system of $k$ linear congruences:
+		\begin{align*}
+			x&\equiv a_1 \pmod{m_1}\\
+			x&\equiv a_2 \pmod{m_2}\\
+			&\vdots \\
+			x&\equiv a_k \pmod{m_k}
+		\end{align*} where \textcolor{magenta}{$m_1,m_2,\dots, m_k$ are pairwise coprime}. Let $M=\prod_{i=1}^km_i$. Then, the \textcolor{red}{unique} \textcolor{blue}{solution} of the system of congruences is given by \begin{align*}
+			X&\equiv\sum_{i=1}^ka_iM_ib_i\pmod{M}\\
+			&\equiv a_1M_1b_1+a_2M_2b_2+\cdots+a_kM_kb_k\pmod{M}.
+		\end{align*} where $M_i=M/m_i$ and $ b_i\equiv\inv{M_i}\pmod{m_i}$.
+	\end{theorem*}
+\end{tcolorbox}
+\begin{proof}
+	(\textcolor{blue}{Existence}) Define \begin{align*}
+		M&:=\prod_{i=1}^km_i=m_1m_2\cdots m_k\quad\text{and}\\
+		M_i&:=\frac{M}{m_i}=m_1m_2\cdots m_{i-1}m_{i+1}\cdots m_k.
+	\end{align*} By Bézout's identity, we know that \[
+	\exists b_i,c_i\in\Z: M_ib_i+m_ic_i=\gcd\of{M_i,m_i}=1.
+	\] because $M_i$ has not $m_i$ as factor. Note that \begin{itemize}
+		\item[(1)] $M_ib_i+m_ic_i=1\Leftrightarrow M_ib_i=(-c_i)m_i+1\Leftrightarrow M_1b_i\equiv 1\pmod{m_i}$.
+		\item[(2)] Let $i,j\in\set{1,2,\cdots, k}$ with $i\neq j$. Then\begin{align*}
+			\textcolor{magenta}{\gcd\of{m_i,m_j}=1}&\implies m_j\in\set{m_1,m_2,\cdots,m_{i-1},m_{i+1},\cdots,m_k}\\
+			&\implies m_j\mid M_i\quad\because M_i=m_1m_2\cdots m_{i-1}m_{i+1}\cdots m_k\\
+			&\implies m_j\mid M_i-0\\
+			&\implies M_i\equiv 0\pmod{m_j}.
+		\end{align*}
+	\end{itemize} 
+	Thus, we have \[
+	\begin{cases}
+		M_ib_i\equiv 1\pmod{m_i}\quad\cdots\cdots(1)\\
+		M_ib_i\equiv 0\pmod{m_j}\ \text{for $j\neq i$}\quad\cdots\cdots(2).
+	\end{cases}
+	\] 
+	Then we claim that $X=\sum_{i=1}^k a_i M_ib_i$ is a solution to the system of linear congruences: \begin{align*}
+		X-a_i=\of{\sum_{j=1}^k a_j M_jb_j} - a_i=\sum_{\substack{j=1\\ j\neq i}}^k a_jM_jb_j + a_iM_ib_i-a_i
+		&=\sum_{j=1,j\neq i}^k a_j M_jb_j + a_i(M_ib_i - 1)\\
+		&\equiv\left[\sum_{j=1,j\neq i}^k a_j\cdot\of{\crossout[red]{0}{M_jb_j }}\right]+ a_i(M_ib_i - 1)\pmod{m_i}\quad\text{by (2)}\\
+		&\equiv a_i\crossout[red]{0}{(M_ib_i - 1)}\quad\pmod{m_i}\quad\text{by (1)}\\
+		&\equiv 0\pmod{m_i}.
+	\end{align*}
+	Therefore, we have:
+	$$X-a_i \equiv 0 \pmod{m_i}$$
+	Hence $X$ satisfies all of the linear congruence.\\
+	\\
+	(\textcolor{red}{Uniqueness}) Let $X_0,X_1$ are roots of the system of linear equations. Let $1\leq i\leq k$. Then \begin{align*}
+		X_0\equiv &a_i\equiv X_1\pmod{m_i}
+	\end{align*} and so \begin{align*}
+		m_i&\mid X_0-X_1.
+	\end{align*} Hence $m_1m_2\cdots m_k\mid X_0-X_1$, \ie, \[
+	X_1\equiv X_2\pmod{M=m_1m_2\cdots m_k}.
+	\]
+\end{proof}
+
+
+\footer{Department of Information Security, Cryptography and Mathematics, Kookmin University}
+\end{document}
