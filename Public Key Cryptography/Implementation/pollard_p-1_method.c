@@ -2,6 +2,7 @@
 #include <stdint.h>
 #include <stdlib.h>
 #include <time.h>
+#include <inttypes.h>
 
 uint64_t gcd(uint64_t a, uint64_t b) {
     while (b != 0) {
@@ -46,13 +47,13 @@ void pollard_p_1(uint64_t N, uint64_t k, uint64_t *p, uint64_t *q) {
 }
 
 int main() {
-    uint64_t N = 7420738134810; // This is just an example value for N
+    uint64_t N = 96940019531; // This is just an example value for N
     uint64_t k = 1000;
     uint64_t p, q;
 
     pollard_p_1(N, k, &p, &q);
 
-    printf("N = %llu = %llu * %llu\n", N, p, q);
+    printf("N = %" PRIu64 " = %" PRIu64 " * %" PRIu64 "\n", N, p, q);
 
     return 0;
 }
