@@ -107,6 +107,7 @@
 \newtheorem{definition}{Definition}
 \newtheorem*{remark}{Remark}
 \newtheorem{exercise}{Exercise}[section]
+\newtheorem{example}{Example}[section]
 
 %New Command
 \newcommand{\set}[1]{\left\{#1\right\}}
@@ -698,15 +699,72 @@
 	
 	\begin{tcolorbox}[colframe=procolor, title={\color{white}\bf }]
 		\begin{proposition}
-			
+			Let $U$ be an open subset of $\C$. Let $f,g:U\to\C$ are complex differentiable at $z_0\in U$. Let $\alpha,\beta\in\C$. \begin{itemize}
+				\item (Linearity) \[
+				\left(\alpha f\pm\beta g\right)'(z_0)=\alpha f'(z_0)\pm\beta g'(z_0).
+				\]
+				\item (Product Rule) \[
+				\left(fg\right)'(z_0)=f'(z_0)g(z_0)+f(z_0)g'(z_0).
+				\]
+				\item (Quotient Rule) \[
+				\left(\frac{f}{g}\right)'(z_0)=\frac{f'(z_0)g(z_0)-f(z_0)g'(z_0)}{g^2(z_0)}.
+				\]
+			\end{itemize}
 		\end{proposition}
 	\end{tcolorbox}
 	
 	\begin{tcolorbox}[colframe=procolor, title={\color{white}\bf Chain Rule}]
 		\begin{proposition}
-			
+			Let $f:I_f\to\R$ and $g:I_g\to\R$ satisfies \begin{enumerate}[(i)]
+				\item $f(I_f)\subseteq I_g$;
+				\item $f$ is differentiable at $x=c$;
+				\item $g$ is differentaible at $y=f(c)$.
+			\end{enumerate} Define $h:I_f\to\R$ as follows: \[
+			h(t)=g(f(t)):=g\circ f(t)
+			\] with $t\in I_f$. Then \[
+			h'(c)=g'(f(c))f'(c),
+			\] \ie, \[
+			\mathcolorbox{-blue}{(g\circ f)'(c)=g'(f(c))f'(c)}.
+			\]
 		\end{proposition}
 	\end{tcolorbox}
+	The chain rule is a fundamental concept in calculus that describes how to differentiate composite functions. In complex analysis, the chain rule is applied to complex-valued functions and involves complex differentiation.
+	
+	Suppose we have two complex-valued functions $f(z)$ and $g(z)$, where $z$ is a complex variable. Let $h(z) = f(g(z))$ be the composite function obtained by applying $g(z)$ to $z$ and then applying $f(z)$ to the result. Then, the chain rule in complex analysis states that:
+	
+	$$h'(z) = f'(g(z)) g'(z)$$
+	
+	This means that the derivative of $h(z)$ with respect to $z$ can be obtained by multiplying the derivative of $f(z)$ with respect to $z$ evaluated at $g(z)$ by the derivative of $g(z)$ with respect to $z$.
+	
+	To see why this formula makes sense, let's write out the derivative of $h(z)$ using the definition of the derivative:
+	
+	$$h'(z) = \lim_{\Delta z \to 0} \frac{h(z + \Delta z) - h(z)}{\Delta z}$$
+	
+	Using the definition of $h(z)$, we can write this as:
+	
+	$$h'(z) = \lim_{\Delta z \to 0} \frac{f(g(z + \Delta z)) - f(g(z))}{\Delta z}$$
+	
+	We can then expand $f(g(z + \Delta z))$ using the Taylor series for $f(z)$ evaluated at $g(z + \Delta z)$:
+	
+	$$f(g(z + \Delta z)) = f(g(z)) + f'(g(z)) g'(z) \Delta z + O(\Delta z^2)$$
+	
+	Substituting this into the expression for $h'(z)$, we get:
+	
+	$$h'(z) = \lim_{\Delta z \to 0} \frac{f(g(z)) + f'(g(z)) g'(z) \Delta z + O(\Delta z^2) - f(g(z))}{\Delta z}$$
+	
+	Simplifying this expression, we get:
+	
+	$$h'(z) = f'(g(z)) g'(z)$$
+	
+	which is the chain rule formula we derived earlier.
+	
+	Note that the chain rule in complex analysis applies to both real and complex-valued functions. In the case of real-valued functions, the formula reduces to the familiar form:
+	
+	$$\frac{d}{dx} f(g(x)) = f'(g(x)) g'(x)$$
+	
+	where $x$ is a real variable.
+	
+	In summary, the chain rule in complex analysis is a powerful tool that allows us to differentiate composite functions involving complex-valued functions. It is an essential concept in complex analysis and is used extensively in many applications.
 
 	\newpage
 	\section{Cauchy-Riemann Equations}
@@ -790,8 +848,14 @@
 	\draw[->] (Uy) -- node[below] {Im} (Vx);
 	\end{tikzpicture}
 	
-	
-	
+	\newpage
+	\begin{example}
+		The function $f:\C\to\C$ is defined by \[
+		f\of{z}=\exp z=e^{x+iy}=e^x\of{\cos y+i\sin y}
+		\] where $z\in\C$. Then we have \begin{align*}
+		u(x,y)=\Re\of{e^{x+iy}}=e^x\cos y.
+		\end{align*}
+	\end{example}
 	\bibliographystyle{plain}
 	\bibliography{references}	
 	
