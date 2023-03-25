@@ -853,9 +853,39 @@
 		The function $f:\C\to\C$ is defined by \[
 		f\of{z}=\exp z=e^{x+iy}=e^x\of{\cos y+i\sin y}
 		\] where $z\in\C$. Then we have \begin{align*}
-		u(x,y)=\Re\of{e^{x+iy}}=e^x\cos y.
-		\end{align*}
+		u(x,y)&=\Re\of{e^{x+iy}}=e^x\cos y,\\
+		v(x,y)&=\Im\of{e^{x+iy}}=e^x\sin y.
+		\end{align*} Thus, \begin{align*}
+		\frac{\partial u}{\partial x}\of{x,y} &=& e^x\cos y &=& \frac{\partial v}{\partial y}\of{x,y},\\
+		\frac{\partial u}{\partial y}\of{x,y} &=& -e^x\sin y &=& -\frac{\partial v}{\partial x}\of{x,y},
+		\end{align*} which shows that the Cauchy-Riemann equations hold in $\C$. Since \[
+		f'\of{z}=\frac{\partial u}{\partial x}\of{x,y}+i\frac{\partial v}{\partial x}\of{x,y}=e^x\cos y+ie^x\sin y=\exp z,
+		\] we also obtain that \[
+		\frac{d}{dz}\exp z=\exp z
+		\] for $z\in\C$.
 	\end{example}
+
+	
+	\begin{example}
+		The function $f:\C\to\C$ is defined by \[
+		f\of{z}=\begin{cases}
+		\displaystyle\frac{\of{\bar{z}}^2}{z} &:z\neq 0\\
+		0 &:z=0,
+		\end{cases}
+		\] where $z\in\C$. Then we have \begin{align*}
+		u(x,y)&=\Re\of{e^{x+iy}}=e^x\cos y,\\
+		v(x,y)&=\Im\of{e^{x+iy}}=e^x\sin y.
+		\end{align*} Thus, \begin{align*}
+		\frac{\partial u}{\partial x}\of{x,y} &=& e^x\cos y &=& \frac{\partial v}{\partial y}\of{x,y},\\
+		\frac{\partial u}{\partial y}\of{x,y} &=& -e^x\sin y &=& -\frac{\partial v}{\partial x}\of{x,y},
+		\end{align*} which shows that the Cauchy-Riemann equations hold in $\C$. Since \[
+		f'\of{z}=\frac{\partial u}{\partial x}\of{x,y}+i\frac{\partial v}{\partial x}\of{x,y}=e^x\cos y+ie^x\sin y=\exp z,
+		\] we also obtain that \[
+		\frac{d}{dz}\exp z=\exp z
+		\] for $z\in\C$.
+	\end{example}
+
+
 	\bibliographystyle{plain}
 	\bibliography{references}	
 	
