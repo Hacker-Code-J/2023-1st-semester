@@ -107,6 +107,9 @@
 \newcommand{\C}{\mathbb{C}}
 \newcommand{\F}{\mathbb{F}}
 \newcommand{\nbhd}{\mathcal{N}}
+\newcommand{\Log}{\operatorname{Log}}
+\newcommand{\Arg}{\operatorname{Arg}}
+\newcommand{\pv}{\operatorname{P.V.}}
 
 \newcommand{\of}[1]{\left( #1 \right)} 
 \newcommand{\abs}[1]{\left\lvert #1 \right\rvert}
@@ -138,14 +141,14 @@
 			%\draw[->, thick, black] (0,-2) -- (0,2) node[above left, black] {$\Im(z)$};
 			
 			% draw unit circle
-			\draw[blue, thick] (0,0) circle (1cm) node[above left, black] {};
+			\draw[blue, thick] (0,0) circle (0.55cm) node[above left, black] {};
 			
 			% draw point
 			\filldraw[red] (0,0) circle (0.08cm) node[below left, black] {$z_0$};
-			\filldraw[red] (0.7,0.7) circle (0.08cm) node[anchor=south west, black] {$z$};
+			\filldraw[red] (0.4,0.4) circle (0.08cm) node[anchor=south west, black] {$z$};
 			
 			% draw radius
-			\draw[dashed, thick, red] (0,0) -- (0.7,0.7) node[midway, below right, black] {$R=\abs{z-z_0}$};
+			\draw[dashed, thick, red] (0,0) -- (0.4,0.4) node[midway, below right, black] {$R=\abs{z-z_0}$};
 			
 			% draw angle
 			%\draw[->, thick, orange] (0.3,0) arc (0:45:0.3) node[midway, right, black] {$\theta$};
@@ -190,15 +193,13 @@
 				Angle & $\sin(\theta)$ & $\cos(\theta)$ & $\tan(\theta)$ \\
 				\midrule
 				$0^\circ$ or $0$ & 0 & 1 & 0 \\
-				$30^\circ$ or $\frac{\pi}{6}$ & $\frac{1}{2}$ & $\frac{\sqrt{3}}{2}$ & $\frac{\sqrt{3}}{6}$ \\
-				$45^\circ$ or $\frac{\pi}{4}$ & $\frac{1}{\sqrt{2}}$ & $\frac{1}{\sqrt{2}}$ & 1 \\
-				$60^\circ$ or $\frac{\pi}{3}$ & $\frac{\sqrt{3}}{2}$ & $\frac{1}{2}$ & $\sqrt{3}$ \\
-				\hline
-				$90^\circ$ or $\frac{\pi}{2}$ & 1 & 0 & undefined \\
-				\hline
-				$120^\circ$ or $\frac{2\pi}{3}$ & $\frac{\sqrt{3}}{2}$ & $-\frac{1}{2}$ & $-\sqrt{3}$ \\
-				$135^\circ$ or $\frac{3\pi}{4}$ & $\frac{1}{\sqrt{2}}$ & $-\frac{1}{\sqrt{2}}$ & -1 \\
-				$150^\circ$ or $\frac{5\pi}{6}$ & $\frac{1}{2}$ & $-\frac{\sqrt{3}}{2}$ & $\frac{\sqrt{3}}{3}$ \\
+				$30^\circ$ or ${\pi}/{6}$ & ${1}/{2}$ & ${\sqrt{3}}/{2}$ & ${\sqrt{3}}/{6}$ \\
+				$45^\circ$ or ${\pi}/{4}$ & ${1}/{\sqrt{2}}$ & ${1}/{\sqrt{2}}$ & 1 \\
+				$60^\circ$ or ${\pi}/{3}$ & ${\sqrt{3}}/{2}$ & ${1}/{2}$ & $\sqrt{3}$ \\
+				$90^\circ$ or ${\pi}/{2}$ & 1 & 0 & undefined \\
+				$120^\circ$ or ${2\pi}/{3}$ & ${\sqrt{3}}/{2}$ & $-{1}/{2}$ & $-\sqrt{3}$ \\
+				$135^\circ$ or ${3\pi}/{4}$ & ${1}/{\sqrt{2}}$ & $-{1}/{\sqrt{2}}$ & -1 \\
+				$150^\circ$ or ${5\pi}/{6}$ & ${1}/{2}$ & $-{\sqrt{3}}/{2}$ & ${\sqrt{3}}/{3}$ \\
 				$180^\circ$ or $\pi$ & 0 & -1 & 0 \\
 				\bottomrule
 			\end{tabular}
@@ -310,11 +311,58 @@
 		\] That is, $U(x,y)$ is harmonic. By a similar argument, we can show that $V(x, y)$ is also harmonic.
 	\end{proof}
 	
+	\newpage
 	\item Show that, for trigonometric and hyperbolic functions defined on complex numbers, the following holds: \[
 	\cosh z = \cosh x\cos y+i\sinh x\sin y
 	\]  with $z=x+iy$ where $x,y\in\R$.
-	\item 
-	\item 
+	\begin{proof}[\sol]
+		Recall that \begin{align*}
+			\cosh z= \cos\of{iz}=\frac{e^{z}+e^{-z}}{2}\quad\text{and}
+			\quad\sinh z= \frac{1}{i}\sin\of{iz}=\frac{e^{z}-e^{-z}}{2}.
+		\end{align*} Let $z=x+iy$. Then \begin{align*}
+		\cosh z=\cosh\of{x+iy}&=\frac{e^xe^{iy}+e^{-x}e^{-iy}}{2}\\
+		&=\frac{e^x\of{\cos y+i\sin y}+e^{-x}\of{\cos y-i\sin y}}{2}\\
+		&=\frac{\of{e^x+e^{-x}}\cos y+i\of{e^x-e^{-x}}\sin y}{2}\\
+		&=\cosh x\cos y+i\sinh x\sin y.
+	\end{align*}
+	\end{proof}
+	
+	\item The principal values of complex logarithm and complex exponential are defined as follows: for $z\neq 0$,
+	\begin{align*}
+		\Log\of{z} &:=\ln\abs{z}+i\Arg\of{z}\quad\text{and}\\
+		\of{\pv}z^c &:=\exp\of{c\Log\of{z}}.
+	\end{align*} Compute \begin{enumerate}
+		\item $\Log\of{1-i}$ 
+		\item $\of{\pv}\of{1+i}^i$
+	\end{enumerate}
+	\begin{proof}[\sol]
+		\begin{enumerate}
+			\item Recall that the complex logarithm can be defined as:
+			\[\Log(z) = \ln|z| + i\Arg(z).
+			\]
+			Let $z = 1-i$ then the modulus is
+			\[|1-i| = \sqrt{(1)^2 + (-1)^2} = \sqrt{2}.\]
+			We can find the argument $\arg(1-i)$: \begin{align*}
+				\tan(-\theta)=1\implies\theta=-\arctan\of{1}=-\frac{\pi}{4}.
+			\end{align*}
+			Now that we have the modulus and argument, we can compute the complex logarithm of $z = 1 - i$:
+			\[
+			\Log(1-i) = \ln|1-i| + i\Arg(1-i) = \ln\sqrt{2} - \frac{i\pi}{4}.
+			\]
+			
+			\item \begin{align*}
+				\of{\pv}\of{1+i}^i &=\exp\of{i\Log\of{1+i}}\\
+				&=\exp\of{i\of{\ln\abs{1+i}+i\Arg\of{1+i}}}\\
+				&=\exp\of{i\of{\ln\sqrt{2}+\frac{i\pi}{4}}}\\
+				&=e^{i\ln\sqrt{2}}e^{-\pi/4}\\
+				&=\sqrt{2}^ie^{-\pi/4}.
+			\end{align*}
+		\end{enumerate}
+	\end{proof}
+
+	\item Consider a complex function \[
+	f\of{z}=\frac{z-\alpha}{1-\conjugate{\alpha}z}
+	\] for $\abs{\alpha}<1$.
 	\item 
 	\item 
 \end{enumerate}
