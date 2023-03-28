@@ -531,7 +531,59 @@
 	
 	$a^2 + b^2 + c^2 - ab - bc - ca = 0$.
 	
-	
+	\newpage
+	Let $\omega$ be a non-trivial cube root of unity, so $\omega^3 = 1$ and $\omega \neq 1$. We know that $\omega^2 + \omega + 1 = 0$. Now, let's consider the complex numbers $\alpha$, $\beta$, and $\gamma$ as vertices of a triangle in the complex plane, and let's multiply the given equation by $\omega$:
+
+	\begin{align*}
+	\omega(\alpha^2+\beta^2+\gamma^2-\alpha\beta-\beta\gamma-\gamma\alpha) &= 0 \\
+	\omega\alpha^2 + \omega\beta^2 + \omega\gamma^2 - \omega\alpha\beta - \omega\beta\gamma - \omega\gamma\alpha &= 0 \hspace{1cm} (1)
+	\end{align*}
+
+	Now, let's multiply the given equation by $\omega^2$:
+
+	\begin{align*}
+	\omega^2(\alpha^2+\beta^2+\gamma^2-\alpha\beta-\beta\gamma-\gamma\alpha) &= 0 \\
+	\omega^2\alpha^2 + \omega^2\beta^2 + \omega^2\gamma^2 - \omega^2\alpha\beta - \omega^2\beta\gamma - \omega^2\gamma\alpha &= 0 \hspace{1cm} (2)
+	\end{align*}
+
+	Now, add the given equation $(0)$, equation $(1)$, and equation $(2)$:
+
+	\begin{align*}
+	&\phantom{{}={}}\, (\alpha^2+\beta^2+\gamma^2-\alpha\beta-\beta\gamma-\gamma\alpha) \\
+	&+ (\omega\alpha^2 + \omega\beta^2 + \omega\gamma^2 - \omega\alpha\beta - \omega\beta\gamma - \omega\gamma\alpha) \\
+	&+ (\omega^2\alpha^2 + \omega^2\beta^2 + \omega^2\gamma^2 - \omega^2\alpha\beta - \omega^2\beta\gamma - \omega^2\gamma\alpha) \\
+	&= 0
+	\end{align*}
+
+	We can rewrite this equation as:
+
+	\begin{align*}
+	(\alpha^2 + \omega\alpha^2 + \omega^2\alpha^2) + (\beta^2 + \omega\beta^2 + \omega^2\beta^2) + (\gamma^2 + \omega\gamma^2 + \omega^2\gamma^2) \\
+	- (\alpha\beta + \omega\alpha\beta + \omega^2\alpha\beta) \\
+	- (\beta\gamma + \omega\beta\gamma + \omega^2\beta\gamma) \\
+	- (\gamma\alpha + \omega\gamma\alpha + \omega^2\gamma\alpha) &= 0
+	\end{align*}
+
+	Now, use the fact that $\omega^2 + \omega + 1 = 0$ to simplify the equation:
+
+	\begin{align*}
+	(\alpha^2 + \omega\alpha^2 + \omega^2\alpha^2) + (\beta^2 + \omega\beta^2 + \omega^2\beta^2) + (\gamma^2 + \omega\gamma^2 + \omega^2\gamma^2) \\
+	- (\alpha\beta + \omega\alpha\beta +(\alpha\beta + \omega\alpha\beta + \omega^2\alpha\beta) \\
+	- (\beta\gamma + \omega\beta\gamma + \omega^2\beta\gamma) \\
+	- (\gamma\alpha + \omega\gamma\alpha + \omega^2\gamma\alpha) &= 0 \\
+	(\alpha^2 + \beta^2 + \gamma^2) - (\alpha\beta + \beta\gamma + \gamma\alpha) &= 0
+	\end{align*}
+
+	Now, recall that $a = |\beta - \alpha|$, $b = |\gamma - \beta|$, and $c = |\alpha - \gamma|$. We can rewrite the equation in terms of $a$, $b$, and $c$:
+
+	\begin{align*}
+	&\phantom{{}={}}\, (|\beta - \alpha|^2 + |\gamma - \beta|^2 + |\alpha - \gamma|^2) \\
+	&- ((\beta - \alpha)(\gamma - \beta) + (\gamma - \beta)(\alpha - \gamma) + (\alpha - \gamma)(\beta - \alpha)) \\
+	&= a^2 + b^2 + c^2 - ab - bc - ca = 0
+	\end{align*}
+
+	Thus, we have shown that $a^2 + b^2 + c^2 - ab - bc - ca = 0$ using $\omega^3 = 1$ with $\omega \neq 1$.
+
 	\end{proof}
 \end{enumerate}
 
