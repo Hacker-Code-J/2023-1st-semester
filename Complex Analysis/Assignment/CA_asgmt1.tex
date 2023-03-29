@@ -433,157 +433,36 @@
 	\alpha^2+\beta^2+\gamma^2-\alpha\beta-\beta\gamma-\gamma\alpha=0,
 	\] will it be an equilateral triangle?
 	\begin{proof}[\sol]
-		Let \begin{align*}
-			a = \abs{\beta - \alpha},\quad b = \abs{\gamma - \beta}\quad\text{and}\quad c = \abs{\alpha - \gamma}.
-		\end{align*} Then 
-		\begin{align*}
-			a^2 + b^2 + c^2 - ab - bc - ca=\abs{\beta - \alpha}^2 + \abs{\gamma - \beta}^2 + \abs{\alpha - \gamma}^2 - \abs{\beta - \alpha}\abs{\gamma - \beta} - \abs{\gamma - \beta}\abs{\alpha - \gamma} - \abs{\alpha - \gamma}\abs{\beta - \alpha}
-		\end{align*}
-	
-		\newpage
-		Let $\alpha, \beta, \gamma$ be distinct complex numbers satisfying the equation
-		\begin{equation}
-			\alpha^2 + \beta^2 + \gamma^2 - \alpha\beta - \beta\gamma - \gamma\alpha = 0.
-		\end{equation}
-		Define $a = |\beta - \alpha|, b = |\gamma - \beta|, c = |\alpha - \gamma|$. We want to show that
-		\begin{equation}
-			a^2 + b^2 + c^2 - ab - bc - ca = 0.
-		\end{equation}
-		
-		From the given equation (1), we have
-		\begin{align*}
-			(\alpha - \beta)(\alpha - \gamma) + (\beta - \gamma)(\beta - \alpha) + (\gamma - \alpha)(\gamma - \beta) &= 0 \\
-			\alpha^2 - \alpha\beta - \alpha\gamma + \beta\gamma - \beta^2 + \beta\alpha + \beta^2 - \beta\gamma - \beta\alpha + \alpha\gamma - \gamma^2 + \gamma\beta &= 0 \\
-			\alpha^2 + \beta^2 + \gamma^2 - \alpha\beta - \beta\gamma - \gamma\alpha &= 0.
-		\end{align*}
-		
-		Now, consider the complex conjugate of equation (1),
-		\begin{equation}
-			\overline{\alpha}^2 + \overline{\beta}^2 + \overline{\gamma}^2 - \overline{\alpha}\overline{\beta} - \overline{\beta}\overline{\gamma} - \overline{\gamma}\overline{\alpha} = 0.
-		\end{equation}
-		
-		Multiplying equations (1) and (3), we get
-		\begin{align*}
-			&(\alpha^2 + \beta^2 + \gamma^2 - \alpha\beta - \beta\gamma - \gamma\alpha)(\overline{\alpha}^2 + \overline{\beta}^2 + \overline{\gamma}^2 - \overline{\alpha}\overline{\beta} - \overline{\beta}\overline{\gamma} - \overline{\gamma}\overline{\alpha}) \\
-			&= (|\alpha|^2 + |\beta|^2 + |\gamma|^2)^2 - (|\alpha|^2 + |\beta|^2 + |\gamma|^2)(a^2 + b^2 + c^2) \\
-			&= a^4 + b^4 + c^4 - 2(a^2b^2 + b^2c^2 + c^2a^2).
-		\end{align*}
-		
-		By the triangle inequality, we have $a + b > c, b + c > a, c + a > b$. Therefore, we can apply Heron's formula for the area of the triangle $\triangle ABC$ with side lengths $a, b, c$. Let $s = \frac{a+b+c}{2}$ be the semi-perimeter, and $K$ be the area of the triangle, then
-		\begin{equation*}
-			K^2 = s(s-a)(s-b)(s-c).
-		\end{equation*}
-		
-		Expanding and rearranging terms, we get
-		\begin{align*}
-			16K^2 &= (a^2 + b^2 + c^2)^2 - 2(a^4 + b^4 + c
-		\end{align*}
-	
-	\newpage
-	
-	Let $\omega = e^{\frac{2\pi i}{3}}$ be a non-trivial cube root of unity, so $\omega^3 = 1$ and $\omega \neq 1$. We are given that $\alpha^2 + \beta^2 + \gamma^2 - \alpha\beta - \beta\gamma - \gamma\alpha = 0$. We will show that $a^2 + b^2 + c^2 - ab - bc - ca = 0$, where $a = |\beta - \alpha|, b = |\gamma - \beta|, c = |\alpha - \gamma|$.
-	
-	We can rewrite the given equation as:
-	
-	$(\alpha + \beta + \gamma)^2 - 3(\alpha^2 + \beta^2 + \gamma^2) = 0$.
-	
-	Now, let's multiply the given equation by $\omega$ and subtract it from the original equation:
-	
-	$(1-\omega)(\alpha^2 + \beta^2 + \gamma^2 - \alpha\beta - \beta\gamma - \gamma\alpha) = 0$.
-	
-	Since $\omega \neq 1$, we have:
-	
-	$\alpha^2 + \beta^2 + \gamma^2 - \alpha\beta - \beta\gamma - \gamma\alpha - (\omega\alpha^2 + \omega\beta^2 + \omega\gamma^2 - \omega\alpha\beta - \omega\beta\gamma - \omega\gamma\alpha) = 0$.
-	
-	Simplifying the above equation gives:
-	
-	$(1-\omega)(\alpha^2 + \beta^2 + \gamma^2 - \alpha\beta - \beta\gamma - \gamma\alpha) = \alpha\beta(\omega - 1) + \beta\gamma(\omega - 1) + \gamma\alpha(\omega - 1)$.
-	
-	Now, we know that $\alpha + \beta + \gamma = 0$ by the given equation. Hence, $\gamma = -\alpha - \beta$. Substituting this into the equation and simplifying, we get:
-	
-	$(\alpha - \beta)^2 + (\beta - \gamma)^2 + (\gamma - \alpha)^2 = (\alpha\beta + \beta\gamma + \gamma\alpha)(\omega - 1)$.
-	
-	Taking the absolute value of both sides:
-	
-	$|\alpha - \beta|^2 + |\beta - \gamma|^2 + |\gamma - \alpha|^2 = |\alpha\beta + \beta\gamma + \gamma\alpha||\omega - 1|$.
-	
-	Recall that $a = |\beta - \alpha|, b = |\gamma - \beta|, c = |\alpha - \gamma|$. Thus, we have:
-	
-	$a^2 + b^2 + c^2 = (\alpha\beta + \beta\gamma + \gamma\alpha)|\omega - 1|$.
-	
-	Since $\omega^3 = 1$, we know that $1 - \omega = \omega^2$. Therefore, we can rewrite the equation as:
-	
-	$a^2 + b^2 + c^2 = (\alpha\beta + \beta\gamma + \gamma\alpha)|\omega^2|$.
-	
-	Now, using the given equation, we have:
-	
-	$a^2 + b^2 + c^2 = (\alpha^2 + \beta^2 + \gamma^2 - \alpha\beta - \beta\gamma - \gamma\alpha)|\omega^2|$.
-	
-	Hence, we have:
-	
-	$a^2 + b^2 + c^2 = (\alpha^2 + \beta^2 + \gamma^2 - \alpha\beta - \beta\gamma - \gamma\alpha)|\omega^2|$.
-	
-	But since $\omega^2$ is a non-trivial cube root of unity, $|\omega^2| = 1$. Thus, we get:
-	
-	$a^2 + b^2 + c^2 = \alpha^2 + \beta^2 + \gamma^2 - \alpha\beta - \beta\gamma - \gamma\alpha$.
-	
-	This is precisely the equation we wanted to show:
-	
-	$a^2 + b^2 + c^2 - ab - bc - ca = 0$.
-	
-	\newpage
-	Let $\omega$ be a non-trivial cube root of unity, so $\omega^3 = 1$ and $\omega \neq 1$. We know that $\omega^2 + \omega + 1 = 0$. Now, let's consider the complex numbers $\alpha$, $\beta$, and $\gamma$ as vertices of a triangle in the complex plane, and let's multiply the given equation by $\omega$:
+	Yes, the triangle with distinct complex numbers $\alpha$, $\beta$, and $\gamma$ as its vertices will be an equilateral triangle if it satisfies the given equation. We can use the complex cube roots of unity, $\omega^3 = 1$, to justify the answer.
+
+	Consider the complex cube roots of unity: $1, \omega, \omega^2$, where $\omega = e^{2\pi i/3}$ and $\omega^3 = 1$. Let $\alpha$, $\beta$, and $\gamma$ be translated and rotated versions of these complex cube roots, so $\alpha = a + b\omega, \beta = a + b\omega^2, \gamma = a + b$. Now, we can rewrite the equation as:
 
 	\begin{align*}
-	\omega(\alpha^2+\beta^2+\gamma^2-\alpha\beta-\beta\gamma-\gamma\alpha) &= 0 \\
-	\omega\alpha^2 + \omega\beta^2 + \omega\gamma^2 - \omega\alpha\beta - \omega\beta\gamma - \omega\gamma\alpha &= 0 \hspace{1cm} (1)
+		&(a + b\omega)^2 + (a + b\omega^2)^2 + (a + b)^2 \
+		&- (a + b\omega)(a + b\omega^2) - (a + b\omega^2)(a + b) - (a + b)(a + b\omega) = 0.
 	\end{align*}
 
-	Now, let's multiply the given equation by $\omega^2$:
+	By expanding and simplifying, we obtain:
 
 	\begin{align*}
-	\omega^2(\alpha^2+\beta^2+\gamma^2-\alpha\beta-\beta\gamma-\gamma\alpha) &= 0 \\
-	\omega^2\alpha^2 + \omega^2\beta^2 + \omega^2\gamma^2 - \omega^2\alpha\beta - \omega^2\beta\gamma - \omega^2\gamma\alpha &= 0 \hspace{1cm} (2)
+		&(a^2 + 2ab\omega + b^2\omega^2) + (a^2 + 2ab\omega^2 + b^2\omega^4) + (a^2 + 2ab + b^2) \\
+		&- (a^2 + ab\omega + ab\omega^2 + b^2\omega^3) - (a^2 + ab\omega^2 + ab\omega^4 + b^2\omega^5) - (a^2 + ab\omega + ab + b^2\omega^2) = 0.
 	\end{align*}
 
-	Now, add the given equation $(0)$, equation $(1)$, and equation $(2)$:
+	Using the property $\omega^3 = 1$, we can simplify the powers of $\omega$:
 
 	\begin{align*}
-	&\phantom{{}={}}\, (\alpha^2+\beta^2+\gamma^2-\alpha\beta-\beta\gamma-\gamma\alpha) \\
-	&+ (\omega\alpha^2 + \omega\beta^2 + \omega\gamma^2 - \omega\alpha\beta - \omega\beta\gamma - \omega\gamma\alpha) \\
-	&+ (\omega^2\alpha^2 + \omega^2\beta^2 + \omega^2\gamma^2 - \omega^2\alpha\beta - \omega^2\beta\gamma - \omega^2\gamma\alpha) \\
-	&= 0
+		&(a^2 + 2ab\omega + b^2\omega^2) + (a^2 + 2ab\omega^2 + b^2) + (a^2 + 2ab + b^2) \\
+		&- (a^2 + ab\omega + ab\omega^2 + b^2) - (a^2 + ab\omega^2 + ab + b^2\omega^2) - (a^2 + ab\omega + ab + b^2\omega^2) = 0.
 	\end{align*}
 
-	We can rewrite this equation as:
+	Now, canceling out terms, we obtain:
 
 	\begin{align*}
-	(\alpha^2 + \omega\alpha^2 + \omega^2\alpha^2) + (\beta^2 + \omega\beta^2 + \omega^2\beta^2) + (\gamma^2 + \omega\gamma^2 + \omega^2\gamma^2) \\
-	- (\alpha\beta + \omega\alpha\beta + \omega^2\alpha\beta) \\
-	- (\beta\gamma + \omega\beta\gamma + \omega^2\beta\gamma) \\
-	- (\gamma\alpha + \omega\gamma\alpha + \omega^2\gamma\alpha) &= 0
+		3a^2 + 3b^2 = 3a^2 + 3b^2.
 	\end{align*}
 
-	Now, use the fact that $\omega^2 + \omega + 1 = 0$ to simplify the equation:
-
-	\begin{align*}
-	(\alpha^2 + \omega\alpha^2 + \omega^2\alpha^2) + (\beta^2 + \omega\beta^2 + \omega^2\beta^2) + (\gamma^2 + \omega\gamma^2 + \omega^2\gamma^2) \\
-	- (\alpha\beta + \omega\alpha\beta +(\alpha\beta + \omega\alpha\beta + \omega^2\alpha\beta) \\
-	- (\beta\gamma + \omega\beta\gamma + \omega^2\beta\gamma) \\
-	- (\gamma\alpha + \omega\gamma\alpha + \omega^2\gamma\alpha) &= 0 \\
-	(\alpha^2 + \beta^2 + \gamma^2) - (\alpha\beta + \beta\gamma + \gamma\alpha) &= 0
-	\end{align*}
-
-	Now, recall that $a = |\beta - \alpha|$, $b = |\gamma - \beta|$, and $c = |\alpha - \gamma|$. We can rewrite the equation in terms of $a$, $b$, and $c$:
-
-	\begin{align*}
-	&\phantom{{}={}}\, (|\beta - \alpha|^2 + |\gamma - \beta|^2 + |\alpha - \gamma|^2) \\
-	&- ((\beta - \alpha)(\gamma - \beta) + (\gamma - \beta)(\alpha - \gamma) + (\alpha - \gamma)(\beta - \alpha)) \\
-	&= a^2 + b^2 + c^2 - ab - bc - ca = 0
-	\end{align*}
-
-	Thus, we have shown that $a^2 + b^2 + c^2 - ab - bc - ca = 0$ using $\omega^3 = 1$ with $\omega \neq 1$.
-
+	Since this equation is true, the given condition is satisfied, which means that the triangle with complex vertices $\alpha, \beta, \gamma$ is equilateral. 
 	\end{proof}
 \end{enumerate}
 
