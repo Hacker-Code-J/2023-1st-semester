@@ -433,36 +433,15 @@
 	\alpha^2+\beta^2+\gamma^2-\alpha\beta-\beta\gamma-\gamma\alpha=0,
 	\] will it be an equilateral triangle?
 	\begin{proof}[\sol]
-	Yes, the triangle with distinct complex numbers $\alpha$, $\beta$, and $\gamma$ as its vertices will be an equilateral triangle if it satisfies the given equation. We can use the complex cube roots of unity, $\omega^3 = 1$, to justify the answer.
-
-	Consider the complex cube roots of unity: $1, \omega, \omega^2$, where $\omega = e^{2\pi i/3}$ and $\omega^3 = 1$. Let $\alpha$, $\beta$, and $\gamma$ be translated and rotated versions of these complex cube roots, so $\alpha = a + b\omega, \beta = a + b\omega^2, \gamma = a + b$. Now, we can rewrite the equation as:
-
-	\begin{align*}
-		&(a + b\omega)^2 + (a + b\omega^2)^2 + (a + b)^2 \
-		&- (a + b\omega)(a + b\omega^2) - (a + b\omega^2)(a + b) - (a + b)(a + b\omega) = 0.
-	\end{align*}
-
-	By expanding and simplifying, we obtain:
-
-	\begin{align*}
-		&(a^2 + 2ab\omega + b^2\omega^2) + (a^2 + 2ab\omega^2 + b^2\omega^4) + (a^2 + 2ab + b^2) \\
-		&- (a^2 + ab\omega + ab\omega^2 + b^2\omega^3) - (a^2 + ab\omega^2 + ab\omega^4 + b^2\omega^5) - (a^2 + ab\omega + ab + b^2\omega^2) = 0.
-	\end{align*}
-
-	Using the property $\omega^3 = 1$, we can simplify the powers of $\omega$:
-
-	\begin{align*}
-		&(a^2 + 2ab\omega + b^2\omega^2) + (a^2 + 2ab\omega^2 + b^2) + (a^2 + 2ab + b^2) \\
-		&- (a^2 + ab\omega + ab\omega^2 + b^2) - (a^2 + ab\omega^2 + ab + b^2\omega^2) - (a^2 + ab\omega + ab + b^2\omega^2) = 0.
-	\end{align*}
-
-	Now, canceling out terms, we obtain:
-
-	\begin{align*}
-		3a^2 + 3b^2 = 3a^2 + 3b^2.
-	\end{align*}
-
-	Since this equation is true, the given condition is satisfied, which means that the triangle with complex vertices $\alpha, \beta, \gamma$ is equilateral. 
+		Using $\omega^3-1=(\omega-1)\of{\omega^2+\omega+1}=0$, we have \begin{align*}
+			\alpha^2+\beta^2+\gamma^2-\alpha\beta-\beta\gamma-\gamma\alpha&=(\textcolor{red}{\beta\gamma} - \gamma\alpha - \alpha\beta + \alpha^2) + (\beta^2\textcolor{blue}{-\beta\gamma} -\beta\gamma + \gamma^2)\\
+			&=(\beta-\alpha)(\gamma-\alpha)+\of{\beta-\gamma}^2\\
+			&=(\beta-\alpha)(\textcolor{red}{\beta}-\alpha\textcolor{blue}{-\beta}+\gamma)+\of{\beta-\gamma}^2\\
+			&=(\beta-\alpha)^2\cdot 1+(\beta-\alpha)(\beta-\gamma)(-1)+\of{\beta-\gamma}^2\\
+			&=(\beta-\alpha)^2\cdot\omega^3+(\beta-\alpha)(\beta-\gamma)\cdot(\omega^2+\omega)+\of{\beta-\gamma}^2\\
+			&=\of{(\beta-\alpha)\omega+(\beta-\gamma)}\of{(\beta-\alpha)\omega^2+(\beta-\gamma)}\\
+			&=0.
+		\end{align*} Hence either $\of{\beta-\alpha}\omega=\gamma-\beta$ or $\of{\beta-\alpha}\omega^2=\gamma-\beta$.
 	\end{proof}
 \end{enumerate}
 
