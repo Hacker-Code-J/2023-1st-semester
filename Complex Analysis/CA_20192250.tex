@@ -3,6 +3,7 @@
 
 \usepackage{amsmath,amsthm,amsfonts,amscd} % Packages for mathematics
 \usepackage{url}
+\usepackage{booktabs}
 
 % Colors
 \usepackage[dvipsnames]{xcolor}
@@ -125,6 +126,7 @@
 \newcommand{\inv}[1]{{#1}^{-1}}
 
 \newcommand{\sol}{\textcolor{magenta}{\bf Sol}}
+\newcommand{\conjugate}[1]{\overline{#1}}
 
 \renewcommand{\Re}{\operatorname{Re}}
 \renewcommand{\Im}{\operatorname{Im}}
@@ -772,81 +774,94 @@
 	
 	\begin{tcolorbox}[colframe=thmcolor, title={\color{white}\bf Cauchy-Riemann Equations}]
 		\begin{theorem}
-			Let $f(z) = u(x, y) + iv(x, y)$ be a complex-valued function, where $z = x + iy$, $u(x, y)$ and $v(x, y)$ are real-valued functions, that is, \begin{align*}
-			(x,y)\mapsto u\of{x,y}&:=\Re\of{f(x+iy)}:U\to\R\quad\text{and}\\ (x,y)\mapsto v\of{x,y}&:=\Im\of{f(x+iy)}:U\to\R
-			\end{align*} are differentiable at $(x_0,y_0)$ and
-			If $f(z)$ is differentiable at a point $z_0 = x_0 + iy_0$, then the partial derivatives of $u(x, y)$ and $v(x, y)$ satisfy the Cauchy-Riemann equations at $(x_0, y_0)$: \begin{align*}
-			\frac{\partial u}{\partial x}(x_0, y_0) &= \frac{\partial v}{\partial y}(x_0, y_0), \\
-			\frac{\partial u}{\partial y}(x_0, y_0) &= -\frac{\partial v}{\partial x}(x_0, y_0).
+			Let $U\of{\subseteq\C}$ be an open set, and let \[f:U\to\C:f(z) =f\of{x+yi} = u(x, y) + iv(x, y)
+			\] be a complex-valued function, where $u(x, y)$ and $v(x, y)$ are real-valued functions, that is, \begin{align*}
+			u:U\to\R&:(x,y)\mapsto \Re\of{f(x+iy)}\quad\text{and}\\ v:U\to R&:\of{x,y}\mapsto\Im\of{f(x+iy)}.
+			\end{align*} If $f(z)$ is differentiable at a point $z_0 = x_0 + iy_0$, then the partial derivatives of $u(x, y)$ and $v(x, y)$ satisfy the Cauchy-Riemann equations: \begin{align*}
+			\frac{\partial u}{\partial x}= \frac{\partial v}{\partial y}\quad\text{and}\quad
+			\frac{\partial u}{\partial y}= -\frac{\partial v}{\partial x}\quad\text{ at $(x_0, y_0)$}.
 			\end{align*}
  		\end{theorem}
 	\end{tcolorbox}
 	
 	\begin{proof}
-		Let $f'(z_0)$ be the complex derivative of $f(z)$ at $z_0$. By definition, we have
-		\[
-		f'(z_0) = \lim_{z \to z_0} \frac{f(z) - f(z_0)}{z - z_0}.
-		\]
-		
-		Now, let $z = x + iy$ and $z_0 = x_0 + iy_0$. We can rewrite the limit as
-		\[
-		f'(z_0) = \lim_{(x, y) \to (x_0, y_0)} \frac{u(x, y) + iv(x, y) - u(x_0, y_0) - iv(x_0, y_0)}{(x - x_0) + i(y - y_0)}.
-		\]
-		
-		Since $f'(z_0)$ exists, the limit must be independent of the path taken in the complex plane. Let's consider two paths: one along the real axis ($y = y_0$) and one along the imaginary axis ($x = x_0$).
-		
-		For the path along the real axis, we have $y = y_0$ and
-		\[
-		f'(z_0) = \lim_{x \to x_0} \frac{u(x, y_0) - u(x_0, y_0)}{x - x_0} = \frac{\partial u}{\partial x}(x_0, y_0).
-		\]
-		
-		For the path along the imaginary axis, we have $x = x_0$ and
-		\[
-		f'(z_0) = \lim_{y \to y_0} \frac{v(x_0, y) - v(x_0, y_0)}{i(y - y_0)} = -i\frac{\partial v}{\partial y}(x_0, y_0).
-		\]
-		
-		Since the limit is independent of the path, we have
-		\[
-		\frac{\partial u}{\partial x}(x_0, y_0) = -i\frac{\partial v}{\partial y}(x_0, y_0).
-		\]
-		
-		We can equate the real and imaginary parts of the above equation:
-		
-		\begin{align*}
-		\frac{\partial u}{\partial x}(x_0, y_0) &= \frac{\partial v}{\partial y}(x_0, y_0), \\
-		0 &= \frac{\partial u}{\partial y}(x_0, y_0) + \frac{\partial v}{\partial x}(x_0, y_0).
+		Let $f'(z_0)$ be the complex derivative of $f(z)$ at $z_0$. By definition, we have \begin{align*}
+		f'(z_0) = \lim_{z \to z_0} \frac{f(z) - f(z_0)}{z - z_0}&=\lim_{\Delta z\to 0}\frac{f\of{z_0+\Delta z}-f\of{z_0}}{\Delta z}\\&=\begin{cases}
+		\displaystyle\lim\limits_{\substack{\Delta x\to 0\\ \Delta y=0}}\frac{f\of{z_0+\Delta z}-f\of{z_0}}{\Delta z} &\cdots\cdots(1)\\
+		\displaystyle\lim\limits_{\substack{\Delta y\to 0\\ \Delta x=0}}\frac{f\of{z_0+\Delta z}-f\of{z_0}}{\Delta z}&\cdots\cdots(2).
+		\end{cases}
 		\end{align*}
 		
-		The second equation gives us:
-		
-		\[
-		\frac{\partial u}{\partial y}(x_0, y_0) = -\frac{\partial v}{\partial x}(x_0, y_0).
+		\begin{itemize}
+			\item[(1)] ($\Delta z=\Delta x+i\cdot 0$);
+			\begin{align*}
+			(1)&=\lim\limits_{\Delta x\to 0}\frac{\left[u(x_0+\Delta x, y_0)-u\of{x_0,y_0}\right]-i\left[v(x_0+\Delta x,y_0)-v\of{x_0,y_0}\right]}{\Delta x}\\
+			&=\frac{\partial u}{\partial x}\of{x_0,y_0}+\frac{\partial v}{\partial x}\of{x_0,y_0}\\
+			&= u_x+iv_x\bigg|_{z=z_0}.
+			\end{align*}
+			\item[(2)] ($\Delta z=0+i\Delta y$);
+			\begin{align*}
+			(2)&=\lim\limits_{\Delta y\to 0}\frac{\left[u(x_0, y_0+\Delta y)-u\of{x_0,y_0}\right]-i\left[v(x_0,y_0+\Delta y)-v\of{x_0,y_0}\right]}{i\Delta y}\\
+			&=\frac{1}{i}\frac{\partial u}{\partial y}\of{x_0,y_0}+\frac{\partial v}{\partial y}\of{x_0,y_0}\\
+			&= v_y-iu_y\bigg|_{z=z_0}\quad\text{by multiplying $1=i/i$}.
+			\end{align*}
+		\end{itemize} Hence we have \[
+		(1)=(2)\implies\begin{cases}
+		u_x=v_y\\
+		u_y=-v_y.
+		\end{cases}
 		\]
-		
-		Thus, we have shown that if $f(z)$ is differentiable at $z_0$, then the Cauchy-Riemann equations are satisfied at $(x_0, y_0)$:
-		
-		\begin{align*}
-		\frac{\partial u}{\partial x}(x_0, y_0) &= \frac{\partial v}{\partial y}(x_0, y_0), \\
-		\frac{\partial u}{\partial y}(x_0, y_0) &= -\frac{\partial v}{\partial x}(x_0, y_0).
-		\end{align*}
 	\end{proof}
-
-	\begin{tikzpicture}[node distance=2cm, >=Stealth]
-	\node (U) {$u(x, y)$};
-	\node[right=of U] (V) {$v(x, y)$};
-	\node[below=of U] (Ux) {$\frac{\partial u}{\partial x}$};
-	\node[below=of V] (Vy) {$\frac{\partial v}{\partial y}$};
-	\node[below=of Ux] (Uy) {$\frac{\partial u}{\partial y}$};
-	\node[below=of Vy] (Vx) {$\frac{\partial v}{\partial x}$};
 	
-	\draw[->] (U) -- node[above] {Re} (V);
-	\draw[->] (U) -- node[left] {$\frac{\partial}{\partial x}$} (Ux);
-	\draw[->] (V) -- node[right] {$\frac{\partial}{\partial y}$} (Vy);
-	\draw[->] (Ux) -- node[below] {Re} (Vy);
-	\draw[->] (U) -- node[left] {$\frac{\partial}{\partial y}$} (Uy);
-	\draw[->] (V) -- node[right] {$\frac{\partial}{\partial x}$} (Vx);
-	\draw[->] (Uy) -- node[below] {Im} (Vx);
-	\end{tikzpicture}
+	\begin{remark}
+		Let $z=x+yi$. \begin{table}[h!]
+			\centering
+			\begin{tabular}{@{}c||cc|cc|cc||cc@{}}
+				\toprule
+				$f(z)$ & $u(x,y)$ & $v(x,y)$ & $u_x$ & $u_y$ & $v_x$ & $v_y$ & $u_x=v_y$? &$u_y=-v_y$?\\
+				\midrule
+				$z^2$ & $x^2-y^2$ & $2xy$ & $2x$ & $-2y$ & $2y$ & $2x$ & O & O\\
+				\addlinespace
+				$\conjugate{z}$ & $x$ & $-y$ & $1$ & $0$ & $0$ & $-1$ & X & X\\
+				\addlinespace
+				$\abs{z}^2$ & $x^2+y^2$ & $0$ & $2x$ & $2y$ & $0$ & $0$ & if $z=0$ & if $z=0$\\
+				\bottomrule
+			\end{tabular}
+		\end{table}
+		
+	\end{remark}
+	
+	\begin{remark}
+		\ \begin{table}[h!]
+			\centering
+			\begin{tabular}{@{}l||c|c@{}}
+				\toprule
+				& \textbf{Real Function} & \textbf{Complex Function} \\
+				\midrule
+				1. Existence of & Sub-seqns & Sub-seqns\\
+				limit of sequence & Criterion & Criterion \\
+				\addlinespace
+				2. Existence of & $\lim_{x\to c} f(x) = L$ & $\lim_{z\to c} f(z) = L$ \\
+				limit of function & $L, c \in \mathbb{R}$ & $L, c \in \mathbb{C}$ \\
+				\addlinespace
+				3. Differentiability & $f'(x) = \lim_{h\to 0} \frac{f(x+h) - f(x)}{h}$ & CR-Eqs \\
+				\bottomrule
+			\end{tabular}
+			%\caption{Comparison of real and complex functions}
+			%\label{tab:comparison}
+		\end{table}
+	\end{remark}
+	
+	
+	\begin{tcolorbox}[colframe=thmcolor, title={\color{white}\bf 
+	}]
+		\begin{theorem}
+			Let
+		\end{theorem}
+	\end{tcolorbox}
+	\begin{proof}
+		
+	\end{proof}
 	
 	\newpage
 	\begin{example}
@@ -864,7 +879,6 @@
 		\frac{d}{dz}\exp z=\exp z
 		\] for $z\in\C$.
 	\end{example}
-
 	
 	\begin{example}
 		The function $f:\C\to\C$ is defined by \[
@@ -875,19 +889,134 @@
 		\] where $z\in\C$. Then we have \begin{align*}
 		u(x,y)&=\Re\of{e^{x+iy}}=e^x\cos y,\\
 		v(x,y)&=\Im\of{e^{x+iy}}=e^x\sin y.
-		\end{align*} Thus, \begin{align*}
-		\frac{\partial u}{\partial x}\of{x,y} &=& e^x\cos y &=& \frac{\partial v}{\partial y}\of{x,y},\\
-		\frac{\partial u}{\partial y}\of{x,y} &=& -e^x\sin y &=& -\frac{\partial v}{\partial x}\of{x,y},
-		\end{align*} which shows that the Cauchy-Riemann equations hold in $\C$. Since \[
-		f'\of{z}=\frac{\partial u}{\partial x}\of{x,y}+i\frac{\partial v}{\partial x}\of{x,y}=e^x\cos y+ie^x\sin y=\exp z,
-		\] we also obtain that \[
-		\frac{d}{dz}\exp z=\exp z
-		\] for $z\in\C$.
+		\end{align*}
 	\end{example}
 
+	\newpage
+	\section{Geometric Meaning of the Complex Derivative}
 
+	\newpage
+	\section{The d-bar operator}
+	
+	\newpage
+	\chapter{Cauchy Integral Theorem}
+	
+	\section{Definition of the Contour Integral}
+	\begin{tcolorbox}[colback=white,colframe=defcolor,arc=5pt,title={\color{white}\bf Path Integral $\R\to\C$}]
+		\begin{definition}
+			Define a function $f:[a,b]\to\C:t\mapsto f\of{t}=u\of{t}+iv\of{t}$. Then \[
+			\int_a^bf\of{t}dt=\int_a^b\of{u\of{t}+iv\of{t}}dt:=\int_a^bu(t)+i\int_a^bv\of{t}dt.
+			\]
+		\end{definition}
+	\end{tcolorbox}
+	\begin{example}
+		Compute $\int_0^1\of{t+i}^3dt$.
+		\begin{proof}[\sol]
+			\begin{itemize}
+				\item[(S1)] \begin{align*}
+				\int_0^1\of{t+i}^3dt=\int_0^1\of{t^3+3t^2i-3t-i}dt&=\int_0^1\of{t^3-3t}dt+i\int_0^1\of{3t^2-1}dt\\
+				&=\frac{1}{4}t^4-\frac{3}{2}t^3\bigg|_0^1+i\left(t^3-t\bigg|_0^1\right)\\
+				&=\frac{1}{4}-\frac{3}{2}\\
+				&=-\frac{5}{4}.
+				\end{align*}
+				\item[(S2)] \begin{align*}
+				\int_0^1\of{t+i}^3dt=\frac{1}{4}\of{t+i}^4\bigg|_0^1=\frac{1}{4}\of{(1+i)^4-i^4}&=\frac{1}{4}\of{\of{1+4i+6i^2+4i^3+1}-1}\\
+				&=\frac{1}{4}\of{1-6}\\
+				&=-\frac{5}{4}.
+				\end{align*}
+			\end{itemize}
+		\end{proof}
+	\end{example}
+
+	\begin{tcolorbox}[colback=white,colframe=defcolor,arc=5pt,title={\color{white}\bf Length of Curve}]
+		\begin{definition}
+			
+		\end{definition}
+	\end{tcolorbox}
+	\begin{example}
+		content...
+	\end{example}
+
+	
+	\begin{tcolorbox}[colback=white,colframe=defcolor,arc=5pt,title={\color{white}\bf Contour Integral}]
+		\begin{definition}
+			Let $D\of{\subseteq\C}$ be a domain. Given \begin{enumerate}
+				\item a continuous function \[
+				f:D\to\C:f\of{z}=u(x,y)+iv(x,y)
+				\] with $u,v:D\to\R$, and
+				\item a smooth path $$\gamma:[a,b]\to D:\gamma\of{t}=x\of{t}+iy\of{t}$$
+				with $x,y:[a,b]\to\R$,
+			\end{enumerate} 
+			we define \begin{align*}
+			\int_\gamma f\of{z}dz:&=\int_a^bf\of{\gamma\of{t}}\gamma'\of{t}dt\\
+			&=\int_a^b\of{u\of{\gamma\of{t}}+iv\of{\gamma\of{t}}}\cdot\of{x'\of{t}+iy'\of{t}}dt\\
+			&=\int_a^b\of{u\of{\gamma\of{t}}\cdot x'\of{t}-v\of{\gamma\of{t}}\cdot y'\of{t}}dt\\
+			&\hspace{5mm} +i\int_a^b\of{u\of{\gamma\of{t}}\cdot x'\of{t}+v\of{\gamma\of{t}}\cdot y'\of{t}}dt.
+			\end{align*}
+		\end{definition}
+	\end{tcolorbox}
+	\begin{remark}
+		\begin{align*}
+		\int_\gamma f\of{z}dz&=\lim_{n\to\infty}\sum_{k=1}^nf\of{c_k}\Delta z_k,\quad c_k\in\left[z_{k-1},z_k\right]\\
+		&=\lim_{n\to\infty}\sum_{k=1}^nf\of{c_k}\of{\frac{\Delta x}{\Delta t}+i\frac{\Delta y}{\Delta t}}\Delta t\\
+		&=\int_a^bf\of{\gamma\of{t}}\of{x'\of{t}+iy'\of{t}}dt\\
+		&=\int_a^bf\of{\gamma\of{t}}\gamma'\of{t}dt.
+		\end{align*}
+	\end{remark}
+	\begin{example}
+		Consider a function \[
+		f:\C\setminus\set{0}\to\C:f\of{z}=\frac{1}{z}
+		\] and two smooth paths
+		\begin{align*}
+		\gamma_1=\exp\of{it},\quad t\in\left[0,2\pi\right]\\
+		\gamma_2=\exp\of{2it},\quad t\in\left[0,\pi\right].
+		\end{align*} Then \begin{align*}
+		\int_{\gamma_1}f\of{z}dz=\int_{0}^{2\pi}f\of{\exp\of{it}}i\exp\of{it}dt=\int_0^{2\pi}idt=it\bigg|_{0}^{2\pi}=2\pi i,\\
+		\int_{\gamma_2}f\of{z}dz=\int_{0}^{\pi}f\of{\exp\of{2it}}2i\exp\of{2it}dt=\int_0^{\pi}2idt=2it\bigg|_{0}^{\pi}=2\pi i.
+		\end{align*}
+	\end{example}
+
+	\begin{tcolorbox}[colback=white,colframe=procolor,arc=5pt,title={\color{white}\bf Equivalent paths give the same integral}]
+		\begin{proposition}
+			Consider two smooth paths: \[
+			\gamma:[a,b]\to\C\quad\text{and}
+			\quad\tilde{\gamma}:[c,d]\to\C
+			\] such that there is a continuously differentiable function $\varphi:[c,d]\to[a,b]$ such that $a=\varphi\of{c}$, $b=\varphi\of{d}$, and $\tilde{\gamma}\of{t}=\of{\gamma\circ\varphi}\of{t}$ for $t\in[c,d]$. 
+			\begin{center}
+				\includegraphics[scale=0.25]{equivalent_paths.png}
+			\end{center}
+			\begin{align*}
+			\int_{\tilde{\gamma}}f\of{z}dz
+			&=\int_a^bf\of{\tilde{\gamma}\of{t}}{\tilde{\gamma}'\of{t}}dt \\
+			&=\int_a^bf\of{\gamma\of{\varphi\of{t}}}\gamma'\of{\varphi\of{t}}\varphi'\of{t}dt\\
+			&=\int_c^df\of{\gamma\of{\tau}}\gamma'\of{\tau}d\tau\quad\text{by $\tau=\varphi\of{t}$}\\
+			&=\int_{\gamma}f\of{z}dz.
+			\end{align*}
+		\end{proposition}
+	\end{tcolorbox}
+
+
+	\newpage
+	\begin{tcolorbox}[colback=white,colframe=defcolor,arc=5pt,title={\color{white}\bf Length of Curve}]
+		\begin{definition}
+			
+		\end{definition}
+	\end{tcolorbox}
+
+	\begin{tcolorbox}[colback=white,colframe=defcolor,arc=5pt,title={\color{white}\bf Length of Curve}]
+		\begin{definition}
+			
+		\end{definition}
+	\end{tcolorbox}
+
+	\begin{tcolorbox}[colback=white,colframe=defcolor,arc=5pt,title={\color{white}\bf Length of Curve}]
+		\begin{definition}
+			
+		\end{definition}
+	\end{tcolorbox}	
+	
 	\bibliographystyle{plain}
 	\bibliography{references}	
-	
+
 	% End document
 \end{document}
