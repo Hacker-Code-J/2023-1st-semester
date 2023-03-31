@@ -31,9 +31,9 @@
 \titleformat{\chapter}[display]
 {\normalfont\sffamily\Huge\bfseries\color{titleblue}}{\chaptertitlename\ \thechapter}{20pt}{\Huge}
 \titleformat{\section}
-{\normalfont\sffamily\Large\bfseries\color{chaptergray}}{\thesection}{1em}{}
+{\normalfont\sffamily\Large\bfseries\color{titleblue!100!gray}}{\thesection}{1em}{}
 \titleformat{\subsection}
-{\normalfont\sffamily\large\bfseries\color{sectiongray}}{\thesubsection}{1em}{}
+{\normalfont\sffamily\large\bfseries\color{titleblue!50!gray}}{\thesubsection}{1em}{}
 
 % Table of contents formatting
 \usepackage{tocloft}
@@ -53,6 +53,8 @@
 
 %---------------------------My Preamble
 \usepackage{enumerate}
+\usepackage{soul}
+\newcommand{\mathcolorbox}[2]{\colorbox{#1}{$\displaystyle #2$}}
 \usepackage{graphicx}
 \usepackage{tikz-cd}
 
@@ -75,6 +77,7 @@
 \newtheorem{definition}{Definition}
 \newtheorem{remark}{Remark}
 \newtheorem{exercise}{Exercise}[section]
+\newtheorem*{note}{Note}
 
 %New Command
 \newcommand{\set}[1]{\left\{#1\right\}}
@@ -96,6 +99,9 @@
 \newcommand{\norm}[1]{\left\| #1 \right\|}
 
 \newcommand{\sol}{\textcolor{magenta}{\bf Sol}}
+
+\newcommand{\dollar}{\$}
+\newcommand{\uniform}{\xleftarrow{\dollar}}
 
 % Begin document
 \begin{document}
@@ -180,7 +186,7 @@
 	\subsection{Conclusion}
 	RSA is a widely used public-key cryptosystem that uses prime numbers to secure communication over the internet. It is based on the difficulty of factoring large integers and is currently considered secure for many applications.
 	
-	
+
 	\section{RSA-CRT}
 	
 	RSA-CRT is a modified version of the RSA public-key cryptosystem that leverages the Chinese Remainder Theorem to enhance the speed of the decryption process.
@@ -232,7 +238,7 @@
 			\]
 		\end{enumerate}
 	\end{tcolorbox}
-	
+
 	\begin{tcolorbox}[title=Chinese Remainder Theorem]
 		\begin{theorem}
 			Given a system of linear congruences with pairwise relatively prime moduli:
@@ -245,12 +251,12 @@
 			
 			there exists a unique solution $x$ modulo $M = m_1m_2\cdots m_n$:
 			\begin{align*}
-				x&\equiv a_1b_1M_1+a_2b_2M_2+\cdots a_nb_nM_n\pmod{M}, \ie,\\ x&\equiv\sum_{i=1}^{n}a_ib_iM_i\pmod{M}
+			x&\equiv a_1b_1M_1+a_2b_2M_2+\cdots a_nb_nM_n\pmod{M}, \ie,\\ x&\equiv\sum_{i=1}^{n}a_ib_iM_i\pmod{M}
 			\end{align*}\[
 			\] where $M_i=M/m_i$ and $b_i$ is the inverse of $M_i$ modulo $m_i$.
 		\end{theorem}
 	\end{tcolorbox}
-	
+		
 	\section{Fermat's Little Theorem}
 	
 	\begin{tcolorbox}[title=Fermat's Little Theorem]
@@ -280,7 +286,7 @@
 	
 	\begin{proof}
 		We use the group theory of the multiplicative group of integers modulo a prime $p$.
-		
+
 		Let $p$ be a prime number, and let $a$ be an integer that is not divisible by $p$. Consider the set of integers modulo $p$, denoted by $\mathbb{Z}/p\mathbb{Z}$. This set forms a group under multiplication, denoted by $(\mathbb{Z}/p\mathbb{Z})^{\times}$. Since $p$ is prime, the group $(\mathbb{Z}/p\mathbb{Z})^{\times}$ has order $p-1$, which means that it contains $p-1$ distinct elements.
 		
 		Now consider the subset of $(\mathbb{Z}/p\mathbb{Z})^{\times}$ consisting of the multiples of $a$, denoted by $S_a = {a, 2a, 3a, \ldots, (p-1)a}$. Since $a$ is not divisible by $p$, the set $S_a$ consists of distinct elements. We claim that $S_a$ is a permutation of the elements of $(\mathbb{Z}/p\mathbb{Z})^{\times}$.
@@ -445,5 +451,349 @@
 	NIST PQC, KpqC
 	
 	
+	\newpage
+	\chapter{Integer Factorization Problem}
+	
+	\section*{Pollard's $p-1$ Method}
+	Pollard's $p-1$ method is an algorithm for factoring a composite number $N$ when one of its prime factors, $p$, has a small prime factor in $p-1$. The method is based on Fermat's Little Theorem and relies on the properties of the greatest common divisor (GCD) function.
+	
+	\subsection*{Mathematical Background}
+	Fermat's Little Theorem states that if $p$ is a prime number and $a$ is an integer not divisible by $p$, then
+	\[
+	a^{p-1} \equiv 1 \pmod{p}.
+	\]
+	Now, let $N = pq$ be a composite number with two prime factors $p$ and $q$. Let $a$ be a random integer such that $1 < a < N$. If we can find an integer $k$ such that
+	\[
+	a^k \equiv 1 \pmod{p},
+	\]
+	then we have
+	\[
+	a^k - 1 \equiv 0 \pmod{p},
+	\]
+	which implies that $p \mid (a^k - 1)$. Since $p$ and $q$ are distinct primes, it is unlikely that $q \mid (a^k - 1)$, so we expect that
+	\[
+	\text{gcd}(a^k - 1, N) = p,
+	\]
+	and we can find the other prime factor as $q = \frac{N}{p}$.
+	
+	Pollard's $p-1$ method aims to find such an integer $k$. The idea is to choose a bound $B$ and compute the least common multiple of all primes less than or equal to $B$, denoted by $\text{lcm}(1, 2, \ldots, B)$. If $p-1$ has only small prime factors less than or equal to $B$, then
+	\[
+	k = \text{lcm}(1, 2, \ldots, B)
+	\]
+	will satisfy the desired property.
+	
+	The algorithm proceeds as follows:
+	
+	\begin{enumerate}
+		\item Choose a bound $B$ and a random integer $a$ such that $1 < a < N$.
+		\item Compute $k = \text{lcm}(1, 2, \ldots, B)$.
+		\item Compute $g = \text{gcd}(a^k - 1, N)$.
+		\item If $g$ is a nontrivial factor of $N$ (i.e., $1 < g < N$), return $g$ as the prime factor of $N$. Otherwise, choose a new bound $B$ and repeat from step 1.
+	\end{enumerate}
+	
+	The success of Pollard's $p-1$ method depends on the choice of the bound $B$ and the prime factors of $p-1$. If the algorithm fails to find a nontrivial factor, a larger bound or other factoring methods can be employed.
+	
+	Let $p$ be a prime number. We want to show that there exists an integer $n_0 \in \mathbb{Z}$ such that for all $n \geq n_0$, $p-1 \mid n!$. 
+	
+	Consider the integer $n_0 = p - 1$. Now, let $n \geq n_0$. We know that $n! = 1 \cdot 2 \cdot 3 \cdots (p-1) \cdots n$. Since $p$ is a prime number and $n_0 = p - 1$, it follows that $p-1$ is the largest integer smaller than $p$. Therefore, there must be at least one factor of $(p-1)$ in the product $1 \cdot 2 \cdot 3 \cdots (p-1) \cdots n$. 
+	
+	Now, we know that $p-1$ divides itself, so $p-1 \mid (p-1)$. Since the product $n!$ contains a factor of $(p-1)$, we can conclude that $p-1 \mid n!$ for all $n \geq n_0$. This completes the proof.
+	
+	\newpage
+	Let $p$ be a prime number. Now, consider the set $S = {n \in \mathbb{Z} \mid n \geq p, p-1 \nmid n!}$. This is the set of integers greater than or equal to $p$ for which $p-1$ does not divide $n!$. Our goal is to show that this set is empty.
+	
+	Assume for the sake of contradiction that $S$ is non-empty. Then by the well-ordering principle, there exists a least element $n_0 \in S$. By the definition of the set $S$, we have that $p-1 \nmid n_0!$.
+	
+	Since $n_0 \geq p$, we can write $n_0 = pk + r$, where $k \in \mathbb{Z}_{\geq 0}$ and $0 \leq r < p$. Note that $r \neq p-1$ because otherwise, we would have $n_0 = pk + (p-1)$, which implies $p-1 \mid n_0!$, a contradiction.
+
+	Now consider $(n_0 - r)!$. Since $0 \leq r < p$, we have $n_0 - r \geq pk$. Therefore, $(n_0 - r)! = (pk)! = p^k k!$, and clearly, $p-1 \mid (n_0 - r)!$ because $p^k$ is divisible by $p-1$ for every positive integer $k$.
+	
+	Using the properties of factorials, we can write $n_0! = (n_0 - r)!(n_0 - r + 1)(n_0 - r + 2) \cdots n_0$. Since $p-1 \mid (n_0 - r)!$, it suffices to show that $p-1 \mid (n_0 - r + 1)(n_0 - r + 2) \cdots n_0$.
+	
+	Notice that $n_0 - r + 1, n_0 - r + 2, \dots, n_0$ are consecutive integers, and among them, there must be a multiple of $p-1$ because the range contains at least $p-1$ integers. Let $n_0 - r + i$ be a multiple of $p-1$, where $1 \leq i \leq p-1$.
+	
+	Since $p-1 \mid (n_0 - r + i)$ and $p-1 \mid (n_0 - r)!$, we have that $p-1 \mid n_0!$, which contradicts our assumption that $n_0 \in S$. Therefore, our assumption that $S$ is non-empty must be false.
+	
+	Thus, the set $S$ is empty, which means that for all $n \geq n_0$, $p-1 \mid n!$.
+	
+	\newpage
+	
+	\begin{proof}
+		Let $p$ be a prime number. We want to prove that there exists a natural number $n_0$ such that for all $n \geq n_0$, $p-1$ divides $n!$. 
+		
+		Consider the set $S = \{k \in \mathbb{N} \mid k! \equiv 0 \pmod{p-1}\}$, which is the set of all natural numbers $k$ such that $p-1$ divides $k!$. We will show that this set is non-empty and then use the well-ordering principle to find its minimum element.
+		
+		First, note that for $k = p-1$, we have $(p-1)! \equiv 0 \pmod{p-1}$, since $(p-1)$ is a factor of $(p-1)!$. Therefore, $p-1 \in S$, and the set $S$ is non-empty.
+		
+		By the well-ordering principle, $S$ has a least element, say $n_0$. So, we have $n_0! \equiv 0 \pmod{p-1}$. We want to show that for all $n \geq n_0$, $p-1$ divides $n!$.
+		
+		Let $n \geq n_0$. Then we can write $n$ as $n = n_0 + k$ for some non-negative integer $k$. Now, consider $(n_0 + k)!$. By the definition of the factorial, we have:
+		
+		\begin{align*}
+		(n_0 + k)! &= (n_0 + k)(n_0 + k - 1) \cdots (n_0 + 1)n_0!
+		\end{align*}
+		
+		Since $n_0! \equiv 0 \pmod{p-1}$ and $p-1$ divides each of the factors $(n_0 + k), (n_0 + k - 1), \ldots, (n_0 + 1)$ exactly once, we have $(n_0 + k)! \equiv 0 \pmod{p-1}$. Therefore, $p-1$ divides $(n_0 + k)!$, which is equivalent to $n!$.
+		
+		Thus, for all $n \geq n_0$, $p-1$ divides $n!$. This completes the proof.
+	\end{proof}
+
+	\begin{proof}
+		Let $N = pq$, where $p$ and $q$ are prime numbers, and let $a$ be an integer such that $\gcd(a, p) = 1$. We want to prove that
+		\begin{equation} \label{eq:congruence}
+		(a^{(j+1)!} - 1) \mod N = (a^{j!} \mod N)^{j+1} \mod N - 1.
+		\end{equation}
+		
+		To prove this, we can use the following properties of modular arithmetic:
+		\begin{align}
+		(ab) \mod N &\equiv (a \mod N)(b \mod N) \mod N, \label{eq:mod_product} \\
+		(a^b) \mod N &\equiv ((a \mod N)^b) \mod N. \label{eq:mod_power}
+		\end{align}
+		
+		We start by calculating $(a^{j!} \mod N)^{j+1} \mod N$. By applying property \eqref{eq:mod_power}, we have
+		\begin{equation} \label{eq:step1}
+		(a^{j!} \mod N)^{j+1} \mod N \equiv a^{j!(j+1)} \mod N.
+		\end{equation}
+		
+		Next, we calculate $(a^{(j+1)!} - 1) \mod N$. Since $(j+1)! = (j+1)j!$, we have
+		\begin{equation} \label{eq:step2}
+		(a^{(j+1)!} - 1) \mod N \equiv (a^{(j+1)j!} - 1) \mod N.
+		\end{equation}
+		
+		Now we need to show that the right-hand sides of \eqref{eq:step1} and \eqref{eq:step2} are congruent modulo $N$. To do this, we use the property \eqref{eq:mod_product}:
+		\begin{align*}
+		(a^{(j+1)j!} - 1) \mod N &\equiv (a^{j!(j+1)} - 1) \mod N \\
+		&\equiv ((a^{j!})^{j+1} - 1) \mod N \\
+		&\equiv (a^{j!(j+1)} \mod N - 1) \mod N,
+		\end{align*}
+		where the last step follows from property \eqref{eq:mod_product}.
+		
+		Thus, we have shown that $(a^{(j+1)!} - 1) \mod N \equiv (a^{j!} \mod N)^{j+1} \mod N - 1$, which completes the proof.
+	\end{proof}
+
+	\newpage
+	\begin{proof}[Proof of $(ab) \mod N \equiv (a \mod N)(b \mod N) \mod N$]
+		Let $a$ and $b$ be integers, and let $N$ be a positive integer. We want to show that $(ab) \mod N \equiv (a \mod N)(b \mod N) \mod N$.
+		
+		By the definition of modulo, we have
+		\begin{align*}
+		a &\equiv a_1 \pmod{N}, \\
+		b &\equiv b_1 \pmod{N},
+		\end{align*}
+		for some integers $a_1$ and $b_1$ such that $a \equiv a_1 \pmod{N}$ and $b \equiv b_1 \pmod{N}$.
+		
+		Then, $a = a_1 + k_1N$ and $b = b_1 + k_2N$ for some integers $k_1$ and $k_2$. Therefore,
+		\begin{align*}
+		ab &= (a_1 + k_1N)(b_1 + k_2N) \\
+		&= a_1b_1 + a_1k_2N + b_1k_1N + k_1k_2N^2 \\
+		&= a_1b_1 + (a_1k_2 + b_1k_1 + k_1k_2N)N.
+		\end{align*}
+		
+		Since $a_1k_2 + b_1k_1 + k_1k_2N$ is an integer, we have $ab \equiv a_1b_1 \pmod{N}$. But $a_1 \equiv a \pmod{N}$ and $b_1 \equiv b \pmod{N}$, so we can rewrite the congruence as
+		\begin{align*}
+		(ab) \mod N &\equiv (a \mod N)(b \mod N) \mod N.
+		\end{align*}
+		This completes the proof.
+	\end{proof}
+	
+	\begin{proof}[Proof of $(a^b) \mod N \equiv ((a \mod N)^b) \mod N$]
+		Let $a$ be an integer, let $b$ be a non-negative integer, and let $N$ be a positive integer. We want to show that $(a^b) \mod N \equiv ((a \mod N)^b) \mod N$.
+		
+		By the definition of modulo, we have
+		\begin{align*}
+		a &\equiv a_1 \pmod{N},
+		\end{align*}
+		for some integer $a_1$ such that $a \equiv a_1 \pmod{N}$.
+		
+		Then, $a = a_1 + kN$ for some integer $k$. Therefore,
+	\end{proof}
+
+	\begin{proof}
+		We want to prove that for any integers $a$, $b$, and $N$ with $N > 0$, the following property holds:
+		\begin{equation} \label{eq:mod_power}
+		(a^b) \mod N \equiv ((a \mod N)^b) \mod N.
+		\end{equation}
+		
+		By the definition of congruence, there exists an integer $k$ such that $a = kN + r$, where $r = a \mod N$. Then, we have
+		\begin{equation} \label{eq:mod_rep}
+		a \equiv r \pmod{N}.
+		\end{equation}
+		
+		Now, we raise both sides of \eqref{eq:mod_rep} to the power $b$ and obtain
+		\begin{equation} \label{eq:mod_power_step1}
+		a^b \equiv r^b \pmod{N}.
+		\end{equation}
+		
+		Taking both sides of \eqref{eq:mod_power_step1} modulo $N$, we have
+		\begin{equation} \label{eq:mod_power_step2}
+		(a^b) \mod N \equiv (r^b) \mod N.
+		\end{equation}
+		
+		Since $r = a \mod N$, we can rewrite \eqref{eq:mod_power_step2} as
+		\begin{equation} \label{eq:mod_power_step3}
+		(a^b) \mod N \equiv ((a \mod N)^b) \mod N.
+		\end{equation}
+		
+		Thus, we have shown that the property $(a^b) \mod N \equiv ((a \mod N)^b) \mod N$ holds, which completes the proof.
+	\end{proof}
+
+
+	\chapter{Pollard $\rho$ Method}
+	\section{Birthday Attack}
+	\subsection{Birthday Bound}
+	From $n$ possible birthdays, sample $k$ times with replacement. \[
+	P(\text{a shared birthday})=1-P(\text{no shared birthdays})=1-\frac{n(n-1)\cdots(n-k+1)}{n^k}.
+	\] When $n=365$, the lowest $k$ for which the above exceeds $0.5$ is, famously, $k=23$. Some values are given in the following table: \begin{table}[h!]
+		\centering\begin{tabular}{c|c}
+			$k$ & prob. for $n=365$ \\
+			\hline
+			$10$ & $0.1169$ \\
+			$23$ & $0.5073$ \\
+			$41$ & $0.9032$ \\
+			$57$ & $0.9901$ \\
+		\end{tabular}
+	\end{table}\
+	\\
+	Consider \[
+	y_1, y_2,\cdots, y_k\uniform\set{1,2,\cdots, n}.
+	\] Let $P_{n,k}=\Pr[\exists (i,j)\ \text{s.t.}\ y_i=y_j\ \text{for}\ i\neq j]$. Then \begin{align*}
+	P_{n,k}=1-\Pr[y_i\neq y_j\ \text{for all}\ i, j]
+	&=1-\left(\frac{n}{n}\right)\left(\frac{n-1}{n}\right)\cdots\left(\frac{n-(k-1)}{n}\right)\\
+	&=1-\left(1-\frac{1}{n}\right)\left(1-\frac{2}{n}\right)\cdots\left(1-\frac{k-1}{n}\right).
+	\end{align*} Recall that Taylor series \[
+	e^x=1+x+\frac{1}{2!}x^2+\frac{1}{3!}x^3+\cdots=\sum_{k=0}^{\infty}\frac{x^k}{k!}.
+	\] Note that $e^x\approx1+x$ for $x\in(-1,1)$. Thus, \begin{align*}
+	P_{n,k}&=1-\left(1-\frac{1}{n}\right)\left(1-\frac{2}{n}\right)\cdots\left(1-\frac{k-1}{n}\right)\\
+	&\approx1-e^{-1/n}\cdot e^{-2/n}\cdots e^{-(k-1)/n}\\
+	&=1-\exp\left(-\frac{1+2+\cdots+(k-1)}{n}\right)\\
+	&=1-\exp\left(-\frac{1}{n}\sum_{i=1}^{k-1}i\right)=1-\exp\left[-\frac{1}{n}\left((k-1+1)\cdot\frac{k-1}{2}\right)\right]\\
+	&=1-\exp\left(-\frac{k(k-1)}{2}\right)\approx1-\exp\left(-\frac{k^2}{2n}\right).
+	\end{align*} What is the value of $k$ such that $P_{n,k}\geq 1/2$? \[
+	\frac{1}{2}\leq1-\exp\left(-\frac{k^2}{2n}\right)\implies e^{-k^2/2n}\leq\frac{1}{2}\implies-\frac{k^2}{2n}\leq\ln 2^{-1}\implies k^2\geq(2\ln2) n.
+	\] Thus, $k\geq c\sqrt{n}$, where $c$ is a constant. That is, $O(\sqrt{n})$. What is the upper bound of $P_{n,k}$? \begin{align*}
+	P_{n,k}&=\Pr\left[(y_1=y_2)\lor\cdots\lor(y_1=y_k)\lor(y_2=y_3)\lor\cdots\lor(y_{k-1}=y_k)\right]\\
+	&\leq\sum_{1\leq i\leq j\leq k}\Pr(y_i=y_j)=\binom{k}{2}\frac{1}{n}\leq\frac{k^2}{2n}.
+	\end{align*}
+	
+	\newpage
+	\subsection{Finding Collision using Birthday Bound}
+	By the pigeon-hole principle, there are \hl{collision}.
+	\subsubsection{Native Approach}
+	For $N=O(\sqrt{2^n})$, we generate the set of input/output pairs \[
+	S=\set{(x_i,f(x_i))\mid i=1,2,\cdots, N}.
+	\] By the birthday bound, \[
+	\Pr[\exists(x_i,f(x_i)),(x_j,f(x_j))\in S\ \text{such that}\ f(x_i)=f(x_j)]\approx\frac{1}{2}.
+	\]\begin{note}
+		For $n=160$ (that is, $160$-bit output function), we need the memory space of \[
+		\sqrt{2^n}\times n\times2=2^{80}\times160\times2=2^{80}\times10\times 2^5=10\times2^{42}\times2^{10}\times2^{10}\times2^{10}\times2^{10}\times2^3=10\times 2^{42}\ \text{TB}
+		\] to find the collisions.
+	\end{note}
+	
+	\subsubsection{Small-Space Attack using Floyd's Cycle-Finding}
+	Consider a function $f:X\to X$ satisfying: \begin{enumerate}
+		\item $\abs{X}<\infty$
+		\item $f\neq id$\footnote{$id$: identity mapping.}, \ie, $\exists x\in D_f=X$ such that $f(x)\neq x$.
+	\end{enumerate} Using above function $f$, we define a sequence $\set{x_i}_{i=0}$ as follows: \[
+	x_{i+1}:=f(x_i).
+	\] We can visualize this sequence as follows: \begin{center}
+		\begin{tikzcd}
+			x_0 \arrow[r, "f"] & x_1 \arrow[r, "f"] & x_2 \arrow[r, "f"]        & \cdots \arrow[r, "f"] & x_n \arrow[r, "f"]                                                  & x_{n+1} \arrow[r, "f"] & \cdots \\
+			x_0 \arrow[r]      & f(x_0) \arrow[r]   & (f\circ f)(x_0) \arrow[r] & \cdots \arrow[r]      & \underbrace{(f\circ\cdots\circ f)}_{n\ \text{times}}(x_0) \arrow[r] & f(x_n) \arrow[r]       & \cdots
+		\end{tikzcd}
+	\end{center} Here, $x_0\in\set{x\mid f(x)\neq x}$. Note that a sequence $\set{x_i}$ has a collision pair because $\abs{X}<\infty$ (feat. pigeon-hole principle).
+	
+	\begin{tcolorbox}[colback=white]
+		\textbf{Theorem 5.1}\quad
+		In a sequence $\set{x_i}$, $\exists k$ such that $x_k=x_{2k}$. \[
+		x_0\xrightarrow{f}x_1\xrightarrow{f}x_2\xrightarrow{f}x_3\xrightarrow{f}\cdots\xrightarrow{f}x_k\xrightarrow{f}\cdots\xrightarrow{f}x_{2k}(=x_k)\xrightarrow{f}\cdots.
+		\]
+		\tcblower\begin{proof}
+			For $N=O(\sqrt{2^n})$, let $(x_i, x_j)$ is a collision pair with $0\leq i< j\leq N$; that is, $x_i\neq x_j$ but $f(x_i)=f(x_j)$, so \[
+			x_i\xrightarrow{f}x_{i+1}\xrightarrow{f}\cdots\xrightarrow{f}x_j\xrightarrow{f}x_{i+1}.
+			\] For $j>i$, then,  \[
+			\set{x_j}:\quad x_j,x_{i+1},x_{i+2},\cdots, x_{i+(j-i)}(=x_j),\cdots
+			\]  is a circular sequence with the period $p=j-i$, And then \begin{center}
+				\begin{tikzcd}
+					i-\text{index}\operatorname{:} \arrow[d, "\text{Changing index}" description] & x_{i+1} \arrow[r, "f"]   & x_{i+2} \arrow[r, "f"] & \cdots \arrow[r, "f"]       & x_{i+(j-i)}=x_{i+p} \arrow[lll, "f"', bend right=49, shift right] \\
+					j-\text{index}\operatorname{:}                                                & x_{j+1} \arrow[r, "f"]   & x_{j+2} \arrow[r, "f"] & \cdots \arrow[r, "f"]       & \mathcolorbox{-blue}{x_{j+p}} \arrow[d, "f"']                                           \\
+					& \mathcolorbox{-blue}{x_{j+2p}} \arrow[d, "f"'] & \cdots \arrow[l, "f"'] & x_{j+(p+2)} \arrow[l, "f"'] & x_{j+(p+1)} \arrow[l, "f"']                                       \\
+					& \mathcolorbox{-blue}{x_{j+3p}} \arrow[r, "f"]  & \cdots \arrow[r, "f"]  & \mathcolorbox{-red}{x_{j+\alpha\cdot p}} \arrow[r, "f"]     & \cdots                                                           
+				\end{tikzcd}
+			\end{center}\ \\ \ie, \[
+			x_j=x_{j+\alpha\cdot p}\quad\text{with}\quad \alpha\in\mathbb{Z}_{\geq 0}.
+			\] Define \[
+			k:=\min\set{t\cdot p\in\mathbb{Z}_{>i}:t\in\mathbb{Z}}>i.
+			\] In other words, $k(>i)$ is the minimal multiple of $p$. Then \[
+			p\mid k \implies p\mid 2k
+			\] because \[
+			k=tp\implies 2k=(2t)p
+			\] for some $t\in\mathbb{Z}$. Thus, $\exists k$ such that $x_k=x_{2k}$.
+		\end{proof}
+	\end{tcolorbox} By the Theorem 5.1, $\exists k$ such that $x_k=x_{2k}$. Since \begin{align*}
+	x_k=f(x_{k-1}),\quad x_{2k}=f(x_{2k-1}),
+	\end{align*} by the definition of $\set{x_j}$, then, we obtain $f(x_{k-1})=f(x_{2k-1})$. But $(x_{k-1},x_{2k-1})$ may not be a collision pair. \textcolor{blue}{Let $x_\alpha$ is the \underline{initial term} of a circular sequence $\set{x_j}$.} Since $k$ is a multiple of the period $p$ of $\set{x_j}$, we see that \begin{align*}
+	x_\alpha&=x_{\alpha+k},\\
+	f(x_{\alpha-1})&=f(x_{\alpha+k-1})\quad\text{by the def. of $\set{x_j}$},\\
+	\end{align*} and so $(x_{\alpha-1},x_{\alpha+k-1})$ is a clear collision pair.
+	\iffalse
+	\newpage
+	\begin{tcolorbox}[title=\textbf{Algorithm.}\ Small-Space Attack, coltitle=black, colback=white,colframe=-red, breakable, enhanced]
+		\textbf{Input:} $\Hash:\set{0,1}^*\to\set{0,1}^n$\\
+		\textbf{Output:} $(x,x')$ such that $x\neq x'$ but $\Hash(x)=\Hash(x')$ \begin{enumerate}[$1$:]
+			\item[] \textcolor{gray}{\code{\slash\slash\quad Step1: Finding $k$ such that $x_k=x_{2k}$.}}
+			\item $x_0\uniform\set{0,1}^{n+1}$\quad \textcolor{gray}{\code{\slash\slash\quad $x_0$ is start node.}}
+			\item $(x,x')\from (x_0,x_0)$
+			\item $k\from0$
+			\item \code{while TRUE do}
+			\item \qquad $k\from k+1$
+			\item \qquad $(x,x')\from \left(\Hash(x), (\Hash\circ \Hash)(x')\right)$
+			\item \qquad\code{if $x=x'$ then}
+			\item \qquad\qquad\code{BREAK}
+			\item \qquad\code{end if}
+			\item \code{end while}\\
+			\textcolor{gray}{\slash*------------------------------------------------------------------------------------------------------\\
+				<Detail for 1-10 line>: \begin{center}
+					\begin{tabular}{c|||c||c||c||c||c||c||c||c||c||c||c||c}
+						\toprule[1.5pt]
+						Parameters & 1-3 line & \multicolumn{7}{c}{4-10 line} \\
+						\midrule
+						$k$ & $0$ &$\xrightarrow{+1}$ & $1$ &$\xrightarrow{+1}$& $2$ & $\cdots$& $j$& $\cdots$&$\xrightarrow{+1}$& $k$\\
+						$x$ & $x_0$ &$\xrightarrow{\Hash}$& $x_1$ &$\xrightarrow{\Hash}$& $x_2$&  $\cdots$& $x_j$& $\cdots$&$\xrightarrow{\Hash}$&$x_k$\\
+						$x'$ & $x_0$ &$\xrightarrow{\Hash\circ\Hash}$& $x_2$ &$\xrightarrow{\Hash\circ\Hash}$& $x_4$& $\cdots$& $x_{2j}$& $\cdots$&$\xrightarrow{\Hash\circ\Hash}$& $x_{2k}$\\
+						\bottomrule[1.5pt]
+					\end{tabular}
+				\end{center} Here, $x_j$ or $x_{2j}$ is the initial term of a circular sequence $\set{x_j}$. Clearly, both $j$ and $2j$ are less than $k$.
+				\\ ------------------------------------------------------------------------------------------------------*\slash}
+			\item[]
+			\textcolor{gray}{\code{\slash\slash\quad Step2: Using $(x_0, x_k)$ obtaining in Step 1, we find the collision pair.}}
+			\item $(x,x')\from(x_0,x)$\quad \textcolor{gray}{\code{\slash\slash\quad $(x,x')\from(x_0,x)=(x_0,x_k)$.}}
+			\item \code{for $i\from1$ to $k$ do}
+			\item \qquad\text{if $\Hash(x)=\Hash(x')$ then}
+			\item \qquad\qquad\code{return $(x,x')$}
+			\item \qquad\code{else}
+			\item \qquad\qquad{$(x,x')\from\left(\Hash(x),\Hash(x')\right)$}
+			\item \qquad\code{end if}
+			\item \code{end for}\\
+			\newpage
+			\textcolor{gray}{\slash*------------------------------------------------------------------------------------------------------\\
+				<Detail for 11-18 line>: \begin{center}
+					\begin{tabular}{c||cc|cc||c}
+						\toprule[1.5pt]
+						$i$ & $x$ & $x'$&$\Hash(x)$& $\Hash(x')$ & Check the collision pair.\\
+						\midrule
+						$1$& $x_0$& $x_k$ &$x_1$&$x_{k+1}$&-\\
+						\hline
+						$2$& $x_1$& $x_{k+1}$ &$x_2$&$x_{k+2}$&-\\
+						\hline
+						$\vdots$& $\vdots$& $\vdots$ &$\vdots$&$\vdots$&\vdots\\
+						\hline
+						{$j$} & $x_{j-1}$& $x_{j+(k-1)}$ &$x_j$&$x_{k+j}$&{Either $(x_{j-1},x_{j+(k-1)})$ or $(x_{2j-1},x_{2j+(k-1)})$}\\
+						{$2j$} & $x_{2j-1}$& $x_{2j+(k-1)}$ &$x_{2j}$&$x_{k+2j}$& is a collision pair!\\
+						\bottomrule[1.5pt]
+					\end{tabular}
+				\end{center} ------------------------------------------------------------------------------------------------------*\slash}
+		\end{enumerate}
+	\end{tcolorbox}
+	\fi
 	% End document
 \end{document}
