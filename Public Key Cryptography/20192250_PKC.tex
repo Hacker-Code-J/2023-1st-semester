@@ -8,6 +8,12 @@
 \definecolor{chaptergray}{RGB}{140,140,140}
 \definecolor{sectiongray}{RGB}{180,180,180}
 
+\definecolor{thmcolor}{RGB}{231, 76, 60}
+\definecolor{defcolor}{RGB}{52, 152, 219}
+\definecolor{lemcolor}{RGB}{155, 89, 182}
+\definecolor{corcolor}{RGB}{46, 204, 113}
+\definecolor{procolor}{RGB}{241, 196, 15}
+
 % Fonts
 \usepackage[T1]{fontenc}
 \usepackage[utf8]{inputenc}
@@ -51,32 +57,84 @@
 	urlcolor=titleblue,
 }
 
+%Listing
+\usepackage{listings} %Code
+\renewcommand{\lstlistingname}{Code}%
+
+\definecolor{sagegreen}{rgb}{0.0,0.6,0.4}
+\definecolor{sagepurple}{rgb}{0.6,0.0,0.4}
+\definecolor{sageblue}{rgb}{0.0,0.4,0.6}
+\definecolor{sageorange}{rgb}{1.0,0.4,0.0}
+\definecolor{sagegray}{rgb}{0.4,0.4,0.4}
+
+\lstdefinestyle{sage}{
+	language=Python,
+	backgroundcolor=\color{white},
+	basicstyle=\small\ttfamily\color{black}, 
+	basicstyle=\footnotesize\ttfamily\color{black},
+	keywordstyle=\color{blue!60!black},
+	commentstyle=\color{green!60!black},
+	stringstyle=\color{purple!60!black},
+	showstringspaces=false,
+	breaklines=true,
+	tabsize=4,
+	morekeywords={True, False, None},
+	frame=leftline, % Remove the border
+	framesep=3pt,
+	frameround=tttt,
+	framexleftmargin=3pt,
+	numbers=left,
+	numberstyle=\small\color{gray},
+	xleftmargin=15pt, % Increase the left margin
+	xrightmargin=5pt,
+	captionpos=b,
+	belowskip=0pt,
+	aboveskip=4pt
+}
+
+%Ceiling and Floor Function
+\usepackage{mathtools}
+\DeclarePairedDelimiter{\ceil}{\lceil}{\rceil}
+\DeclarePairedDelimiter{\floor}{\lfloor}{\rfloor}
+
+%Algorithm
+\usepackage[ruled,linesnumbered]{algorithm2e}
+\usepackage{setspace}
+\usepackage{algpseudocode}
+\SetKwComment{Comment}{/* }{ */}
+\SetKw{Break}{break}
+
+
 %---------------------------My Preamble
 \usepackage{enumerate}
 \usepackage{soul}
 \newcommand{\mathcolorbox}[2]{\colorbox{#1}{$\displaystyle #2$}}
 \usepackage{graphicx}
+\usepackage{tikz}
 \usepackage{tikz-cd}
+\usetikzlibrary{calc}
 
 %Tcolorbox
 \usepackage[most]{tcolorbox}
-\tcbset{enhanced, colback=white,colframe=black,fonttitle=\bfseries,arc=4mm,boxrule=1pt,shadow={2mm}{-1mm}{0mm}{black!50}}
-
+\tcbset{colback=white, arc=5pt}
+%\tcbset{enhanced, colback=white,colframe=black,fonttitle=\bfseries,arc=4mm,boxrule=1pt,shadow={2mm}{-1mm}{0mm}{black!50}}
 %White box with black text and shadow
 %\begin{tcolorbox}[colback=white,colframe=black,fonttitle=\bfseries,title=Black Shadow Box,arc=4mm,boxrule=1pt,shadow={2mm}{-1mm}{0mm}{black!50}]
 %	This is a white box with black text and a subtle shadow. The shadow adds some depth and dimension to the box without overpowering the design.
 %\end{tcolorbox}
 
 %Theorem
-\newtheorem{axiom}{Axiom}[section]
+\newtheorem{axiom}{Axiom}[chapter]
 \newtheorem{theorem}{Theorem}
 \newtheorem{proposition}[theorem]{Proposition}
 \newtheorem{corollary}{Corollary}[theorem]
 \newtheorem{lemma}[theorem]{Lemma}
 
-\newtheorem{definition}{Definition}
-\newtheorem{remark}{Remark}
-\newtheorem{exercise}{Exercise}[section]
+\theoremstyle{definition}
+\newtheorem{definition}{Definition}[chapter]
+\newtheorem{remark}{Remark}[chapter]
+\newtheorem{exercise}{Exercise}[chapter]
+\newtheorem{example}{Example}[chapter]
 \newtheorem*{note}{Note}
 
 %New Command
@@ -100,8 +158,11 @@
 
 \newcommand{\sol}{\textcolor{magenta}{\bf Sol}}
 
+\newcommand{\img}{\operatorname{\textnormal{Img}}}
+
 \newcommand{\dollar}{\$}
 \newcommand{\uniform}{\xleftarrow{\dollar}}
+\newcommand{\hash}{\mathsf{H}}
 
 % Begin document
 \begin{document}
@@ -186,7 +247,7 @@
 	\subsection{Conclusion}
 	RSA is a widely used public-key cryptosystem that uses prime numbers to secure communication over the internet. It is based on the difficulty of factoring large integers and is currently considered secure for many applications.
 	
-
+	
 	\section{RSA-CRT}
 	
 	RSA-CRT is a modified version of the RSA public-key cryptosystem that leverages the Chinese Remainder Theorem to enhance the speed of the decryption process.
@@ -238,7 +299,7 @@
 			\]
 		\end{enumerate}
 	\end{tcolorbox}
-
+	
 	\begin{tcolorbox}[title=Chinese Remainder Theorem]
 		\begin{theorem}
 			Given a system of linear congruences with pairwise relatively prime moduli:
@@ -251,12 +312,12 @@
 			
 			there exists a unique solution $x$ modulo $M = m_1m_2\cdots m_n$:
 			\begin{align*}
-			x&\equiv a_1b_1M_1+a_2b_2M_2+\cdots a_nb_nM_n\pmod{M}, \ie,\\ x&\equiv\sum_{i=1}^{n}a_ib_iM_i\pmod{M}
+				x&\equiv a_1b_1M_1+a_2b_2M_2+\cdots a_nb_nM_n\pmod{M}, \ie,\\ x&\equiv\sum_{i=1}^{n}a_ib_iM_i\pmod{M}
 			\end{align*}\[
 			\] where $M_i=M/m_i$ and $b_i$ is the inverse of $M_i$ modulo $m_i$.
 		\end{theorem}
 	\end{tcolorbox}
-		
+	
 	\section{Fermat's Little Theorem}
 	
 	\begin{tcolorbox}[title=Fermat's Little Theorem]
@@ -286,7 +347,7 @@
 	
 	\begin{proof}
 		We use the group theory of the multiplicative group of integers modulo a prime $p$.
-
+		
 		Let $p$ be a prime number, and let $a$ be an integer that is not divisible by $p$. Consider the set of integers modulo $p$, denoted by $\mathbb{Z}/p\mathbb{Z}$. This set forms a group under multiplication, denoted by $(\mathbb{Z}/p\mathbb{Z})^{\times}$. Since $p$ is prime, the group $(\mathbb{Z}/p\mathbb{Z})^{\times}$ has order $p-1$, which means that it contains $p-1$ distinct elements.
 		
 		Now consider the subset of $(\mathbb{Z}/p\mathbb{Z})^{\times}$ consisting of the multiples of $a$, denoted by $S_a = {a, 2a, 3a, \ldots, (p-1)a}$. Since $a$ is not divisible by $p$, the set $S_a$ consists of distinct elements. We claim that $S_a$ is a permutation of the elements of $(\mathbb{Z}/p\mathbb{Z})^{\times}$.
@@ -505,7 +566,7 @@
 	Assume for the sake of contradiction that $S$ is non-empty. Then by the well-ordering principle, there exists a least element $n_0 \in S$. By the definition of the set $S$, we have that $p-1 \nmid n_0!$.
 	
 	Since $n_0 \geq p$, we can write $n_0 = pk + r$, where $k \in \mathbb{Z}_{\geq 0}$ and $0 \leq r < p$. Note that $r \neq p-1$ because otherwise, we would have $n_0 = pk + (p-1)$, which implies $p-1 \mid n_0!$, a contradiction.
-
+	
 	Now consider $(n_0 - r)!$. Since $0 \leq r < p$, we have $n_0 - r \geq pk$. Therefore, $(n_0 - r)! = (pk)! = p^k k!$, and clearly, $p-1 \mid (n_0 - r)!$ because $p^k$ is divisible by $p-1$ for every positive integer $k$.
 	
 	Using the properties of factorials, we can write $n_0! = (n_0 - r)!(n_0 - r + 1)(n_0 - r + 2) \cdots n_0$. Since $p-1 \mid (n_0 - r)!$, it suffices to show that $p-1 \mid (n_0 - r + 1)(n_0 - r + 2) \cdots n_0$.
@@ -530,68 +591,68 @@
 		Let $n \geq n_0$. Then we can write $n$ as $n = n_0 + k$ for some non-negative integer $k$. Now, consider $(n_0 + k)!$. By the definition of the factorial, we have:
 		
 		\begin{align*}
-		(n_0 + k)! &= (n_0 + k)(n_0 + k - 1) \cdots (n_0 + 1)n_0!
+			(n_0 + k)! &= (n_0 + k)(n_0 + k - 1) \cdots (n_0 + 1)n_0!
 		\end{align*}
 		
 		Since $n_0! \equiv 0 \pmod{p-1}$ and $p-1$ divides each of the factors $(n_0 + k), (n_0 + k - 1), \ldots, (n_0 + 1)$ exactly once, we have $(n_0 + k)! \equiv 0 \pmod{p-1}$. Therefore, $p-1$ divides $(n_0 + k)!$, which is equivalent to $n!$.
 		
 		Thus, for all $n \geq n_0$, $p-1$ divides $n!$. This completes the proof.
 	\end{proof}
-
+	
 	\begin{proof}
 		Let $N = pq$, where $p$ and $q$ are prime numbers, and let $a$ be an integer such that $\gcd(a, p) = 1$. We want to prove that
 		\begin{equation} \label{eq:congruence}
-		(a^{(j+1)!} - 1) \mod N = (a^{j!} \mod N)^{j+1} \mod N - 1.
+			(a^{(j+1)!} - 1) \mod N = (a^{j!} \mod N)^{j+1} \mod N - 1.
 		\end{equation}
 		
 		To prove this, we can use the following properties of modular arithmetic:
 		\begin{align}
-		(ab) \mod N &\equiv (a \mod N)(b \mod N) \mod N, \label{eq:mod_product} \\
-		(a^b) \mod N &\equiv ((a \mod N)^b) \mod N. \label{eq:mod_power}
+			(ab) \mod N &\equiv (a \mod N)(b \mod N) \mod N, \label{eq:mod_product} \\
+			(a^b) \mod N &\equiv ((a \mod N)^b) \mod N. \label{eq:mod_power}
 		\end{align}
 		
 		We start by calculating $(a^{j!} \mod N)^{j+1} \mod N$. By applying property \eqref{eq:mod_power}, we have
 		\begin{equation} \label{eq:step1}
-		(a^{j!} \mod N)^{j+1} \mod N \equiv a^{j!(j+1)} \mod N.
+			(a^{j!} \mod N)^{j+1} \mod N \equiv a^{j!(j+1)} \mod N.
 		\end{equation}
 		
 		Next, we calculate $(a^{(j+1)!} - 1) \mod N$. Since $(j+1)! = (j+1)j!$, we have
 		\begin{equation} \label{eq:step2}
-		(a^{(j+1)!} - 1) \mod N \equiv (a^{(j+1)j!} - 1) \mod N.
+			(a^{(j+1)!} - 1) \mod N \equiv (a^{(j+1)j!} - 1) \mod N.
 		\end{equation}
 		
 		Now we need to show that the right-hand sides of \eqref{eq:step1} and \eqref{eq:step2} are congruent modulo $N$. To do this, we use the property \eqref{eq:mod_product}:
 		\begin{align*}
-		(a^{(j+1)j!} - 1) \mod N &\equiv (a^{j!(j+1)} - 1) \mod N \\
-		&\equiv ((a^{j!})^{j+1} - 1) \mod N \\
-		&\equiv (a^{j!(j+1)} \mod N - 1) \mod N,
+			(a^{(j+1)j!} - 1) \mod N &\equiv (a^{j!(j+1)} - 1) \mod N \\
+			&\equiv ((a^{j!})^{j+1} - 1) \mod N \\
+			&\equiv (a^{j!(j+1)} \mod N - 1) \mod N,
 		\end{align*}
 		where the last step follows from property \eqref{eq:mod_product}.
 		
 		Thus, we have shown that $(a^{(j+1)!} - 1) \mod N \equiv (a^{j!} \mod N)^{j+1} \mod N - 1$, which completes the proof.
 	\end{proof}
-
+	
 	\newpage
 	\begin{proof}[Proof of $(ab) \mod N \equiv (a \mod N)(b \mod N) \mod N$]
 		Let $a$ and $b$ be integers, and let $N$ be a positive integer. We want to show that $(ab) \mod N \equiv (a \mod N)(b \mod N) \mod N$.
 		
 		By the definition of modulo, we have
 		\begin{align*}
-		a &\equiv a_1 \pmod{N}, \\
-		b &\equiv b_1 \pmod{N},
+			a &\equiv a_1 \pmod{N}, \\
+			b &\equiv b_1 \pmod{N},
 		\end{align*}
 		for some integers $a_1$ and $b_1$ such that $a \equiv a_1 \pmod{N}$ and $b \equiv b_1 \pmod{N}$.
 		
 		Then, $a = a_1 + k_1N$ and $b = b_1 + k_2N$ for some integers $k_1$ and $k_2$. Therefore,
 		\begin{align*}
-		ab &= (a_1 + k_1N)(b_1 + k_2N) \\
-		&= a_1b_1 + a_1k_2N + b_1k_1N + k_1k_2N^2 \\
-		&= a_1b_1 + (a_1k_2 + b_1k_1 + k_1k_2N)N.
+			ab &= (a_1 + k_1N)(b_1 + k_2N) \\
+			&= a_1b_1 + a_1k_2N + b_1k_1N + k_1k_2N^2 \\
+			&= a_1b_1 + (a_1k_2 + b_1k_1 + k_1k_2N)N.
 		\end{align*}
 		
 		Since $a_1k_2 + b_1k_1 + k_1k_2N$ is an integer, we have $ab \equiv a_1b_1 \pmod{N}$. But $a_1 \equiv a \pmod{N}$ and $b_1 \equiv b \pmod{N}$, so we can rewrite the congruence as
 		\begin{align*}
-		(ab) \mod N &\equiv (a \mod N)(b \mod N) \mod N.
+			(ab) \mod N &\equiv (a \mod N)(b \mod N) \mod N.
 		\end{align*}
 		This completes the proof.
 	\end{proof}
@@ -601,99 +662,277 @@
 		
 		By the definition of modulo, we have
 		\begin{align*}
-		a &\equiv a_1 \pmod{N},
+			a &\equiv a_1 \pmod{N},
 		\end{align*}
 		for some integer $a_1$ such that $a \equiv a_1 \pmod{N}$.
 		
 		Then, $a = a_1 + kN$ for some integer $k$. Therefore,
 	\end{proof}
-
+	
 	\begin{proof}
 		We want to prove that for any integers $a$, $b$, and $N$ with $N > 0$, the following property holds:
 		\begin{equation} \label{eq:mod_power}
-		(a^b) \mod N \equiv ((a \mod N)^b) \mod N.
+			(a^b) \mod N \equiv ((a \mod N)^b) \mod N.
 		\end{equation}
 		
 		By the definition of congruence, there exists an integer $k$ such that $a = kN + r$, where $r = a \mod N$. Then, we have
 		\begin{equation} \label{eq:mod_rep}
-		a \equiv r \pmod{N}.
+			a \equiv r \pmod{N}.
 		\end{equation}
 		
 		Now, we raise both sides of \eqref{eq:mod_rep} to the power $b$ and obtain
 		\begin{equation} \label{eq:mod_power_step1}
-		a^b \equiv r^b \pmod{N}.
+			a^b \equiv r^b \pmod{N}.
 		\end{equation}
 		
 		Taking both sides of \eqref{eq:mod_power_step1} modulo $N$, we have
 		\begin{equation} \label{eq:mod_power_step2}
-		(a^b) \mod N \equiv (r^b) \mod N.
+			(a^b) \mod N \equiv (r^b) \mod N.
 		\end{equation}
 		
 		Since $r = a \mod N$, we can rewrite \eqref{eq:mod_power_step2} as
 		\begin{equation} \label{eq:mod_power_step3}
-		(a^b) \mod N \equiv ((a \mod N)^b) \mod N.
+			(a^b) \mod N \equiv ((a \mod N)^b) \mod N.
 		\end{equation}
 		
 		Thus, we have shown that the property $(a^b) \mod N \equiv ((a \mod N)^b) \mod N$ holds, which completes the proof.
 	\end{proof}
-
-
+	
+	
 	\chapter{Pollard $\rho$ Method}
 	\section{Birthday Attack}
+		
+	The birthday problem (also known as the birthday paradox) is a famous problem in probability theory that demonstrates the surprising fact that, in a group of just 23 people, there is a greater than 50\% chance that at least two of them share the same birthday. It is based on the assumption that birthdays are uniformly distributed throughout the year (ignoring leap years).
+	
 	\subsection{Birthday Bound}
-	From $n$ possible birthdays, sample $k$ times with replacement. \[
-	P(\text{a shared birthday})=1-P(\text{no shared birthdays})=1-\frac{n(n-1)\cdots(n-k+1)}{n^k}.
-	\] When $n=365$, the lowest $k$ for which the above exceeds $0.5$ is, famously, $k=23$. Some values are given in the following table: \begin{table}[h!]
-		\centering\begin{tabular}{c|c}
-			$k$ & prob. for $n=365$ \\
-			\hline
-			$10$ & $0.1169$ \\
-			$23$ & $0.5073$ \\
-			$41$ & $0.9032$ \\
-			$57$ & $0.9901$ \\
-		\end{tabular}
-	\end{table}\
-	\\
-	Consider \[
-	y_1, y_2,\cdots, y_k\uniform\set{1,2,\cdots, n}.
-	\] Let $P_{n,k}=\Pr[\exists (i,j)\ \text{s.t.}\ y_i=y_j\ \text{for}\ i\neq j]$. Then \begin{align*}
-	P_{n,k}=1-\Pr[y_i\neq y_j\ \text{for all}\ i, j]
-	&=1-\left(\frac{n}{n}\right)\left(\frac{n-1}{n}\right)\cdots\left(\frac{n-(k-1)}{n}\right)\\
-	&=1-\left(1-\frac{1}{n}\right)\left(1-\frac{2}{n}\right)\cdots\left(1-\frac{k-1}{n}\right).
-	\end{align*} Recall that Taylor series \[
-	e^x=1+x+\frac{1}{2!}x^2+\frac{1}{3!}x^3+\cdots=\sum_{k=0}^{\infty}\frac{x^k}{k!}.
-	\] Note that $e^x\approx1+x$ for $x\in(-1,1)$. Thus, \begin{align*}
-	P_{n,k}&=1-\left(1-\frac{1}{n}\right)\left(1-\frac{2}{n}\right)\cdots\left(1-\frac{k-1}{n}\right)\\
-	&\approx1-e^{-1/n}\cdot e^{-2/n}\cdots e^{-(k-1)/n}\\
-	&=1-\exp\left(-\frac{1+2+\cdots+(k-1)}{n}\right)\\
-	&=1-\exp\left(-\frac{1}{n}\sum_{i=1}^{k-1}i\right)=1-\exp\left[-\frac{1}{n}\left((k-1+1)\cdot\frac{k-1}{2}\right)\right]\\
-	&=1-\exp\left(-\frac{k(k-1)}{2}\right)\approx1-\exp\left(-\frac{k^2}{2n}\right).
-	\end{align*} What is the value of $k$ such that $P_{n,k}\geq 1/2$? \[
-	\frac{1}{2}\leq1-\exp\left(-\frac{k^2}{2n}\right)\implies e^{-k^2/2n}\leq\frac{1}{2}\implies-\frac{k^2}{2n}\leq\ln 2^{-1}\implies k^2\geq(2\ln2) n.
-	\] Thus, $k\geq c\sqrt{n}$, where $c$ is a constant. That is, $O(\sqrt{n})$. What is the upper bound of $P_{n,k}$? \begin{align*}
-	P_{n,k}&=\Pr\left[(y_1=y_2)\lor\cdots\lor(y_1=y_k)\lor(y_2=y_3)\lor\cdots\lor(y_{k-1}=y_k)\right]\\
-	&\leq\sum_{1\leq i\leq j\leq k}\Pr(y_i=y_j)=\binom{k}{2}\frac{1}{n}\leq\frac{k^2}{2n}.
+	Let $n$ be the number of people in the group. Consider \[
+	a_1,\cdots,a_k\uniform\set{1,\cdots, n}\quad\text{with $k\leq n$}.
+	\] Let $P(n)$ be the probability that at least two people share a birthday: \[
+	P\of{n}:=\Pr\left[\exists (i,j):i\neq j\Rightarrow a_i=a_j\right].
+	\] To calculate this probability, let $P'\of{n}:=1-P\of{n}$ then \begin{align*}
+		P'\of{n}&=1-\Pr\left[\exists (i,j):i\neq j\Rightarrow a_i=a_j\right]\\
+		&=\Pr\left[\lnot\of{\exists (i,j):i\neq j\Rightarrow a_i=a_j}\right]\\
+		&=\Pr\left[\forall(i,j):i\neq j\land a_i\neq a_j\right].
 	\end{align*}
+	That is, $P' (n)$ be the probability that all $n$ birthdays are unique.
+	
+	Assuming there are 365 possible birthdays, the probability that the first person has a unique birthday is:
+	\begin{equation*}
+		P'_1 = \frac{365}{365} = 1.
+	\end{equation*}
+	
+	For the second person to have a unique birthday (different from the first person), there are 364 remaining possibilities:
+	\begin{equation*}
+		P'_2 = \frac{364}{365}.
+	\end{equation*}
+	
+	For the third person to have a unique birthday (different from the previous two), there are 363 remaining possibilities:
+	\begin{equation*}
+		P'_3 = \frac{363}{365}.
+	\end{equation*}
+	
+	Following this pattern, the probability that all $n$ birthdays are unique is:
+	\begin{equation*}
+		P'(n) = \frac{365}{365} \times \frac{364}{365} \times \cdots \times \frac{365 - (n - 1)}{365}.
+	\end{equation*}
+	
+	Thus, the probability that at least two people share a birthday is:
+	
+	\begin{equation*}
+		P(n) = 1 - P'(n)=1-\of{\frac{365}{365}}\of{\frac{364}{365}}\cdots\of{\frac{365-(n-1)}{365}}.
+	\end{equation*}
+
+	\begin{tcolorbox}[colback=white,colframe=procolor,arc=5pt,title={\color{white}\bf Generalization of Birthday Problem}]
+		\begin{proposition}
+			Assume all birthday are equally likely, and generalize the problem a little: \textnormal{from $n$ possible birthdays, sample $k$ times with replacement}. \begin{align*}
+				P(\textnormal{a shared birthday})&=1-P(\textnormal{no shared birthdays})\\
+				&=1-P(\textnormal{all birthdays are unique})\\
+				&=1-\of{\frac{n}{n}}\of{\frac{n-1}{n}}\cdots\of{\frac{n-(k-1)}{n}}\\
+				&=1-1\cdot \prod_{i=1}^{k-1}\frac{n-i}{n}\\
+				&=1-\prod_{i=1}^{k-1}\of{1-\frac{i}{n}}.
+			\end{align*}
+		\end{proposition}
+	\end{tcolorbox}
+
+	\newpage
+	\begin{remark}
+		When $n=365$, the lowest $k$ for which the above exceeds $0.5$ is $k=23$: \begin{figure}[ht!]
+			\centering
+			\includegraphics[width=0.95\linewidth,height=95mm]{birthday_problem.png}
+		\end{figure}
+		\begin{lstlisting}[style=sage, caption={Birthday Bound (Sage)},captionpos=t]
+import matplotlib.pyplot as plt
+
+# Define a function to compute the probability of two people sharing a birthday for a given group size
+def birthday_prob(n):
+	return 1 - prod([(365-i)/365 for i in range(n)])
+
+# Create a list of group sizes from 2 to 50
+group_sizes = range(2, 51)
+
+# Compute the probabilities for each group size
+probabilities = [birthday_prob(n) for n in group_sizes]
+
+# Plot the probabilities as a function of group size
+plt.plot(group_sizes, probabilities)
+plt.xlabel("Group Size")
+plt.ylabel("Probability")
+plt.title("Probability of Two People Sharing a Birthday")
+
+# Add a horizontal line at the probability of 0.5
+plt.axhline(y=0.5, color='r', linestyle='-')
+
+plt.show()
+		\end{lstlisting}
+	\end{remark}
+
+	\newpage
+	\begin{tcolorbox}[colback=white,colframe=thmcolor,arc=5pt,title={\color{white}\bf Birthday Bound}]
+		\begin{theorem}
+			From the set $I:=\set{1,\cdots,n}$, sample $k$ times with replacement: \[
+			a_1,a_2,\cdots,a_k\uniform\set{1,2,\cdots,n}
+			\] where all element of $I$ are equally likely. Then \[
+			P_{n,k}:=\Pr\left[\exists \of{i,j}\in I^2, i\neq j:a_i=a_j\right]\approx 1-e^{-\frac{k^2}{2n}}.
+			\]
+		\end{theorem}
+	\end{tcolorbox}
+	\begin{proof}
+		Note that \begin{align*}
+			P_{n,k}=1-\Pr[(i,j)\in I^2, i\neq j\implies a_i\neq a_j]=1-\prod_{i=1}^{k-1}\of{1-\frac{i}{n}}.
+		\end{align*} Recall that Taylor series for exponential: \[
+		e^x=1+x+\frac{1}{2!}x^2+\frac{1}{3!}x^3+\cdots=\sum_{k=0}^{\infty}\frac{x^k}{k!}.
+		\] Note that $e^x\approx1+x$ for $x\in(-1,1)$:
+		\begin{figure}[ht!]
+			\centering
+			\includegraphics[scale=0.5]{approx_exp.png}
+		\end{figure}\\
+		Since $i\in[1,k-1]\subseteq[1,n)\Rightarrow-\frac{i}{n}\in\of{-1,1}\Rightarrow 1+\of{-\frac{i}{n}}\approx e^{-i/n}$, we have \begin{align*}
+			P_{n,k}=
+			1-\prod_{i=1}^{k-1}\of{1-\frac{i}{n}}
+			&\approx 1-\prod_{i=1}^{k-1}e^{-\frac{i}{n}}\\
+			&=1-e^{-1/n}\cdot e^{-2/n}\cdots e^{-(k-1)/n}\\
+			&=1-e^{-\frac{1}{n}\of{1+2+\cdots+(k-1)}}\\
+			&=1-e^{-\frac{1}{n}\cdot\frac{k\of{k-1}}{2}}\\
+			&\approx 1-e^{-\frac{k^2}{2n}}.
+		\end{align*}
+	\end{proof}
+
+	\begin{remark}
+		Find minimum value of $k$ such that $P_{n,k}\geq 1/2$. \begin{align*}
+		P_{n,k}=1-e^{-\frac{k^2}{2n}}\geq\frac{1}{2}&\implies e^{-k^2/2n}\leq\frac{1}{2}\\
+		&\implies-\frac{k^2}{2n}\leq\ln\frac{1}{2}\\
+		&\implies (2\ln2)n\leq k^2\\
+		&\implies \ceil*{\sqrt{\of{2\ln 2}n}}\leq k.
+		\end{align*} 
+		Thus, $k\geq c\sqrt{n}$, where $c$ is a constant. That is, $O(\sqrt{n})$.
+	\end{remark}
+
+	\begin{remark}
+		Find the upper bound of $P_{n,k}$. \begin{align*}
+			P_{n,k}
+			&=\Pr\left[(a_1=a_2)\lor\cdots\lor(a_1=a_k)\lor(a_2=a_3)\lor\cdots\lor(a_{k-1}=a_k)\right]\\
+			&\leq\sum_{1\leq i< j\leq k}\Pr\left[a_i=a_j\right]\\
+			&=\binom{k}{2}\frac{1}{n}\\
+			&\leq\frac{k^2}{2n}.
+		\end{align*} Thus, the upper bound of $P_{n,k}$ is less than 1/2 when $k=\floor*{\sqrt{n}}$.
+	\end{remark}
+	
+	\subsection{Set Intersection Bound}
 	
 	\newpage
-	\subsection{Finding Collision using Birthday Bound}
-	By the pigeon-hole principle, there are \hl{collision}.
-	\subsubsection{Native Approach}
-	For $N=O(\sqrt{2^n})$, we generate the set of input/output pairs \[
-	S=\set{(x_i,f(x_i))\mid i=1,2,\cdots, N}.
-	\] By the birthday bound, \[
-	\Pr[\exists(x_i,f(x_i)),(x_j,f(x_j))\in S\ \text{such that}\ f(x_i)=f(x_j)]\approx\frac{1}{2}.
-	\]\begin{note}
-		For $n=160$ (that is, $160$-bit output function), we need the memory space of \[
-		\sqrt{2^n}\times n\times2=2^{80}\times160\times2=2^{80}\times10\times 2^5=10\times2^{42}\times2^{10}\times2^{10}\times2^{10}\times2^{10}\times2^3=10\times 2^{42}\ \text{TB}
-		\] to find the collisions.
-	\end{note}
+	\section{Finding Collision of a (One-way) Function}
 	
-	\subsubsection{Small-Space Attack using Floyd's Cycle-Finding}
+	Finding a collision for a one-way function is a computationally hard problem. We can define a one-way function as:
+	\[
+	f : \set{0,1}^*\to \set{0,1}^n
+	\] By the pigeon-hole principle, there are \hl{collision}. A collision in a one-way function is a pair of inputs:
+	\[
+	x_1,x_2\in\set{0,1}^*\ \text{such that}\ f\of{x_1}=f\of{x_2}\ \text{but}\ x_1\neq x_2.
+	\]
+	
+	One common method used to find a collision is the \textit{birthday attack}, which is based on the birthday paradox. The birthday paradox states that in a group of 23 people, there is a 50\% chance that two people share the same birthday, assuming uniform distribution of birthdays over 365 days.
+	
+	\begin{algorithm}[H]
+		\caption{{Birthday Attack} to Find a Collision in a One-way Function}
+		\KwData{One-way function $f$.}
+		\KwResult{Collision pair $(x_1,x_2)$.}
+		\vspace{4pt}
+		\vspace{4pt}
+		\begin{minipage}{.45\textwidth}
+			Initialize an empty set $S=\varnothing$\;
+			\vspace{4pt}
+			\While{\texttt{True}}{
+				$x\uniform\set{0,1}^*$\;
+				$y\gets f\of{x}$\;
+				\eIf{$y\in S$}{
+					\Return $(x_1,x_2)$ s.t. $f\of{x_1}=f\of{x_2}=y$\;
+				}{
+					$S\gets S\cup\set{y}$\;
+				}
+			}
+		\vspace{15pt}
+		\end{minipage}\hfil
+		\begin{minipage}{.45\textwidth}
+			Initialize an empty dictionary $D$\;
+			\vspace{4pt}
+			\While{\texttt{True}}{
+				$x\uniform\set{0,1}^*$\;
+				$y\gets f\of{x}$\;
+				\eIf{$y$ is a key in $D$}{
+					$x_1\gets x$\;
+					$x_2\gets D[y]$\;
+					\Return $(x_1,x_2)$\;
+				}{
+					$D\gets D\cup\set{(y,x)}$\;
+				}
+			}
+		\end{minipage}
+		\vspace{4pt}
+	\end{algorithm}
+	The dictionary stores $D$ key-value pairs where the key is the output value $y$ and the value is the corresponding input value 
+	$x$. This way, we can keep track of the input values corresponding to the computed output values.
+	
+	\newpage
+	\subsection{Native Approach}
+	
+	From $2^n$ possible outputs of $f$, sample $k$ times with replacement: \[
+	P\of{\textnormal{no collision for $k$ inputs}}=\prod_{i=1}^{k-1}\of{1-\frac{i}{2^n}}.
+	\]
+	Then \begin{align*}
+		\prod_{i=1}^{k-1}\of{1-\frac{i}{2^n}}\approx e^{-\frac{k^2}{2\cdot 2^n}}\geq\frac{1}{2}
+		&\implies (2\ln2)2^n\leq k^2\\
+		&\implies \sqrt{2\ln2}\sqrt{2^n}\leq k.
+	\end{align*}
+	For $N=O(\sqrt{2^n})$, we generate the set of input/output pairs \[
+	S=\set{\of{x_i,f\of{x_i}}}_{i=1}^N.
+	\] By the birthday bound, \[
+	\Pr[\exists(x_i,f(x_i)),(x_j,f(x_j))\in S:f(x_i)=f(x_j)]\approx\frac{1}{2}.
+	\]
+	\vspace{8pt}
+	\begin{remark}[Memory Space]
+		To store $k$ inputs, each of which is represented by $n$ bits, we need $k \times n$ bits. If we consider that the probability of a collision is greater than 50\% when $k > \sqrt{2^n}$, the memory space required to store these inputs is approximately: \[
+		\sqrt{2^n}\times n.
+		\] Thus the memory space needed to store $n$-bit i/o is approximately $\sqrt{2^n}\times n\times 2$.
+	\end{remark}
+	\vspace{8pt}
+	\begin{example}
+		Consider $160$-bit output function. Then 
+		\begin{align*}
+			\text{Memory space} &= \sqrt{2^n} \times n \times 2 \\
+			&= 2^{80} \times 160 \times 2 \\
+			&= 2^{80} \times 2^5\times 5 \times 2 \\
+			&= 10\times 2^{85}\\
+			&= 10\times 2^{82} \times 2^3 (= 10\times 2^{82}\ \text{bytes})\\
+			&= 10 \times 2^{42}\ \text{TB}.
+		\end{align*}
+	\end{example}
+	
+	\newpage
+	\subsection{Small-Space Attack using Floyd's Cycle-Finding}
 	Consider a function $f:X\to X$ satisfying: \begin{enumerate}
 		\item $\abs{X}<\infty$
 		\item $f\neq id$\footnote{$id$: identity mapping.}, \ie, $\exists x\in D_f=X$ such that $f(x)\neq x$.
-	\end{enumerate} Using above function $f$, we define a sequence $\set{x_i}_{i=0}$ as follows: \[
+	\end{enumerate} Using above function $f$, we define a sequence $\set{x_i}_{i=1}$ as follows: \[
 	x_{i+1}:=f(x_i).
 	\] We can visualize this sequence as follows: \begin{center}
 		\begin{tikzcd}
@@ -702,39 +941,123 @@
 		\end{tikzcd}
 	\end{center} Here, $x_0\in\set{x\mid f(x)\neq x}$. Note that a sequence $\set{x_i}$ has a collision pair because $\abs{X}<\infty$ (feat. pigeon-hole principle).
 	
-	\begin{tcolorbox}[colback=white]
-		\textbf{Theorem 5.1}\quad
-		In a sequence $\set{x_i}$, $\exists k$ such that $x_k=x_{2k}$. \[
-		x_0\xrightarrow{f}x_1\xrightarrow{f}x_2\xrightarrow{f}x_3\xrightarrow{f}\cdots\xrightarrow{f}x_k\xrightarrow{f}\cdots\xrightarrow{f}x_{2k}(=x_k)\xrightarrow{f}\cdots.
+	\newpage
+	\begin{tcolorbox}[colback=white,colframe=thmcolor,arc=5pt,title={\color{white}\bf }]
+		\begin{theorem}
+			Define a sequence $\set{x_i}$ as follows: \[
+			x_{i+1}:=f\of{x_i}
+			\] Then $\exists k>i$ such that $x_k=x_{2k}$:
+			\begin{center}
+			\begin{tikzcd}
+				\cdots \arrow[r, "f"] & x_i \arrow[r, "f"] & x_{i+1} \arrow[r, "f"] & \cdots \arrow[r, "f"] & x_k(=x_{2k}) \arrow[d, "f"] \\
+				&                    & x_j \arrow[u, "f"]     &                       & \cdots \arrow[ll, "f"]     
+			\end{tikzcd}
+			\end{center}
+		\end{theorem}
+	\end{tcolorbox}
+	\begin{proof}
+		Let $(x_i, x_j)$ be a collision pair with $0\leq i< j\leq N\of{=O\of{\sqrt{2^n}}}$; that is, $\exists x_i,x_j$ such that $x_i\neq x_j$ but $f(x_i)=f(x_j)$, so 
+		\begin{center}
+		\begin{tikzcd}
+			\cdots \arrow[r, "f"] & x_i \arrow[r, "f"] & x_{i+1} \arrow[r, "f"] & \cdots \arrow[d, "f"] \\
+			&                    & x_j \arrow[u, "f"]     & \cdots \arrow[l, "f"]
+		\end{tikzcd}
+		\end{center}
+		For $j>i$, we have a circular sequence \[
+		\set{x_j}_{j>i}:\quad x_j,x_{i+1},x_{i+2},\cdots, x_{i+(j-i)}(=x_j),\cdots
+		\] with the period $p=j-i>0$. That is, \[
+		x_j = x_{j+t\cdot p}\quad\text{with}\quad t\in\Z_{\geq 0}.
 		\]
-		\tcblower\begin{proof}
-			For $N=O(\sqrt{2^n})$, let $(x_i, x_j)$ is a collision pair with $0\leq i< j\leq N$; that is, $x_i\neq x_j$ but $f(x_i)=f(x_j)$, so \[
-			x_i\xrightarrow{f}x_{i+1}\xrightarrow{f}\cdots\xrightarrow{f}x_j\xrightarrow{f}x_{i+1}.
-			\] For $j>i$, then,  \[
-			\set{x_j}:\quad x_j,x_{i+1},x_{i+2},\cdots, x_{i+(j-i)}(=x_j),\cdots
-			\]  is a circular sequence with the period $p=j-i$, And then \begin{center}
-				\begin{tikzcd}
-					i-\text{index}\operatorname{:} \arrow[d, "\text{Changing index}" description] & x_{i+1} \arrow[r, "f"]   & x_{i+2} \arrow[r, "f"] & \cdots \arrow[r, "f"]       & x_{i+(j-i)}=x_{i+p} \arrow[lll, "f"', bend right=49, shift right] \\
-					j-\text{index}\operatorname{:}                                                & x_{j+1} \arrow[r, "f"]   & x_{j+2} \arrow[r, "f"] & \cdots \arrow[r, "f"]       & \mathcolorbox{-blue}{x_{j+p}} \arrow[d, "f"']                                           \\
-					& \mathcolorbox{-blue}{x_{j+2p}} \arrow[d, "f"'] & \cdots \arrow[l, "f"'] & x_{j+(p+2)} \arrow[l, "f"'] & x_{j+(p+1)} \arrow[l, "f"']                                       \\
-					& \mathcolorbox{-blue}{x_{j+3p}} \arrow[r, "f"]  & \cdots \arrow[r, "f"]  & \mathcolorbox{-red}{x_{j+\alpha\cdot p}} \arrow[r, "f"]     & \cdots                                                           
-				\end{tikzcd}
-			\end{center}\ \\ \ie, \[
-			x_j=x_{j+\alpha\cdot p}\quad\text{with}\quad \alpha\in\mathbb{Z}_{\geq 0}.
-			\] Define \[
-			k:=\min\set{t\cdot p\in\mathbb{Z}_{>i}:t\in\mathbb{Z}}>i.
-			\] In other words, $k(>i)$ is the minimal multiple of $p$. Then \[
-			p\mid k \implies p\mid 2k
-			\] because \[
-			k=tp\implies 2k=(2t)p
-			\] for some $t\in\mathbb{Z}$. Thus, $\exists k$ such that $x_k=x_{2k}$.
-		\end{proof}
-	\end{tcolorbox} By the Theorem 5.1, $\exists k$ such that $x_k=x_{2k}$. Since \begin{align*}
-	x_k=f(x_{k-1}),\quad x_{2k}=f(x_{2k-1}),
-	\end{align*} by the definition of $\set{x_j}$, then, we obtain $f(x_{k-1})=f(x_{2k-1})$. But $(x_{k-1},x_{2k-1})$ may not be a collision pair. \textcolor{blue}{Let $x_\alpha$ is the \underline{initial term} of a circular sequence $\set{x_j}$.} Since $k$ is a multiple of the period $p$ of $\set{x_j}$, we see that \begin{align*}
-	x_\alpha&=x_{\alpha+k},\\
-	f(x_{\alpha-1})&=f(x_{\alpha+k-1})\quad\text{by the def. of $\set{x_j}$},\\
-	\end{align*} and so $(x_{\alpha-1},x_{\alpha+k-1})$ is a clear collision pair.
+		Define a number \[
+		k:=\min\set{tp\in\mathbb{Z}_{>i}:t\in\mathbb{N}}>i.
+		\] In other words, $k$ is the smallest multiple greater than $i$ of the period $p$. Since
+		$p\mid k \implies p\mid 2k$, the equality $x_k=x_{2k}$ holds.
+	\end{proof}
+	\vspace{8pt}
+	\begin{remark}
+		We know that $\exists k>i$ such that $x_k=x_{2k}$. Since \begin{align*}
+			x_k=f(x_{k-1}),\quad x_{2k}=f(x_{2k-1}),
+		\end{align*} by the definition of $\set{x_j}$, then, we obtain $f(x_{k-1})=f(x_{2k-1})$. But $(x_{k-1},x_{2k-1})$ may not be a collision pair. \textcolor{blue}{Let $x_\alpha$ is the \underline{initial term} of a circular sequence $\set{x_j}$.} Since $k$ is a multiple of the period $p$ of $\set{x_j}$, we see that \begin{align*}
+			x_\alpha&=x_{\alpha+k},\\
+			f(x_{\alpha-1})&=f(x_{\alpha+k-1})\quad\text{by the def. of $\set{x_j}$},\\
+		\end{align*} and so $(x_{\alpha-1},x_{\alpha+k-1})$ is a clear collision pair.
+	\end{remark}
+
+	\newpage
+	%\SetKwComment{Comment}{/* }{ */}
+	\begin{algorithm}[H]
+		\caption{Finding Collision: Small-Space Attack}
+		\KwData{One-way function $\hash:\set{0,1}^*\to\set{0,1}^n$.}
+		\KwResult{Collision pair $(x,x')$ such that $x\neq x'$ but $\hash\of{x}=\hash\of{x'}$.}
+		\vspace{4pt}
+		\vspace{4pt}
+		\Comment{Step1: We discover $k$ such that $x_k=x_{2k}$}
+		\vspace{4pt}
+		$x_0\uniform\set{0,1}^{n+1}$ \tcp*{$x_0\notin\img\hash$ is the start node}
+		\vspace{4pt}
+		$\of{x,x'}\gets\of{x_0,x_0}$\;
+		\vspace{4pt}
+		$k\gets 0$\;
+		\vspace{4pt}
+		\While{\texttt{True}}{
+			$k\gets k+1$\;
+			$\of{x,x'}\gets\of{H\of{x},\of{H\circ H}\of{x}}$\;
+			\If{$x=x'$}{
+				\Break\;
+			}
+		}
+	\vspace{4pt}
+		\Comment{Step2: Using $(x_0, x_k)$ obtained in Step1, we find the collision pair}
+		\vspace{4pt}
+		$\of{x,x'}\gets\of{x_0,x'}$\;
+		\vspace{4pt}
+		\For{$i\leftarrow 1$ \KwTo $k$}{
+			\eIf{$\hash\of{x}=\hash\of{x'}$}{
+				\Return $\of{x,x'}$
+			}{
+				$\of{x,x'}\gets\of{\hash\of{x},\hash\of{x'}}$\;
+			}
+		}
+	\end{algorithm}
+
+\newpage
+	\begin{lstlisting}[style=sage, caption={Small-Sapce Attack (Sage)},captionpos=t]
+N = 2^13 - 1 #12-bit
+n = floor(sqrt(N))
+print("N = {}\nn = floor(sqrt N) = {}\n".format(N,n))
+
+def f(x):
+	return (x^2 + 1) % N
+
+# Step 1: Discover k such that x_k = x_{2k}
+x0 = ZZ.random_element(N, 2*N) #x0 is the start node
+x1, x2 = x0, x0
+k = 0
+while True :
+	k = k + 1
+	x1, x2 = f(x1), f(f(x2))
+	if x1 == x2 :
+		print ("k = {}, 2k = {}".format(k, 2*k))
+		break
+
+# Step 2: Find the collision pair
+x1 , x2 = x0, x2
+for i in [0..k]:
+	if f(x1) == f(x2):
+		print("Collision: ({}-th elt = {}, {}-th elt = {}) ".format(i, x1, k+i, x2))
+		break
+	else :
+		x1, x2 = f(x1), f(x2)
+
+L = [(0, x0)]
+for j in [1..2*k]:
+L = L + [(j, f(L[j-1][1]))]
+
+# list_plot(L)
+
+for pair in L:
+print(pair)
+	\end{lstlisting}
 	\iffalse
 	\newpage
 	\begin{tcolorbox}[title=\textbf{Algorithm.}\ Small-Space Attack, coltitle=black, colback=white,colframe=-red, breakable, enhanced]
