@@ -125,7 +125,7 @@
 
 %Theorem
 \newtheorem{axiom}{Axiom}[chapter]
-\newtheorem{theorem}{Theorem}
+\newtheorem{theorem}{Theorem}[chapter]
 \newtheorem{proposition}[theorem]{Proposition}
 \newtheorem{corollary}{Corollary}[theorem]
 \newtheorem{lemma}[theorem]{Lemma}
@@ -159,6 +159,7 @@
 \newcommand{\sol}{\textcolor{magenta}{\bf Sol}}
 
 \newcommand{\img}{\operatorname{\textnormal{Img}}}
+\newcommand{\id}{\operatorname{\textnormal{Id}}}
 
 \newcommand{\dollar}{\$}
 \newcommand{\uniform}{\xleftarrow{\dollar}}
@@ -1058,65 +1059,48 @@ L = L + [(j, f(L[j-1][1]))]
 for pair in L:
 print(pair)
 	\end{lstlisting}
-	\iffalse
+
 	\newpage
-	\begin{tcolorbox}[title=\textbf{Algorithm.}\ Small-Space Attack, coltitle=black, colback=white,colframe=-red, breakable, enhanced]
-		\textbf{Input:} $\Hash:\set{0,1}^*\to\set{0,1}^n$\\
-		\textbf{Output:} $(x,x')$ such that $x\neq x'$ but $\Hash(x)=\Hash(x')$ \begin{enumerate}[$1$:]
-			\item[] \textcolor{gray}{\code{\slash\slash\quad Step1: Finding $k$ such that $x_k=x_{2k}$.}}
-			\item $x_0\uniform\set{0,1}^{n+1}$\quad \textcolor{gray}{\code{\slash\slash\quad $x_0$ is start node.}}
-			\item $(x,x')\from (x_0,x_0)$
-			\item $k\from0$
-			\item \code{while TRUE do}
-			\item \qquad $k\from k+1$
-			\item \qquad $(x,x')\from \left(\Hash(x), (\Hash\circ \Hash)(x')\right)$
-			\item \qquad\code{if $x=x'$ then}
-			\item \qquad\qquad\code{BREAK}
-			\item \qquad\code{end if}
-			\item \code{end while}\\
-			\textcolor{gray}{\slash*------------------------------------------------------------------------------------------------------\\
-				<Detail for 1-10 line>: \begin{center}
-					\begin{tabular}{c|||c||c||c||c||c||c||c||c||c||c||c||c}
-						\toprule[1.5pt]
-						Parameters & 1-3 line & \multicolumn{7}{c}{4-10 line} \\
-						\midrule
-						$k$ & $0$ &$\xrightarrow{+1}$ & $1$ &$\xrightarrow{+1}$& $2$ & $\cdots$& $j$& $\cdots$&$\xrightarrow{+1}$& $k$\\
-						$x$ & $x_0$ &$\xrightarrow{\Hash}$& $x_1$ &$\xrightarrow{\Hash}$& $x_2$&  $\cdots$& $x_j$& $\cdots$&$\xrightarrow{\Hash}$&$x_k$\\
-						$x'$ & $x_0$ &$\xrightarrow{\Hash\circ\Hash}$& $x_2$ &$\xrightarrow{\Hash\circ\Hash}$& $x_4$& $\cdots$& $x_{2j}$& $\cdots$&$\xrightarrow{\Hash\circ\Hash}$& $x_{2k}$\\
-						\bottomrule[1.5pt]
-					\end{tabular}
-				\end{center} Here, $x_j$ or $x_{2j}$ is the initial term of a circular sequence $\set{x_j}$. Clearly, both $j$ and $2j$ are less than $k$.
-				\\ ------------------------------------------------------------------------------------------------------*\slash}
-			\item[]
-			\textcolor{gray}{\code{\slash\slash\quad Step2: Using $(x_0, x_k)$ obtaining in Step 1, we find the collision pair.}}
-			\item $(x,x')\from(x_0,x)$\quad \textcolor{gray}{\code{\slash\slash\quad $(x,x')\from(x_0,x)=(x_0,x_k)$.}}
-			\item \code{for $i\from1$ to $k$ do}
-			\item \qquad\text{if $\Hash(x)=\Hash(x')$ then}
-			\item \qquad\qquad\code{return $(x,x')$}
-			\item \qquad\code{else}
-			\item \qquad\qquad{$(x,x')\from\left(\Hash(x),\Hash(x')\right)$}
-			\item \qquad\code{end if}
-			\item \code{end for}\\
-			\newpage
-			\textcolor{gray}{\slash*------------------------------------------------------------------------------------------------------\\
-				<Detail for 11-18 line>: \begin{center}
-					\begin{tabular}{c||cc|cc||c}
-						\toprule[1.5pt]
-						$i$ & $x$ & $x'$&$\Hash(x)$& $\Hash(x')$ & Check the collision pair.\\
-						\midrule
-						$1$& $x_0$& $x_k$ &$x_1$&$x_{k+1}$&-\\
-						\hline
-						$2$& $x_1$& $x_{k+1}$ &$x_2$&$x_{k+2}$&-\\
-						\hline
-						$\vdots$& $\vdots$& $\vdots$ &$\vdots$&$\vdots$&\vdots\\
-						\hline
-						{$j$} & $x_{j-1}$& $x_{j+(k-1)}$ &$x_j$&$x_{k+j}$&{Either $(x_{j-1},x_{j+(k-1)})$ or $(x_{2j-1},x_{2j+(k-1)})$}\\
-						{$2j$} & $x_{2j-1}$& $x_{2j+(k-1)}$ &$x_{2j}$&$x_{k+2j}$& is a collision pair!\\
-						\bottomrule[1.5pt]
-					\end{tabular}
-				\end{center} ------------------------------------------------------------------------------------------------------*\slash}
-		\end{enumerate}
+	\section{Fermat Factorization}
+	\begin{tcolorbox}[colback=white,colframe=lemcolor,arc=5pt,title={\color{white}\bf }]
+		\begin{lemma}
+			Let $n\in 2\Z+1$. Define two sets: \begin{align*}
+				S_n&:=\set{(a,b)\in\Z^2:n=ab\ \text{with}\ 0<b\leq a},\\
+				T_n&:=\set{\of{u^2,v^2}\in\Z^2:n=u^2+v^2}.
+			\end{align*} Then $\exists\phi:S_n\leftrightarrow T_n$. In other words, there exists a one-to-one correspondence between factorizations of $n$ into two positive integers and differences of two squares that equal $n$.
+		\end{lemma}
 	\end{tcolorbox}
-	\fi
+	\begin{proof}
+		Define two functions: \begin{align*}
+			f:S_n\to T_n&:f\of{\of{a,b}}=\of{\of{\frac{a+b}{2}}^2,\of{\frac{a-b}{2}}^2},\\
+			g:T_n\to S_n&:g\of{\of{u^2,v^2}}=\of{\abs{u}+\abs{v},\abs{u}-\abs{v}}.
+		\end{align*} We claim that $g\circ f=\id_{S_n}$ and $f\circ g=\id_{T_n}$:\begin{align*}
+		\of{g\circ f}(a,b)&=g\of{\of{\frac{a+b}{2}}^2,\of{\frac{a-b}{2}}^2}=\of{\abs{\frac{a+b}{2}}+\abs{\frac{a-b}{2}},\abs{\frac{a+b}{2}}-\abs{\frac{a-b}{2}}}\\
+		&=\of{{\frac{a+b}{2}}+{\frac{a-b}{2}},{\frac{a+b}{2}}-{\frac{a-b}{2}}}\\
+		&=\of{a,b},\\
+		\of{f\circ g}\of{u^2,v^2}&=f\of{\abs{u}+\abs{v},\abs{u}-\abs{v}}=\of{\abs{u}^2,\abs{v}^2}=\of{u^2,v^2}.
+	\end{align*}
+	\end{proof}
+
+To solve $3x\equiv 1\pmod{28}$, we need to find a value of $x$ such that $3x$ leaves a remainder of $1$ when divided by $28$. In other words, we need to find an integer $x$ such that $3x = 1 + 28k$ for some integer $k$.
+
+We can start by multiplying both sides of the congruence by the inverse of $3$ modulo $28$. Since $3$ and $28$ are relatively prime, $3$ has an inverse modulo $28$. We can find it using the Euclidean algorithm:
+
+\begin{align*}
+	28 &= 3\times 9 + 1 \\
+	1 &= 28 - 3\times 9
+\end{align*}
+
+Therefore, $1$ is the inverse of $3$ modulo $28$. Multiplying both sides of the congruence by $1$ gives:
+
+\begin{align*}
+	3x &\equiv 1\pmod{28} \\
+	\Rightarrow \quad 1\times 3x &\equiv 1\times 1\pmod{28} \\
+	\Rightarrow \quad x &\equiv 3^{-1}\pmod{28} \\
+	\Rightarrow \quad x &\equiv 9\pmod{28}
+\end{align*}
+
+Therefore, the solution to the congruence $3x\equiv 1\pmod{28}$ is $x\equiv 9\pmod{28}$. We can check this solution by verifying that $3\times 9\equiv 1\pmod{28}$.
+
 	% End document
 \end{document}
