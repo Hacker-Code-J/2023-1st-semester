@@ -103,6 +103,8 @@
 \usepackage{algpseudocode}
 \SetKwComment{Comment}{/* }{ */}
 \SetKw{Break}{break}
+\SetKwProg{Fn}{Function}{:}{end}
+\SetKwFunction{KeyGen}{KeyGen}
 
 
 %---------------------------My Preamble
@@ -165,6 +167,7 @@
 \newcommand{\uniform}{\xleftarrow{\dollar}}
 \newcommand{\hash}{\mathsf{H}}
 
+\renewcommand{\mod}{\operatorname{\textnormal{mod}}}
 % Begin document
 \begin{document}
 	
@@ -305,15 +308,15 @@
 		\begin{theorem}
 			Given a system of linear congruences with pairwise relatively prime moduli:
 			\begin{align*}
-				x&\equiv a_1 \pmod{m_1}\\
-				x&\equiv a_2 \pmod{m_2}\\
-				&\vdots \\
-				x&\equiv a_n \pmod{m_1},
+			x&\equiv a_1 \pmod{m_1}\\
+			x&\equiv a_2 \pmod{m_2}\\
+			&\vdots \\
+			x&\equiv a_n \pmod{m_1},
 			\end{align*}
 			
 			there exists a unique solution $x$ modulo $M = m_1m_2\cdots m_n$:
 			\begin{align*}
-				x&\equiv a_1b_1M_1+a_2b_2M_2+\cdots a_nb_nM_n\pmod{M}, \ie,\\ x&\equiv\sum_{i=1}^{n}a_ib_iM_i\pmod{M}
+			x&\equiv a_1b_1M_1+a_2b_2M_2+\cdots a_nb_nM_n\pmod{M}, \ie,\\ x&\equiv\sum_{i=1}^{n}a_ib_iM_i\pmod{M}
 			\end{align*}\[
 			\] where $M_i=M/m_i$ and $b_i$ is the inverse of $M_i$ modulo $m_i$.
 		\end{theorem}
@@ -592,7 +595,7 @@
 		Let $n \geq n_0$. Then we can write $n$ as $n = n_0 + k$ for some non-negative integer $k$. Now, consider $(n_0 + k)!$. By the definition of the factorial, we have:
 		
 		\begin{align*}
-			(n_0 + k)! &= (n_0 + k)(n_0 + k - 1) \cdots (n_0 + 1)n_0!
+		(n_0 + k)! &= (n_0 + k)(n_0 + k - 1) \cdots (n_0 + 1)n_0!
 		\end{align*}
 		
 		Since $n_0! \equiv 0 \pmod{p-1}$ and $p-1$ divides each of the factors $(n_0 + k), (n_0 + k - 1), \ldots, (n_0 + 1)$ exactly once, we have $(n_0 + k)! \equiv 0 \pmod{p-1}$. Therefore, $p-1$ divides $(n_0 + k)!$, which is equivalent to $n!$.
@@ -603,30 +606,30 @@
 	\begin{proof}
 		Let $N = pq$, where $p$ and $q$ are prime numbers, and let $a$ be an integer such that $\gcd(a, p) = 1$. We want to prove that
 		\begin{equation} \label{eq:congruence}
-			(a^{(j+1)!} - 1) \mod N = (a^{j!} \mod N)^{j+1} \mod N - 1.
+		(a^{(j+1)!} - 1) \mod N = (a^{j!} \mod N)^{j+1} \mod N - 1.
 		\end{equation}
 		
 		To prove this, we can use the following properties of modular arithmetic:
 		\begin{align}
-			(ab) \mod N &\equiv (a \mod N)(b \mod N) \mod N, \label{eq:mod_product} \\
-			(a^b) \mod N &\equiv ((a \mod N)^b) \mod N. \label{eq:mod_power}
+		(ab) \mod N &\equiv (a \mod N)(b \mod N) \mod N, \label{eq:mod_product} \\
+		(a^b) \mod N &\equiv ((a \mod N)^b) \mod N. \label{eq:mod_power}
 		\end{align}
 		
 		We start by calculating $(a^{j!} \mod N)^{j+1} \mod N$. By applying property \eqref{eq:mod_power}, we have
 		\begin{equation} \label{eq:step1}
-			(a^{j!} \mod N)^{j+1} \mod N \equiv a^{j!(j+1)} \mod N.
+		(a^{j!} \mod N)^{j+1} \mod N \equiv a^{j!(j+1)} \mod N.
 		\end{equation}
 		
 		Next, we calculate $(a^{(j+1)!} - 1) \mod N$. Since $(j+1)! = (j+1)j!$, we have
 		\begin{equation} \label{eq:step2}
-			(a^{(j+1)!} - 1) \mod N \equiv (a^{(j+1)j!} - 1) \mod N.
+		(a^{(j+1)!} - 1) \mod N \equiv (a^{(j+1)j!} - 1) \mod N.
 		\end{equation}
 		
 		Now we need to show that the right-hand sides of \eqref{eq:step1} and \eqref{eq:step2} are congruent modulo $N$. To do this, we use the property \eqref{eq:mod_product}:
 		\begin{align*}
-			(a^{(j+1)j!} - 1) \mod N &\equiv (a^{j!(j+1)} - 1) \mod N \\
-			&\equiv ((a^{j!})^{j+1} - 1) \mod N \\
-			&\equiv (a^{j!(j+1)} \mod N - 1) \mod N,
+		(a^{(j+1)j!} - 1) \mod N &\equiv (a^{j!(j+1)} - 1) \mod N \\
+		&\equiv ((a^{j!})^{j+1} - 1) \mod N \\
+		&\equiv (a^{j!(j+1)} \mod N - 1) \mod N,
 		\end{align*}
 		where the last step follows from property \eqref{eq:mod_product}.
 		
@@ -639,21 +642,21 @@
 		
 		By the definition of modulo, we have
 		\begin{align*}
-			a &\equiv a_1 \pmod{N}, \\
-			b &\equiv b_1 \pmod{N},
+		a &\equiv a_1 \pmod{N}, \\
+		b &\equiv b_1 \pmod{N},
 		\end{align*}
 		for some integers $a_1$ and $b_1$ such that $a \equiv a_1 \pmod{N}$ and $b \equiv b_1 \pmod{N}$.
 		
 		Then, $a = a_1 + k_1N$ and $b = b_1 + k_2N$ for some integers $k_1$ and $k_2$. Therefore,
 		\begin{align*}
-			ab &= (a_1 + k_1N)(b_1 + k_2N) \\
-			&= a_1b_1 + a_1k_2N + b_1k_1N + k_1k_2N^2 \\
-			&= a_1b_1 + (a_1k_2 + b_1k_1 + k_1k_2N)N.
+		ab &= (a_1 + k_1N)(b_1 + k_2N) \\
+		&= a_1b_1 + a_1k_2N + b_1k_1N + k_1k_2N^2 \\
+		&= a_1b_1 + (a_1k_2 + b_1k_1 + k_1k_2N)N.
 		\end{align*}
 		
 		Since $a_1k_2 + b_1k_1 + k_1k_2N$ is an integer, we have $ab \equiv a_1b_1 \pmod{N}$. But $a_1 \equiv a \pmod{N}$ and $b_1 \equiv b \pmod{N}$, so we can rewrite the congruence as
 		\begin{align*}
-			(ab) \mod N &\equiv (a \mod N)(b \mod N) \mod N.
+		(ab) \mod N &\equiv (a \mod N)(b \mod N) \mod N.
 		\end{align*}
 		This completes the proof.
 	\end{proof}
@@ -663,7 +666,7 @@
 		
 		By the definition of modulo, we have
 		\begin{align*}
-			a &\equiv a_1 \pmod{N},
+		a &\equiv a_1 \pmod{N},
 		\end{align*}
 		for some integer $a_1$ such that $a \equiv a_1 \pmod{N}$.
 		
@@ -673,27 +676,27 @@
 	\begin{proof}
 		We want to prove that for any integers $a$, $b$, and $N$ with $N > 0$, the following property holds:
 		\begin{equation} \label{eq:mod_power}
-			(a^b) \mod N \equiv ((a \mod N)^b) \mod N.
+		(a^b) \mod N \equiv ((a \mod N)^b) \mod N.
 		\end{equation}
 		
 		By the definition of congruence, there exists an integer $k$ such that $a = kN + r$, where $r = a \mod N$. Then, we have
 		\begin{equation} \label{eq:mod_rep}
-			a \equiv r \pmod{N}.
+		a \equiv r \pmod{N}.
 		\end{equation}
 		
 		Now, we raise both sides of \eqref{eq:mod_rep} to the power $b$ and obtain
 		\begin{equation} \label{eq:mod_power_step1}
-			a^b \equiv r^b \pmod{N}.
+		a^b \equiv r^b \pmod{N}.
 		\end{equation}
 		
 		Taking both sides of \eqref{eq:mod_power_step1} modulo $N$, we have
 		\begin{equation} \label{eq:mod_power_step2}
-			(a^b) \mod N \equiv (r^b) \mod N.
+		(a^b) \mod N \equiv (r^b) \mod N.
 		\end{equation}
 		
 		Since $r = a \mod N$, we can rewrite \eqref{eq:mod_power_step2} as
 		\begin{equation} \label{eq:mod_power_step3}
-			(a^b) \mod N \equiv ((a \mod N)^b) \mod N.
+		(a^b) \mod N \equiv ((a \mod N)^b) \mod N.
 		\end{equation}
 		
 		Thus, we have shown that the property $(a^b) \mod N \equiv ((a \mod N)^b) \mod N$ holds, which completes the proof.
@@ -702,7 +705,7 @@
 	
 	\chapter{Pollard $\rho$ Method}
 	\section{Birthday Attack}
-		
+	
 	The birthday problem (also known as the birthday paradox) is a famous problem in probability theory that demonstrates the surprising fact that, in a group of just 23 people, there is a greater than 50\% chance that at least two of them share the same birthday. It is based on the assumption that birthdays are uniformly distributed throughout the year (ignoring leap years).
 	
 	\subsection{Birthday Bound}
@@ -711,82 +714,82 @@
 	\] Let $P(n)$ be the probability that at least two people share a birthday: \[
 	P\of{n}:=\Pr\left[\exists (i,j):i\neq j\Rightarrow a_i=a_j\right].
 	\] To calculate this probability, let $P'\of{n}:=1-P\of{n}$ then \begin{align*}
-		P'\of{n}&=1-\Pr\left[\exists (i,j):i\neq j\Rightarrow a_i=a_j\right]\\
-		&=\Pr\left[\lnot\of{\exists (i,j):i\neq j\Rightarrow a_i=a_j}\right]\\
-		&=\Pr\left[\forall(i,j):i\neq j\land a_i\neq a_j\right].
+	P'\of{n}&=1-\Pr\left[\exists (i,j):i\neq j\Rightarrow a_i=a_j\right]\\
+	&=\Pr\left[\lnot\of{\exists (i,j):i\neq j\Rightarrow a_i=a_j}\right]\\
+	&=\Pr\left[\forall(i,j):i\neq j\land a_i\neq a_j\right].
 	\end{align*}
 	That is, $P' (n)$ be the probability that all $n$ birthdays are unique.
 	
 	Assuming there are 365 possible birthdays, the probability that the first person has a unique birthday is:
 	\begin{equation*}
-		P'_1 = \frac{365}{365} = 1.
+	P'_1 = \frac{365}{365} = 1.
 	\end{equation*}
 	
 	For the second person to have a unique birthday (different from the first person), there are 364 remaining possibilities:
 	\begin{equation*}
-		P'_2 = \frac{364}{365}.
+	P'_2 = \frac{364}{365}.
 	\end{equation*}
 	
 	For the third person to have a unique birthday (different from the previous two), there are 363 remaining possibilities:
 	\begin{equation*}
-		P'_3 = \frac{363}{365}.
+	P'_3 = \frac{363}{365}.
 	\end{equation*}
 	
 	Following this pattern, the probability that all $n$ birthdays are unique is:
 	\begin{equation*}
-		P'(n) = \frac{365}{365} \times \frac{364}{365} \times \cdots \times \frac{365 - (n - 1)}{365}.
+	P'(n) = \frac{365}{365} \times \frac{364}{365} \times \cdots \times \frac{365 - (n - 1)}{365}.
 	\end{equation*}
 	
 	Thus, the probability that at least two people share a birthday is:
 	
 	\begin{equation*}
-		P(n) = 1 - P'(n)=1-\of{\frac{365}{365}}\of{\frac{364}{365}}\cdots\of{\frac{365-(n-1)}{365}}.
+	P(n) = 1 - P'(n)=1-\of{\frac{365}{365}}\of{\frac{364}{365}}\cdots\of{\frac{365-(n-1)}{365}}.
 	\end{equation*}
-
+	
 	\begin{tcolorbox}[colback=white,colframe=procolor,arc=5pt,title={\color{white}\bf Generalization of Birthday Problem}]
 		\begin{proposition}
 			Assume all birthday are equally likely, and generalize the problem a little: \textnormal{from $n$ possible birthdays, sample $k$ times with replacement}. \begin{align*}
-				P(\textnormal{a shared birthday})&=1-P(\textnormal{no shared birthdays})\\
-				&=1-P(\textnormal{all birthdays are unique})\\
-				&=1-\of{\frac{n}{n}}\of{\frac{n-1}{n}}\cdots\of{\frac{n-(k-1)}{n}}\\
-				&=1-1\cdot \prod_{i=1}^{k-1}\frac{n-i}{n}\\
-				&=1-\prod_{i=1}^{k-1}\of{1-\frac{i}{n}}.
+			P(\textnormal{a shared birthday})&=1-P(\textnormal{no shared birthdays})\\
+			&=1-P(\textnormal{all birthdays are unique})\\
+			&=1-\of{\frac{n}{n}}\of{\frac{n-1}{n}}\cdots\of{\frac{n-(k-1)}{n}}\\
+			&=1-1\cdot \prod_{i=1}^{k-1}\frac{n-i}{n}\\
+			&=1-\prod_{i=1}^{k-1}\of{1-\frac{i}{n}}.
 			\end{align*}
 		\end{proposition}
 	\end{tcolorbox}
-
+	
 	\newpage
 	\begin{remark}
 		When $n=365$, the lowest $k$ for which the above exceeds $0.5$ is $k=23$: \begin{figure}[ht!]
 			\centering
-			\includegraphics[width=0.95\linewidth,height=95mm]{birthday_problem.png}
+			%\includegraphics[width=0.95\linewidth,height=95mm]{birthday_problem.png}
 		\end{figure}
 		\begin{lstlisting}[style=sage, caption={Birthday Bound (Sage)},captionpos=t]
-import matplotlib.pyplot as plt
-
-# Define a function to compute the probability of two people sharing a birthday for a given group size
-def birthday_prob(n):
-	return 1 - prod([(365-i)/365 for i in range(n)])
-
-# Create a list of group sizes from 2 to 50
-group_sizes = range(2, 51)
-
-# Compute the probabilities for each group size
-probabilities = [birthday_prob(n) for n in group_sizes]
-
-# Plot the probabilities as a function of group size
-plt.plot(group_sizes, probabilities)
-plt.xlabel("Group Size")
-plt.ylabel("Probability")
-plt.title("Probability of Two People Sharing a Birthday")
-
-# Add a horizontal line at the probability of 0.5
-plt.axhline(y=0.5, color='r', linestyle='-')
-
-plt.show()
+		import matplotlib.pyplot as plt
+		
+		# Define a function to compute the probability of two people sharing a birthday for a given group size
+		def birthday_prob(n):
+		return 1 - prod([(365-i)/365 for i in range(n)])
+		
+		# Create a list of group sizes from 2 to 50
+		group_sizes = range(2, 51)
+		
+		# Compute the probabilities for each group size
+		probabilities = [birthday_prob(n) for n in group_sizes]
+		
+		# Plot the probabilities as a function of group size
+		plt.plot(group_sizes, probabilities)
+		plt.xlabel("Group Size")
+		plt.ylabel("Probability")
+		plt.title("Probability of Two People Sharing a Birthday")
+		
+		# Add a horizontal line at the probability of 0.5
+		plt.axhline(y=0.5, color='r', linestyle='-')
+		
+		plt.show()
 		\end{lstlisting}
 	\end{remark}
-
+	
 	\newpage
 	\begin{tcolorbox}[colback=white,colframe=thmcolor,arc=5pt,title={\color{white}\bf Birthday Bound}]
 		\begin{theorem}
@@ -799,25 +802,25 @@ plt.show()
 	\end{tcolorbox}
 	\begin{proof}
 		Note that \begin{align*}
-			P_{n,k}=1-\Pr[(i,j)\in I^2, i\neq j\implies a_i\neq a_j]=1-\prod_{i=1}^{k-1}\of{1-\frac{i}{n}}.
+		P_{n,k}=1-\Pr[(i,j)\in I^2, i\neq j\implies a_i\neq a_j]=1-\prod_{i=1}^{k-1}\of{1-\frac{i}{n}}.
 		\end{align*} Recall that Taylor series for exponential: \[
 		e^x=1+x+\frac{1}{2!}x^2+\frac{1}{3!}x^3+\cdots=\sum_{k=0}^{\infty}\frac{x^k}{k!}.
 		\] Note that $e^x\approx1+x$ for $x\in(-1,1)$:
 		\begin{figure}[ht!]
 			\centering
-			\includegraphics[scale=0.5]{approx_exp.png}
+			%\includegraphics[scale=0.5]{approx_exp.png}
 		\end{figure}\\
 		Since $i\in[1,k-1]\subseteq[1,n)\Rightarrow-\frac{i}{n}\in\of{-1,1}\Rightarrow 1+\of{-\frac{i}{n}}\approx e^{-i/n}$, we have \begin{align*}
-			P_{n,k}=
-			1-\prod_{i=1}^{k-1}\of{1-\frac{i}{n}}
-			&\approx 1-\prod_{i=1}^{k-1}e^{-\frac{i}{n}}\\
-			&=1-e^{-1/n}\cdot e^{-2/n}\cdots e^{-(k-1)/n}\\
-			&=1-e^{-\frac{1}{n}\of{1+2+\cdots+(k-1)}}\\
-			&=1-e^{-\frac{1}{n}\cdot\frac{k\of{k-1}}{2}}\\
-			&\approx 1-e^{-\frac{k^2}{2n}}.
+		P_{n,k}=
+		1-\prod_{i=1}^{k-1}\of{1-\frac{i}{n}}
+		&\approx 1-\prod_{i=1}^{k-1}e^{-\frac{i}{n}}\\
+		&=1-e^{-1/n}\cdot e^{-2/n}\cdots e^{-(k-1)/n}\\
+		&=1-e^{-\frac{1}{n}\of{1+2+\cdots+(k-1)}}\\
+		&=1-e^{-\frac{1}{n}\cdot\frac{k\of{k-1}}{2}}\\
+		&\approx 1-e^{-\frac{k^2}{2n}}.
 		\end{align*}
 	\end{proof}
-
+	
 	\begin{remark}
 		Find minimum value of $k$ such that $P_{n,k}\geq 1/2$. \begin{align*}
 		P_{n,k}=1-e^{-\frac{k^2}{2n}}\geq\frac{1}{2}&\implies e^{-k^2/2n}\leq\frac{1}{2}\\
@@ -827,14 +830,14 @@ plt.show()
 		\end{align*} 
 		Thus, $k\geq c\sqrt{n}$, where $c$ is a constant. That is, $O(\sqrt{n})$.
 	\end{remark}
-
+	
 	\begin{remark}
 		Find the upper bound of $P_{n,k}$. \begin{align*}
-			P_{n,k}
-			&=\Pr\left[(a_1=a_2)\lor\cdots\lor(a_1=a_k)\lor(a_2=a_3)\lor\cdots\lor(a_{k-1}=a_k)\right]\\
-			&\leq\sum_{1\leq i< j\leq k}\Pr\left[a_i=a_j\right]\\
-			&=\binom{k}{2}\frac{1}{n}\\
-			&\leq\frac{k^2}{2n}.
+		P_{n,k}
+		&=\Pr\left[(a_1=a_2)\lor\cdots\lor(a_1=a_k)\lor(a_2=a_3)\lor\cdots\lor(a_{k-1}=a_k)\right]\\
+		&\leq\sum_{1\leq i< j\leq k}\Pr\left[a_i=a_j\right]\\
+		&=\binom{k}{2}\frac{1}{n}\\
+		&\leq\frac{k^2}{2n}.
 		\end{align*} Thus, the upper bound of $P_{n,k}$ is less than 1/2 when $k=\floor*{\sqrt{n}}$.
 	\end{remark}
 	
@@ -871,7 +874,7 @@ plt.show()
 					$S\gets S\cup\set{y}$\;
 				}
 			}
-		\vspace{15pt}
+			\vspace{15pt}
 		\end{minipage}\hfil
 		\begin{minipage}{.45\textwidth}
 			Initialize an empty dictionary $D$\;
@@ -900,9 +903,9 @@ plt.show()
 	P\of{\textnormal{no collision for $k$ inputs}}=\prod_{i=1}^{k-1}\of{1-\frac{i}{2^n}}.
 	\]
 	Then \begin{align*}
-		\prod_{i=1}^{k-1}\of{1-\frac{i}{2^n}}\approx e^{-\frac{k^2}{2\cdot 2^n}}\geq\frac{1}{2}
-		&\implies (2\ln2)2^n\leq k^2\\
-		&\implies \sqrt{2\ln2}\sqrt{2^n}\leq k.
+	\prod_{i=1}^{k-1}\of{1-\frac{i}{2^n}}\approx e^{-\frac{k^2}{2\cdot 2^n}}\geq\frac{1}{2}
+	&\implies (2\ln2)2^n\leq k^2\\
+	&\implies \sqrt{2\ln2}\sqrt{2^n}\leq k.
 	\end{align*}
 	For $N=O(\sqrt{2^n})$, we generate the set of input/output pairs \[
 	S=\set{\of{x_i,f\of{x_i}}}_{i=1}^N.
@@ -919,12 +922,12 @@ plt.show()
 	\begin{example}
 		Consider $160$-bit output function. Then 
 		\begin{align*}
-			\text{Memory space} &= \sqrt{2^n} \times n \times 2 \\
-			&= 2^{80} \times 160 \times 2 \\
-			&= 2^{80} \times 2^5\times 5 \times 2 \\
-			&= 10\times 2^{85}\\
-			&= 10\times 2^{82} \times 2^3 (= 10\times 2^{82}\ \text{bytes})\\
-			&= 10 \times 2^{42}\ \text{TB}.
+		\text{Memory space} &= \sqrt{2^n} \times n \times 2 \\
+		&= 2^{80} \times 160 \times 2 \\
+		&= 2^{80} \times 2^5\times 5 \times 2 \\
+		&= 10\times 2^{85}\\
+		&= 10\times 2^{82} \times 2^3 (= 10\times 2^{82}\ \text{bytes})\\
+		&= 10 \times 2^{42}\ \text{TB}.
 		\end{align*}
 	\end{example}
 	
@@ -949,20 +952,20 @@ plt.show()
 			x_{i+1}:=f\of{x_i}
 			\] Then $\exists k>i$ such that $x_k=x_{2k}$:
 			\begin{center}
-			\begin{tikzcd}
-				\cdots \arrow[r, "f"] & x_i \arrow[r, "f"] & x_{i+1} \arrow[r, "f"] & \cdots \arrow[r, "f"] & x_k(=x_{2k}) \arrow[d, "f"] \\
-				&                    & x_j \arrow[u, "f"]     &                       & \cdots \arrow[ll, "f"]     
-			\end{tikzcd}
+				\begin{tikzcd}
+					\cdots \arrow[r, "f"] & x_i \arrow[r, "f"] & x_{i+1} \arrow[r, "f"] & \cdots \arrow[r, "f"] & x_k(=x_{2k}) \arrow[d, "f"] \\
+					&                    & x_j \arrow[u, "f"]     &                       & \cdots \arrow[ll, "f"]     
+				\end{tikzcd}
 			\end{center}
 		\end{theorem}
 	\end{tcolorbox}
 	\begin{proof}
 		Let $(x_i, x_j)$ be a collision pair with $0\leq i< j\leq N\of{=O\of{\sqrt{2^n}}}$; that is, $\exists x_i,x_j$ such that $x_i\neq x_j$ but $f(x_i)=f(x_j)$, so 
 		\begin{center}
-		\begin{tikzcd}
-			\cdots \arrow[r, "f"] & x_i \arrow[r, "f"] & x_{i+1} \arrow[r, "f"] & \cdots \arrow[d, "f"] \\
-			&                    & x_j \arrow[u, "f"]     & \cdots \arrow[l, "f"]
-		\end{tikzcd}
+			\begin{tikzcd}
+				\cdots \arrow[r, "f"] & x_i \arrow[r, "f"] & x_{i+1} \arrow[r, "f"] & \cdots \arrow[d, "f"] \\
+				&                    & x_j \arrow[u, "f"]     & \cdots \arrow[l, "f"]
+			\end{tikzcd}
 		\end{center}
 		For $j>i$, we have a circular sequence \[
 		\set{x_j}_{j>i}:\quad x_j,x_{i+1},x_{i+2},\cdots, x_{i+(j-i)}(=x_j),\cdots
@@ -977,13 +980,13 @@ plt.show()
 	\vspace{8pt}
 	\begin{remark}
 		We know that $\exists k>i$ such that $x_k=x_{2k}$. Since \begin{align*}
-			x_k=f(x_{k-1}),\quad x_{2k}=f(x_{2k-1}),
+		x_k=f(x_{k-1}),\quad x_{2k}=f(x_{2k-1}),
 		\end{align*} by the definition of $\set{x_j}$, then, we obtain $f(x_{k-1})=f(x_{2k-1})$. But $(x_{k-1},x_{2k-1})$ may not be a collision pair. \textcolor{blue}{Let $x_\alpha$ is the \underline{initial term} of a circular sequence $\set{x_j}$.} Since $k$ is a multiple of the period $p$ of $\set{x_j}$, we see that \begin{align*}
-			x_\alpha&=x_{\alpha+k},\\
-			f(x_{\alpha-1})&=f(x_{\alpha+k-1})\quad\text{by the def. of $\set{x_j}$},\\
+		x_\alpha&=x_{\alpha+k},\\
+		f(x_{\alpha-1})&=f(x_{\alpha+k-1})\quad\text{by the def. of $\set{x_j}$},\\
 		\end{align*} and so $(x_{\alpha-1},x_{\alpha+k-1})$ is a clear collision pair.
 	\end{remark}
-
+	
 	\newpage
 	%\SetKwComment{Comment}{/* }{ */}
 	\begin{algorithm}[H]
@@ -1007,7 +1010,7 @@ plt.show()
 				\Break\;
 			}
 		}
-	\vspace{4pt}
+		\vspace{4pt}
 		\Comment{Step2: Using $(x_0, x_k)$ obtained in Step1, we find the collision pair}
 		\vspace{4pt}
 		$\of{x,x'}\gets\of{x_0,x'}$\;
@@ -1020,87 +1023,219 @@ plt.show()
 			}
 		}
 	\end{algorithm}
-
-\newpage
+	
+	\newpage
 	\begin{lstlisting}[style=sage, caption={Small-Sapce Attack (Sage)},captionpos=t]
-N = 2^13 - 1 #12-bit
-n = floor(sqrt(N))
-print("N = {}\nn = floor(sqrt N) = {}\n".format(N,n))
-
-def f(x):
+	N = 2^13 - 1 #12-bit
+	n = floor(sqrt(N))
+	print("N = {}\nn = floor(sqrt N) = {}\n".format(N,n))
+	
+	def f(x):
 	return (x^2 + 1) % N
-
-# Step 1: Discover k such that x_k = x_{2k}
-x0 = ZZ.random_element(N, 2*N) #x0 is the start node
-x1, x2 = x0, x0
-k = 0
-while True :
+	
+	# Step 1: Discover k such that x_k = x_{2k}
+	x0 = ZZ.random_element(N, 2*N) #x0 is the start node
+	x1, x2 = x0, x0
+	k = 0
+	while True :
 	k = k + 1
 	x1, x2 = f(x1), f(f(x2))
 	if x1 == x2 :
-		print ("k = {}, 2k = {}".format(k, 2*k))
-		break
-
-# Step 2: Find the collision pair
-x1 , x2 = x0, x2
-for i in [0..k]:
+	print ("k = {}, 2k = {}".format(k, 2*k))
+	break
+	
+	# Step 2: Find the collision pair
+	x1 , x2 = x0, x2
+	for i in [0..k]:
 	if f(x1) == f(x2):
-		print("Collision: ({}-th elt = {}, {}-th elt = {}) ".format(i, x1, k+i, x2))
-		break
+	print("Collision: ({}-th elt = {}, {}-th elt = {}) ".format(i, x1, k+i, x2))
+	break
 	else :
-		x1, x2 = f(x1), f(x2)
-
-L = [(0, x0)]
-for j in [1..2*k]:
-L = L + [(j, f(L[j-1][1]))]
-
-# list_plot(L)
-
-for pair in L:
-print(pair)
+	x1, x2 = f(x1), f(x2)
+	
+	L = [(0, x0)]
+	for j in [1..2*k]:
+	L = L + [(j, f(L[j-1][1]))]
+	
+	# list_plot(L)
+	
+	for pair in L:
+	print(pair)
 	\end{lstlisting}
-
+	
 	\newpage
 	\section{Fermat Factorization}
+	\subsection{Fermat Factorization ($N=b^2-a^2$)}
 	\begin{tcolorbox}[colback=white,colframe=lemcolor,arc=5pt,title={\color{white}\bf }]
 		\begin{lemma}
 			Let $n\in 2\Z+1$. Define two sets: \begin{align*}
-				S_n&:=\set{(a,b)\in\Z^2:n=ab\ \text{with}\ 0<b\leq a},\\
-				T_n&:=\set{\of{u^2,v^2}\in\Z^2:n=u^2+v^2}.
+			S_n&:=\set{(a,b)\in\Z^2:n=ab\ \text{with}\ 0<b\leq a},\\
+			T_n&:=\set{\of{u^2,v^2}\in\Z^2:n=u^2+v^2}.
 			\end{align*} Then $\exists\phi:S_n\leftrightarrow T_n$. In other words, there exists a one-to-one correspondence between factorizations of $n$ into two positive integers and differences of two squares that equal $n$.
 		\end{lemma}
 	\end{tcolorbox}
 	\begin{proof}
 		Define two functions: \begin{align*}
-			f:S_n\to T_n&:f\of{\of{a,b}}=\of{\of{\frac{a+b}{2}}^2,\of{\frac{a-b}{2}}^2},\\
-			g:T_n\to S_n&:g\of{\of{u^2,v^2}}=\of{\abs{u}+\abs{v},\abs{u}-\abs{v}}.
+		f:S_n\to T_n&:f\of{\of{a,b}}=\of{\of{\frac{a+b}{2}}^2,\of{\frac{a-b}{2}}^2},\\
+		g:T_n\to S_n&:g\of{\of{u^2,v^2}}=\of{\abs{u}+\abs{v},\abs{u}-\abs{v}}.
 		\end{align*} We claim that $g\circ f=\id_{S_n}$ and $f\circ g=\id_{T_n}$:\begin{align*}
 		\of{g\circ f}(a,b)&=g\of{\of{\frac{a+b}{2}}^2,\of{\frac{a-b}{2}}^2}=\of{\abs{\frac{a+b}{2}}+\abs{\frac{a-b}{2}},\abs{\frac{a+b}{2}}-\abs{\frac{a-b}{2}}}\\
 		&=\of{{\frac{a+b}{2}}+{\frac{a-b}{2}},{\frac{a+b}{2}}-{\frac{a-b}{2}}}\\
 		&=\of{a,b},\\
 		\of{f\circ g}\of{u^2,v^2}&=f\of{\abs{u}+\abs{v},\abs{u}-\abs{v}}=\of{\abs{u}^2,\abs{v}^2}=\of{u^2,v^2}.
-	\end{align*}
+		\end{align*}
 	\end{proof}
-
-To solve $3x\equiv 1\pmod{28}$, we need to find a value of $x$ such that $3x$ leaves a remainder of $1$ when divided by $28$. In other words, we need to find an integer $x$ such that $3x = 1 + 28k$ for some integer $k$.
-
-We can start by multiplying both sides of the congruence by the inverse of $3$ modulo $28$. Since $3$ and $28$ are relatively prime, $3$ has an inverse modulo $28$. We can find it using the Euclidean algorithm:
-
-\begin{align*}
+	
+	To solve $3x\equiv 1\pmod{28}$, we need to find a value of $x$ such that $3x$ leaves a remainder of $1$ when divided by $28$. In other words, we need to find an integer $x$ such that $3x = 1 + 28k$ for some integer $k$.
+	
+	We can start by multiplying both sides of the congruence by the inverse of $3$ modulo $28$. Since $3$ and $28$ are relatively prime, $3$ has an inverse modulo $28$. We can find it using the Euclidean algorithm:
+	
+	\begin{align*}
 	28 &= 3\times 9 + 1 \\
 	1 &= 28 - 3\times 9
-\end{align*}
-
-Therefore, $1$ is the inverse of $3$ modulo $28$. Multiplying both sides of the congruence by $1$ gives:
-
-\begin{align*}
+	\end{align*}
+	
+	Therefore, $1$ is the inverse of $3$ modulo $28$. Multiplying both sides of the congruence by $1$ gives:
+	
+	\begin{align*}
 	3x &\equiv 1\pmod{28} \\
 	\Rightarrow \quad 1\times 3x &\equiv 1\times 1\pmod{28} \\
 	\Rightarrow \quad x &\equiv 3^{-1}\pmod{28} \\
 	\Rightarrow \quad x &\equiv 9\pmod{28}
-\end{align*}
+	\end{align*}
+	
+	Therefore, the solution to the congruence $3x\equiv 1\pmod{28}$ is $x\equiv 9\pmod{28}$. We can check this solution by verifying that $3\times 9\equiv 1\pmod{28}$.
+	
+	\subsection{Improved Fermat Factorization ($rN=a^2-b^2$)}
+	
+	Let $N=pq$ and $r<\min\set{p,q}$.
+	
+	\begin{algorithm}[H]
+		\caption{Improved Fermat Factorization: $rN=a^2-b^2$}
+		\KwData{$N=pq$, $R\in\of{0,\min\set{p,q}}\setminus\set{2}$ and $B\in\Z_{>0}$.}
+		\KwResult{$(p,q)$ or \texttt{Failure}}
+		\vspace{4pt}
+		\vspace{4pt}
+		\For{$r=1$ \KwTo $R$}{
+			\For{$b=1$ \KwTo $B$}{
+				$t\gets rN+b^2$\;
+				\If{$t$ is a square}{
+					$a\gets\sqrt{t}$\;
+					$d\gets\gcd\of{N,a-b}$\;
+					\If{$1<d<N$}{
+						\Return $\of{d,N/d}$\;
+					}
+				}
+			}
+		}
+		\Return \texttt{Failure}\;
+	\end{algorithm}
+	\begin{remark}
+		Let $N\in 2\Z+1$ and $b\in\Z+$. Then $2N+b^2$ is not square.
+		\begin{proof}
+			sd
+		\end{proof}
+	\end{remark}
 
-Therefore, the solution to the congruence $3x\equiv 1\pmod{28}$ is $x\equiv 9\pmod{28}$. We can check this solution by verifying that $3\times 9\equiv 1\pmod{28}$.
+	\newpage
+	\section{Pollard's $\rho$ Method for IFP}
+	Finding $a$ and $b$ that satisfy $rN=a^2-b^2$ is equivalent to finding $a$ and $b$ satisfying \begin{enumerate}[(i)]
+		\item $a^2\equiv b^2\pmod{N}$,
+		\item $\gcd\of{N,a-b}\in\of{1,N}$.
+	\end{enumerate}
+	Using Floyd's cycle-finding, we can find $a$ and $b$ satisfying above equation.
+	
+	Define a function $f_{N,c}:\Z_N\to\Z_N$ as follows: \[
+	f_{N,c}\of{X}:=X^2+c\mod{N}.
+	\]
+
+	\begin{tcolorbox}[colback=white,colframe=procolor,arc=5pt,title={\color{white}\bf }]
+		\begin{proposition}
+			A sequence $\set{a_n^{(p)}}:=\set{a_n\mod p}$ satisfies \[
+			a_i^{(p)}=
+			a_j^{(p)}\implies
+			a_{i+1}^{(p)}=
+			a_{j+1}^{(p)}
+			\]
+		\end{proposition}
+	\end{tcolorbox}
+	\begin{proof}
+		\begin{align*}
+			a_i^{(p)}=a_j^{(p)}&\iff a_i\mod p=a_j\mod p\\
+			&\iff a_i\equiv a_j\pmod{p}\\
+			&\iff a_i^2\equiv a_j^2\pmod{p}\\
+			&\iff a_i^2+c\equiv a_j^2+c\pmod{p}\\
+			&\iff \of{a_i^2+c\mod pq}\mod p=\of{a_j^2+c\mod pq}\mod p\\
+			&\iff a_{i+1}\mod p=a_{j+1}\mod p\\
+			&\iff a_{i+1}^{(p)}= a_{j+1}^{(p)}.
+		\end{align*}
+	\end{proof}
+
+	
+	\begin{algorithm}[H]
+		\caption{Pollard's $\rho$ Method}
+		\KwData{$N=pq$ ($p,q$: distinct odd primes), $c$: constant.}
+		\KwResult{$p$ and $q$.}
+		\vspace{4pt}
+		\vspace{4pt}
+		$c\uniform\Z_N$\;
+		\vspace{4pt}
+		\Fn{$f\of{x}$}{
+			\Return $\of{x^2 + c}\mod N$\;
+		}
+		\vspace{4pt}
+		$(a,b)\gets\of{2,2}$\;
+		\vspace{4pt}
+		\While{\texttt{True}}{
+			$\of{a,b}\gets\of{f\of{a},\of{f\circ f}\of{b}}$\;
+			$d\gets\gcd\of{N,a-b}$\;
+			\If{$1<d<N$}{
+				\Return $\of{d, N/d}$\;
+			}
+		}
+	\end{algorithm}
+
+	\newpage
+	\begin{tcolorbox}[colback=white,colframe=lemcolor,arc=5pt,title={\color{white}\bf }]
+	
+\end{tcolorbox}
+	\begin{tcolorbox}[colback=white,colframe=lemcolor,arc=5pt,title={\color{white}\bf }]
+	
+\end{tcolorbox}
+	\begin{tcolorbox}[colback=white,colframe=lemcolor,arc=5pt,title={\color{white}\bf }]
+	
+\end{tcolorbox}
+	\begin{tcolorbox}[colback=white,colframe=lemcolor,arc=5pt,title={\color{white}\bf }]
+	
+\end{tcolorbox}
+	\begin{tcolorbox}[colback=white,colframe=lemcolor,arc=5pt,title={\color{white}\bf }]
+	
+\end{tcolorbox}
+
+	\section*{Pollard's Rho Algorithm}
+	
+	Pollard's Rho algorithm is a probabilistic factorization algorithm that is particularly effective in finding small factors of large composite numbers. Given a composite number $N$, the algorithm aims to find a non-trivial factor $p$ of $N$.
+	
+	\subsection*{Algorithm}
+	
+	\begin{enumerate}
+		\item Choose a random function $f(x) \pmod{N}$ with the property $f(x) = f(x + N)$ for all $x$.
+		\item Choose random initial values $x_0$ and $y_0$ in the range $[1, N-1]$.
+		\item For $i = 1, 2, \ldots$:
+		\begin{enumerate}
+			\item Calculate $x_i = f(x_{i-1}) \pmod{N}$ and $y_i = f(f(y_{i-1})) \pmod{N}$.
+			\item Compute the greatest common divisor $d = \text{gcd}(\lvert x_i - y_i \rvert, N)$.
+			\item If $1 < d < N$, then $d$ is a non-trivial factor of $N$; return $d$.
+			\item If $i$ is a power of 2, check if $\text{gcd}(\lvert x_i - y_i \rvert, N) > 1$. If so, return the factor found.
+		\end{enumerate}
+	\end{enumerate}
+	
+	\subsection*{Remarks}
+	
+	Pollard's Rho algorithm relies on the properties of pseudorandom sequences and the birthday paradox. The function $f(x)$ generates a pseudorandom sequence modulo $N$, and the algorithm looks for collisions in the sequence. When a collision is found, the algorithm computes the greatest common divisor of the difference of the colliding elements and $N$. If the greatest common divisor is greater than 1, a non-trivial factor of $N$ is found.
+	
+	The algorithm is not deterministic, meaning it may not always find a factor in a fixed number of steps. However, it has an expected running time of $O(\sqrt{p})$, where $p$ is the smallest prime factor of $N$, making it an efficient algorithm for finding small factors.
+	
 
 	% End document
 \end{document}
