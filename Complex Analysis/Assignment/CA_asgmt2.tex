@@ -228,6 +228,50 @@
 			\item[(b)] Let $z = e^{i\theta}$ and $dz = ie^{i\theta} d\theta$ (\ie, $d\theta=\frac{1}{ie^{i\theta}}dz$). Then, the integral becomes: \[
 			\int_0^{2\pi}e^{-i\theta}e^{e^{i\theta}}d\theta=\oint_{\abs{z}=1}\frac{e^z}{iz^2}dz.
 			\] 
+			First, let's rewrite the given integral using the given function:
+			
+			\[
+			I = \int_0^{2\pi} e^{-i\theta} e^{e^{i\theta}} d\theta.
+			\]
+			
+			Now, consider the following function:
+			
+			\[
+			f(z) = e^{z},
+			\]
+			
+			where $z = e^{i\theta}$. We can compute the derivative of $f(z)$ with respect to $z$:
+			
+			\[
+			f'(z) = e^{z}.
+			\]
+			
+			Recall the Cauchy integral formula for a simple closed contour $\Gamma$:
+			
+			\[
+			f(a) = \frac{1}{2\pi i} \oint_\Gamma \frac{f(z)}{z-a} dz,
+			\]
+			
+			where $a$ is a point inside $\Gamma$. In our case, we can set $a = 0$ and consider the unit circle as our contour, i.e., $\Gamma: z = e^{i\theta}$.
+			
+			We want to find $I = \oint_\Gamma e^{-i\theta} f'(z) dz$. We have:
+			
+			\[
+			I = \oint_\Gamma \frac{f'(z)}{z} dz = 2\pi i f(0),
+			\]
+			
+			where the last equality follows from the Cauchy integral formula. Since $f(0) = e^0 = 1$, we have:
+			
+			\[
+			I = 2\pi i.
+			\]
+			
+			Therefore, the value of the given integral is:
+			
+			\[
+			\int_0^{2\pi} e^{-i\theta} e^{e^{i\theta}} d\theta = 2\pi i.
+			\]
+			
 		\end{itemize}
 	\end{proof}
 	\item 
@@ -236,7 +280,62 @@
 	\end{proof}
 	\item 
 	\begin{proof}[\sol]
-		content...
+		We can estimate the integral using the ML-inequality. The ML-inequality states that for a contour integral, we have:
+		
+		\[
+		\left|\int_C f(z) dz\right| \leq ML,
+		\]
+		
+		where $M$ is the maximum value of $|f(z)|$ on the contour $C$, and $L$ is the length of the contour $C$.
+		
+		First, let's parametrize the contour $C$ and find its length. We have $z(t) = 2e^{it}$ for $t \in [0, \frac{\pi}{2}]$. The derivative of $z(t)$ with respect to $t$ is:
+		
+		\[
+		z'(t) = 2ie^{it}.
+		\]
+		
+		The length of the contour $C$ is given by:
+		
+		\[
+		L = \int_0^{\frac{\pi}{2}} |z'(t)| dt = \int_0^{\frac{\pi}{2}} 2 dt = \pi.
+		\]
+		
+		Now, let's find the maximum value of $|f(z)|$ on the contour $C$. We have:
+		
+		\[
+		f(z) = \frac{z + 4}{z^3 - 1}.
+		\]
+		
+		On the contour $C$, we can replace $z$ by $2e^{it}$:
+		
+		\[
+		f(2e^{it}) = \frac{2e^{it} + 4}{(2e^{it})^3 - 1}.
+		\]
+		
+		Let's find the magnitude of $f(2e^{it})$:
+		
+		\begin{align*}
+			\left|f(2e^{it})\right| &= \left|\frac{2e^{it} + 4}{(2e^{it})^3 - 1}\right| \\
+			&= \frac{|2e^{it} + 4|}{|8e^{3it} - 1|} \\
+			&\leq \frac{2 + 4}{|8e^{3it} - 1|}.
+		\end{align*}
+		
+		Since $|8e^{3it} - 1|$ is minimized when $t = 0$, we have:
+		
+		\begin{align*}
+			M &= \max_{t \in [0, \frac{\pi}{2}]} \frac{6}{|8e^{3it} - 1|} \\
+			&= \frac{6}{|8 - 1|} \\
+			&= \frac{6}{7}.
+		\end{align*}
+		
+		Applying the ML-inequality, we get:
+		
+		\[
+		\left|\int_C \frac{z + 4}{z^3 - 1} dz\right| \leq ML = \frac{6}{7} \cdot \pi = \frac{6\pi}{7}.
+		\]
+		
+		Therefore, we have proven that $\left|\int_C \frac{z + 4}{z^3 - 1} dz\right| \leq \frac{6\pi}{7}$.
+		
 	\end{proof}
 \end{enumerate}
 
