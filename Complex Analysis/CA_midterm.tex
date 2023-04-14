@@ -1,0 +1,172 @@
+\documentclass{article}
+
+% Packages for formatting
+\usepackage[margin=1in]{geometry}
+\usepackage{fancyhdr}
+\usepackage{enumitem}
+\usepackage{graphicx}
+\usepackage{kotex}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{algorithm2e,setspace}
+\usepackage{algpseudocode}
+\usepackage{xcolor}
+\usepackage{amssymb}
+
+% Fonts
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{newpxtext,newpxmath}
+\usepackage{sectsty}
+
+% Define colors
+\definecolor{blue1}{HTML}{0077c2}
+\definecolor{blue2}{HTML}{00a5e6}
+\definecolor{blue3}{HTML}{b3e0ff}
+\definecolor{blue4}{HTML}{00293c}
+\definecolor{blue5}{HTML}{e6f7ff}
+
+\definecolor{thmcolor}{RGB}{231, 76, 60}
+\definecolor{defcolor}{RGB}{52, 152, 219}
+\definecolor{lemcolor}{RGB}{155, 89, 182}
+\definecolor{corcolor}{RGB}{46, 204, 113}
+\definecolor{procolor}{RGB}{241, 196, 15}
+
+\usepackage{color,soul}
+\usepackage{soul}
+\newcommand{\mathcolorbox}[2]{\colorbox{#1}{$\displaystyle #2$}}
+\usepackage{cancel}
+\newcommand\crossout[3][black]{\renewcommand\CancelColor{\color{#1}}\cancelto{#2}{#3}}
+\newcommand\ncrossout[2][black]{\renewcommand\CancelColor{\color{#1}}\cancel{#2}}
+
+\usepackage{hyperref}
+\usepackage{booktabs}
+
+% Chapter formatting
+\definecolor{titleblue}{RGB}{0,53,128}
+\usepackage{titlesec}
+\titleformat{\section}
+{\normalfont\sffamily\Large\bfseries\color{titleblue!100!gray}}{\thesection}{1em}{}
+\titleformat{\subsection}
+{\normalfont\sffamily\large\bfseries\color{titleblue!50!gray}}{\thesubsection}{1em}{}
+
+%Tcolorbox
+\usepackage[most]{tcolorbox}
+
+%Tikzpicture
+\usepackage{tikz-cd}
+\usetikzlibrary{positioning}
+\usetikzlibrary{angles, quotes}
+
+% Header and footer formatting
+\pagestyle{fancy}
+\fancyhead{}
+\fancyhf{}
+\rhead{Student ID: 20192250\quad Name: 지용현}%\rule{3cm}{0.4pt}}
+\lhead{\textcolor{blue2}{\textbf{CA Assignment \#1}}}
+% Define footer
+\newcommand{\footer}[1]{
+	\begin{flushright}
+		\vspace{2em}
+		\includegraphics[width=2cm]{school_logo.jpg} \\
+		\vspace{1em}
+		\textcolor{blue2}{\small\textbf{#1}}
+	\end{flushright}
+}
+%\rfoot{\large Department of Information Security, Cryptogrphy and Mathematics, Kookmin Uni.\includegraphics[height=1.5cm]{school_logo.jpg}}
+\fancyfoot{}
+\fancyfoot[C]{-\thepage-}
+
+\newcommand{\ie}{\textnormal{i.e.}}
+\newcommand{\rsa}{\mathsf{RSA}}
+\newcommand{\rsacrt}{\mathsf{RSA}\textendash\mathsf{CRT}}
+\newcommand{\inv}[1]{#1^{-1}}
+
+\usepackage{amsthm}
+\newtheorem{axiom}{Axiom}[section]
+\newtheorem{theorem}{Theorem}
+\newtheorem*{theorem*}{Theorem}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{corollary}{Corollary}[theorem]
+\newtheorem*{corollary*}{Corollary}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem*{lemma*}{Lemma}
+
+\theoremstyle{definition}
+\newtheorem{definition}{Definition}
+\newtheorem*{definition*}{Definition}
+\newtheorem{remark}{Remark}
+\newtheorem{exercise}{Exercise}[section]
+
+%New Command
+\newcommand{\set}[1]{\left\{#1\right\}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\F}{\mathbb{F}}
+\newcommand{\nbhd}{\mathcal{N}}
+\newcommand{\Log}{\operatorname{Log}}
+\newcommand{\Arg}{\operatorname{Arg}}
+\newcommand{\pv}{\operatorname{P.V.}}
+
+\newcommand{\of}[1]{\left( #1 \right)} 
+\newcommand{\abs}[1]{\left\lvert #1 \right\rvert}
+\newcommand{\norm}[1]{\left\| #1 \right\|}
+
+\newcommand{\sol}{\textcolor{magenta}{\bf Sol}}
+\newcommand{\conjugate}[1]{\overline{#1}}
+
+
+\renewcommand{\Re}{\operatorname{Re}}
+\renewcommand{\Im}{\operatorname{Im}}
+
+\begin{document}
+	\pagenumbering{arabic}
+	\begin{center}
+		\huge\textbf{Complex Analysis}\\
+		\vspace{0.5em}
+	\end{center}
+	
+	\begin{enumerate}
+		\item  Express all complex solutions to the equation $z^6 + 1 = 0$ in the form $z = a + bi$.
+		\begin{proof}[\sol]
+			Let $z=re^{i\theta}$. Then \[
+			z^6=r^6e^{i 6\theta}=64=2^6\implies\begin{cases}
+			r = 2,\\
+			6\theta = 2\pi\cdot k, \ie, \theta=\frac{k\pi}{3}\ \text{with}\ k=0,1,2,\cdots.
+			\end{cases}
+			\] Thus, \begin{align*}
+			z_1&=2\of{\cos 0+i\sin 0}=2+0i,\\
+			z_2&=2\of{\cos\of{\frac{\pi}{3}}+i\sin\of{\frac{\pi}{3}}}=1+\sqrt{3}i,\\
+			z_3&=2\of{\cos\of{\frac{2\pi}{3}}+i\sin\of{\frac{\pi}{3}}}=-1+\sqrt{3}i,\\
+			z_4&=2\of{\cos\pi+i\sin\pi}=-2+0i,\\
+			z_5&=2\of{\cos\of{\frac{4\pi}{3}}+i\sin\of{\frac{4\pi}{3}}}=-1-\sqrt{3}i,\\
+			z_6&=2\of{\cos\of{\frac{5\pi}{3}}+i\sin\of{\frac{5\pi}{3}}}=1-\sqrt{3}i,\\
+			\end{align*}
+			Note that: \begin{table}[ht!]
+				\centering
+				\begin{tabular}{c||c|c|c}
+					\toprule
+					Angle & $\sin(\theta)$ & $\cos(\theta)$ & $\tan(\theta)$ \\
+					\midrule
+					$0^\circ$ or $0$ & 0 & 1 & 0 \\
+					$30^\circ$ or ${\pi}/{6}$ & ${1}/{2}$ & ${\sqrt{3}}/{2}$ & ${\sqrt{3}}/{6}$ \\
+					$45^\circ$ or ${\pi}/{4}$ & ${1}/{\sqrt{2}}$ & ${1}/{\sqrt{2}}$ & 1 \\
+					$60^\circ$ or ${\pi}/{3}$ & ${\sqrt{3}}/{2}$ & ${1}/{2}$ & $\sqrt{3}$ \\
+					$90^\circ$ or ${\pi}/{2}$ & 1 & 0 & undefined \\
+					$120^\circ$ or ${2\pi}/{3}$ & ${\sqrt{3}}/{2}$ & $-{1}/{2}$ & $-\sqrt{3}$ \\
+					$135^\circ$ or ${3\pi}/{4}$ & ${1}/{\sqrt{2}}$ & $-{1}/{\sqrt{2}}$ & -1 \\
+					$150^\circ$ or ${5\pi}/{6}$ & ${1}/{2}$ & $-{\sqrt{3}}/{2}$ & ${\sqrt{3}}/{3}$ \\
+					$180^\circ$ or $\pi$ & 0 & -1 & 0 \\
+					\bottomrule
+				\end{tabular}
+				%\caption{Special angles and their sine, cosine, and tangent values}
+			\end{table}\\
+		\end{proof}
+	\end{enumerate}
+	
+	
+	\footer{Department of Information Security, Cryptography and Mathematics, Kookmin University}
+\end{document}
