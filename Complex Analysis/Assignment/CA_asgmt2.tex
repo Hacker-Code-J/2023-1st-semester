@@ -66,12 +66,12 @@
 \lhead{\textcolor{blue2}{\textbf{CA Assignment \#2}}}
 % Define footer
 \newcommand{\footer}[1]{
-\begin{flushright}
-	\vspace{2em}
-	\includegraphics[width=2cm]{school_logo.jpg} \\
-	\vspace{1em}
-	\textcolor{blue2}{\small\textbf{#1}}
-\end{flushright}
+	\begin{flushright}
+		\vspace{2em}
+		\includegraphics[width=2cm]{school_logo.jpg} \\
+		\vspace{1em}
+		\textcolor{blue2}{\small\textbf{#1}}
+	\end{flushright}
 }
 %\rfoot{\large Department of Information Security, Cryptogrphy and Mathematics, Kookmin Uni.\includegraphics[height=1.5cm]{school_logo.jpg}}
 \fancyfoot{}
@@ -123,221 +123,176 @@
 \renewcommand{\Im}{\operatorname{Im}}
 
 \begin{document}
-\pagenumbering{arabic}
-\begin{center}
-	\huge\textbf{Complex Analysis}\\
-	\vspace{0.5em}
-\end{center}
-
-\begin{enumerate}
-	\item We define \[
-	f'\of{t}=\frac{d}{dt}\left[u\of{t}+iv\of{t}\right] = u'\of{t}+iv'\of{t},\quad
-	\int f\of{t}dt = \int u\of{t}dt + i\int v\of{t}dt.
-	\] \begin{itemize}
-		\item[(a)]
-		\item[(b)]
-		\item[(c)]
-	\end{itemize}
-	\begin{proof}[\sol]
-		\begin{itemize}
-			\item[(a)] Note that \[
-			f\of{t}=e^{z_0t}=e^{\of{a+ib}t}=e^{at}e^{i bt}=e^{at}\of{\cos\of{bt}+i\sin\of{bt}}.
-			\] Then \begin{align*}
+	\pagenumbering{arabic}
+	\begin{center}
+		\huge\textbf{Complex Analysis}\\
+		\vspace{0.5em}
+	\end{center}
+	
+	\begin{enumerate}
+		\item We define \[
+		f'\of{t}=\frac{d}{dt}\left[u\of{t}+iv\of{t}\right] = u'\of{t}+iv'\of{t},\quad
+		\int f\of{t}dt = \int u\of{t}dt + i\int v\of{t}dt.
+		\] \begin{itemize}
+			\item[(a)]
+			\item[(b)]
+			\item[(c)]
+		\end{itemize}
+		\begin{proof}[\sol]
+			\begin{itemize}
+				\item[(a)] Note that \[
+				f\of{t}=e^{z_0t}=e^{\of{a+ib}t}=e^{at}e^{i bt}=e^{at}\of{\cos\of{bt}+i\sin\of{bt}}.
+				\] Then \begin{align*}
 				u\of{t} &=\Re\of{e^{z_0t}}=e^{at}\cos\of{bt},\\
 				v\of{t} &=\Im\of{e^{z_0t}}=e^{at}\sin\of{bt},
-			\end{align*} and so \begin{align*}
+				\end{align*} and so \begin{align*}
 				u'\of{t}=\frac{d}{dt}\left[e^{at}\cos\of{bt}\right]&=ae^{at}\cos\of{bt}-be^{at}\sin\of{bt},\\
 				v'\of{t}=\frac{d}{dt}\left[e^{at}\sin\of{bt}\right]&=ae^{at}\sin\of{bt}+be^{at}\cos\of{bt}.
-			\end{align*} Thus \begin{align*}
+				\end{align*} Thus \begin{align*}
 				f'\of{t}=u'\of{t}+iv'\of{t}&=ae^{at}\cos\of{bt}-be^{at}\sin\of{bt}+iae^{at}\sin\of{bt}+ibe^{at}\cos\of{bt}\\
 				&=ae^{at}\cos\of{bt}-i^2be^{at}\sin\of{bt}+iae^{at}\sin\of{bt}+ibe^{at}\cos\of{bt}\\
 				&=(ae^{at}+ibe^{at})\of{\cos\of{bt}+i\sin\of{bt}}\\
 				&=\of{a+bi}\cdot e^{at}e^{ibt}\\
 				&=\of{a+bi}e^{\of{a+bi}t}\\
 				&=z_0e^{z_0t}.
-			\end{align*}
-			\item[(b)] \[
-			\int e^{z_0t}dt = \frac{1}{z_0}e^{z_0t}=\frac{1}{a+bi}e^{\of{a+bi}t}.
-			\]\begin{align*}
-				\int e^{z_0t}dt&=\int e^{at}\cos\of{bt}dt +i\int e^{at}\sin\of{bt}dt\\
-				&=\int e^{at}\cos\of{bt}dt +i\int e^{at}\sin\of{bt}dt\\
-			\end{align*}\begin{align*}
-				\int e^{at}\cos(bt)dt &= \frac{1}{2}\int e^{at}\left(e^{ibt} + e^{-ibt}\right)dt \\
-				&= \frac{1}{2}\left[\frac{1}{a+ib}e^{(a+ib)t} + \frac{1}{a-ib}e^{(a-ib)t}\right] + C \\
-				&= \frac{1}{2}\left[\frac{(a-ib)e^{(a+ib)t} + (a+ib)e^{(a-ib)t}}{a^2 + b^2}\right] + C \\
-				&= \frac{a}{a^2 + b^2}\cdot\frac{1}{2}\left[e^{(a+ib)t} + e^{(a-ib)t}\right] + \frac{b}{a^2 + b^2}\cdot\frac{1}{2i}\left[e^{(a+ib)t} - e^{(a-ib)t}\right] + C
-			\end{align*}
-			\item[(c)] Note that \begin{align*}
-				\frac{1}{a+bi}e^{\of{a+bi}t}&=\frac{1}{a+bi}e^{at}\of{\cos\of{bt}+i\sin\of{bt}}\\
-				&=\frac{1}{a+bi}e^{at}\cos\of{bt}+\frac{1}{b-ai}e^{at}\sin\of{bt}\\
-				&=
-			\end{align*}
-			\begin{align*}
-				\int e^{z_0t}dt=\int e^{at}\cos\of{bt}+i\int e^{at}\sin\of{bt}\\
-			\end{align*}
-		\end{itemize}
-	\end{proof}
-	\item Let $C$ be the path in the complex plane defined as the counter-clockwise rotation of a circle with center at the origin and radius $2$, represented by the function $z(t) = 2e^{it}$ for $t \in [0, 2\pi]$. Calculate the value of the following integral:
-	\begin{figure}[h!]
-		\centering
-		\begin{tikzpicture}[scale=0.7]
+				\end{align*}
+				\item[(b)] \[
+				\int e^{z_0t}dt = \frac{1}{z_0}e^{z_0t}=\frac{1}{a+bi}e^{\of{a+bi}t}+C.
+				\]
+				\item[(c)] \begin{itemize}
+					\item[(i)] \begin{align*}
+					\int e^{at}\cos\of{bt}dt&=\frac{1}{2}\int e^{at}\of{e^{ibt}+e^{-ibt}}dt\\
+					&=\frac{1}{2}\of{\int e^{\of{a+bi}t}dt+\int e^{\of{a-bi}t}dt}\\
+					&=\frac{1}{2}\of{\frac{1}{a+bi}e^{\of{a+bi}t}+\frac{1}{a-bi}e^{\of{a-bi}t}}+C_1\\
+					&=\frac{e^{at}}{2}\of{\frac{a-bi}{a^2+b^2}e^{ibt}+\frac{a+bi}{a^2+b^2}e^{-i bt}}+C_1\\
+					&=\frac{e^{at}}{2\of{a^2+b^2}}\left[\of{a-bi}e^{ibt}+\of{a+bi}e^{-i bt}\right]+C_1.
+					\end{align*}
+					\item[(ii)] Similarly, \[
+					\int e^{at}\sin\of{bt}dt=\frac{1}{2i}\int e^{at}\of{e^{ibt}-e^{-ibt}}dt=\frac{e^{at}}{2\of{a^2+b^2}i}\left[\of{a-bi}e^{ibt}-\of{a+bi}e^{-i bt}\right]+C_2.
+					\]
+				\end{itemize}
+			\end{itemize}
+		\end{proof}
+		\item Let $C$ be the path in the complex plane defined as the counter-clockwise rotation of a circle with center at the origin and radius $2$, represented by the function $z(t) = 2e^{it}$ for $t \in [0, 2\pi]$. Calculate the value of the following integral:
+		\begin{figure}[h!]
+			\centering
+			\begin{tikzpicture}[scale=0.7]
 			\draw[->] (-2.5,0) -- (2.5,0) node[right] {$\Re(z)$};
 			\draw[->] (0,-2.5) -- (0,2.5) node[above] {$\Im(z)$};
 			\draw[thick,red] (2,0) arc (0:360:2);
 			\filldraw[black] (0,0) circle (1.5pt) node[anchor=north east] {$O$};
 			\filldraw[blue] (2,0) circle (1.5pt) node[anchor=north west] {$2$};
 			\filldraw[blue] (0,2) circle (1.5pt) node[anchor=north west] {$2i$};
-		\end{tikzpicture}
-	\end{figure}
-	\begin{itemize}
-		\item[(a)] $\displaystyle\int_C\frac{e^z}{z}dz$\quad(b) $\displaystyle\int_C\frac{z^2}{z-1}dz$\quad(c) $\displaystyle\int_C\frac{z}{z-3}dz$\quad(d) $\displaystyle\int_C\frac{\cos z}{z\of{z^2+9}}dz$
-	\end{itemize}
-	\begin{proof}[\sol]
+			\end{tikzpicture}
+		\end{figure}
 		\begin{itemize}
-			\item[(a)] Let $f\of{z}=e^z$ then \[
-			\int_C\frac{e^z}{z}dz=\int_C\frac{f\of{z}}{z-0}dz=f\of{0}2\pi i=2\pi i.
-			\]
-			\item[(b)] Let $f\of{z}=z^2$ then \[
-			\int_C\frac{z^2}{z-1}dz=\int_C\frac{f\of{z}}{z-1}dz=f\of{1}2\pi i=2\pi i.
-			\]
-			\item[(c)] $\displaystyle\int_C\frac{z}{z-3}dz$
-			\item[(d)] $\displaystyle\int_C\frac{\cos z}{z\of{z^2+9}}dz$
+			\item[(a)] $\displaystyle\int_C\frac{e^z}{z}dz$\quad(b) $\displaystyle\int_C\frac{z^2}{z-1}dz$\quad(c) $\displaystyle\int_C\frac{z}{z-3}dz$\quad(d) $\displaystyle\int_C\frac{\cos z}{z\of{z^2+9}}dz$
 		\end{itemize}
-	\end{proof}
-	\item 
-	\begin{proof}[\sol]
-		content...
-	\end{proof}
-	\item Find the following integral. \begin{itemize}
-		\item[(a)] $\displaystyle\int_0^{2\pi}e^{e^{i\theta}}d\theta$.
-		\item[(b)] $\displaystyle\int_0^{2\pi}e^{-i\theta}e^{e^{i\theta}}d\theta$.
-	\end{itemize}
-	\begin{proof}[\sol]
-		Recall that Cauchy integral formula for a function $f\of{z}$ that is analytic inside and on a simple closed contour $C$: \[
-		f\of{z_0}=\frac{1}{2\pi i}\oint_C\frac{f\of{z}}{z-z_0}dz.
-		\]
-		\vspace{4pt}
-		\begin{itemize}
-			\item[(a)] Let $z = e^{i\theta}$ and $dz = ie^{i\theta} d\theta$ (\ie, $d\theta=\frac{1}{ie^{i\theta}}dz$). Then, the integral becomes: \[
-			\int_0^{2\pi}e^{e^{i\theta}}d\theta=\oint_{\abs{z}=1}\frac{e^z}{iz}dz.
-			\] Here, the contour $C$ is the unit circle $|z|=1$. The integrand has a simple pole at $z=0$. Using the Cauchy integral formula, we can identify the function $f(z) = e^z$ and $z_0=0$. Thus, the integral is equal to:
-			\[
-			\int_0^{2\pi}e^{e^{i\theta}}d\theta = \oint_{\abs{z}=1}\frac{e^z}{iz}dz = 2\pi i\cdot f\of{z}=2\pi i\cdot e^0 = 2\pi i.
+		\begin{proof}[\sol]
+			\begin{itemize}
+				\item[(a)] Let $f\of{z}=e^z$ then \[
+				\oint_C\frac{e^z}{z}dz=\oint_C\frac{f\of{z}}{z-0}dz=2\pi i\cdot e^0 =2\pi i.
+				\] by the Cauchy integral formula.
+				\vspace{4pt}
+				\item[(b)] Let $f\of{z}=z^2$ then \[
+				\oint_C\frac{z^2}{z-1}dz=\oint_C\frac{f\of{z}}{z-1}dz=2\pi i\cdot(1)^2=2\pi i.
+				\] by the Cauchy integral formula.
+				\vspace{4pt}
+				\item[(c)] Since $z_0=3$ is not inside the curve $C$, \[
+				\oint_C\frac{z}{z-3}dz=0
+				\] by Cauchy-Goursat theorem.
+				\vspace{4pt}
+				\item[(d)] Let $f\of{z}=\displaystyle\frac{\cos z}{\of{z+3i}\of{z-3i}}$ then \[
+				\oint_C\frac{\of{\cos z}}{z\of{z^2+9}}dz = 2\pi i\cdot \frac{\cos 0}{3i\cdot(-3i)}=\frac{2\pi i}{9}.
+				\]
+			\end{itemize}
+		\end{proof}
+		\item 
+		\begin{proof}[\sol]
+			Let $f\of{\zeta}=2\zeta^2-\zeta-2$. Since $z=2$ is inside the curve $C$, \[
+			g\of{2}=\oint_C\frac{2\zeta^2-\zeta-2}{\zeta-2}=2\pi i\cdot f\of{2}=2\pi i\cdot(2\cdot 2^2-2-2)=8\pi i
+			\] by the Cauchy integral formula.
+		\end{proof}
+		\item Find the following integral. \begin{itemize}
+			\item[(a)] $\displaystyle\int_0^{2\pi}e^{e^{i\theta}}d\theta$.
+			\item[(b)] $\displaystyle\int_0^{2\pi}e^{-i\theta}e^{e^{i\theta}}d\theta$.
+		\end{itemize}
+		\begin{proof}[\sol]
+			Recall that Cauchy integral formula for a function $f\of{z}$ that is analytic inside and on a simple closed contour $C$: \[
+			f\of{z_0}=\frac{1}{2\pi i}\oint_C\frac{f\of{z}}{z-z_0}dz.
 			\]
 			\vspace{4pt}
-			\item[(b)] Let $z = e^{i\theta}$ and $dz = ie^{i\theta} d\theta$ (\ie, $d\theta=\frac{1}{ie^{i\theta}}dz$). Then, the integral becomes: \[
-			\int_0^{2\pi}e^{-i\theta}e^{e^{i\theta}}d\theta=\oint_{\abs{z}=1}\frac{e^z}{iz^2}dz.
-			\] 
-			First, let's rewrite the given integral using the given function:
-			
+			\begin{itemize}
+				\item[(a)] Let $z = e^{i\theta}$ and $dz = ie^{i\theta} d\theta$ (\ie, $d\theta=\frac{1}{ie^{i\theta}}dz$). Then, the integral becomes: \begin{align*}
+				\int_0^{2\pi}e^{e^{i\theta}}d\theta&=\oint_{\abs{z}=1}e^z\cdot\frac{1}{iz}dz\\
+				&=\frac{1}{i}\oint_{\abs{z}=1}\frac{e^z}{z-0}dz\\
+				&=\frac{1}{i}\cdot 2\pi i\cdot e^0\quad\text{by the Cauchy integral formula}\\
+				&=2\pi.
+				\end{align*}\[
+				\]
+				\item[(b)] Let $z = e^{i\theta}$ and $dz = ie^{i\theta} d\theta$ (\ie, $d\theta=\frac{1}{ie^{i\theta}}dz$). Then, the integral becomes: \begin{align*}
+				\int_0^{2\pi}e^{-i\theta}e^{e^{i\theta}}d\theta&=\oint_{\abs{z}=1}z^{-1}\cdot e^z\cdot\frac{1}{iz}dz\\
+				&=\frac{1}{i}\oint_{\abs{z}=1}\frac{e^z}{z^2}dz\\
+				&=\frac{1}{i}\oint_{\abs{z}=1}\frac{e^z}{\of{z-0}^2}dz\\
+				&=\frac{1}{i}\cdot 2\pi i\cdot e^0\quad\because f^{\of{1}}\of{a}=\frac{1!}{2\pi i}\oint_C\frac{f\of{z}}{\of{z-a}^{1+1}}dz\\
+				&=2\pi.
+				\end{align*}
+			\end{itemize}
+		\end{proof}
+		\item 
+		\begin{proof}[\sol]
+			Let $f\of{\zeta}=\zeta^3+2\zeta$ then \[
+			f'\of{\zeta}=3\zeta^2+2,\quad f''\of{\zeta}=6\zeta.
+			\] Note that $\displaystyle f^{\of{n}}\of{z}=\frac{n!}{2\pi i}\oint_C\frac{f\of{\zeta}}{\of{\zeta-z}^{n+1}}d\zeta$. Then we have \[
+			g\of{z}=\frac{2\pi i}{2!}\cdot f''\of{\zeta}=\pi i\cdot\of{6\zeta}.
+			\] Thus \begin{itemize}
+				\item[(i)] ($z$ is in interior of $C$) By the generalized Cauchy integral formula, \[
+				g\of{z}=\pi i\cdot 6z = 6\pi iz.
+				\]
+				\item[(ii)] ($z$ is in exterior of $C$) By the Cauchy-Goursat theorem, \[
+				g\of{z} = 0.
+				\]
+			\end{itemize}
+		\end{proof}
+		\item 
+		\begin{proof}[\sol]
+			Note that
 			\[
-			I = \int_0^{2\pi} e^{-i\theta} e^{e^{i\theta}} d\theta.
-			\]
-			
-			Now, consider the following function:
-			
+			\left|\int_C f(z) dz\right| \leq ML,
+			\] where $M=\max_{t\in[a,b]}\abs{f\of{\gamma\of{t}}}$ and $L = $ length of $C$.
+			For $z(t) = 2e^{it}$ with $t \in [0, \frac{\pi}{2}]$, we obtain the length of the contour $C$:
 			\[
-			f(z) = e^{z},
+			L = \int_0^{\frac{\pi}{2}} |z'(t)| dt = \int_0^{\frac{\pi}{2}} 2 dt = \pi.
 			\]
+			Let $\displaystyle
+			f(z) = \frac{z + 4}{z^3 - 1}$ then $\displaystyle
+			f(2e^{it}) = \frac{2e^{it} + 4}{(2e^{it})^3 - 1}$.
+			Since
 			
-			where $z = e^{i\theta}$. We can compute the derivative of $f(z)$ with respect to $z$:
-			
-			\[
-			f'(z) = e^{z}.
-			\]
-			
-			Recall the Cauchy integral formula for a simple closed contour $\Gamma$:
-			
-			\[
-			f(a) = \frac{1}{2\pi i} \oint_\Gamma \frac{f(z)}{z-a} dz,
-			\]
-			
-			where $a$ is a point inside $\Gamma$. In our case, we can set $a = 0$ and consider the unit circle as our contour, i.e., $\Gamma: z = e^{i\theta}$.
-			
-			We want to find $I = \oint_\Gamma e^{-i\theta} f'(z) dz$. We have:
-			
-			\[
-			I = \oint_\Gamma \frac{f'(z)}{z} dz = 2\pi i f(0),
-			\]
-			
-			where the last equality follows from the Cauchy integral formula. Since $f(0) = e^0 = 1$, we have:
-			
-			\[
-			I = 2\pi i.
-			\]
-			
-			Therefore, the value of the given integral is:
-			
-			\[
-			\int_0^{2\pi} e^{-i\theta} e^{e^{i\theta}} d\theta = 2\pi i.
-			\]
-			
-		\end{itemize}
-	\end{proof}
-	\item 
-	\begin{proof}[\sol]
-		content...
-	\end{proof}
-	\item 
-	\begin{proof}[\sol]
-		We can estimate the integral using the ML-inequality. The ML-inequality states that for a contour integral, we have:
-		
-		\[
-		\left|\int_C f(z) dz\right| \leq ML,
-		\]
-		
-		where $M$ is the maximum value of $|f(z)|$ on the contour $C$, and $L$ is the length of the contour $C$.
-		
-		First, let's parametrize the contour $C$ and find its length. We have $z(t) = 2e^{it}$ for $t \in [0, \frac{\pi}{2}]$. The derivative of $z(t)$ with respect to $t$ is:
-		
-		\[
-		z'(t) = 2ie^{it}.
-		\]
-		
-		The length of the contour $C$ is given by:
-		
-		\[
-		L = \int_0^{\frac{\pi}{2}} |z'(t)| dt = \int_0^{\frac{\pi}{2}} 2 dt = \pi.
-		\]
-		
-		Now, let's find the maximum value of $|f(z)|$ on the contour $C$. We have:
-		
-		\[
-		f(z) = \frac{z + 4}{z^3 - 1}.
-		\]
-		
-		On the contour $C$, we can replace $z$ by $2e^{it}$:
-		
-		\[
-		f(2e^{it}) = \frac{2e^{it} + 4}{(2e^{it})^3 - 1}.
-		\]
-		
-		Let's find the magnitude of $f(2e^{it})$:
-		
-		\begin{align*}
+			\begin{align*}
 			\left|f(2e^{it})\right| &= \left|\frac{2e^{it} + 4}{(2e^{it})^3 - 1}\right| \\
 			&= \frac{|2e^{it} + 4|}{|8e^{3it} - 1|} \\
 			&\leq \frac{2 + 4}{|8e^{3it} - 1|}.
-		\end{align*}
-		
-		Since $|8e^{3it} - 1|$ is minimized when $t = 0$, we have:
-		
-		\begin{align*}
+			\end{align*}
+			
+			Since $|8e^{3it} - 1|$ is minimized when $t = 0$, we have:
+			
+			\begin{align*}
 			M &= \max_{t \in [0, \frac{\pi}{2}]} \frac{6}{|8e^{3it} - 1|} \\
 			&= \frac{6}{|8 - 1|} \\
 			&= \frac{6}{7}.
-		\end{align*}
-		
-		Applying the ML-inequality, we get:
-		
-		\[
-		\left|\int_C \frac{z + 4}{z^3 - 1} dz\right| \leq ML = \frac{6}{7} \cdot \pi = \frac{6\pi}{7}.
-		\]
-		
-		Therefore, we have proven that $\left|\int_C \frac{z + 4}{z^3 - 1} dz\right| \leq \frac{6\pi}{7}$.
-		
-	\end{proof}
-\end{enumerate}
-
-\footer{Department of Information Security, Cryptography and Mathematics, Kookmin University}
+			\end{align*}
+			
+			Applying the ML-inequality, we get:
+			
+			\[
+			\left|\int_C \frac{z + 4}{z^3 - 1} dz\right| \leq ML = \frac{6}{7} \cdot \pi = \frac{6\pi}{7}.
+			\]
+			
+			Therefore, we have proven that $\left|\int_C \frac{z + 4}{z^3 - 1} dz\right| \leq \frac{6\pi}{7}$.
+			
+		\end{proof}
+	\end{enumerate}
+	
+	\footer{Department of Information Security, Cryptography and Mathematics, Kookmin University}
 \end{document}
