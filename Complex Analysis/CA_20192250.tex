@@ -99,14 +99,15 @@
 %Theorem
 %\usepackage{amsthm}
 \newtheorem{axiom}{Axiom}[section]
-\newtheorem{theorem}{Theorem}
+\newtheorem{theorem}{Theorem}[chapter]
 \newtheorem{proposition}[theorem]{Proposition}
 \newtheorem{corollary}{Corollary}[theorem]
 \newtheorem{lemma}[theorem]{Lemma}
 
 \theoremstyle{definition}
-\newtheorem{definition}{Definition}
-\newtheorem*{remark}{Remark}
+\newtheorem{definition}{Definition}[chapter]
+\newtheorem{remark}{Remark}[section]
+\newtheorem{note}{Note}[section]
 \newtheorem{exercise}{Exercise}[section]
 \newtheorem{example}{Example}[section]
 
@@ -983,7 +984,7 @@
 			\quad\tilde{\gamma}:[c,d]\to\C
 			\] such that there is a continuously differentiable function $\varphi:[c,d]\to[a,b]$ such that $a=\varphi\of{c}$, $b=\varphi\of{d}$, and $\tilde{\gamma}\of{t}=\of{\gamma\circ\varphi}\of{t}$ for $t\in[c,d]$. 
 			\begin{center}
-				\includegraphics[scale=0.25]{equivalent_paths.png}
+				\includegraphics[scale=0.25]{equivalent_paths.png} Linearity of Integration
 			\end{center}
 			\begin{align*}
 			\int_{\tilde{\gamma}}f\of{z}dz
@@ -995,20 +996,341 @@
 		\end{proposition}
 	\end{tcolorbox}
 
+	\newpage
+	\begin{tcolorbox}[colframe=thmcolor, title={\color{white}\bf An Important Integral}]
+		\begin{theorem}
+			Let $C$ be a circular path with center $z_0$ and radius $r>0$ traversed in the anti-clockwise direction. Then \[
+			\int_C\of{z-z_0}^ndz=\begin{cases}
+			2\pi i &:n= -1,\\
+			0 &:n\neq -1.
+			\end{cases}
+			\]
+		\end{theorem}
+	\end{tcolorbox}
+	\begin{proof}
+		\begin{itemize}
+			\item[(1)] Let $n\neq -1$ then
+			\begin{align*}
+			\int_C\of{z-z_0}^ndz&=\int_0^{2\pi}\of{z_0+re^{it}-z_0}^n\cdot ire^{it}dt\\
+			&=\int_0^{2\pi}r^ne^{i nt}\cdot ire^{it}dt\\
+			&=ir^{n+1}\int_0^{2\pi}e^{i(n+1)t}dt\\
+			&=ir^{n+1}\left[\frac{1}{i(n+1)}e^{i(n+1)t}\right]_0^{2\pi}\\
+			&=0.
+			\end{align*}
+			\item[(2)] Let $n = -1$ then
+			\begin{align*}
+			\int_C\of{z-z_0}^{-1}dz&=\int_0^{2\pi}\of{re^{it}}^{-1}\cdot ire^{it}dt\\
+			&=\int_0^{2\pi}i dt\\
+			&=2\pi i.
+			\end{align*}
+		\end{itemize}
+	\end{proof}
+
+	\begin{example}
+		
+	\end{example}
 
 	\newpage
-	\begin{tcolorbox}[colback=white,colframe=defcolor,arc=5pt,title={\color{white}\bf Length of Curve}]
+	\section{Properties of Contour Integration}
+
+	\begin{tcolorbox}[colback=white,colframe=procolor,arc=5pt,title={\color{white}\bf Linearity of Integration}]
+		\begin{proposition}
+			Let $D$ be a domain in $\C$ and $\gamma:[a,b]\to D$ be a piecewise smooth path. Then the following hold: for all continuous $f,g:D\to\C$ and all $\alpha\in\C$, \[
+			\int_\gamma\left(\alpha f+\beta g\right)\of{z}dz=\alpha\int_\gamma f\of{z}dz+\beta\int_\gamma g\of{z}dz.
+			\]
+		\end{proposition}
+	\end{tcolorbox}
+	\vspace{4pt}
+	\begin{tcolorbox}[colback=white,colframe=procolor,arc=5pt,title={\color{white}\bf }]
+		\begin{proposition}
+			Let $\gamma:[a,b]\to D$ be a smooth path in a domain $D$ and $f:D\to\C$ be a continuous function. Then \[
+			\int_{-\gamma}f\of{z}dz = -\int_{\gamma}f\of{z}dz.
+			\]
+		\end{proposition}
+	\end{tcolorbox}
+	\begin{proof}
+		Note that $-\gamma:[a,b]\to\C$ is defined by \[
+		\of{-\gamma}\of{t}=\gamma\of{a+b-t}.
+		\]\begin{align*}
+			\int_{-\gamma}f\of{z}dz &=\int_a^bf\of{\of{-\gamma}\of{t}}\of{-\gamma}'\of{t}dt\\
+			&=\int_a^bf\of{\gamma\of{a+b-t}}\frac{d}{dt}\left[\of{-\gamma}\of{t}\right]dt\\
+			&=\int_a^bf\of{\gamma\of{a+b-t}}\gamma'\of{a+b-t}\of{-1}dt\\
+			&=\int_b^af\of{\gamma\of{\tau}}\gamma'\of{\tau}d\tau\quad\text{by $\tau:=a+b-t$, \ie, $d\tau=-dt$}\\
+			&=-\int_a^bf\of{z}dz.
+		\end{align*}
+	\end{proof}
+	\vspace{4pt}
+	\begin{tcolorbox}[colback=white,colframe=procolor,arc=5pt,title={\color{white}\bf Concatenation of Paths}]
+		\begin{proposition}
+			Let $\gamma_1:[a_1,b_1]\to D$ and $\gamma_2:[a_2,b_2]\to D$ be two paths such that $\gamma_1\of{b_1}=\gamma_2\of{a_2}$. Define the concatenation of paths $\gamma_1+\gamma_2:\left[a_1,b_1+b_2-a_2\right]$ as follows: \[
+			\of{\gamma_1+\gamma_2}\of{t}=\begin{cases}
+			\gamma_1\of{t} &:t\in[a_1,b_1],\\
+			\gamma_2\of{t-b_1+a_2} &:t\in[b_1,b_1+b_2-a_2].
+			\end{cases}
+			\] Then \[
+			\int_{\gamma_1+\gamma_2}f\of{z}dz=\int_{\gamma_1}f\of{z}dz+\int_{\gamma_2}f\of{z}dz.
+			\]
+		\end{proposition}
+	\end{tcolorbox}
+	\vspace{8pt}
+	\begin{tcolorbox}[colback=white,colframe=procolor,arc=5pt,title={\color{white}\bf }]
+		\begin{proposition}
+			Let \begin{enumerate}
+				\item $D$ be a domain in $\C$;
+				\item $\gamma:[a,b]\to D$ be a piecewise smooth path and
+				\item $f:D\to\C$ be a continuous function.
+			\end{enumerate} Then \[
+			\abs{\int_\gamma f\of{z}dz}\leq\of{\max_{t\in[a,b]}\abs{f\of{\gamma\of{t}}}}\cdot\int_\gamma\abs{dz}
+			\]
+		\end{proposition}
+	\end{tcolorbox}
+	\begin{proof}
+		Consider first a curve $\varphi:[a,b]\to\C$. We claim that \[
+		\abs{\int_a^b\varphi\of{t}dt}\leq\int_a^b\abs{\varphi\of{t}}dt.
+		\] Let $\displaystyle\int_a^b\varphi\of{t}dt=re^{i\theta}$, where $r\geq 0$ and $\theta\in(-\pi,\pi]$. Then \begin{align*}
+			\abs{\int_a^b\varphi\of{t}dt}=r
+			&=e^{-i\theta}\int_a^b\varphi\of{t}dt\quad\because\int_a^b\varphi\of{t}dt=re^{i\theta}\\
+			&=\int_a^be^{-i\theta}\varphi\of{t}dt\\
+			&=\int_a^b\Re\of{e^{-i\theta}\varphi\of{t}}dt\quad\because\abs{\int_a^b\varphi\of{t}dt}\in\R\\
+			&\leq\int_a^b\abs{\Re\of{e^{-i\theta}\varphi\of{t}}}dt \\
+			&\leq\int_a^b\abs{\of{e^{-i\theta}\varphi\of{t}}}dt\quad\because\abs{\Re\of{z}}\leq\abs{z}\\
+			&=\int_a^b\abs{\varphi\of{t}}dt\quad\because \abs{e^{-i\theta}}=1.
+		\end{align*}
+		
+		Let $\varphi\of{t}:=f\of{\gamma\of{t}}\cdot\gamma'\of{t}$ with $t\in[a,b]$. Then
+		\begin{align*}
+			\abs{\int_\gamma f\of{z}dz}&=\abs{\int_a^b f\of{\gamma\of{t}}\gamma'\of{t}dt}\\
+			&\leq{\int_a^b \abs{f\of{\gamma\of{t}}\gamma'\of{t}}dt}\\
+			&=\int_a^b\abs{f\of{\gamma\of{t}}}\abs{\gamma'\of{t}}dt\\
+			&\leq\max_{t\in[a,b]}\abs{f\of{\gamma\of{t}}}\cdot\int_a^b\abs{\gamma'\of{t}}dt.
+		\end{align*}
+	\end{proof}
+
+	\section{Fundamental Theorem of Contour Integration}
+
+	\begin{tcolorbox}[colback=white,colframe=thmcolor,arc=5pt,title={\color{white}\bf Fundamental Theorem of Contour Integration}]
+		\begin{theorem}
+			Let \begin{enumerate}[(i)]
+				\item $D$ be a domain in $\C$;
+				\item $\gamma:[a,b]\to D$ be a piecewise smooth path;
+				\item $f:D\to\C$ be a continuous in $D$;
+				\item $F:D\to\C$ be a holomorphic function such that $F'=f$ in $D$.
+			\end{enumerate} Then \[
+			\int_\gamma f\of{z}dz=F\of{\gamma\of{b}}-F\of{\gamma\of{a}}.
+		\]
+		\end{theorem}
+	\end{tcolorbox}
+	\begin{proof}
+		For $z=x+iy\in D$, where $x,y\in\R$, we define the real-valued functions $U,V,u,v$ by \begin{align*}
+		F(x+iy)&=U(x,y)+iV(x,y),\\
+		f(x+iy)&=u(x,y)+iv(x,y).
+		\end{align*} Also, set $\gamma\of{t}=x\of{t}+iy\of{t}$ ($t\in[a,b]$). Then
+		\begin{align*}
+			\int_\gamma f\of{z}dz&=\int_a^bf\of{\gamma\of{t}}\gamma'\of{t}dt\\
+			&=\int_a^b\of{u+iv}\of{x'+iy'}dt\\
+			&=\int_a^b\of{ux'-vy'}dt +i\int_a^b\of{vx'+uy'}dt\\
+			&=\int_a^b\of{U_xx'-V_xy'}dt +i\int_a^b\of{V_xx'+U_xy'}dt\quad\because F'=U_x+iV_x=f=u+iv\\
+			&=\int_a^b\of{U_xx'+U_yy'}dt +i\int_a^b\of{V_xx'+V_yy'}dt\quad\text{by CR-Eqs: $U_x=V_y$ and $U_y=-V_x$}\\
+			&=\int_a^b\frac{d}{dt}\left[U(x,y)\right]dt+i\int_a^b\frac{d}{dt}\left[V(x,y)\right]dt\\
+			&=U\of{x(b),y(b)}-U\of{x(a),y(a)}+i\of{V\of{x(b),y(b)}-V\of{x(a),y(a)}}\\
+			&=\of{U\of{x(b),y(b)}+U\of{x(a),y(a)}}-\of{V\of{x(b),y(b)}+V\of{x(a),y(a)}}\\
+			&=F\of{\gamma\of{b}}-F\of{\gamma\of{a}}.
+		\end{align*}
+	\end{proof}
+
+
+	\newpage
+	\section{The Cauchy Integral Theorem}
+	
+	\begin{tcolorbox}[colback=white,colframe=defcolor,arc=5pt,title={\color{white}\bf Path Homotopy}]
 		\begin{definition}
-			
+			Consider two closed paths $\gamma_0,\gamma_1:[0,1]\to D$. $\gamma_0$ is \textit{$D$-homotopic to} $\gamma_1$ if there exists a continuous function $H:[0,1]^2\to D$ such that \begin{enumerate}[(H1)]
+				\item $\forall t\in[0,1]: H(t,0)=\gamma_0(t)$;
+				\item $\forall t\in[0,1]: H(t,1)=\gamma_1(t)$;
+				\item $\forall s\in[0,1]: H(0,s)=H(1,s)$.
+			\end{enumerate}
 		\end{definition}
 	\end{tcolorbox}
-
-	\begin{tcolorbox}[colback=white,colframe=defcolor,arc=5pt,title={\color{white}\bf Length of Curve}]
-		\begin{definition}
-			
-		\end{definition}
+	\vspace{8pt}
+	\begin{example}
+		
+	\end{example}	
+	\vspace{8pt}
+	\begin{tcolorbox}[colback=white,colframe=thmcolor,arc=5pt,title={\color{white}\bf The Cauchy Integral Theorem}]
+		\begin{theorem}
+			Let \begin{enumerate}[(i)]
+				\item $D$ be a domain in $\C$;
+				\item $f:D\to\C$ be holomorphic in $D$, and
+				\item $\gamma_0,\gamma_1:[0,1]\to\C$ be two closed, piecewise smooth, $D$-homotopic paths.
+			\end{enumerate} Then \[
+			\int_{\gamma_0}f\of{z}dz=\int_{\gamma_1}f\of{z}dz.
+			\]
+		\end{theorem}
 	\end{tcolorbox}
+	\begin{proof}
+		Consider a path homotopy $H:[0,1]^2\to D$ s.t. $H\in C^2$. Let $\gamma_s:=H\of{\cdot, s}$ be a closed path with fixed point $s$. Define \[
+		I\of{s}:=\int_{\gamma_s}f\of{z}dz,\quad s\in[0,1].
+		\] We must show that $I(0)=I(1)$. Note that \[
+		\left[\forall s\in[0,1]:\frac{d}{ds}\left[I(s)\right]=0\right]\implies I(0)=I(1).
+		\] We claim that $\displaystyle\frac{d}{ds}\left[I(s)\right]=0$ for $s\in[0,1]$:
+		\begin{align*}
+		\frac{d}{ds}\left[I(s)\right]&=\frac{d}{ds}\left[\int_{\gamma_s}f\of{z}dz\right]\\
+		&=\frac{d}{ds}\left[\int_0^1f\of{\gamma_s\of{t}}\gamma_s'\of{t}dt\right]\\
+		&=\frac{d}{ds}\left[\int_0^1f\of{H\of{t,s}}H_t\of{t,s}dt\right]\\
+		&=\int_0^1\frac{\partial}{\partial s}\left[f\of{H\of{t,s}}\frac{\partial}{\partial t}H\of{t,s}\right]dt\\
+		&=\int_0^1\left(f'\of{H(t,s)}\cdot \frac{\partial}{\partial s}H\of{t,s}\cdot \frac{\partial}{\partial t}H\of{t,s}+f\of{H(t,s)}\cdot \frac{\partial^2}{\partial s\partial t}H\of{t,s}\right)dt\\
+		&=\int_0^1\frac{\partial}{\partial t}\left[f\of{H(t,s)}\frac{\partial }{\partial s}H\of{t,s}\right]dt\quad\because H\in C^2\\
+		&=\left[f\of{H(t,s)}\frac{\partial }{\partial s}H\of{t,s}\right]_0^1\\
+		&=f\of{H\of{1,s}}\frac{\partial}{\partial s}H\of{1,s}-f\of{H\of{0,s}}\frac{\partial}{\partial s}H\of{0,s}\\
+		&=0,
+		\end{align*} since \begin{enumerate}[(i)]
+			\item By (H3), $H\of{1,s}=H\of{0,s}$ holds.
+			\item $\displaystyle\frac{\partial}{\partial s}H\of{1,s}=\lim_{h\to 0}\frac{H\of{1,s+h}-H\of{1,s}}{h}=\lim_{h\to 0}\frac{H\of{0,s+h}-H\of{0,s}}{h}=\frac{\partial}{\partial s}H\of{0,s}$.
+		\end{enumerate}
+		Hence \[
+		\frac{d}{ds}\left[I\of{s}\right]=0\implies I\of{0}=I\of{1}\implies
+		\int_{\gamma_0}f\of{z}dz=\int_{\gamma_1}f\of{z}dz.
+		\]
+	\end{proof}
+	\vspace{8pt}
+	\begin{tcolorbox}[colback=white,colframe=thmcolor,arc=5pt,title={\color{white}\bf Cauchy-Goursat Theorem}]
+		\begin{theorem}
+			Let $f:D\to\C$ be a holomorphic function, where $D\subseteq\C$ is a simply connected domain. Let $C$ be a closed contour in $D$. Then \[
+			\oint_C f\of{z}dz = 0.
+			\]
+		\end{theorem}
+	\end{tcolorbox}
+	
+	\begin{tikzpicture}[scale=1.5]
+	
+	% Connected and simply connected
+	\filldraw[fill=green!20] (0,0) ellipse (1cm and 0.5cm);
+	\draw (0.8,0) node {$D$};
+	\draw (0,-1) node {Connected (\textcolor{blue}{O})};
+	\draw (0,-1.4) node {Simply connected (\textcolor{blue}{O})};
+	
+	% Non-connected and simply connected
+	\filldraw[fill=green!20] (4.5,0) circle (0.4cm);
+	\draw (4.5,0) node {$D_1$};
+	\filldraw[fill=green!20] (3.5,0) circle (0.4cm);
+	\draw (3.5,0) node {$D_2$};
+	\draw (4,-1) node {Connected (\textcolor{red}{X})};
+	\draw (4,-1.4) node {Simply connected (\textcolor{blue}{O})};
+	
+	% Connected and non simply connected
+	\filldraw[fill=green!20] (0,-3) ellipse (1cm and 0.7cm);
+	\draw (0.8,-3) node {$D$};
+	\draw (0,-4) node {Connected (\textcolor{blue}{O})};
+	\draw (0,-4.4) node {Simply connected (\textcolor{red}{X})};
+	\filldraw[fill=white] (0,-3) circle (0.2cm);
+	
+	% Non-connected and non simply connected
+	\filldraw[fill=green!20] (4.8,-3) circle (0.6cm);
+	\draw (4.8,-3) node {$D_1$};
+	\filldraw[fill=green!20] (3.2,-3) circle (0.6cm);
+	\filldraw[fill=white] (3.2,-3) circle (0.1cm);
+	\draw (3.5,-3) node {$D_2$};
+	\draw (4,-4) node {Connected (\textcolor{red}{X})};
+	\draw (4,-4.4) node {Simply connected (\textcolor{red}{X})};
+	
+	\end{tikzpicture}
+	
+	\newpage
+	\section{Existence of Primitive}
+	
+	
+	\begin{tcolorbox}[colback=white,colframe=thmcolor,arc=5pt,title={\color{white}\bf Anti-derivative Theorem}]
+		\begin{theorem}
+			Let \begin{enumerate}[(i)]
+				\item $D$ is a simply connected domain and
+				\item $f:D\to\C$ is holomorphic.
+			\end{enumerate} Then there is a holomorphic function $F:D\to\C$ such that \[
+			z\in D\implies F'\of{z}=f\of{z}.
+			\]
+		\end{theorem}
+	\end{tcolorbox}
+	\begin{proof}
+		Fixed a point $p\in D$. Define a function $F:D\to\C$ as follows: \[
+		F\of{z}=\int_{\gamma_z}f\of{\zeta}d\zeta
+		\] where $\gamma_z$ is a path joining $p$ to $z$. \begin{enumerate}[(i)]
+			\item ($F$ is well-defined) Clearly, $\gamma:=\gamma_z+\of{-\tilde{\gamma_z}}$ is closed. Then
+			\begin{align*}
+				\int_{\gamma}f\of{\zeta}d\zeta=0&\implies \int_{\gamma_z+\of{-\tilde{\gamma_z}}}f\of{\zeta}d\zeta=0\\
+				&\implies\int_{\gamma}f\of{\zeta}d\zeta=\int_{\tilde{\gamma_z}}f\of{\zeta}d\zeta
+			\end{align*} That is, Cauchy Integral Theorem gives $F$ is well-defined.
+			\item (Holomorphicity of $F$ and $F'=f$ in $D$) Since $f$ is holomorphic in $D$, it is also continuous there. Let $\varepsilon>0$. Then \[
+			\exists\delta>0:\forall z\in D:\abs{w-z}<\delta\implies\abs{f\of{w}-f\of{z}}<\varepsilon.
+			\] We take a $w$ such that $0<\abs{w-z}<\delta$. Then \[
+			\frac{F\of{w}-F\of{z}}{w-z}=\frac{1}{w-z}\of{\int_{\gamma_w}f\of{\zeta}d\zeta-\int_{\gamma_z}f\of{\zeta}d\zeta}.
+			\] Let $\gamma_{zw}$ is a straight line path joining $z$ to $w$. By the Cauchy Integral Theorem, we obtain \[
+			0=\int_{\gamma_z+\gamma_{zw}-\gamma_w}f\of{\zeta}d\zeta\implies\int_{\gamma_{zw}}f\of{\zeta}d\zeta=\int_{\gamma_w}f\of{\zeta}d\zeta-\int_{\gamma_z}f\of{\zeta}d\zeta.
+			\] Note that \[
+			w-z=\zeta\bigg|_z^w=\int_{\gamma_{zw}}\frac{d}{d\zeta}\left[\zeta\right] d\zeta=\int_{\gamma_{zw}}1d\zeta.
+			\]Then \begin{align*}
+				\frac{F\of{w}-F\of{z}}{w-z}-f\of{z}&=\frac{1}{w-z}\int_{\gamma_{zw}}f\of{\zeta}d\zeta-f\of{z}\\
+				&=\frac{1}{w-z}\int_{\gamma_{zw}}f\of{\zeta}d\zeta-f\of{z}\cdot\frac{1}{w-z}\int_{\gamma_{zw}}1d\zeta\\
+				&=\frac{1}{w-z}\int_{\gamma_{zw}}\of{f\of{\zeta}-f\of{z}}d\zeta,
+			\end{align*} and so \begin{align*}
+				\abs{\frac{F\of{w}-F\of{z}}{w-z}-f\of{z}}&=\abs{\frac{1}{w-z}\int_{\gamma_{zw}}\of{f\of{\zeta}-f\of{z}}d\zeta}\\
+				&=\frac{1}{\abs{w-z}}\abs{\int_{\gamma_{zw}}\of{f\of{\zeta}-f\of{z}}d\zeta}\\
+				&\leq\frac{1}{\abs{w-z}}\cdot\max_{\zeta\in\gamma_{zw}}\abs{f\of{\zeta}-f\of{z}}\cdot\int_{\gamma_{zw}}\abs{dz}\\
+				&<\frac{1}{\abs{w-z}}\cdot\varepsilon\cdot\abs{w-z}\\
+				&=\varepsilon.
+			\end{align*} Thus $F'\of{z}=f\of{z}$, and $F$ is holomorphic.
+		\end{enumerate}
+	\end{proof}
 
+	\newpage
+	\section{The Cauchy Integral Formula}
+	
+	\begin{tcolorbox}[colback=white,colframe=thmcolor,arc=5pt,title={\color{white}\bf The Cauchy Integral Formula for Circular Paths}]
+		\begin{theorem}
+			Let \begin{enumerate}[(1)]
+				\item $D$ be a domain;
+				\item $f:D\to\C$ be holomorphic in $D\setminus\set{0}$, and continuous on $D$;
+				\item the disk $\Delta:=\set{z\in\C:\abs{z-z_0}\leq r}\subset D$ with $r>0$ and $z_0\in D$.
+			\end{enumerate} Then \[
+				f\of{z_0}=\frac{1}{2\pi i}\int_{C_r}\frac{f\of{z}}{z-z_0}dz,\quad \abs{z-z_0}<r,
+			\] where $C_r$ is the circular path $C_r\of{t}=z_0+re^{it}$, $t\in[0,2\pi]$, with enter $z_0$ and radius $r>0$ traversed in the anti-clockwise direction.
+		\end{theorem}
+	\end{tcolorbox}
+	\begin{proof}
+		Let $\varepsilon>0$. We must show that \[
+		\abs{\frac{1}{2\pi i}\int_{C_r}\frac{f\of{z}}{z-z_0}dz-f\of{z_0}}<\varepsilon.
+		\] The continuity of $f$ on $D$ gives \[
+		\exists\delta:\abs{z-z_0}<\varepsilon\implies\abs{f\of{z}-f\of{z_0}}<\varepsilon.
+		\] Since $C_r$ is $D\setminus\set{z_0}$-homotopic to $C_\delta$, we have \[
+		\int_{C_r}\frac{f\of{z}}{z-z_0}dz=\int_{C_\delta}\frac{f\of{z}}{z-z_0}dz
+		\] Note that \[
+		\int\frac{1}{z-z_0}dz=2\pi i.
+		\] Thus, \begin{align*}
+			\abs{\frac{1}{2\pi i}\int_{C_r}\frac{f\of{z}}{z-z_0}dz-f\of{z_0}}&=
+			\abs{\frac{1}{2\pi i}\int_{C_\delta}\frac{f\of{z}}{z-z_0}dz-f\of{z_0}}\\
+			&=\abs{\frac{1}{2\pi i}\int_{C_\delta}\frac{f\of{z}}{z-z_0}dz-\frac{1}{2\pi i}\cdot f\of{z_0}\cdot\int_{C_\delta}\frac{1}{z-z_0}dz}\\
+			&=\abs{\frac{1}{2\pi i}\int_{C_\delta}\frac{f\of{z}-f\of{z_0}}{z-z_0}dz}\\
+			&\leq\frac{1}{\abs{2\pi i}}\cdot\max_{z\in C_\delta}\abs{\frac{f\of{z}-f\of{z_0}}{z-z_0}}\cdot\int_{C_\delta}\abs{dz}\\
+			&<\frac{1}{2\pi}\cdot\frac{\varepsilon}{\delta}\cdot 2\pi\delta\\
+			&=\varepsilon.
+		\end{align*}
+	\end{proof}
+
+\begin{tcolorbox}[colback=white,colframe=defcolor,arc=5pt,title={\color{white}\bf Length of Curve}]
+	
+\end{tcolorbox}\begin{tcolorbox}[colback=white,colframe=defcolor,arc=5pt,title={\color{white}\bf Length of Curve}]
+
+\end{tcolorbox}\begin{tcolorbox}[colback=white,colframe=defcolor,arc=5pt,title={\color{white}\bf Length of Curve}]
+
+\end{tcolorbox}\begin{tcolorbox}[colback=white,colframe=defcolor,arc=5pt,title={\color{white}\bf Length of Curve}]
+
+\end{tcolorbox}\begin{tcolorbox}[colback=white,colframe=defcolor,arc=5pt,title={\color{white}\bf Length of Curve}]
+
+\end{tcolorbox}\begin{tcolorbox}[colback=white,colframe=defcolor,arc=5pt,title={\color{white}\bf Length of Curve}]
+
+\end{tcolorbox}\begin{tcolorbox}[colback=white,colframe=defcolor,arc=5pt,title={\color{white}\bf Length of Curve}]
+
+\end{tcolorbox}\begin{tcolorbox}[colback=white,colframe=defcolor,arc=5pt,title={\color{white}\bf Length of Curve}]
+
+\end{tcolorbox}
 	\begin{tcolorbox}[colback=white,colframe=defcolor,arc=5pt,title={\color{white}\bf Length of Curve}]
 		\begin{definition}
 			
