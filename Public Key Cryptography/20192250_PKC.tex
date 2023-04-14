@@ -1237,5 +1237,51 @@
 	The algorithm is not deterministic, meaning it may not always find a factor in a fixed number of steps. However, it has an expected running time of $O(\sqrt{p})$, where $p$ is the smallest prime factor of $N$, making it an efficient algorithm for finding small factors.
 	
 
+	
+	\newpage
+	\chapter{Discrete Logarithm Problem}
+	In cryptography, the discrete logarithm problem (DLP) is the problem of computing $x$ given $g$, $h$, and $n$, where \begin{enumerate}[(i)]
+		\item $G=\langle g\rangle$ with $\abs{G}=n$;
+		\item $h=g^x\in G$.
+	\end{enumerate} In other words,  \begin{center}
+		``Given $h\in\langle g\rangle$, find $x\in[0,n)$ such that $g^x=h$''.
+	\end{center}
+
+	\begin{algorithm}[H]
+		\caption{DLP Solution: Brute Force Search}
+		\KwData{Cyclic group $G=\langle g\rangle$ with order $n$, and $h\in G$.}
+		\KwResult{$x\in\set{0,1,\cdots, n-1}$ such that $g^x=h$.}
+		\vspace{4pt}
+		\vspace{4pt}
+		$t\gets 1$\;
+		\vspace{4pt}
+		\For{$j\gets 0$ \KwTo $n-1$}{
+		\eIf{$t=h$}{
+			\Return j\;
+		}{
+			$t\gets tg$\;
+		}
+		}
+	\end{algorithm}
+	
+	This problem arises in many cryptographic systems, including the Diffie-Hellman key exchange protocol and the Digital Signature Algorithm. If an efficient algorithm for solving the DLP is discovered, then these systems would become insecure.
+	
+	The DLP is a difficult problem to solve in general, and there is no known algorithm that can solve it efficiently on all inputs. However, there are several algorithms that can solve the problem for certain groups and values of $p$.
+	
+	One such algorithm is the baby-step giant-step algorithm, which uses the fact that any element $y$ in a cyclic group $G$ can be expressed as $y = g^k$ for some integer $k$. The algorithm works by precomputing a table of $m$ pairs $(g^{jr}, j)$ for $j=0,1,\ldots, m-1$, where $m$ is some integer parameter and $r = \lfloor p/m\rfloor$. Then, for each integer $i=0,1,\ldots, r-1$, the algorithm computes $y(g^{-m})^i$ using $m$ multiplications and searches the table for a match. If a match is found, then the algorithm computes $j$ and $i$ and returns $jr + i$ as the solution to the DLP. If no match is found, then the algorithm repeats with a larger value of $m$.
+	
+	Another algorithm is the Pollard rho algorithm, which works by iterating through a sequence of numbers $x_0, x_1, x_2, \ldots$ defined by the recurrence relation $x_{i+1} = f(x_i)$, where $f$ is some function on $G$. The algorithm keeps track of two values $a$ and $b$ and computes $g^a$, $g^b$, and $g^{a+b}$ at each iteration. If $g^a = g^b$, then the algorithm returns $a-b$ as the solution to the DLP. If $g^a = g^{a+b}$, then the algorithm returns $b$ as the solution to the DLP. Otherwise, the algorithm repeats with a new starting value of $x_0$.
+	
+	These algorithms and others like them are based on the algebraic properties of cyclic groups, including the existence of a generator $g$ and the group operation of multiplication modulo $p$. In particular, the difficulty of the DLP is related to the difficulty of computing discrete logarithms in general, which is an active area of research in number theory and algebraic geometry.
+	
+	\begin{tcolorbox}[colback=white,colframe=lemcolor,arc=5pt,title={\color{white}\bf }]
+		
+	\end{tcolorbox}
+	\begin{tcolorbox}[colback=white,colframe=lemcolor,arc=5pt,title={\color{white}\bf }]
+		
+	\end{tcolorbox}
+	\begin{tcolorbox}[colback=white,colframe=lemcolor,arc=5pt,title={\color{white}\bf }]
+		
+	\end{tcolorbox}
 	% End document
 \end{document}
