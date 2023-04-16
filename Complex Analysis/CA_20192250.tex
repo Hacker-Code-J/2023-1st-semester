@@ -128,6 +128,7 @@
 
 \newcommand{\sol}{\textcolor{magenta}{\bf Sol}}
 \newcommand{\conjugate}[1]{\overline{#1}}
+\newcommand{\Hol}{\operatorname{Hol}}
 
 \renewcommand{\Re}{\operatorname{Re}}
 \renewcommand{\Im}{\operatorname{Im}}
@@ -1323,17 +1324,16 @@
 	
 	\newpage
 	\section{The Cauchy Integral Formula}
-	
-	\begin{tcolorbox}[colback=white,colframe=thmcolor,arc=5pt,title={\color{white}\bf The Cauchy Integral Formula for Circular Paths}]
-		\begin{theorem}
+	\begin{tcolorbox}[colback=white,colframe=procolor,arc=5pt,title={\color{white}\bf }]
+		\begin{proposition}
 			Let \begin{enumerate}[(1)]
 				\item $D$ be a domain;
 				\item $f:D\to\C$ be holomorphic in $D\setminus\set{0}$, and continuous on $D$;
-				\item the disk $\Delta:=\set{z\in\C:\abs{z-z_0}\leq r}\subset D$ with $r>0$ and $z_0\in D$.
+				\item the disc $\Delta:=\set{z\in\C:\abs{z-z_0}\leq r}\subset D$ with $r>0$ and $z_0\in D$.
 			\end{enumerate} Then \[
 			f\of{z_0}=\frac{1}{2\pi i}\int_{C_r}\frac{f\of{z}}{z-z_0}dz,\quad \abs{z-z_0}<r,
 			\] where $C_r$ is the circular path $C_r\of{t}=z_0+re^{it}$, $t\in[0,2\pi]$, with enter $z_0$ and radius $r>0$ traversed in the anti-clockwise direction.
-		\end{theorem}
+		\end{proposition}
 	\end{tcolorbox}
 	\begin{proof}
 		Let $\varepsilon>0$. We must show that \[
@@ -1354,42 +1354,137 @@
 			&=\varepsilon.
 		\end{align*}
 	\end{proof}
+
+	\begin{tcolorbox}[colback=white,colframe=thmcolor,arc=5pt,title={\color{white}\bf The Cauchy Integral Formula for Circular Paths}]
+		\begin{theorem}
+			Let \begin{enumerate}[(1)]
+				\item $D$ be a domain;
+				\item $f:D\to\C$ be holomorphic in $D$ and $z_0\in D$;
+				\item the disc $\Delta:=\set{z\in\C:\abs{z-z_0}\leq r}\subset D$ with $r>0$ and $z_0\in D$.
+			\end{enumerate} Then \[
+			f\of{w}=\frac{1}{2\pi i}\int_{C_r}\frac{f\of{z}}{z-w}dz,\quad \abs{w-z_0}<r,
+			\] where $C_r$ is the circular path $C_r\of{t}=z_0+re^{it}$, $t\in[0,2\pi]$, with enter $z_0$ and radius $r>0$ traversed in the anti-clockwise direction.
+		\end{theorem}
+	\end{tcolorbox}
+	\begin{proof}
+		Since $\displaystyle\frac{f\of{z}}{z-w
+		}$ is holomorphic in $D\setminus\set{w}$ and $C_\delta$ is $D\setminus\set{w}$-homotopic to $C_{r}$,
+		\begin{align*}
+			f\of{w}=\frac{1}{2\pi i}\int_{C_\delta}\frac{f\of{z}}{z-w}dz=\frac{1}{2\pi i}\int_{C_r}\frac{f\of{z}}{z-w}dz.
+ 		\end{align*}
+	\end{proof}
 	
+	\begin{tcolorbox}[colback=white,colframe=corcolor,arc=5pt,title={\color{white}\bf The Cauchy Integral Formula for General Paths}]
+	\begin{corollary}
+		Let \begin{enumerate}[(1)]
+			\item $D$ be a domain;
+			\item $f:D\to\C$ be holomorphic in $D$;
+			\item $\gamma$ be a closed path in $D$ which is $D\setminus\set{z_0}$-homotopic to a circular path $C$ centered at $z_0$, such that $C$ and its interior is contained in $D$.
+		\end{enumerate} Then $\displaystyle f\of{z_0}=\frac{1}{2\pi i}\int_\gamma\frac{f\of{z}}{z-z_0}dz$.
+	\end{corollary}
+	\end{tcolorbox}
 	
 	\newpage
 	\section{Holomorphic Functions are Infinitely Differentiable}
-	
+	\begin{tcolorbox}[colback=white,colframe=corcolor,arc=5pt,title={\color{white}\bf }]
+	\begin{corollary}
+		Let \begin{enumerate}[(1)]
+			\item $D$ be a domain;
+			\item $f:D\to\C$ be holomorphic in $D$;
+		\end{enumerate} Then $f'$ is holomorphic in $D$.
+	\end{corollary}
+	\end{tcolorbox}
+	\begin{remark}
+		The above gives the following chain of implications: \[
+		\boxed{f\in\Hol\of{D}}\Rightarrow\boxed{f'\in\Hol\of{D}}\Rightarrow\boxed{f''\in\Hol\of{D}}\Rightarrow\cdots\boxed{f^{\of{n}}\in\Hol\of{D}}\Rightarrow\cdots.
+		\]
+	\end{remark}
+	\begin{proof}
+		(Naive Proof) Let $\displaystyle f\of{z}=\frac{1}{2\pi i}\int_\gamma\frac{f\of{\zeta}}{\zeta-z}d\zeta$. Then \begin{align*}
+			f'\of{z}&=\frac{1}{2\pi i}\frac{d}{dz}\left[\int_\gamma\frac{f\of{\zeta}}{\zeta-z}d\zeta\right]\\
+			&=\frac{1}{2\pi i}\int_\gamma\frac{d}{dz}\left[\frac{f\of{\zeta}}{\zeta-z}\right]d\zeta\quad\text{(an assumption)}\\
+			&=\frac{1}{2\pi i}\int_\gamma\frac{f\of{\zeta}}{\of{\zeta-z}^2}d\zeta,
+		\end{align*} and $f''\of{z}=\displaystyle\frac{1}{2\pi i}\cdot 2\int_\gamma\frac{f\of{\zeta}}{\of{\zeta-z}^3}d\zeta$. Thus \[
+		f^{\of{n}}\of{z}=\frac{n!}{2\pi i}\int_\gamma\frac{f\of{\zeta}}{\of{\zeta-z}^{n+1}}d\zeta.
+		\]
+	\end{proof}
+
 	\newpage
-	\section{Liouville's Theorem; Fundamental Theorem of Algebra}
+	\section{Liouville's Theorem; F.T.A.}
+	\begin{tcolorbox}[colback=white,colframe=thmcolor,arc=5pt,title={\color{white}\bf Liouville's Theorem}]
+		\begin{theorem}
+			Every bounded entire function is constant.
+		\end{theorem}
+	\end{tcolorbox}
+	\begin{proof}
+		Let $M\geq 0$ be such that $\forall z\in\C:\abs{f\of{z}}\leq M$. Choose $w\in\C$, and let \[
+		\gamma\of{t}=w+Re^{it},\quad t\in[0,2\pi].
+		\] By generalized Cauchy integral theorem, \[
+		f'\of{w}=\frac{1}{2\pi i}\int_\gamma\frac{f\of{z}}{\of{z-w}^2}dz,
+		\] and so \begin{align*}
+			\abs{f'\of{w}}=\abs{\frac{1}{2\pi i}\int_\gamma\frac{f\of{z}}{\of{z-w}^2}dz}&\leq\abs{\frac{1}{2\pi i}}\cdot\max_{z\in\gamma}\abs{\frac{f\of{z}}{\of{z-w}^2}}\cdot\int_\gamma\abs{dz}\\
+			&\leq\frac{1}{2\pi}\cdot\frac{M}{R^2}\cdot 2\pi R\\
+			&=\frac{M}{R}.
+		\end{align*} Since $R>0$ was arbitrary, it follows that $f'\of{w}=0$, and hence $f$ is constant.
+	\end{proof}
+
+	\begin{tcolorbox}[colback=white,colframe=corcolor,arc=5pt,title={\color{white}\bf Fundamental Theorem of Algebra}]
+	\begin{corollary}
+		Every polynomial of degree $\geq 1$ has a root in $\C$.
+	\end{corollary}
+	\end{tcolorbox}
+	\begin{proof}
+		Let $P:\C\to\C:P\of{z}=\sum_{i=1}^d c_iz^i=c_0+c_1z+\cdots+c_dz^d$ is a polynomial with $d\geq 1$. Suppose that $P(z)$ has no root in $\C$, that is, for all $z\in\C$, $P\of{z}\neq 0$. Define the function $f$ by $f\of{z}=1/P\of{z}$ ($z\in\C$), is entire. Note that \[
+		\abs{z}>R\implies\exists M,R>0:\abs{P\of{z}}\geq M\abs{z}^d.
+		\] And so \[
+		\abs{P\of{z}}\leq\max\set{\frac{1}{MR^d},\frac{1}{m}},\quad z\in\C.
+		\] By Liouville's Theorem, $f$ must be constant, and so $P$ must be a constant, a contradiction to the fact that $d\geq 1$.
+	\end{proof}
 	
 	\newpage
 	\section{Morera's Theorem: converse to Cauchy's Integral Theorem}
-	\begin{tcolorbox}[colback=white,colframe=defcolor,arc=5pt,title={\color{white}\bf Length of Curve}]
-		
-	\end{tcolorbox}\begin{tcolorbox}[colback=white,colframe=defcolor,arc=5pt,title={\color{white}\bf Length of Curve}]
-		
-	\end{tcolorbox}\begin{tcolorbox}[colback=white,colframe=defcolor,arc=5pt,title={\color{white}\bf Length of Curve}]
-		
-	\end{tcolorbox}\begin{tcolorbox}[colback=white,colframe=defcolor,arc=5pt,title={\color{white}\bf Length of Curve}]
-		
-	\end{tcolorbox}\begin{tcolorbox}[colback=white,colframe=defcolor,arc=5pt,title={\color{white}\bf Length of Curve}]
-		
-	\end{tcolorbox}\begin{tcolorbox}[colback=white,colframe=defcolor,arc=5pt,title={\color{white}\bf Length of Curve}]
-		
-	\end{tcolorbox}\begin{tcolorbox}[colback=white,colframe=defcolor,arc=5pt,title={\color{white}\bf Length of Curve}]
-		
-	\end{tcolorbox}\begin{tcolorbox}[colback=white,colframe=defcolor,arc=5pt,title={\color{white}\bf Length of Curve}]
-		
+	\begin{tcolorbox}[colback=white,colframe=thmcolor,arc=5pt,title={\color{white}\bf Morera's Theorem}]
+	\begin{theorem}
+		Let \begin{enumerate}[(i)]
+			\item $D$ is a domain;
+			\item $f:D\to\C$ is a continuous function such that
+			\item for every closed rectangular path $\gamma$ in every disc contained in $D$, $\oint_\gamma f\of{z}dz=0$.
+		\end{enumerate} Then $f$ is holomorphic in $D$.
+	\end{theorem}
 	\end{tcolorbox}
-	\begin{tcolorbox}[colback=white,colframe=defcolor,arc=5pt,title={\color{white}\bf Length of Curve}]
-		\begin{definition}
-			
-		\end{definition}
-	\end{tcolorbox}	
 
 	\newpage
 	\chapter{Taylor and Laurent series}
 		
+	
+	\begin{tcolorbox}[colback=white,colframe=defcolor,arc=5pt,title={\color{white}\bf Length of Curve}]
+		
+	\end{tcolorbox}
+
+	\begin{tcolorbox}[colback=white,colframe=defcolor,arc=5pt,title={\color{white}\bf Length of Curve}]
+		
+	\end{tcolorbox}
+
+	\begin{tcolorbox}[colback=white,colframe=defcolor,arc=5pt,title={\color{white}\bf Length of Curve}]
+		
+	\end{tcolorbox}
+
+	\begin{tcolorbox}[colback=white,colframe=defcolor,arc=5pt,title={\color{white}\bf Length of Curve}]
+		
+	\end{tcolorbox}
+
+	\begin{tcolorbox}[colback=white,colframe=defcolor,arc=5pt,title={\color{white}\bf Length of Curve}]
+		
+	\end{tcolorbox}
+
+	\begin{tcolorbox}[colback=white,colframe=defcolor,arc=5pt,title={\color{white}\bf Length of Curve}]
+		
+	\end{tcolorbox}
+
+	\begin{tcolorbox}[colback=white,colframe=defcolor,arc=5pt,title={\color{white}\bf Length of Curve}]
+		
+	\end{tcolorbox}
+	
 	\bibliographystyle{plain}
 	\bibliography{references}	
 	
