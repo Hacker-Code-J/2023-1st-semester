@@ -39,7 +39,7 @@
 \titleformat{\section}
 {\normalfont\sffamily\Large\bfseries\color{titleblue!100!gray}}{\thesection}{1em}{}
 \titleformat{\subsection}
-{\normalfont\sffamily\large\bfseries\color{titleblue!50!gray}}{\thesubsection}{1em}{}
+{\normalfont\sffamily\large\bfseries\color{titleblue!75!gray}}{\thesubsection}{1em}{}
 
 % Table of contents formatting
 \usepackage{tocloft}
@@ -519,44 +519,150 @@
 	\newpage
 	\chapter{Integer Factorization Problem}
 	
-	\section*{Pollard's $p-1$ Method}
+	\section{Pollard's $p-1$ Method}
 	Pollard's $p-1$ method is an algorithm for factoring a composite number $N$ when one of its prime factors, $p$, has a small prime factor in $p-1$. The method is based on Fermat's Little Theorem and relies on the properties of the greatest common divisor (GCD) function.
-	
-	\subsection*{Mathematical Background}
+	\vspace{4pt}\\
+	\begin{algorithm}[H]
+		\caption{Pollard's $p-1$ Method}
+		\label{algo:pollard_p-1}
+		\KwData{An integer $N=pq$ which is the product of two primes $p$ and $q$.}
+		\KwResult{$(p,q)$ or \texttt{Failure}.}
+		
+		\BlankLine
+		$k_1,k_2\gets\mathbb{Z}^+$ \tcp*{Choose two bounds}
+		$i\gets 0$\;
+		\While{$i<k_1$}{
+			$a\uniform \left(1,\sqrt{N}\right)$ \tcp*{Initialization}
+			\If{$1<\gcd\of{a,N}<N$}{
+				\Return{$\displaystyle\of{\gcd\of{a,N},\frac{N}{\gcd\of{a,N}}}$}\;
+			}
+			$j\gets 2$\;
+			\While{$j<k_2$}{
+				$a \gets a^j \mod N$\;
+				$d \gets \gcd(a - 1, N)$\;
+				\uIf{$1 < d < N$}{
+					\Return{$(d,N/d)$}\;
+				}\ElseIf{$d = N$}{
+					\textbf{Goto} line 19\;
+				}
+				$j\to j+1$\;
+			}
+			$i\gets i+1$\;
+		}
+		\Return{Failure}\;
+	\end{algorithm}
+
+	\subsection{The multiple of $p-1$}
 	Fermat's Little Theorem states that if $p$ is a prime number and $a$ is an integer not divisible by $p$, then
 	\[
 	a^{p-1} \equiv 1 \pmod{p}.
 	\]
-	Now, let $N = pq$ be a composite number with two prime factors $p$ and $q$. Let $a$ be a random integer such that $1 < a < N$. If we can find an integer $k$ such that
+	Let $N = pq$, and let $a\uniform[1,p-1]$. Consider an integer $k$ such that $k=(p-1)t$ for some $t\in\Z$, that is, a multiple of $p-1$, then
 	\[
-	a^k \equiv 1 \pmod{p},
+	a^k =\of{a^{p-1}}^t\equiv 1 \pmod{p}.
 	\]
-	then we have
-	\[
-	a^k - 1 \equiv 0 \pmod{p},
+	Then \begin{align*}
+		a^k - 1 \equiv 0 \pmod{p}&\implies p \mid (a^k - 1)\\
+		&\implies \gcd\of{a^k-1, N}\in\set{p,N=pq}.
+	\end{align*} If $\gcd\of{a^k-1,N}\neq N$ then \[
+	N=p\times q=\gcd\of{a^k-1,N}\times\frac{N}{\gcd\of{a^k-1,N}}.
 	\]
-	which implies that $p \mid (a^k - 1)$. Since $p$ and $q$ are distinct primes, it is unlikely that $q \mid (a^k - 1)$, so we expect that
-	\[
-	\text{gcd}(a^k - 1, N) = p,
-	\]
-	and we can find the other prime factor as $q = \frac{N}{p}$.
+	\hl{Pollard's $p-1$ method aims to find such an integer $k$ is a multiple of $p-1$}.
+	\vspace{8pt}
+	\iffalse
+	\begin{remark}
+		Consider $\square\uniform\of{0,\ceil*{\sqrt{N}}}$. Then either $1<\gcd\of{\square,N}<N$ or $\gcd\of{\square,N}=1$.
+		\begin{itemize}
+			\item[] ($\gcd\of{\square,N}\in(1,N)$) Clearly, $N=\gcd\of{\square, N}\times\frac{N}{\gcd\of{\square, N}}$.
+			\item[] ($\gcd\of{\square,N}=1$) Since $\left[\gcd\of{\square,N}=1\Rightarrow\gcd\of{\square^k,N}=1\right]$,
+		\end{itemize}
+	\end{remark}
+	\fi
+	\subsection{How to find the multiple of $p-1$}
 	
-	Pollard's $p-1$ method aims to find such an integer $k$. The idea is to choose a bound $B$ and compute the least common multiple of all primes less than or equal to $B$, denoted by $\text{lcm}(1, 2, \ldots, B)$. If $p-1$ has only small prime factors less than or equal to $B$, then
-	\[
-	k = \text{lcm}(1, 2, \ldots, B)
-	\]
-	will satisfy the desired property.
+	\begin{tcolorbox}[colback=white,colframe=lemcolor,arc=5pt,title={\color{white}\bf Existence of the Multiple of $p-1$}]
+		\begin{lemma}
+			Let $p$ be a prime. Then \[
+			\exists n_0\in\N:\left[n\geq n_0\implies p-1\mid n!\right].
+			\]
+		\end{lemma}
+	\end{tcolorbox}
+	\begin{proof}
+		Define a set $S$ by \[
+		S:=\set{k\in\N:k!\equiv0\pmod{p-1}}.
+		\] Since $\of{p-1}!\equiv 0\pmod{p-1}$, we know $p-1\in S$, \ie, $S\neq\emptyset$. By well-ordering principle, $\exists\min S=:n_0$. Since $n_0\in S$, $n_0!\equiv 0\pmod{p-1}$ holds.
+		
+		We want to show that $n\geq n_0\implies p-1\mid n!$. Let $n\geq n_0$ then $n=n_0+k$ for some $k\in\Z_{\geq 0}$. Now, consider the factorial of $n$: \[
+		n!=\of{n_0+k}!=\of{n_0+k}\of{n_0+k-1}\cdots\of{n_0+1}n_0!.
+		\] Thus, \[
+		n_0!\equiv 0\pmod{p-1}\implies p-1\mid n_0!\implies p-1\mid \underbrace{n_0!\of{n_0+1}\cdots\of{n_0+k}}_{=\of{n_0+k}!=n!}.
+		\]
+	\end{proof}
+
+	\begin{example}
+		Consider the prime $65537=2^{16}+1$. Then \begin{align*}
+			15!(=2^{11}\cdot 3^6\cdot 5^3\cdot 7^2\cdot 11\cdot 13)\mod 2^{16} &= 22528&\Rightarrow p-1\nmid 15!,\\
+			16!(=2^{15}\cdot 3^6\cdot 5^3\cdot 7^2\cdot 11\cdot 13)\mod 2^{16} &= 32768&\Rightarrow p-1\nmid 16!,\\
+			17!(=2^{15}\cdot 3^6\cdot 5^3\cdot 7^2\cdot 11\cdot 13\cdot 17)\mod 2^{16} &= 32768&\Rightarrow p-1\nmid 17!,\\
+			18!(=2^{16}\cdot 3^8\cdot 5^3\cdot 7^2\cdot 11\cdot 13\cdot 17)\mod 2^{16} &= 0&\Rightarrow p-1\mid 18!,\\
+			19!(=2^{16}\cdot 3^8\cdot 5^3\cdot 7^2\cdot 11\cdot 13\cdot 17\cdot 19)\mod 2^{16} &= 0&\Rightarrow p-1\mid 19!.
+		\end{align*}
+	\end{example}
 	
-	The algorithm proceeds as follows:
+	\begin{tcolorbox}[colback=white,colframe=procolor,arc=5pt,title={\color{white}\bf Existence of the Multiple of $p-1$}]
+		\begin{proposition}
+			\[
+			\gcd\of{a^{j!}-1,N}=N\implies\gcd\of{a^{\of{j+1}!}-1,N}=N.
+			\]
+		\end{proposition}
+	\end{tcolorbox}
+	\begin{proof}
+		Since \begin{align*}
+		\gcd\of{a^{j!}-1,N}=N&\implies N\mid a^{j!}-1\\
+		&\implies a^{j!}\equiv 1\pmod{N}\\
+		&\implies \of{a^{j!}}^{j+1}\equiv 1\pmod{N}\\
+		&\implies N\mid a^{\of{j+1}!}-1\\
+		&\implies a^{\of{j+1}!}-1=Nk\quad \text{for some}\quad k\in\Z,
+		\end{align*} we have \[
+		\gcd\of{a^{\of{j+1}!}-1,N}=\gcd\of{Nk,N}=N.
+		\]
+	\end{proof}
 	
-	\begin{enumerate}
-		\item Choose a bound $B$ and a random integer $a$ such that $1 < a < N$.
-		\item Compute $k = \text{lcm}(1, 2, \ldots, B)$.
-		\item Compute $g = \text{gcd}(a^k - 1, N)$.
-		\item If $g$ is a nontrivial factor of $N$ (i.e., $1 < g < N$), return $g$ as the prime factor of $N$. Otherwise, choose a new bound $B$ and repeat from step 1.
-	\end{enumerate}
+	\subsection{How to compute $\gcd\of{a^{n!}-1,N}$ efficiently}
 	
-	The success of Pollard's $p-1$ method depends on the choice of the bound $B$ and the prime factors of $p-1$. If the algorithm fails to find a nontrivial factor, a larger bound or other factoring methods can be employed.
+	\begin{tcolorbox}[colback=white,colframe=procolor,arc=5pt,title={\color{white}\bf Existence of the Multiple of $p-1$}]
+		\begin{proposition}
+			\begin{align*}
+				\gcd\of{a^{\of{j+1}!}-1,N}&=\gcd\of{a^{\of{j+1}!}\mod N-1,N}\\
+				&=\gcd\of{\of{a^{j!}\mod N}^{j+1}-1,N}.
+			\end{align*}
+		\end{proposition}
+	\end{tcolorbox}
+	
+	\begin{example}
+		Factor $N=5157437$ using Pollard $p-1$ method.\begin{proof}[\sol]
+			content...
+		\end{proof}
+	\end{example}
+	
+	
+	\begin{exercise}
+		Factor $N=221$ using Pollard $p-1$ method.\begin{proof}[\sol]
+			content...
+		\end{proof}
+	\end{exercise}
+
+	\subsection{Special Case I}
+	
+	\subsection{Special Case II}
+	\subsection{Special Case I}
+
+	\section{Fermat's Factorization Method}
+	
+	
+	\section{Pollard's $\rho$(Rho) Method}
+	
+	\subsection*{Mathematical Background}
 	
 	Let $p$ be a prime number. We want to show that there exists an integer $n_0 \in \mathbb{Z}$ such that for all $n \geq n_0$, $p-1 \mid n!$. 
 	
@@ -802,7 +908,7 @@
 	\end{tcolorbox}
 	\begin{proof}
 		Note that \begin{align*}
-		P_{n,k}=1-\Pr[(i,j)\in I^2, i\neq j\implies a_i\neq a_j]=1-\prod_{i=1}^{k-1}\of{1-\frac{i}{n}}.
+		P_{n,k}=1-\Pr[a_i\neq a_j\ \text{for all distinct}\ i,j]=1-\prod_{i=1}^{k-1}\of{1-\frac{i}{n}}.
 		\end{align*} Recall that Taylor series for exponential: \[
 		e^x=1+x+\frac{1}{2!}x^2+\frac{1}{3!}x^3+\cdots=\sum_{k=0}^{\infty}\frac{x^k}{k!}.
 		\] Note that $e^x\approx1+x$ for $x\in(-1,1)$:
@@ -831,6 +937,7 @@
 		Thus, $k\geq c\sqrt{n}$, where $c$ is a constant. That is, $O(\sqrt{n})$.
 	\end{remark}
 	
+	\iffalse
 	\begin{remark}
 		Find the upper bound of $P_{n,k}$. \begin{align*}
 		P_{n,k}
@@ -840,8 +947,40 @@
 		&\leq\frac{k^2}{2n}.
 		\end{align*} Thus, the upper bound of $P_{n,k}$ is less than 1/2 when $k=\floor*{\sqrt{n}}$.
 	\end{remark}
+	\fi
 	
 	\subsection{Set Intersection Bound}
+	
+	\begin{tcolorbox}[colback=white,colframe=thmcolor,arc=5pt,title={\color{white}\bf Set Intersection Bound}]
+		\begin{theorem}
+			Consider a set $S$ with $\abs{S}=n$. Let \[
+			a_1,a_2,\cdots, a_k\uniform S,\quad b_1,b_2,\cdots, b_k\uniform S
+			\] for $k<n$. For two multi-set $A=[a_1,a_2,\cdots,a_k]$ and $B=[b_1,b_2,\cdots, b_k]$, we have \[
+			\Pr[A\cap B\neq\emptyset]=1-e^{-\frac{k^2}{n}}
+			\]
+		\end{theorem}
+	\end{tcolorbox}
+	\begin{proof}
+		For all $i,j\in\set{1,\cdots, k}$, we have \[
+		\Pr[a_i=b_j]=\frac{1}{n}\implies\Pr[a_i\neq b_j]=1-\frac{1}{n}.
+		\] Thus \begin{align*}
+		\Pr[A\cap B\neq\emptyset]&=1-\prod_{i=1}^k\prod_{j=1}^k\Pr[a_i\neq b_j]\\
+		&=1-\prod_{i=1}^k\prod_{j=1}^k\of{1-\frac{1}{n}}\\
+		&=1-\of{1-\frac{1}{n}}^{k^2}\\
+		&\approx 1-\of{e^{-\frac{1}{n}}}^{k^2}\\
+		&=1-e^{-\frac{k^2}{n}}.
+		\end{align*}
+	\end{proof}
+	
+	\begin{remark}
+		Find minimum value of $k$ such that $P_{n,k}\geq 1/2$. \begin{align*}
+		P_{n,k}=1-e^{-\frac{k^2}{n}}\geq\frac{1}{2}&\implies e^{-k^2/n}\leq\frac{1}{2}\\
+		&\implies-\frac{k^2}{n}\leq\ln\frac{1}{2}\\
+		&\implies (\ln2)n\leq k^2\\
+		&\implies \ceil*{\sqrt{\of{\ln 2}n}}\leq k.
+		\end{align*} 
+		Thus, $k\geq c\sqrt{n}$, where $c$ is a constant. That is, $O(\sqrt{n})$.
+	\end{remark}
 	
 	\newpage
 	\section{Finding Collision of a (One-way) Function}
