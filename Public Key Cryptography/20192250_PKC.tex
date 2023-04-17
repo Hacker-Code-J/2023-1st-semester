@@ -115,6 +115,7 @@
 \usepackage{tikz}
 \usepackage{tikz-cd}
 \usetikzlibrary{calc}
+\usetikzlibrary{arrows.meta, positioning, shapes.multipart}
 
 %Tcolorbox
 \usepackage[most]{tcolorbox}
@@ -444,78 +445,6 @@
 	
 	There are also deterministic primality tests that can determine with certainty whether a number is prime or composite. One example is the AKS primality test, which is based on a polynomial-time algorithm and can handle very large numbers. However, deterministic tests are generally more complex and slower than probabilistic tests.
 	
-	\section{EEA}
-	\section{CRT}
-	
-	\newpage
-	IFP-based Schemes
-	
-	RSA-OAEP, RSA-PSS
-	
-	Random Oracle Model
-	
-	
-	How to Implement IFP-based Schemes Part 1
-	
-	Integer Multiplication, Division, (Modular) Exponentiation
-	
-	
-	How to Implement IFP-based Schemes Part 2
-	
-	Barrett Reduction, Montgomery Reduction
-	
-	
-	How to Solve IFP Part 1
-	
-	Birthday Bound, Floyd's Cycle Detection
-	
-	Pollard’s p-1 method, Pollard’s rho method
-	
-	
-	How to Solve IFP Part 2
-	
-	Quadratic Residue mod p (Legendre symbol), Square Roots modulo p
-	
-	QS, GNFS
-	
-	
-	Midterm Exam. (04.20.)
-	
-	
-	DLP-based Schemes
-	
-	DH, DSA, KCDSA
-	
-	
-	How to Solve DLP Part 1
-	
-	Baby-Step/Giant-Step Algorithm, Pollard’s rho method
-	
-	
-	How to Solve DLP Part 2
-	
-	Pohlig-Hellman Algorithm, Index Calculus Method
-	
-	
-	Elliptic Curve Cryptography Part 1
-	
-	Projective Space, Elliptic Curve, Elliptic Curve Group
-	
-	ECDH, ECDSA, EC-KCDSA
-	
-	
-	Elliptic Curve Cryptography Part 2
-	
-	Addition, Doubling
-	
-	NIST Curves, Curve25519
-	
-	
-	Post-Quantum Cryptography
-	
-	NIST PQC, KpqC
-	
-	
 	\newpage
 	\chapter{Integer Factorization Problem}
 	
@@ -653,176 +582,182 @@
 	\end{exercise}
 
 	\subsection{Special Case I}
+	Assume that $a^k\mod p = 1$. Then \[
+	p\mid a^k-1\implies \gcd\of{a^t-1,pq}\in\set{p,pq}.
+	\]
+	
 	
 	\subsection{Special Case II}
-	\subsection{Special Case I}
+	Assume that $p-1\mid n!$ and $q-1\mid n!$.
+	
+	
+	\newpage
+	\section{Fermat Factorization}
+	\subsection{Fermat Factorization ($N=a^2-b^2$)}
+	
+	\begin{algorithm}[H]
+		\caption{Fermat Factorization: $N=a^2-b^2$}
+		\KwData{$N=pq$, $B\in\Z_{>0}$.}
+		\KwResult{$(p,q)$ or \texttt{Failure}}
+		\BlankLine
+		\For{$b=1$ \KwTo $B$}{
+			$t\gets N+b^2$\;
+			\If{$t$ is a square}{
+				$a\gets\sqrt{t}$\;
+				\Return $\of{a-b,a+b}$\;
+			}
+		}
+		\Return \texttt{Failure}\;
+	\end{algorithm}
+	\begin{example}
+		Factor 6077 using Fermat method.
+		\begin{proof}[\sol]
+			Note that $\ceil*{\sqrt{6077}}=78$. Then \begin{align*}
+			78^2-6077&=7\\
+			&\vdots\\
+			81^2-6077&=484=22^2.
+			\end{align*}
+			Thus, $6077=\of{81+22}\of{81-21}=103\cdot 59$.
+		\end{proof}
+	\end{example}
 
-	\section{Fermat's Factorization Method}
+	\begin{tcolorbox}[colback=white,colframe=lemcolor,arc=5pt,title={\color{white}\bf }]
+		\begin{lemma}
+			Let $n\in 2\Z+1$. Define two sets: \begin{align*}
+			S_n&:=\set{(a,b)\in\Z^2:n=ab\ \text{with}\ 0<b\leq a},\\
+			T_n&:=\set{\of{u^2,v^2}\in\Z^2:n=u^2-v^2}.
+			\end{align*} Then $\exists\phi:S_n\leftrightarrow T_n$. In other words, there exists a one-to-one correspondence between factorizations of $n$ into two positive integers and differences of two squares that equal $n$.
+		\end{lemma}
+	\end{tcolorbox}
+	\begin{proof}
+		Define two functions: \begin{align*}
+		f:S_n\to T_n&:f\of{\of{a,b}}=\of{\of{\frac{a+b}{2}}^2,\of{\frac{a-b}{2}}^2},\\
+		g:T_n\to S_n&:g\of{\of{u^2,v^2}}=\of{\abs{u}+\abs{v},\abs{u}-\abs{v}}.
+		\end{align*} We claim that $g\circ f=\id_{S_n}$ and $f\circ g=\id_{T_n}$:\begin{align*}
+		\of{g\circ f}(a,b)&=g\of{\of{\frac{a+b}{2}}^2,\of{\frac{a-b}{2}}^2}=\of{\abs{\frac{a+b}{2}}+\abs{\frac{a-b}{2}},\abs{\frac{a+b}{2}}-\abs{\frac{a-b}{2}}}\\
+		&=\of{{\frac{a+b}{2}}+{\frac{a-b}{2}},{\frac{a+b}{2}}-{\frac{a-b}{2}}}\\
+		&=\of{a,b},\\
+		\of{f\circ g}\of{u^2,v^2}&=f\of{\abs{u}+\abs{v},\abs{u}-\abs{v}}=\of{\abs{u}^2,\abs{v}^2}=\of{u^2,v^2}.
+		\end{align*}
+	\end{proof}
 	
+	\subsection{Improved Fermat Factorization ($rN=a^2-b^2$)}
 	
-	\section{Pollard's $\rho$(Rho) Method}
+	Let $N=pq$ and $r<\min\set{p,q}$.
 	
-	\subsection*{Mathematical Background}
-	
-	Let $p$ be a prime number. We want to show that there exists an integer $n_0 \in \mathbb{Z}$ such that for all $n \geq n_0$, $p-1 \mid n!$. 
-	
-	Consider the integer $n_0 = p - 1$. Now, let $n \geq n_0$. We know that $n! = 1 \cdot 2 \cdot 3 \cdots (p-1) \cdots n$. Since $p$ is a prime number and $n_0 = p - 1$, it follows that $p-1$ is the largest integer smaller than $p$. Therefore, there must be at least one factor of $(p-1)$ in the product $1 \cdot 2 \cdot 3 \cdots (p-1) \cdots n$. 
-	
-	Now, we know that $p-1$ divides itself, so $p-1 \mid (p-1)$. Since the product $n!$ contains a factor of $(p-1)$, we can conclude that $p-1 \mid n!$ for all $n \geq n_0$. This completes the proof.
+	\begin{algorithm}[H]
+		\caption{Improved Fermat Factorization: $rN=a^2-b^2$}
+		\KwData{$N=pq$, $R\in\of{0,\min\set{p,q}}\setminus\set{2}$ and $B\in\Z_{>0}$.}
+		\KwResult{$(p,q)$ or \texttt{Failure}}
+		\vspace{4pt}
+		\vspace{4pt}
+		\For{$r=1$ \KwTo $R$}{
+			\For{$b=1$ \KwTo $B$}{
+				$t\gets rN+b^2$\;
+				\If{$t$ is a square}{
+					$a\gets\sqrt{t}$\;
+					$d\gets\gcd\of{N,a-b}$\;
+					\If{$1<d<N$}{
+						\Return $\of{d,N/d}$\;
+					}
+				}
+			}
+		}
+		\Return \texttt{Failure}\;
+	\end{algorithm}
+	\begin{remark}
+		Let $N\in 2\Z+1$ and $b\in\Z^+$. Then $2N+b^2$ is not square.
+		\begin{proof}
+			Note that, for any square number $\alpha$, $\alpha\mod 4\in\set{0,1}$ since \begin{align*}
+			\of{2k}^2&=4k^2\equiv 0\pmod{4}\\
+			\of{2k+1}^2&=4k^2+4k+1\equiv 1\pmod{4}.
+			\end{align*} Let $N=2m+1$ then \begin{itemize}
+				\item[] (Case 1) ($b=2n$) \[
+				2N+b^2=(4m+2)+4n^2\equiv 2\pmod{4}.
+				\]
+				\item[] (Case 2) ($b=2n+1$) \[
+				2N+b^2=(4m+2)+(4n^2+4n+1)\equiv 3\pmod{4}.
+				\]
+			\end{itemize} Thus, $2N+b^2\mod 4\in\set{2,3}$, and hence $2N+b^2$ is not square.
+		\end{proof}
+	\end{remark}
 	
 	\newpage
-	Let $p$ be a prime number. Now, consider the set $S = {n \in \mathbb{Z} \mid n \geq p, p-1 \nmid n!}$. This is the set of integers greater than or equal to $p$ for which $p-1$ does not divide $n!$. Our goal is to show that this set is empty.
+	\section{Pollard's $\rho$ Method for IFP}
 	
-	Assume for the sake of contradiction that $S$ is non-empty. Then by the well-ordering principle, there exists a least element $n_0 \in S$. By the definition of the set $S$, we have that $p-1 \nmid n_0!$.
+	Pollard's Rho algorithm is a probabilistic factorization algorithm that is particularly effective in finding small factors of large composite numbers. Given a composite number $N$, the algorithm aims to find a non-trivial factor $p$ of $N$.
 	
-	Since $n_0 \geq p$, we can write $n_0 = pk + r$, where $k \in \mathbb{Z}_{\geq 0}$ and $0 \leq r < p$. Note that $r \neq p-1$ because otherwise, we would have $n_0 = pk + (p-1)$, which implies $p-1 \mid n_0!$, a contradiction.
+	Pollard's Rho algorithm relies on the properties of pseudorandom sequences and the birthday paradox. The function $f(x)$ generates a pseudorandom sequence modulo $N$, and the algorithm looks for collisions in the sequence. When a collision is found, the algorithm computes the greatest common divisor of the difference of the colliding elements and $N$. If the greatest common divisor is greater than 1, a non-trivial factor of $N$ is found.
 	
-	Now consider $(n_0 - r)!$. Since $0 \leq r < p$, we have $n_0 - r \geq pk$. Therefore, $(n_0 - r)! = (pk)! = p^k k!$, and clearly, $p-1 \mid (n_0 - r)!$ because $p^k$ is divisible by $p-1$ for every positive integer $k$.
+	The algorithm is not deterministic, meaning it may not always find a factor in a fixed number of steps. However, it has an expected running time of $O(\sqrt{p})$, where $p$ is the smallest prime factor of $N$, making it an efficient algorithm for finding small factors.
+
+	Finding $a$ and $b$ that satisfy $rN=a^2-b^2$ is equivalent to finding $a$ and $b$ satisfying \begin{enumerate}[(i)]
+		\item $a^2\equiv b^2\pmod{N}$,
+		\item $\gcd\of{N,a-b}\in\of{1,N}$.
+	\end{enumerate}
+	Using Floyd's cycle-finding, we can find $a$ and $b$ satisfying above equation.
 	
-	Using the properties of factorials, we can write $n_0! = (n_0 - r)!(n_0 - r + 1)(n_0 - r + 2) \cdots n_0$. Since $p-1 \mid (n_0 - r)!$, it suffices to show that $p-1 \mid (n_0 - r + 1)(n_0 - r + 2) \cdots n_0$.
+	Define a function $f_{N,c}:\Z_N\to\Z_N$ as follows: \[
+	f_{N,c}\of{X}:=X^2+c\mod{N}.
+	\]
 	
-	Notice that $n_0 - r + 1, n_0 - r + 2, \dots, n_0$ are consecutive integers, and among them, there must be a multiple of $p-1$ because the range contains at least $p-1$ integers. Let $n_0 - r + i$ be a multiple of $p-1$, where $1 \leq i \leq p-1$.
-	
-	Since $p-1 \mid (n_0 - r + i)$ and $p-1 \mid (n_0 - r)!$, we have that $p-1 \mid n_0!$, which contradicts our assumption that $n_0 \in S$. Therefore, our assumption that $S$ is non-empty must be false.
-	
-	Thus, the set $S$ is empty, which means that for all $n \geq n_0$, $p-1 \mid n!$.
-	
-	\newpage
-	
+	\begin{tcolorbox}[colback=white,colframe=procolor,arc=5pt,title={\color{white}\bf }]
+		\begin{proposition}
+			A sequence $\set{a_n^{(p)}}:=\set{a_n\mod p}$ satisfies \[
+			a_i^{(p)}=
+			a_j^{(p)}\implies
+			a_{i+1}^{(p)}=
+			a_{j+1}^{(p)}
+			\]
+		\end{proposition}
+	\end{tcolorbox}
 	\begin{proof}
-		Let $p$ be a prime number. We want to prove that there exists a natural number $n_0$ such that for all $n \geq n_0$, $p-1$ divides $n!$. 
-		
-		Consider the set $S = \{k \in \mathbb{N} \mid k! \equiv 0 \pmod{p-1}\}$, which is the set of all natural numbers $k$ such that $p-1$ divides $k!$. We will show that this set is non-empty and then use the well-ordering principle to find its minimum element.
-		
-		First, note that for $k = p-1$, we have $(p-1)! \equiv 0 \pmod{p-1}$, since $(p-1)$ is a factor of $(p-1)!$. Therefore, $p-1 \in S$, and the set $S$ is non-empty.
-		
-		By the well-ordering principle, $S$ has a least element, say $n_0$. So, we have $n_0! \equiv 0 \pmod{p-1}$. We want to show that for all $n \geq n_0$, $p-1$ divides $n!$.
-		
-		Let $n \geq n_0$. Then we can write $n$ as $n = n_0 + k$ for some non-negative integer $k$. Now, consider $(n_0 + k)!$. By the definition of the factorial, we have:
-		
 		\begin{align*}
-		(n_0 + k)! &= (n_0 + k)(n_0 + k - 1) \cdots (n_0 + 1)n_0!
+		a_i^{(p)}=a_j^{(p)}&\iff a_i\mod p=a_j\mod p\\
+		&\iff a_i\equiv a_j\pmod{p}\\
+		&\iff a_i^2\equiv a_j^2\pmod{p}\\
+		&\iff a_i^2+c\equiv a_j^2+c\pmod{p}\\
+		&\iff \of{a_i^2+c\mod pq}\mod p=\of{a_j^2+c\mod pq}\mod p\\
+		&\iff a_{i+1}\mod p=a_{j+1}\mod p\\
+		&\iff a_{i+1}^{(p)}= a_{j+1}^{(p)}.
 		\end{align*}
-		
-		Since $n_0! \equiv 0 \pmod{p-1}$ and $p-1$ divides each of the factors $(n_0 + k), (n_0 + k - 1), \ldots, (n_0 + 1)$ exactly once, we have $(n_0 + k)! \equiv 0 \pmod{p-1}$. Therefore, $p-1$ divides $(n_0 + k)!$, which is equivalent to $n!$.
-		
-		Thus, for all $n \geq n_0$, $p-1$ divides $n!$. This completes the proof.
-	\end{proof}
-	
-	\begin{proof}
-		Let $N = pq$, where $p$ and $q$ are prime numbers, and let $a$ be an integer such that $\gcd(a, p) = 1$. We want to prove that
-		\begin{equation} \label{eq:congruence}
-		(a^{(j+1)!} - 1) \mod N = (a^{j!} \mod N)^{j+1} \mod N - 1.
-		\end{equation}
-		
-		To prove this, we can use the following properties of modular arithmetic:
-		\begin{align}
-		(ab) \mod N &\equiv (a \mod N)(b \mod N) \mod N, \label{eq:mod_product} \\
-		(a^b) \mod N &\equiv ((a \mod N)^b) \mod N. \label{eq:mod_power}
-		\end{align}
-		
-		We start by calculating $(a^{j!} \mod N)^{j+1} \mod N$. By applying property \eqref{eq:mod_power}, we have
-		\begin{equation} \label{eq:step1}
-		(a^{j!} \mod N)^{j+1} \mod N \equiv a^{j!(j+1)} \mod N.
-		\end{equation}
-		
-		Next, we calculate $(a^{(j+1)!} - 1) \mod N$. Since $(j+1)! = (j+1)j!$, we have
-		\begin{equation} \label{eq:step2}
-		(a^{(j+1)!} - 1) \mod N \equiv (a^{(j+1)j!} - 1) \mod N.
-		\end{equation}
-		
-		Now we need to show that the right-hand sides of \eqref{eq:step1} and \eqref{eq:step2} are congruent modulo $N$. To do this, we use the property \eqref{eq:mod_product}:
-		\begin{align*}
-		(a^{(j+1)j!} - 1) \mod N &\equiv (a^{j!(j+1)} - 1) \mod N \\
-		&\equiv ((a^{j!})^{j+1} - 1) \mod N \\
-		&\equiv (a^{j!(j+1)} \mod N - 1) \mod N,
-		\end{align*}
-		where the last step follows from property \eqref{eq:mod_product}.
-		
-		Thus, we have shown that $(a^{(j+1)!} - 1) \mod N \equiv (a^{j!} \mod N)^{j+1} \mod N - 1$, which completes the proof.
-	\end{proof}
-	
-	\newpage
-	\begin{proof}[Proof of $(ab) \mod N \equiv (a \mod N)(b \mod N) \mod N$]
-		Let $a$ and $b$ be integers, and let $N$ be a positive integer. We want to show that $(ab) \mod N \equiv (a \mod N)(b \mod N) \mod N$.
-		
-		By the definition of modulo, we have
-		\begin{align*}
-		a &\equiv a_1 \pmod{N}, \\
-		b &\equiv b_1 \pmod{N},
-		\end{align*}
-		for some integers $a_1$ and $b_1$ such that $a \equiv a_1 \pmod{N}$ and $b \equiv b_1 \pmod{N}$.
-		
-		Then, $a = a_1 + k_1N$ and $b = b_1 + k_2N$ for some integers $k_1$ and $k_2$. Therefore,
-		\begin{align*}
-		ab &= (a_1 + k_1N)(b_1 + k_2N) \\
-		&= a_1b_1 + a_1k_2N + b_1k_1N + k_1k_2N^2 \\
-		&= a_1b_1 + (a_1k_2 + b_1k_1 + k_1k_2N)N.
-		\end{align*}
-		
-		Since $a_1k_2 + b_1k_1 + k_1k_2N$ is an integer, we have $ab \equiv a_1b_1 \pmod{N}$. But $a_1 \equiv a \pmod{N}$ and $b_1 \equiv b \pmod{N}$, so we can rewrite the congruence as
-		\begin{align*}
-		(ab) \mod N &\equiv (a \mod N)(b \mod N) \mod N.
-		\end{align*}
-		This completes the proof.
-	\end{proof}
-	
-	\begin{proof}[Proof of $(a^b) \mod N \equiv ((a \mod N)^b) \mod N$]
-		Let $a$ be an integer, let $b$ be a non-negative integer, and let $N$ be a positive integer. We want to show that $(a^b) \mod N \equiv ((a \mod N)^b) \mod N$.
-		
-		By the definition of modulo, we have
-		\begin{align*}
-		a &\equiv a_1 \pmod{N},
-		\end{align*}
-		for some integer $a_1$ such that $a \equiv a_1 \pmod{N}$.
-		
-		Then, $a = a_1 + kN$ for some integer $k$. Therefore,
-	\end{proof}
-	
-	\begin{proof}
-		We want to prove that for any integers $a$, $b$, and $N$ with $N > 0$, the following property holds:
-		\begin{equation} \label{eq:mod_power}
-		(a^b) \mod N \equiv ((a \mod N)^b) \mod N.
-		\end{equation}
-		
-		By the definition of congruence, there exists an integer $k$ such that $a = kN + r$, where $r = a \mod N$. Then, we have
-		\begin{equation} \label{eq:mod_rep}
-		a \equiv r \pmod{N}.
-		\end{equation}
-		
-		Now, we raise both sides of \eqref{eq:mod_rep} to the power $b$ and obtain
-		\begin{equation} \label{eq:mod_power_step1}
-		a^b \equiv r^b \pmod{N}.
-		\end{equation}
-		
-		Taking both sides of \eqref{eq:mod_power_step1} modulo $N$, we have
-		\begin{equation} \label{eq:mod_power_step2}
-		(a^b) \mod N \equiv (r^b) \mod N.
-		\end{equation}
-		
-		Since $r = a \mod N$, we can rewrite \eqref{eq:mod_power_step2} as
-		\begin{equation} \label{eq:mod_power_step3}
-		(a^b) \mod N \equiv ((a \mod N)^b) \mod N.
-		\end{equation}
-		
-		Thus, we have shown that the property $(a^b) \mod N \equiv ((a \mod N)^b) \mod N$ holds, which completes the proof.
 	\end{proof}
 	
 	
-	\chapter{Pollard $\rho$ Method}
-	\section{Birthday Attack}
+	\begin{algorithm}[H]
+		\caption{Pollard's $\rho$ Method}
+		\KwData{$N=pq$ ($p,q$: distinct odd primes), $c$: constant.}
+		\KwResult{$p$ and $q$.}
+		\vspace{4pt}
+		\vspace{4pt}
+		$c\uniform\Z_N$\;
+		\vspace{4pt}
+		\Fn{$f\of{x}$}{
+			\Return $\of{x^2 + c}\mod N$\;
+		}
+		\vspace{4pt}
+		$(a,b)\gets\of{2,2}$\;
+		\vspace{4pt}
+		\While{\texttt{True}}{
+			$\of{a,b}\gets\of{f\of{a},\of{f\circ f}\of{b}}$\;
+			$d\gets\gcd\of{N,a-b}$\;
+			\If{$1<d<N$}{
+				\Return $\of{d, N/d}$\;
+			}
+		}
+	\end{algorithm}
 	
+	\chapter{Birthday Attack}
 	The birthday problem (also known as the birthday paradox) is a famous problem in probability theory that demonstrates the surprising fact that, in a group of just 23 people, there is a greater than 50\% chance that at least two of them share the same birthday. It is based on the assumption that birthdays are uniformly distributed throughout the year (ignoring leap years).
 	
-	\subsection{Birthday Bound}
+	\section{Birthday Bound}
 	Let $n$ be the number of people in the group. Consider \[
 	a_1,\cdots,a_k\uniform\set{1,\cdots, n}\quad\text{with $k\leq n$}.
 	\] Let $P(n)$ be the probability that at least two people share a birthday: \[
-	P\of{n}:=\Pr\left[\exists (i,j):i\neq j\Rightarrow a_i=a_j\right].
+	P\of{n}:=\Pr\left[\exists (i,j)\ \text{with}\ i\neq j: a_i=a_j\right].
 	\] To calculate this probability, let $P'\of{n}:=1-P\of{n}$ then \begin{align*}
-	P'\of{n}&=1-\Pr\left[\exists (i,j):i\neq j\Rightarrow a_i=a_j\right]\\
-	&=\Pr\left[\lnot\of{\exists (i,j):i\neq j\Rightarrow a_i=a_j}\right]\\
-	&=\Pr\left[\forall(i,j):i\neq j\land a_i\neq a_j\right].
+	P'\of{n}&=1-\Pr\left[\exists (i,j)\ \text{with}\ i\neq j: a_i=a_j\right]\\
+	&=\Pr\left[\forall(i,j)\ \text{with}\ i\neq j: a_i\neq a_j\right].
 	\end{align*}
 	That is, $P' (n)$ be the probability that all $n$ birthdays are unique.
 	
@@ -851,7 +786,7 @@
 	\begin{equation*}
 	P(n) = 1 - P'(n)=1-\of{\frac{365}{365}}\of{\frac{364}{365}}\cdots\of{\frac{365-(n-1)}{365}}.
 	\end{equation*}
-	
+	\vspace{8pt}
 	\begin{tcolorbox}[colback=white,colframe=procolor,arc=5pt,title={\color{white}\bf Generalization of Birthday Problem}]
 		\begin{proposition}
 			Assume all birthday are equally likely, and generalize the problem a little: \textnormal{from $n$ possible birthdays, sample $k$ times with replacement}. \begin{align*}
@@ -864,6 +799,7 @@
 		\end{proposition}
 	\end{tcolorbox}
 	
+	\iffalse
 	\newpage
 	\begin{remark}
 		When $n=365$, the lowest $k$ for which the above exceeds $0.5$ is $k=23$: \begin{figure}[ht!]
@@ -895,7 +831,7 @@
 		plt.show()
 		\end{lstlisting}
 	\end{remark}
-	
+	\fi
 	\newpage
 	\begin{tcolorbox}[colback=white,colframe=thmcolor,arc=5pt,title={\color{white}\bf Birthday Bound}]
 		\begin{theorem}
@@ -949,7 +885,7 @@
 	\end{remark}
 	\fi
 	
-	\subsection{Set Intersection Bound}
+	\section{Set Intersection Bound}
 	
 	\begin{tcolorbox}[colback=white,colframe=thmcolor,arc=5pt,title={\color{white}\bf Set Intersection Bound}]
 		\begin{theorem}
@@ -984,6 +920,8 @@
 	
 	\newpage
 	\section{Finding Collision of a (One-way) Function}
+	
+	
 	
 	Finding a collision for a one-way function is a computationally hard problem. We can define a one-way function as:
 	\[
@@ -1072,89 +1010,29 @@
 	
 	\newpage
 	\subsection{Small-Space Attack using Floyd's Cycle-Finding}
-	Consider a function $f:X\to X$ satisfying: \begin{enumerate}
-		\item $\abs{X}<\infty$
-		\item $f\neq id$\footnote{$id$: identity mapping.}, \ie, $\exists x\in D_f=X$ such that $f(x)\neq x$.
-	\end{enumerate} Using above function $f$, we define a sequence $\set{x_i}_{i=1}$ as follows: \[
-	x_{i+1}:=f(x_i).
-	\] We can visualize this sequence as follows: \begin{center}
-		\begin{tikzcd}
-			x_0 \arrow[r, "f"] & x_1 \arrow[r, "f"] & x_2 \arrow[r, "f"]        & \cdots \arrow[r, "f"] & x_n \arrow[r, "f"]                                                  & x_{n+1} \arrow[r, "f"] & \cdots \\
-			x_0 \arrow[r]      & f(x_0) \arrow[r]   & (f\circ f)(x_0) \arrow[r] & \cdots \arrow[r]      & \underbrace{(f\circ\cdots\circ f)}_{n\ \text{times}}(x_0) \arrow[r] & f(x_n) \arrow[r]       & \cdots
-		\end{tikzcd}
-	\end{center} Here, $x_0\in\set{x\mid f(x)\neq x}$. Note that a sequence $\set{x_i}$ has a collision pair because $\abs{X}<\infty$ (feat. pigeon-hole principle).
-	
-	\newpage
-	\begin{tcolorbox}[colback=white,colframe=thmcolor,arc=5pt,title={\color{white}\bf }]
-		\begin{theorem}
-			Define a sequence $\set{x_i}$ as follows: \[
-			x_{i+1}:=f\of{x_i}
-			\] Then $\exists k>i$ such that $x_k=x_{2k}$:
-			\begin{center}
-				\begin{tikzcd}
-					\cdots \arrow[r, "f"] & x_i \arrow[r, "f"] & x_{i+1} \arrow[r, "f"] & \cdots \arrow[r, "f"] & x_k(=x_{2k}) \arrow[d, "f"] \\
-					&                    & x_j \arrow[u, "f"]     &                       & \cdots \arrow[ll, "f"]     
-				\end{tikzcd}
-			\end{center}
-		\end{theorem}
-	\end{tcolorbox}
-	\begin{proof}
-		Let $(x_i, x_j)$ be a collision pair with $0\leq i< j\leq N\of{=O\of{\sqrt{2^n}}}$; that is, $\exists x_i,x_j$ such that $x_i\neq x_j$ but $f(x_i)=f(x_j)$, so 
-		\begin{center}
-			\begin{tikzcd}
-				\cdots \arrow[r, "f"] & x_i \arrow[r, "f"] & x_{i+1} \arrow[r, "f"] & \cdots \arrow[d, "f"] \\
-				&                    & x_j \arrow[u, "f"]     & \cdots \arrow[l, "f"]
-			\end{tikzcd}
-		\end{center}
-		For $j>i$, we have a circular sequence \[
-		\set{x_j}_{j>i}:\quad x_j,x_{i+1},x_{i+2},\cdots, x_{i+(j-i)}(=x_j),\cdots
-		\] with the period $p=j-i>0$. That is, \[
-		x_j = x_{j+t\cdot p}\quad\text{with}\quad t\in\Z_{\geq 0}.
-		\]
-		Define a number \[
-		k:=\min\set{tp\in\mathbb{Z}_{>i}:t\in\mathbb{N}}>i.
-		\] In other words, $k$ is the smallest multiple greater than $i$ of the period $p$. Since
-		$p\mid k \implies p\mid 2k$, the equality $x_k=x_{2k}$ holds.
-	\end{proof}
-	\vspace{8pt}
-	\begin{remark}
-		We know that $\exists k>i$ such that $x_k=x_{2k}$. Since \begin{align*}
-		x_k=f(x_{k-1}),\quad x_{2k}=f(x_{2k-1}),
-		\end{align*} by the definition of $\set{x_j}$, then, we obtain $f(x_{k-1})=f(x_{2k-1})$. But $(x_{k-1},x_{2k-1})$ may not be a collision pair. \textcolor{blue}{Let $x_\alpha$ is the \underline{initial term} of a circular sequence $\set{x_j}$.} Since $k$ is a multiple of the period $p$ of $\set{x_j}$, we see that \begin{align*}
-		x_\alpha&=x_{\alpha+k},\\
-		f(x_{\alpha-1})&=f(x_{\alpha+k-1})\quad\text{by the def. of $\set{x_j}$},\\
-		\end{align*} and so $(x_{\alpha-1},x_{\alpha+k-1})$ is a clear collision pair.
-	\end{remark}
-	
-	\newpage
-	%\SetKwComment{Comment}{/* }{ */}
+	Floyd's cycle-finding algorithm is a method to detect cycles in a sequence of values, using a small amount of memory. It is particularly useful for finding cycles in functions, like hash functions or pseudorandom number generators. In the context of a small-space attack, an adversary tries to find a collision (two inputs producing the same output) with limited memory resources.
+	\vspace{8pt}\\
 	\begin{algorithm}[H]
-		\caption{Finding Collision: Small-Space Attack}
+		\caption{Small-Space Attack; Floyd's Cycle-Finding Algorithm}
 		\KwData{One-way function $\hash:\set{0,1}^*\to\set{0,1}^n$.}
 		\KwResult{Collision pair $(x,x')$ such that $x\neq x'$ but $\hash\of{x}=\hash\of{x'}$.}
-		\vspace{4pt}
-		\vspace{4pt}
+		\BlankLine
 		\Comment{Step1: We discover $k$ such that $x_k=x_{2k}$}
 		\vspace{4pt}
 		$x_0\uniform\set{0,1}^{n+1}$ \tcp*{$x_0\notin\img\hash$ is the start node}
 		\vspace{4pt}
 		$\of{x,x'}\gets\of{x_0,x_0}$\;
-		\vspace{4pt}
-		$k\gets 0$\;
-		\vspace{4pt}
+		\BlankLine
 		\While{\texttt{True}}{
-			$k\gets k+1$\;
 			$\of{x,x'}\gets\of{H\of{x},\of{H\circ H}\of{x}}$\;
 			\If{$x=x'$}{
 				\Break\;
 			}
-		}
-		\vspace{4pt}
+		}\BlankLine
 		\Comment{Step2: Using $(x_0, x_k)$ obtained in Step1, we find the collision pair}
-		\vspace{4pt}
-		$\of{x,x'}\gets\of{x_0,x'}$\;
-		\vspace{4pt}
-		\For{$i\leftarrow 1$ \KwTo $k$}{
+		\BlankLine$\of{x,x'}\gets\of{x_0,x'}$\;
+		\BlankLine
+		\While{\texttt{True}}{
 			\eIf{$\hash\of{x}=\hash\of{x'}$}{
 				\Return $\of{x,x'}$
 			}{
@@ -1162,8 +1040,92 @@
 			}
 		}
 	\end{algorithm}
+	\vspace{8pt}
+	\begin{center}
+		\begin{tikzpicture}[
+		node distance = .3cm and .5cm,
+		block/.style = {rectangle split, rectangle split parts=2, draw, anchor=center},
+		arr/.style = {-Stealth, line width=0.8pt}
+		]
+		\node[block] (A) {0\nodepart{two}$x_0$};
+		\node[block, right=of A] (B) {1\nodepart{two}$f(x_0)$};
+		\node[block, right=of B] (C) {2\nodepart{two}$(f\circ f)(x_0)=:f^2(x_0)$};
+		\node[block, right=2.5cm of C] (D) {$\mu$\nodepart{two}$f^\mu(x_0)$};
+		\node[block, right=of D] (E) {$\mu + 1$\nodepart{two}$f^{\mu + 1}(x_0)$};
+		\node[block, right=of E] (F) {$\cdots$\nodepart{two}$\cdots$};
+		\node[block, right=of F] (G) {$\nu$\nodepart{two}$f^{\nu}(x_0)$};
+		\node[draw=none, below=.7cm of C] (dots) {$\cdots$};
+		
+		\draw[arr] (A) -- (B);
+		\draw[arr] (B) -- (C);
+		\draw[arr] (C) -- (dots);
+		\draw[arr] (dots) -- (D);
+		\draw[arr] (D) -- (E);
+		\draw[arr] (E) -- (F);
+		\draw[arr] (F) -- (G);
+		\draw[arr] (G) edge[bend right=45] (D);
+		\end{tikzpicture}
+	\end{center}
+	We define a sequence $\set{x_i}_{i>0}$ as follows: \[
+	x_{i}:=f(x_{i-1}).
+	\] Here, $x_0\in\set{x\mid f(x)\neq x}$. Note that a sequence $\set{x_i}$ has a collision pair because $\abs{X}<\infty$ (feat. pigeon-hole principle).
 	
-	\newpage
+	\begin{tcolorbox}[colback=white,colframe=thmcolor,arc=5pt,title={\color{white}\bf }]
+		\begin{theorem}
+			Define a sequence $\set{x_i}_{i>0}$ as follows: \[
+			x_{i}:=f\of{x_{i-1}}
+			\] with initial node $x_0\notin\img\of{f}$. Then $\exists k>I$ such that $x_k=x_{2k}$:
+			\begin{center}
+			\begin{tikzpicture}[
+			node distance = .2cm and .4cm,
+			block/.style = {rectangle split, rectangle split parts=2, draw, anchor=center},
+			arr/.style = {-Stealth, line width=0.8pt}
+			]
+			\node[block] (A) {0\nodepart{two}$x_0$};
+			\node[block, right=2.5cm of A] (B) {$I$\nodepart{two}$f^I(x_0)$};
+			\node[block, right=of B] (C) {$I + 1$\nodepart{two}$f^{I + 1}(x_0)$};
+			\node[block, right=of C] (D) {$\cdots$\nodepart{two}$\cdots$};
+			\node[block, right=of D] (E) {$k=2k$\nodepart{two}$f^{k}=f^{2k}$};
+			\node[block, right=of E] (F) {$\cdots$\nodepart{two}$\cdots$};
+			\node[block, right=of F] (G) {$J$\nodepart{two}$f^{J}(x_0)$};
+			\node[draw=none, below=.7cm of B] (dots) {$\cdots$};
+			
+			\draw[arr] (A) -- (dots);
+			\draw[arr] (dots) -- (B);
+			\draw[arr] (B) -- (C);
+			\draw[arr] (C) -- (D);
+			\draw[arr] (D) -- (E);
+			\draw[arr] (E) to[out=315, in=225, looseness=2, loop] (E);
+			\draw[arr] (E) -- (F);
+			\draw[arr] (F) -- (G);
+			\draw[arr] (G) edge[bend right=45] (C);
+			\end{tikzpicture}
+			\end{center}
+		\end{theorem}
+	\end{tcolorbox}
+	\begin{proof}
+		Let $(x_I, x_J)$ be a collision pair with $0\leq I< J\leq N\of{=O\of{\sqrt{2^n}}}$; that is, $x_I\neq x_J$ but $f(x_I)=f(x_J)$.
+		For $J>I$, we have a circular sequence $\set{x_j}_{j>I}$:\[
+		\quad x_J,x_{I+1},x_{I+2},\cdots, x_{I+(J-I)}(=x_J),\cdots
+		\] with the period of $\lambda=J-I>0$. That is, \[
+		x_j = x_{j+t\cdot\lambda}\quad\text{for some}\quad t\in\Z_{\geq 0}.
+		\]
+		Define a number \[
+		k:=\min\set{t\lambda\in\mathbb{Z}_{>I}:t\in\mathbb{N}}>I.
+		\] In other words, $k$ is the smallest multiple greater than $I$ of the period of $\lambda$. Clearly,
+		$\lambda\mid k \implies \lambda\mid 2k$, that is, $2k$ is also multiple of the period of $\lambda$. Hence the equality $x_k=x_{2k}$ holds.
+	\end{proof}
+	\vspace{8pt}
+	\begin{remark}
+		We know that $\exists k>I$ such that $x_k=x_{2k}$. Since \begin{align*}
+		x_k=f(x_{k-1}),\quad x_{2k}=f(x_{2k-1}),
+		\end{align*} by the definition of $\set{x_i}_{i>0}$, then, we obtain $f(x_{k-1})=f(x_{2k-1})$. But $(x_{k-1},x_{2k-1})$ may not be a collision pair. \textcolor{blue}{Let $x_\alpha$ is the \underline{initial term} of a circular sequence $\set{x_j}_{j>I}$.} Since $k$ is a multiple of the period of $\lambda$ of $\set{x_j}_{j>I}$, Then, we see that \begin{align*}
+		x_\alpha&=x_{\alpha+k}\quad\because\text{$k$ is the multiple of the period of $\lambda$}\\
+		f(x_{\alpha-1})&=f(x_{\alpha+k-1})\quad\text{by the def. of $\set{x_i}_{i>0}$},\\
+		\end{align*} and so $(x_{\alpha-1},x_{\alpha+k-1})$ is a clear collision pair.
+	\end{remark}
+	
+	\iffalse
 	\begin{lstlisting}[style=sage, caption={Small-Sapce Attack (Sage)},captionpos=t]
 	N = 2^13 - 1 #12-bit
 	n = floor(sqrt(N))
@@ -1201,181 +1163,7 @@
 	for pair in L:
 	print(pair)
 	\end{lstlisting}
-	
-	\newpage
-	\section{Fermat Factorization}
-	\subsection{Fermat Factorization ($N=b^2-a^2$)}
-	\begin{tcolorbox}[colback=white,colframe=lemcolor,arc=5pt,title={\color{white}\bf }]
-		\begin{lemma}
-			Let $n\in 2\Z+1$. Define two sets: \begin{align*}
-			S_n&:=\set{(a,b)\in\Z^2:n=ab\ \text{with}\ 0<b\leq a},\\
-			T_n&:=\set{\of{u^2,v^2}\in\Z^2:n=u^2+v^2}.
-			\end{align*} Then $\exists\phi:S_n\leftrightarrow T_n$. In other words, there exists a one-to-one correspondence between factorizations of $n$ into two positive integers and differences of two squares that equal $n$.
-		\end{lemma}
-	\end{tcolorbox}
-	\begin{proof}
-		Define two functions: \begin{align*}
-		f:S_n\to T_n&:f\of{\of{a,b}}=\of{\of{\frac{a+b}{2}}^2,\of{\frac{a-b}{2}}^2},\\
-		g:T_n\to S_n&:g\of{\of{u^2,v^2}}=\of{\abs{u}+\abs{v},\abs{u}-\abs{v}}.
-		\end{align*} We claim that $g\circ f=\id_{S_n}$ and $f\circ g=\id_{T_n}$:\begin{align*}
-		\of{g\circ f}(a,b)&=g\of{\of{\frac{a+b}{2}}^2,\of{\frac{a-b}{2}}^2}=\of{\abs{\frac{a+b}{2}}+\abs{\frac{a-b}{2}},\abs{\frac{a+b}{2}}-\abs{\frac{a-b}{2}}}\\
-		&=\of{{\frac{a+b}{2}}+{\frac{a-b}{2}},{\frac{a+b}{2}}-{\frac{a-b}{2}}}\\
-		&=\of{a,b},\\
-		\of{f\circ g}\of{u^2,v^2}&=f\of{\abs{u}+\abs{v},\abs{u}-\abs{v}}=\of{\abs{u}^2,\abs{v}^2}=\of{u^2,v^2}.
-		\end{align*}
-	\end{proof}
-	
-	To solve $3x\equiv 1\pmod{28}$, we need to find a value of $x$ such that $3x$ leaves a remainder of $1$ when divided by $28$. In other words, we need to find an integer $x$ such that $3x = 1 + 28k$ for some integer $k$.
-	
-	We can start by multiplying both sides of the congruence by the inverse of $3$ modulo $28$. Since $3$ and $28$ are relatively prime, $3$ has an inverse modulo $28$. We can find it using the Euclidean algorithm:
-	
-	\begin{align*}
-	28 &= 3\times 9 + 1 \\
-	1 &= 28 - 3\times 9
-	\end{align*}
-	
-	Therefore, $1$ is the inverse of $3$ modulo $28$. Multiplying both sides of the congruence by $1$ gives:
-	
-	\begin{align*}
-	3x &\equiv 1\pmod{28} \\
-	\Rightarrow \quad 1\times 3x &\equiv 1\times 1\pmod{28} \\
-	\Rightarrow \quad x &\equiv 3^{-1}\pmod{28} \\
-	\Rightarrow \quad x &\equiv 9\pmod{28}
-	\end{align*}
-	
-	Therefore, the solution to the congruence $3x\equiv 1\pmod{28}$ is $x\equiv 9\pmod{28}$. We can check this solution by verifying that $3\times 9\equiv 1\pmod{28}$.
-	
-	\subsection{Improved Fermat Factorization ($rN=a^2-b^2$)}
-	
-	Let $N=pq$ and $r<\min\set{p,q}$.
-	
-	\begin{algorithm}[H]
-		\caption{Improved Fermat Factorization: $rN=a^2-b^2$}
-		\KwData{$N=pq$, $R\in\of{0,\min\set{p,q}}\setminus\set{2}$ and $B\in\Z_{>0}$.}
-		\KwResult{$(p,q)$ or \texttt{Failure}}
-		\vspace{4pt}
-		\vspace{4pt}
-		\For{$r=1$ \KwTo $R$}{
-			\For{$b=1$ \KwTo $B$}{
-				$t\gets rN+b^2$\;
-				\If{$t$ is a square}{
-					$a\gets\sqrt{t}$\;
-					$d\gets\gcd\of{N,a-b}$\;
-					\If{$1<d<N$}{
-						\Return $\of{d,N/d}$\;
-					}
-				}
-			}
-		}
-		\Return \texttt{Failure}\;
-	\end{algorithm}
-	\begin{remark}
-		Let $N\in 2\Z+1$ and $b\in\Z+$. Then $2N+b^2$ is not square.
-		\begin{proof}
-			sd
-		\end{proof}
-	\end{remark}
-
-	\newpage
-	\section{Pollard's $\rho$ Method for IFP}
-	Finding $a$ and $b$ that satisfy $rN=a^2-b^2$ is equivalent to finding $a$ and $b$ satisfying \begin{enumerate}[(i)]
-		\item $a^2\equiv b^2\pmod{N}$,
-		\item $\gcd\of{N,a-b}\in\of{1,N}$.
-	\end{enumerate}
-	Using Floyd's cycle-finding, we can find $a$ and $b$ satisfying above equation.
-	
-	Define a function $f_{N,c}:\Z_N\to\Z_N$ as follows: \[
-	f_{N,c}\of{X}:=X^2+c\mod{N}.
-	\]
-
-	\begin{tcolorbox}[colback=white,colframe=procolor,arc=5pt,title={\color{white}\bf }]
-		\begin{proposition}
-			A sequence $\set{a_n^{(p)}}:=\set{a_n\mod p}$ satisfies \[
-			a_i^{(p)}=
-			a_j^{(p)}\implies
-			a_{i+1}^{(p)}=
-			a_{j+1}^{(p)}
-			\]
-		\end{proposition}
-	\end{tcolorbox}
-	\begin{proof}
-		\begin{align*}
-			a_i^{(p)}=a_j^{(p)}&\iff a_i\mod p=a_j\mod p\\
-			&\iff a_i\equiv a_j\pmod{p}\\
-			&\iff a_i^2\equiv a_j^2\pmod{p}\\
-			&\iff a_i^2+c\equiv a_j^2+c\pmod{p}\\
-			&\iff \of{a_i^2+c\mod pq}\mod p=\of{a_j^2+c\mod pq}\mod p\\
-			&\iff a_{i+1}\mod p=a_{j+1}\mod p\\
-			&\iff a_{i+1}^{(p)}= a_{j+1}^{(p)}.
-		\end{align*}
-	\end{proof}
-
-	
-	\begin{algorithm}[H]
-		\caption{Pollard's $\rho$ Method}
-		\KwData{$N=pq$ ($p,q$: distinct odd primes), $c$: constant.}
-		\KwResult{$p$ and $q$.}
-		\vspace{4pt}
-		\vspace{4pt}
-		$c\uniform\Z_N$\;
-		\vspace{4pt}
-		\Fn{$f\of{x}$}{
-			\Return $\of{x^2 + c}\mod N$\;
-		}
-		\vspace{4pt}
-		$(a,b)\gets\of{2,2}$\;
-		\vspace{4pt}
-		\While{\texttt{True}}{
-			$\of{a,b}\gets\of{f\of{a},\of{f\circ f}\of{b}}$\;
-			$d\gets\gcd\of{N,a-b}$\;
-			\If{$1<d<N$}{
-				\Return $\of{d, N/d}$\;
-			}
-		}
-	\end{algorithm}
-
-	\newpage
-	\begin{tcolorbox}[colback=white,colframe=lemcolor,arc=5pt,title={\color{white}\bf }]
-	
-\end{tcolorbox}
-	\begin{tcolorbox}[colback=white,colframe=lemcolor,arc=5pt,title={\color{white}\bf }]
-	
-\end{tcolorbox}
-	\begin{tcolorbox}[colback=white,colframe=lemcolor,arc=5pt,title={\color{white}\bf }]
-	
-\end{tcolorbox}
-	\begin{tcolorbox}[colback=white,colframe=lemcolor,arc=5pt,title={\color{white}\bf }]
-	
-\end{tcolorbox}
-	\begin{tcolorbox}[colback=white,colframe=lemcolor,arc=5pt,title={\color{white}\bf }]
-	
-\end{tcolorbox}
-
-	\section*{Pollard's Rho Algorithm}
-	
-	Pollard's Rho algorithm is a probabilistic factorization algorithm that is particularly effective in finding small factors of large composite numbers. Given a composite number $N$, the algorithm aims to find a non-trivial factor $p$ of $N$.
-	
-	\subsection*{Algorithm}
-	
-	\begin{enumerate}
-		\item Choose a random function $f(x) \pmod{N}$ with the property $f(x) = f(x + N)$ for all $x$.
-		\item Choose random initial values $x_0$ and $y_0$ in the range $[1, N-1]$.
-		\item For $i = 1, 2, \ldots$:
-		\begin{enumerate}
-			\item Calculate $x_i = f(x_{i-1}) \pmod{N}$ and $y_i = f(f(y_{i-1})) \pmod{N}$.
-			\item Compute the greatest common divisor $d = \text{gcd}(\lvert x_i - y_i \rvert, N)$.
-			\item If $1 < d < N$, then $d$ is a non-trivial factor of $N$; return $d$.
-			\item If $i$ is a power of 2, check if $\text{gcd}(\lvert x_i - y_i \rvert, N) > 1$. If so, return the factor found.
-		\end{enumerate}
-	\end{enumerate}
-	
-	\subsection*{Remarks}
-	
-	Pollard's Rho algorithm relies on the properties of pseudorandom sequences and the birthday paradox. The function $f(x)$ generates a pseudorandom sequence modulo $N$, and the algorithm looks for collisions in the sequence. When a collision is found, the algorithm computes the greatest common divisor of the difference of the colliding elements and $N$. If the greatest common divisor is greater than 1, a non-trivial factor of $N$ is found.
-	
-	The algorithm is not deterministic, meaning it may not always find a factor in a fixed number of steps. However, it has an expected running time of $O(\sqrt{p})$, where $p$ is the smallest prime factor of $N$, making it an efficient algorithm for finding small factors.
-	
-
+	\fi	
 	
 	\newpage
 	\chapter{Discrete Logarithm Problem}
@@ -1413,6 +1201,145 @@
 	
 	These algorithms and others like them are based on the algebraic properties of cyclic groups, including the existence of a generator $g$ and the group operation of multiplication modulo $p$. In particular, the difficulty of the DLP is related to the difficulty of computing discrete logarithms in general, which is an active area of research in number theory and algebraic geometry.
 	
+	\section{DLP Solutions}
+	\section{Exhaustive Search}
+	
+	\newpage
+	\section{Shanks' Algorithm: Baby-Step/Giant-Step (1971)}
+	
+	\begin{algorithm}[H]
+		\KwData{A group G of order $n$ with generator $g$, and an element $h$ in $G$.}
+		\KwResult{The discrete logarithm $x\in\Z_n$ such that $g^x = h$.}
+		$m \leftarrow \lceil\sqrt{n}\rceil+1$ \tcp*{$m>\sqrt{n}$}
+		$SB\gets\set{(i,g^i):i=0,1,\cdots, m-1}$ \tcp*{Baby-step}
+		$SB\gets\set{\of{j, h(g^{-m})^j}:i=0,1,\cdots, m-1}$ \tcp*{Giant-step}
+		Find $i,j$ such that $g^{i}=h\of{g^{-m}}^j$\;
+		\Return $x\gets mj+i$\;
+		\caption{Shanks' Baby-step/Giant-step Algorithm}
+	\end{algorithm}
+	\vspace{8pt}
+	Consider cyclic group $G=\langle g\rangle$ of order $n$. We want to find $k$ such that $g^k=h$ for some $h\in G$. Clearly, $k\in\set{0,1,\cdots, n-1}=\Z_n$. Define a number $m:=\ceil*{\sqrt{n}}+1$. By division theorem, $\exists!q,r\in\Z_{\geq 0}$ such that \[
+	k=mq+r,\quad 0\leq r<m.
+	\] Note that \[
+	\sqrt{n}<m=\frac{k-r}{q}\leq\frac{k}{q}<\frac{n}{q}\implies q<\frac{n}{\sqrt{n}}=\sqrt{n}\implies 0\leq q<\sqrt{n}<m.	
+	\] That is, $r,q\in\Z_m$. Then \[
+	h=g^k=g^{mq+r}\implies g^r=h\of{g^{-m}}^q.
+	\] Define two sets  \begin{align*}
+	BS &:= \set{g^i:i=0,1,\cdots, m-1},\\
+	GS &:= \set{h\of{g^{-m}}^j:j=0,1,\cdots, m-1}.
+	\end{align*} Since $BS\cap GS\neq\emptyset$ clearly, we can find $i,j\in\set{0,1,\cdots,m-1}$ such that $g^i=h\of{g^{-m}}^j$. Hence we obtain  the discrete logarithm \[
+	k=mj+i.
+	\]
+	
+	\newpage
+	\section{Pollard $\rho$ Method for DLP (1978)}
+	
+	Consider a group $G$ of \textit{prime} order $p$ with generator $g$. We want to find $k$ such that $g^k=h\in G=\langle g\rangle$.
+	
+	\begin{itemize}
+		\item[] (Step I) \[
+		G=G_1\dot{\cup}G_2\dot{\cup}G_3,\quad \abs{G_1}\approx\abs{G_2}\approx\abs{G_3}.
+		\]
+		\item[] (Step II) Define a sequence $\set{x_j,a_j,b_j}_{j=0}^\infty=\set{g^{a_j}h^{b_j},a_j,b_j}_{j=0}^\infty$ as follows: \[
+		\of{x_j,a_j,b_j}:=\begin{cases}
+		\of{1_G,0,0}=\of{g^0h^0, 0, 0} &: j=0,\\
+		\of{g^0h^0, 0, 0} &: j=0,\\
+		1_G=\of{g^0h^0, 0, 0} &: j=0,\\
+		1_G=\of{g^0h^0, 0, 0} &: j=0.
+		\end{cases}
+		\]
+		\item[] (Step III)
+		\begin{center}
+			\begin{tikzpicture}[
+			node distance = .3cm and .5cm,
+			block/.style = {rectangle split, rectangle split parts=2, draw, anchor=center},
+			arr/.style = {-Stealth, line width=0.8pt}
+			]
+			\node[block] (A) {$0$\nodepart{two}$g^{a_0}h^{b_0}$};
+			\node[block, right=2.5cm of A] (B) {$I$\nodepart{two}$f^I(x_0)$};
+			\node[block, right=of B] (C) {$I+1$\nodepart{two}$f^{I + 1}(x_0)$};
+			\node[block, right=of C] (D) {$\cdots$\nodepart{two}$\cdots$};
+			\node[block, right=of D] (E) {$k=2k$\nodepart{two}$f^{k}=f^{2k}$};
+			\node[block, right=of E] (F) {$\cdots$\nodepart{two}$\cdots$};
+			\node[block, right=of F] (G) {$J$\nodepart{two}$f^{J}(x_0)$};
+			\node[draw=none, below=.7cm of B] (dots) {$\cdots$};
+			
+			\draw[arr] (A) -- (dots);
+			\draw[arr] (dots) -- (B);
+			\draw[arr] (B) -- (C);
+			\draw[arr] (C) -- (D);
+			\draw[arr] (D) -- (E);
+			\draw[arr] (E) to[out=315, in=225, looseness=2, loop] (E);
+			\draw[arr] (E) -- (F);
+			\draw[arr] (F) -- (G);
+			\draw[arr] (G) edge[bend right=45] (C);
+			\end{tikzpicture}
+		\end{center}
+		
+		\item[] (Step IV)
+	\end{itemize}
+	
+	The Pollard's rho method is an algorithm designed to solve the discrete logarithm problem (DLP), which is defined as follows: given a group G with generator g and an element h in G, find an integer x such that $g^x = h$ (mod p), where p is a prime number.
+	
+	The algorithm is based on the idea of finding a collision in a sequence of group elements and their corresponding exponents. It employs a pseudorandom function $F(x)$ to generate the sequence.
+	
+	The algorithm's main steps are as follows:
+	
+	1. Define a pseudorandom function $F(x)$ that maps elements of the group G to itself. The function can be partitioned into three equal-sized domains, each with its own transformation rule:
+	
+	\[
+	F(x) = 
+	\begin{cases}
+	(x, a + 1, b) & \text{if } 0 \leq x < \frac{1}{3}p \\
+	(x^2, 2a, 2b) & \text{if } \frac{1}{3}p \leq x < \frac{2}{3}p \\
+	(x \cdot h, a, b + 1) & \text{otherwise}
+	\end{cases}
+	\]
+	
+	2. Initialize two sequences of group elements, $x_1$ and $x_2$, both starting at the identity element $1$. The sequences are generated by applying the function $F(x)$ iteratively.
+	
+	3. Search for a collision between the two sequences, i.e., find distinct indices $i$ and $j$ such that $x_i = x_j$. The sequences are traversed using the "tortoise and hare" approach, with $x_1$ moving one step at a time and $x_2$ moving two steps at a time.
+	
+	4. Once a collision is found, compute the difference between the exponents of the colliding elements, $r = b_i - b_j \pmod{p}$. Calculate the inverse of $r$, denoted as $r^{-1} \pmod{p}$.
+	
+	5. Calculate the discrete logarithm x as $x = (a_j - a_i) \cdot r^{-1} \pmod{p}$.
+	
+	The complexity of the algorithm is $O(\sqrt{p})$, as it involves generating and searching through a sequence of group elements until a collision is found.
+	
+	Here is the LaTeX code for the equations presented above:
+	
+	\[
+	\text{Step 1: Define the pseudorandom function } F(x) \text{:}
+	\]
+	\[
+	F(x) = 
+	\begin{cases}
+	(x, a + 1, b) & \text{if } 0 \leq x < \frac{1}{3}p \\
+	(x^2, 2a, 2b) & \text{if } \frac{1}{3}p \leq x < \frac{2}{3}p \\
+	(x \cdot h, a, b + 1) & \text{otherwise}
+	\end{cases}
+	\]
+	
+	\[
+	\text{Step 4: Calculate the inverse of } r \text{:}
+	\]
+	\[
+	r^{-1} = r^{-1} \pmod{p}
+	\]
+	
+	\[
+	\text{Step 5: Calculate the discrete logarithm x:}
+	\]
+	\[
+	x = (a_j - a_i) \cdot r
+	^{-1} \pmod{p}
+	\]
+	
+	The complexity of the algorithm is $O(\sqrt{p})$, as it involves generating and searching through a sequence of group elements until a collision is found.
+	
+	You can paste this code into a LaTeX editor or a platform that supports LaTeX, such as Overleaf or Jupyter Notebooks, to render the equations properly.
+	
+	
 	\begin{tcolorbox}[colback=white,colframe=lemcolor,arc=5pt,title={\color{white}\bf }]
 		
 	\end{tcolorbox}
@@ -1422,5 +1349,24 @@
 	\begin{tcolorbox}[colback=white,colframe=lemcolor,arc=5pt,title={\color{white}\bf }]
 		
 	\end{tcolorbox}
+
+	
+	\newpage
+	\begin{tcolorbox}[colback=white,colframe=lemcolor,arc=5pt,title={\color{white}\bf }]
+		
+	\end{tcolorbox}
+	\begin{tcolorbox}[colback=white,colframe=lemcolor,arc=5pt,title={\color{white}\bf }]
+		
+	\end{tcolorbox}
+	\begin{tcolorbox}[colback=white,colframe=lemcolor,arc=5pt,title={\color{white}\bf }]
+		
+	\end{tcolorbox}
+	\begin{tcolorbox}[colback=white,colframe=lemcolor,arc=5pt,title={\color{white}\bf }]
+		
+	\end{tcolorbox}
+	\begin{tcolorbox}[colback=white,colframe=lemcolor,arc=5pt,title={\color{white}\bf }]
+		
+	\end{tcolorbox}
+	
 	% End document
 \end{document}
