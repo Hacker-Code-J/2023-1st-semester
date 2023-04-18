@@ -63,7 +63,7 @@
 \fancyhead{}
 \fancyhf{}
 \rhead{Student ID: 20192250\quad Name: 지용현}%\rule{3cm}{0.4pt}}
-\lhead{\textcolor{blue2}{\textbf{CA Assignment \#1}}}
+\lhead{\textcolor{blue2}{\textbf{CA\hspace{4pt} 2023-spring-Midterm}}}
 % Define footer
 \newcommand{\footer}[1]{
 	\begin{flushright}
@@ -130,7 +130,7 @@
 	\end{center}
 	
 	\begin{enumerate}
-		\item  Express all complex solutions to the equation $z^6 + 1 = 0$ in the form $z = a + bi$.
+		\item Express all complex solutions to the equation $z^6 + 1 = 0$ in the form $z = a + bi$.
 		\begin{proof}[\sol]
 			Let $z=re^{i\theta}$. Then \[
 			z^6=r^6e^{i 6\theta}=64=2^6\implies\begin{cases}
@@ -164,6 +164,116 @@
 				\end{tabular}
 				%\caption{Special angles and their sine, cosine, and tangent values}
 			\end{table}\\
+		\end{proof}
+		\vspace{8pt}
+		\item Determine whether the following functions are differentiable and analytic at $z = 0$.
+		\begin{enumerate}
+			\item[(a)] $f\of{z}=f\of{x+iy}=\of{x+2y}+i\of{2x+y}$
+			\item[(b)] $f\of{z}=\abs{z}^2+z$
+			\item[(c)] $f\of{z}=f\of{x+iy}=e^x\cos y+ie^x\sin y$
+			\item[(d)] $\displaystyle f\of{z}=f\of{x+iy}=\begin{cases}\displaystyle
+			\frac{2x^3-3y^3}{2x^2+3y^2}+i\frac{2x^3+3y^3}{2x^2+3y^2} &:z\neq 0,\\
+			0 &:z= 0.
+			\end{cases}$
+		\end{enumerate}
+		\begin{proof}[\sol]
+			\begin{enumerate}
+				\item[(a)] Let $\begin{cases}
+				u(x,y)=x+2y,\\
+				v(x,y)=2x+y.
+				\end{cases}$ Then \[
+				u_x=1,\quad u_y=2,\quad v_x=2,\quad\text{and}\quad v_y=1.
+				\] Thus $u_x=v_y$ but $u_y\neq -v_x$, that is, it does not hold CR-eqs.
+				\vspace{4pt}
+				\item[(b)] Let $z=x+iy$ then $f\of{z}=x^2+y^2+(x+iy)$. Define $\begin{cases}
+				u(x,y):=x^2+x+y^2,\\
+				v(x,y):=y.
+				\end{cases}$ Then \[
+				u_x=2x+1,\quad u_y=2y,\quad v_x=0,\quad\text{and}\quad v_y=1.
+				\] And so \begin{align*}
+				u_x=v_y&\implies 2x+1=1\implies 2x=0,\\
+				u_y=-v_x&\implies 2y=0.
+				\end{align*} Thus $f$ is differentiable at $z=0$ only. It is not holomorphic.
+				\vspace{4pt}
+				\item[(c)] Let $\begin{cases}
+				u(x,y)=e^x\cos y,\\
+				v(x,y)=e^x\sin y
+				\end{cases}$ then \[
+				u_x=e^x\cos y,\quad u_y=-e^x\sin y,\quad v_x=e^x\sin y,\quad\text{and}\quad v_y=e^x\cos y.
+				\] Since $u_x=v_y$ and $u_y=-v_x$, a function $f$ satisfies CR-Eqs. Thus $f$ is differentiable on $\C$ and holomorphic in $\C$. And \[
+				f'\of{z}=u_x+iv_x=e^x\cos y+ie^x\sin y=e^{x+iy}=e^z.
+				\]
+				\vspace{4pt}
+				\item[(d)]
+			\end{enumerate}
+		\end{proof}
+		\vspace{8pt}
+		\item For the curve $C:z(t) = 3 + 3e^{it}$ with $0\leq t\leq\pi$, find the $\displaystyle\int_C\conjugate{z}dz$.
+		\begin{proof}[\sol]
+		\end{proof}
+		\vspace{8pt}
+		\item Let $C$ be a straight line joining $z_1=0$ to $z_2=1+i$. Find \[
+		\int_C\of{3z^2+4iz}dz.
+		\]
+		\begin{proof}[\sol]
+			content...
+		\end{proof}
+		\vspace{8pt}
+		\item Define a principal value of complex exponent as follows: \[
+		\pv z^\alpha:=\exp\of{a\Log z}.
+		\] Find $\abs{\pv\of{1-i}^{1+i}}$.
+		\begin{proof}[\sol]
+			content...
+		\end{proof}
+		\vspace{8pt}
+		\item Consider the complex function $h\of{z}$ defined as follows: \[
+		h\of{z}=h\of{x+iy}=\of{x^3+3xy^2-3x}+i\of{y^3+3x^2y-3y}.
+		\]\begin{itemize}
+			\item[(a)] Show that $h\of{z}$ is differentiable at all points on $x$-axis.
+			\item[(b)] Find all points where $h\of{z}$ is holomorphic.
+		\end{itemize}
+		\begin{proof}[\sol]
+			content...
+		\end{proof}
+		\vspace{8pt}
+		\item The curve $C$ is the unit circle $z(t) = e^(it)$ for $0\leq t\leq 2\pi$. Calculate the following integral: \begin{enumerate}
+			\item[(a)] $\displaystyle\int_C\frac{2z-10}{z^2-10z}dz$.
+			\item[(b)] $\displaystyle\int_C\frac{\sinh z}{z^4}dz$.
+		\end{enumerate}
+		\begin{proof}[\sol]
+			content...
+		\end{proof}
+		\vspace{8pt}
+		\item Let the two curves $C_R$ and $C_\rho$ in the complex plane be positively oriented semicircles, defined as follows:
+		\[
+		C_R: z(t) = Re^{it},\quad  C_\rho: z(t) = \rho e^{it},\quad \of{0\leq t\leq\pi}.
+		\] Let the complex function $\displaystyle f(z) = \frac{z^2}{\of{z^2+1}^2}$. \begin{enumerate}
+			\item[(a)] Prove the following inequality when $R=3$: \[
+			\abs{\int_{C_R}f\of{z}dz}<\frac{1}{2}\pi.
+			\] As the radius $R$ approaches infinity $\of{R\to\infty}$, where does the integral value converge?
+			\item[(b)] Prove the following inequality when $\rho = 1/3$:
+			\[
+			\abs{\int_{C_\rho}f\of{z}dz}<\frac{1}{16}\pi.
+			\] As the radius $\rho$ approaches zero $\of{\rho\to 0}$, where does the integral value converge?
+		\end{enumerate}
+		\begin{proof}[\sol]
+			content...
+		\end{proof}
+		\vspace{8pt}
+		\item Show that an entire function $f$ becomes a constant function if it satisfies the following condition: \[
+		\abs{f\of{z}}\geq 1,\quad z\in\C.
+		\]
+		\begin{proof}[\sol]
+			content...
+		\end{proof}
+		\vspace{8pt}
+		\item For an entire function $f$ satisfying the following condition: \[
+		\abs{f\of{z}}\leq 3\abs{z},\quad z\in\C,
+		\] \begin{enumerate}
+			\item[(a)] Show that $f^{(n)}(z) = 0$ ($n\geq 2$) for all points $z$.
+			\item[(b)] Demonstrate that a function satisfying this condition is a linear polynomial, \ie, $f(z) = az + b$.
+		\end{enumerate}\begin{proof}[\sol]
+			content...
 		\end{proof}
 	\end{enumerate}
 	
