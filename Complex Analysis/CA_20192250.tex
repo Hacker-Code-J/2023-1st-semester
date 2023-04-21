@@ -152,21 +152,21 @@
 			\vspace{1in}
 			%\includegraphics[width=3in]{Exponentials_of_complex_number_within_unit_circle-2.png}
 			\begin{tikzpicture}[scale=1.8,>=Stealth]
-				% draw axes
-				\draw[->, thick, black] (-2,0) -- (2,0) node[below right, black] {$\Re$};
-				\draw[->, thick, black] (0,-2) -- (0,2) node[above left, black] {$\Im$};
-				
-				% draw unit circle
-				\draw[blue, thick] (0,0) circle (1.4cm);
-				
-				% draw point
-				\filldraw[red] (1,1) circle (0.08cm) node[anchor=south west, black] {$z = a + ib$};
-				
-				% draw radius
-				\draw[dashed, thick, red] (0,0) -- (1,1) node[midway, above left, black] {$r$};
-				
-				% draw angle
-				\draw[->, thick, orange] (0.3,0) arc (0:45:0.3) node[midway, right, black] {$\theta$};
+			% draw axes
+			\draw[->, thick, black] (-2,0) -- (2,0) node[below right, black] {$\Re$};
+			\draw[->, thick, black] (0,-2) -- (0,2) node[above left, black] {$\Im$};
+			
+			% draw unit circle
+			\draw[blue, thick] (0,0) circle (1.4cm);
+			
+			% draw point
+			\filldraw[red] (1,1) circle (0.08cm) node[anchor=south west, black] {$z = a + ib$};
+			
+			% draw radius
+			\draw[dashed, thick, red] (0,0) -- (1,1) node[midway, above left, black] {$r$};
+			
+			% draw angle
+			\draw[->, thick, orange] (0.3,0) arc (0:45:0.3) node[midway, right, black] {$\theta$};
 			\end{tikzpicture}\par
 			\vspace{1in}
 			{\large Ji Yong-Hyeon\par}
@@ -194,8 +194,8 @@
 	\end{tcolorbox}
 	\begin{remark}
 		$f$ is discontinuous at $\alpha$ if and only if \begin{align*}
-			&\exists\varepsilon>0\quad\text{s.t.}\quad\forall\delta>0:\abs{x-\alpha}<\delta\ \text{but}\ \abs{f(x)-f(\alpha)}\geq\varepsilon\\
-			\iff &\exists\varepsilon>0\quad\text{s.t.}\quad\forall\delta>0:\nbhd_\varepsilon\left(f(\alpha)\right)\subset f\left(\nbhd_\delta(\alpha)\right).
+		&\exists\varepsilon>0\quad\text{s.t.}\quad\forall\delta>0:\abs{x-\alpha}<\delta\ \text{but}\ \abs{f(x)-f(\alpha)}\geq\varepsilon\\
+		\iff &\exists\varepsilon>0\quad\text{s.t.}\quad\forall\delta>0:\nbhd_\varepsilon\left(f(\alpha)\right)\subset f\left(\nbhd_\delta(\alpha)\right).
 		\end{align*}
 	\end{remark}
 	
@@ -228,7 +228,7 @@
 	The formal definition of continuity of a function $f(x)$ at a point $x_0$ is:
 	
 	\begin{align*}
-		\lim_{x \to x_0}f(x) &= f(x_0)\
+	\lim_{x \to x_0}f(x) &= f(x_0)\
 	\end{align*}
 	
 	That is, the limit of $f(x)$ as $x$ approaches $x_0$ exists and is equal to $f(x_0)$.
@@ -267,10 +267,10 @@
 	\end{tcolorbox}
 	\begin{proof}
 		By hypothesis, $f'(\alpha)$ exists. We have, then, \begin{align*}
-			\lim_{x\to\alpha}\left(f(x)-f(\alpha)\right)&=\lim_{x\to\alpha}\left[\frac{f(x)-f(\alpha)}{(x-\alpha)}(x-\alpha)\right]\\
-			&=\lim_{x\to\alpha}\frac{f(x)-f(\alpha)}{(x-\alpha)}\cdot\lim_{x\to\alpha}(x-\alpha)\\
-			&=f'(\alpha)\cdot0\\
-			&=0.
+		\lim_{x\to\alpha}\left(f(x)-f(\alpha)\right)&=\lim_{x\to\alpha}\left[\frac{f(x)-f(\alpha)}{(x-\alpha)}(x-\alpha)\right]\\
+		&=\lim_{x\to\alpha}\frac{f(x)-f(\alpha)}{(x-\alpha)}\cdot\lim_{x\to\alpha}(x-\alpha)\\
+		&=f'(\alpha)\cdot0\\
+		&=0.
 		\end{align*} Hence $\lim\limits_{x\to\alpha}f(x)=f(\alpha)$.
 	\end{proof}
 	\fi
@@ -286,13 +286,13 @@
 	The absolute value or modulus of a complex number is the distance between the origin and the point representing the complex number on the complex plane. It is defined as:
 	
 	\begin{align*}
-		|a+bi| &= \sqrt{a^2 + b^2}
+	|a+bi| &= \sqrt{a^2 + b^2}
 	\end{align*}
 	
 	The argument or phase of a complex number is the angle that the line connecting the origin to the point representing the complex number makes with the positive real axis. It is defined as:
 	
 	\begin{align*}
-		\theta &= \operatorname{arg}(a+bi) = \operatorname{arctan}\left(\frac{b}{a}\right)
+	\theta &= \operatorname{arg}(a+bi) = \operatorname{arctan}\left(\frac{b}{a}\right)
 	\end{align*}
 	
 	The complex number system is important in mathematics, physics, engineering, and many other fields. It is used to represent quantities that have both a magnitude and a direction, such as electrical currents and electromagnetic waves. Complex numbers also have applications in signal processing, control theory, and cryptography, among others.
@@ -301,8 +301,8 @@
 	\section{The Field of Complex Numbers}
 	
 	The set of complex numbers, denoted by $\C$, is defined as the collection of all ordered pairs $(x,y)$ where $x,y\in\R$. The operations of addition and multiplication are defined by:\begin{align*}
-		(x_1,y_1)+(x_2+y_2)&=(x_1+x_2,y_1+y_2),\\
-		(x_1,y_1)\cdot(x_2+y_2)&=(x_1x_2-y_1y_2,x_1y_2+x_2y_1).
+	(x_1,y_1)+(x_2+y_2)&=(x_1+x_2,y_1+y_2),\\
+	(x_1,y_1)\cdot(x_2+y_2)&=(x_1x_2-y_1y_2,x_1y_2+x_2y_1).
 	\end{align*}
 	
 	We verify that the axioms for a field are met by the definitions given for $\C$: \begin{itemize}
@@ -316,17 +316,17 @@
 	\] Additionally, \[
 	(x,y)\in\C\implies\exists(-x,-y)\in\C:[(x,y)+(-x,-y)=(0,0)=(-x,-y)+(x,y)].
 	\] In condition (F2), the multiplicative identity is (1,0), and the multiplicative inverse of any complex number (x,y) in $\C\setminus\set{(0,0)}$ is determined by \begin{align}
-		\of{\frac{x}{x^2+y^2},\frac{-y}{x^2+y^2}}.
+	\of{\frac{x}{x^2+y^2},\frac{-y}{x^2+y^2}}.
 	\end{align}
 	
 	\begin{exercise}
 		Verify that (1.1) is indeed the inverse of $(x,y)\in\C\setminus\set{(0,0)}$.
 		\begin{proof}[\sol]
 			Let $(x,y)\in\C$. Then \begin{align*}
-				(x,y)\cdot\of{\frac{x}{x^2+y^2},\frac{-y}{x^2+y^2}}
-				&=\of{\frac{x^2}{x^2+y^2}-\frac{-y^2}{x^2+y^2},\frac{-xy}{x^2+y^2}+\frac{xy}{x^2+y^2}}\\
-				&=\of{\frac{x^2+y^2}{x^2+y^2},\frac{-xy+xy}{x^2+y^2}}\\
-				&=(1,0).
+			(x,y)\cdot\of{\frac{x}{x^2+y^2},\frac{-y}{x^2+y^2}}
+			&=\of{\frac{x^2}{x^2+y^2}-\frac{-y^2}{x^2+y^2},\frac{-xy}{x^2+y^2}+\frac{xy}{x^2+y^2}}\\
+			&=\of{\frac{x^2+y^2}{x^2+y^2},\frac{-xy+xy}{x^2+y^2}}\\
+			&=(1,0).
 			\end{align*}
 		\end{proof}
 	\end{exercise}
@@ -342,16 +342,16 @@
 	Note that $\C\approx\R^2$ (vector space):
 	\begin{center}
 		\begin{tikzpicture}[scale=1.5]
-			% draw axes
-			\draw[->] (-.5,0) -- (1.5,0) node[right] {$\Re(z)$};
-			\draw[->] (0,-.5) -- (0,1.5) node[above] {$\Im(z)$};
-			% add arrow
-			%\draw[->] (0,0) -- (1,1) node[midway, above left] {};
-			% draw point
-			\filldraw[black] (1,1) circle (2pt) node[anchor=south west] {$(x,y)=x+yi$};
-			
-			\draw[dotted] (0,1) -- (1,1) node[midway, above left] {};
-			\draw[dotted] (1,0) -- (1,1) node[midway, above left] {};
+		% draw axes
+		\draw[->] (-.5,0) -- (1.5,0) node[right] {$\Re(z)$};
+		\draw[->] (0,-.5) -- (0,1.5) node[above] {$\Im(z)$};
+		% add arrow
+		%\draw[->] (0,0) -- (1,1) node[midway, above left] {};
+		% draw point
+		\filldraw[black] (1,1) circle (2pt) node[anchor=south west] {$(x,y)=x+yi$};
+		
+		\draw[dotted] (0,1) -- (1,1) node[midway, above left] {};
+		\draw[dotted] (1,0) -- (1,1) node[midway, above left] {};
 		\end{tikzpicture}
 	\end{center}
 	\vspace{8pt}
@@ -359,62 +359,62 @@
 	Addition $\leftrightarrow$ Vector Addition:
 	\begin{center}
 		\begin{tikzpicture}[scale=1.5]
-			% draw axes
-			\draw[->] (-.5,0) -- (2,0) node[right] {$\Re(z)$};
-			\draw[->] (0,-.5) -- (0,2) node[above] {$\Im(z)$};
-			% add arrow
-			\draw[->] (0,0) -- (.5,1) node[midway, above left] {};
-			\draw[->] (0,0) -- (1.5,1.5) node[midway, above left] {};
-			\draw[->] (0,0) -- (1,.5) node[midway, above left] {};
-			% draw point
-			\filldraw[black] (.5,1) circle (1pt) node[anchor=south west] {$z_1$};
-			\filldraw[black] (1.5,1.5) circle (1pt) node[anchor=south west] {$z_1+z_2$};
-			\filldraw[black] (1,.5) circle (1pt) node[anchor=south west] {$z_2$};
-			
-			\draw[dotted] (.5,1) -- (1.5,1.5) node[midway, above left] {};
-			\draw[dotted] (1,.5) -- (1.5,1.5) node[midway, above left] {};
+		% draw axes
+		\draw[->] (-.5,0) -- (2,0) node[right] {$\Re(z)$};
+		\draw[->] (0,-.5) -- (0,2) node[above] {$\Im(z)$};
+		% add arrow
+		\draw[->] (0,0) -- (.5,1) node[midway, above left] {};
+		\draw[->] (0,0) -- (1.5,1.5) node[midway, above left] {};
+		\draw[->] (0,0) -- (1,.5) node[midway, above left] {};
+		% draw point
+		\filldraw[black] (.5,1) circle (1pt) node[anchor=south west] {$z_1$};
+		\filldraw[black] (1.5,1.5) circle (1pt) node[anchor=south west] {$z_1+z_2$};
+		\filldraw[black] (1,.5) circle (1pt) node[anchor=south west] {$z_2$};
+		
+		\draw[dotted] (.5,1) -- (1.5,1.5) node[midway, above left] {};
+		\draw[dotted] (1,.5) -- (1.5,1.5) node[midway, above left] {};
 		\end{tikzpicture}
 	\end{center}
 	\vspace{8pt}
 	\subsection{Polar Coordinate}
 	\[
 	\begin{cases}
-		x=r\cos\theta\\
-		y=r\sin\theta
+	x=r\cos\theta\\
+	y=r\sin\theta
 	\end{cases},\quad \begin{cases}
-		r=\sqrt{x^2+y^2}\geq 0\\
-		\theta\in[0,2\pi).
+	r=\sqrt{x^2+y^2}\geq 0\\
+	\theta\in[0,2\pi).
 	\end{cases}0
 	\]
 	\begin{center}
 		\begin{minipage}{.45\textwidth}
 			\begin{tikzpicture}[scale=2]
-				% draw axes
-				\draw[->] (-.5,0) -- (1.5,0) node[right] {$\Re(z)$};
-				\draw[->] (0,-.5) -- (0,1.5) node[above] {$\Im(z)$};
-				% add arrow
-				%\draw[->] (0,0) -- (1,1) node[midway, above left] {};
-				% draw point
-				\filldraw[black] (1,1) circle (1pt) node[anchor=south west] {$(x,y)=x+yi=z$};
-				
-				\draw[dotted] (0,1) -- (1,1) node[midway, above left] {};
-				\draw[dotted] (1,0) -- (1,1) node[midway, above left] {};
+			% draw axes
+			\draw[->] (-.5,0) -- (1.5,0) node[right] {$\Re(z)$};
+			\draw[->] (0,-.5) -- (0,1.5) node[above] {$\Im(z)$};
+			% add arrow
+			%\draw[->] (0,0) -- (1,1) node[midway, above left] {};
+			% draw point
+			\filldraw[black] (1,1) circle (1pt) node[anchor=south west] {$(x,y)=x+yi=z$};
+			
+			\draw[dotted] (0,1) -- (1,1) node[midway, above left] {};
+			\draw[dotted] (1,0) -- (1,1) node[midway, above left] {};
 			\end{tikzpicture}
 		\end{minipage}
 		\begin{minipage}{.45\textwidth}
 			\begin{tikzpicture}[scale=2]
-				% draw axes
-				\draw[->] (-.5,0) -- (1.5,0) node[right] {$\Re(z)$};
-				\draw[->] (0,-.5) -- (0,1.5) node[above] {$\Im(z)$};
-				% add arrow
-				%\draw[->] (0,0) -- (1,1) node[midway, above left] {};
-				% draw point
-				\filldraw[black] (1,1) circle (1pt) node[anchor=south west] {$re^{i\theta}=r\of{\cos\theta+i\sin\theta}$};
-				
-				\draw[->] (0,0) -- (1,1) node[midway, above left] {$r$};
-				\draw[->, thick, red] (.5,0) arc (0:45:.5) node[midway, right, red] {$\theta$};
-				\draw[dotted] (0,1) -- (1,1) node[midway, above left] {};
-				\draw[dotted] (1,0) -- (1,1) node[midway, above left] {};
+			% draw axes
+			\draw[->] (-.5,0) -- (1.5,0) node[right] {$\Re(z)$};
+			\draw[->] (0,-.5) -- (0,1.5) node[above] {$\Im(z)$};
+			% add arrow
+			%\draw[->] (0,0) -- (1,1) node[midway, above left] {};
+			% draw point
+			\filldraw[black] (1,1) circle (1pt) node[anchor=south west] {$re^{i\theta}=r\of{\cos\theta+i\sin\theta}$};
+			
+			\draw[->] (0,0) -- (1,1) node[midway, above left] {$r$};
+			\draw[->, thick, red] (.5,0) arc (0:45:.5) node[midway, right, red] {$\theta$};
+			\draw[dotted] (0,1) -- (1,1) node[midway, above left] {};
+			\draw[dotted] (1,0) -- (1,1) node[midway, above left] {};
 			\end{tikzpicture}
 		\end{minipage}
 	\end{center} \[
@@ -423,36 +423,36 @@
 	\newpage
 	\subsection{Multiplication}
 	Let \begin{align*}
-		z_1=\of{x_1,y_1}\Leftrightarrow r_1\of{\cos\theta_1+i\sin\theta_1},\\
-		z_2=\of{x_2,y_2}\Leftrightarrow r_2\of{\cos\theta_2+i\sin\theta_2}.
+	z_1=\of{x_1,y_1}\Leftrightarrow r_1\of{\cos\theta_1+i\sin\theta_1},\\
+	z_2=\of{x_2,y_2}\Leftrightarrow r_2\of{\cos\theta_2+i\sin\theta_2}.
 	\end{align*} Then \begin{align*}
-		z_1z_2&=r_1r_2\of{\cos\theta_1+i\sin\theta_1}\of{\cos\theta_2+i\sin\theta_2}\\
-		&=r_1r_2\left[\of{\cos\theta_1\cos\theta_2-\sin\theta_1\sin\theta_2}+i\of{\cos\theta_1\sin\theta_2+\sin\theta_1\cos\theta_2}\right]\\
-		&=r_1r_2\left[\cos\of{\theta_1+\theta_2}+i\sin\of{\theta_1+\theta_2}\right]\\
-		&=r\of{\cos\theta+\sin\theta}\ \text{with}\ \begin{cases}
-			r=r_1r_2\\
-			\theta=\theta_1+\theta_2.
-		\end{cases}
+	z_1z_2&=r_1r_2\of{\cos\theta_1+i\sin\theta_1}\of{\cos\theta_2+i\sin\theta_2}\\
+	&=r_1r_2\left[\of{\cos\theta_1\cos\theta_2-\sin\theta_1\sin\theta_2}+i\of{\cos\theta_1\sin\theta_2+\sin\theta_1\cos\theta_2}\right]\\
+	&=r_1r_2\left[\cos\of{\theta_1+\theta_2}+i\sin\of{\theta_1+\theta_2}\right]\\
+	&=r\of{\cos\theta+\sin\theta}\ \text{with}\ \begin{cases}
+	r=r_1r_2\\
+	\theta=\theta_1+\theta_2.
+	\end{cases}
 	\end{align*}
 	
 	\begin{center}
 		\begin{tikzpicture}[scale=2]
-			% draw axes
-			\draw[->] (-3,0) -- (3,0) node[right] {};
-			%\draw[->] (0,-.5) -- (0,1.5) node[above] {$\Im(z)$};
-			% add arrow
-			%\draw[->] (0,0) -- (1,1) node[midway, above left] {};
-			% draw point
-			\filldraw[black] (1,1) circle (1pt) node[anchor=south west] {$z_1$};
-			\filldraw[black] (.5,1.5) circle (1pt) node[anchor=south west] {$z_2$};
-			\filldraw[black] (-1,2) circle (1pt) node[anchor=south west] {$z=z_1z_2$};
-			
-			\draw[->] (0,0) -- (1,1) node[midway, above left] {$r_1$};
-			\draw[->] (0,0) -- (.5,1.5) node[midway, above left] {$r_2$};
-			\draw[->] (0,0) -- (-1,2) node[midway, left] {$r=r_1r_2$};
-			\draw[->, thick, blue] (.2,0) arc (0:45:.2) node[midway, right, blue] {$\theta_1$};
-			\draw[->, thick, blue] (.5,0) arc (0:71:.5) node[midway, right, blue] {$\theta_2$};
-			\draw[->, thick, red] (1,0) arc (0:116:1) node[midway, right, red] {$\theta=\theta_1+\theta_2$};
+		% draw axes
+		\draw[->] (-3,0) -- (3,0) node[right] {};
+		%\draw[->] (0,-.5) -- (0,1.5) node[above] {$\Im(z)$};
+		% add arrow
+		%\draw[->] (0,0) -- (1,1) node[midway, above left] {};
+		% draw point
+		\filldraw[black] (1,1) circle (1pt) node[anchor=south west] {$z_1$};
+		\filldraw[black] (.5,1.5) circle (1pt) node[anchor=south west] {$z_2$};
+		\filldraw[black] (-1,2) circle (1pt) node[anchor=south west] {$z=z_1z_2$};
+		
+		\draw[->] (0,0) -- (1,1) node[midway, above left] {$r_1$};
+		\draw[->] (0,0) -- (.5,1.5) node[midway, above left] {$r_2$};
+		\draw[->] (0,0) -- (-1,2) node[midway, left] {$r=r_1r_2$};
+		\draw[->, thick, blue] (.2,0) arc (0:45:.2) node[midway, right, blue] {$\theta_1$};
+		\draw[->, thick, blue] (.5,0) arc (0:71:.5) node[midway, right, blue] {$\theta_2$};
+		\draw[->, thick, red] (1,0) arc (0:116:1) node[midway, right, red] {$\theta=\theta_1+\theta_2$};
 		\end{tikzpicture}
 	\end{center}
 	\vspace{8pt}
@@ -469,11 +469,11 @@
 	\newpage
 	\begin{remark}[Approximation of $\pi$]
 		Let $y=\tan x$ then $\frac{d}{dx}y=\sec^2x=1+\tan^2x=1+y^2$. Since $x=\arctan y$, we have $\frac{d}{dy}x=\frac{1}{1+y^2}$, that is, $\frac{d}{dx}\arctan x=\frac{1}{1+x^2}$. Note that \begin{align*}
-			\arctan x =\int\frac{d}{dx}\of{\arctan x}dx=\int\frac{1}{1+x^2}dx
-			&=\int\sum_{n=0}^\infty\of{-x^2}^ndx\quad\because\frac{1}{1-r}=\sum_{n=0}^\infty r^n\\
-			&=\sum_{n=0}^\infty\int(-1)^nx^{2n}dx\\
-			&=\sum_{n=0}^\infty(-1)^n\frac{1}{2n+1}x^{2n+1}\\
-			&=x-\frac{1}{3}x^3+\frac{1}{5}x^5-\frac{1}{7}x^7+\cdots.
+		\arctan x =\int\frac{d}{dx}\of{\arctan x}dx=\int\frac{1}{1+x^2}dx
+		&=\int\sum_{n=0}^\infty\of{-x^2}^ndx\quad\because\frac{1}{1-r}=\sum_{n=0}^\infty r^n\\
+		&=\sum_{n=0}^\infty\int(-1)^nx^{2n}dx\\
+		&=\sum_{n=0}^\infty(-1)^n\frac{1}{2n+1}x^{2n+1}\\
+		&=x-\frac{1}{3}x^3+\frac{1}{5}x^5-\frac{1}{7}x^7+\cdots.
 		\end{align*} Since $\tan\frac{\pi}{4}=1\Leftrightarrow\arctan(1)=\frac{\pi}{4}$, we have \[
 		\pi=4\cdot\arctan(1)=4\of{1-\frac{1}{3}+\frac{1}{5}-\frac{1}{7}}+\cdots.
 		\]
@@ -497,7 +497,7 @@
 				\filldraw[black] (2,1) circle (1.5pt) node[anchor=south] {$2+i$};
 				\filldraw[black] (3,1) circle (1.5pt) node[anchor=south west] {$3+i$};
 				\filldraw[black] (5,5) circle (1.5pt) node[anchor=south west] {$5(1+i)$};
-			
+				
 				\draw[->, thick, red] (.7,0) arc (0:26:.7) node[midway, right, black] {$\theta_1=\tan^{-1}(1/2)$};
 				\draw[->, thick, red] (2.7,0) arc (0:18:2.7) node[midway, right, black] {$\theta_2=\tan^{-1}(1/3)$};
 				\draw[->, thick, red] (4.7,0) arc (0:45:4.7) node[midway, right, black] {$\pi/4=\theta_1+\theta_2$};
@@ -508,19 +508,19 @@
 				\draw[dotted] (0,1) -- (3,1) node[] {};
 				\draw[dotted] (5,0) -- (5,5) node[] {};
 				\draw[dotted] (0,5) -- (5,5) node[] {};
-			\end{tikzpicture}
+				\end{tikzpicture}
 			\end{center}
 		\end{proof}
 	\end{exercise}
 	\vspace{8pt}
 	\subsection{$n$-th roots}
 	Note that $\omega$ is a $n$-th root of $z$ if $\omega^n=z$. Let \begin{align*}
-		z&=r\of{\cos\theta+i\sin\theta}\ \text{with}\ r\geq 0\ \text{and}\ \theta\in[0,2\pi),\\
-		w&=\rho\of{\cos\alpha+i\sin\alpha}\ \text{with}\ \rho\geq 0\ \text{and}\ \alpha\in[0,2\pi).
+	z&=r\of{\cos\theta+i\sin\theta}\ \text{with}\ r\geq 0\ \text{and}\ \theta\in[0,2\pi),\\
+	w&=\rho\of{\cos\alpha+i\sin\alpha}\ \text{with}\ \rho\geq 0\ \text{and}\ \alpha\in[0,2\pi).
 	\end{align*} Then \[
 	\omega^n=z\Rightarrow \rho^n(\cos n\alpha+i\sin n\alpha)=r\of{\cos\theta+i\sin\theta}\Rightarrow\begin{cases}
-		\rho^n=r\\
-		n\alpha=\theta+2k\pi,\ k\in\Z.
+	\rho^n=r\\
+	n\alpha=\theta+2k\pi,\ k\in\Z.
 	\end{cases}
 	\] Thus, \[
 	w=\rho\of{\cos\alpha+i\sin\alpha}=\boxed{\sqrt[n]{r}\left[\cos\of{\frac{\theta}{n}+\frac{2\pi k}{n}}+i\sin\of{\frac{\theta}{n}+\frac{2\pi k}{n}}\right]}.
@@ -547,8 +547,8 @@
 				\item $\conjugate{\conjugate{z}}=z$
 				\item $\boxed{z\conjugate{z}=\abs{z}^2}$
 				\item $\begin{cases}
-					\Re(z)=\frac{z+\conjugate{z}}{2}\\
-					\Im(z)=\frac{z-\conjugate{z}}{2i}.
+				\Re(z)=\frac{z+\conjugate{z}}{2}\\
+				\Im(z)=\frac{z-\conjugate{z}}{2i}.
 				\end{cases}$
 			\end{enumerate}
 		\end{proposition}
@@ -566,7 +566,7 @@
 			\]
 		\end{proof}
 	\end{remark}
-
+	
 	\newpage
 	\section{Topology of $\C$}
 	
@@ -627,8 +627,8 @@
 	\begin{tcolorbox}[title=Path-connected;]
 		\begin{definition}
 			An open set $U\subset\C$ is called \textbf{path-connected} if \begin{align*}
-				\forall z_1,z_2\in U:\exists\text{a stepwise path}\ \gamma:[a,b]\to\C\ \text{s.t.}\ \gamma(a)=z_1,\gamma(b)=z_2\ \text{and}\\
-				t\in[a,b]\implies\gamma(t)\in U.
+			\forall z_1,z_2\in U:\exists\text{a stepwise path}\ \gamma:[a,b]\to\C\ \text{s.t.}\ \gamma(a)=z_1,\gamma(b)=z_2\ \text{and}\\
+			t\in[a,b]\implies\gamma(t)\in U.
 			\end{align*}
 		\end{definition}
 	\end{tcolorbox}
@@ -666,16 +666,16 @@
 		\begin{definition}
 			The \textbf{complex exponential function} is defined as
 			\begin{equation*}
-				\exp{z} =\exp{(x+iy)} \triangleq e^{x}(\cos y + i\sin y),
+			\exp{z} =\exp{(x+iy)} \triangleq e^{x}(\cos y + i\sin y),
 			\end{equation*}
 			where $x,y\in\R$ and $i$ is the imaginary unit, $i^2=-1$.
 		\end{definition}
 	\end{tcolorbox}
 	\begin{remark}
 		Recall that Taylor series $e^x=\sum_{n=0}^\infty\frac{1}{n!}x^n$. Note that \begin{align*}
-			e^{iy}&=1+iy+\frac{1}{2!}(iy)^2+\frac{1}{3!}(iy)^3+\frac{1}{4!}(iy)^4+\frac{1}{5!}(iy)^5+\cdots\\
-			&=\of{1-\frac{1}{2!}y^2+\frac{1}{4!}y^4-\cdots}+i\of{y-\frac{1}{3!}y^3+\frac{1}{5!}y^5-\cdots}\\
-			&=\cos y+i\sin y.
+		e^{iy}&=1+iy+\frac{1}{2!}(iy)^2+\frac{1}{3!}(iy)^3+\frac{1}{4!}(iy)^4+\frac{1}{5!}(iy)^5+\cdots\\
+		&=\of{1-\frac{1}{2!}y^2+\frac{1}{4!}y^4-\cdots}+i\of{y-\frac{1}{3!}y^3+\frac{1}{5!}y^5-\cdots}\\
+		&=\cos y+i\sin y.
 		\end{align*} Then $e^{iy}=\cos y+i\sin y$. Thus, we have $
 		\exp z=e^x(\cos y+i\sin y)=e^{x+iy}.
 		$
@@ -695,9 +695,9 @@
 	\begin{proof}
 		\begin{itemize}
 			\item[(2)] Let $z_1=x_1+iy_1$ and $z_2=x_2+iy_2$. Then \begin{align*}
-				\exp\of{z_1+z_2}=\exp\of{x_1+x_2+i(y_1+y_2)}&=e^{x_1+x_2+i(y_1+y_2)}\\
-				&=e^{x_1+iy_1}e^{x_2+iy_2}\\
-				&=\of{\exp z_1}\of{\exp z_2}.
+			\exp\of{z_1+z_2}=\exp\of{x_1+x_2+i(y_1+y_2)}&=e^{x_1+x_2+i(y_1+y_2)}\\
+			&=e^{x_1+iy_1}e^{x_2+iy_2}\\
+			&=\of{\exp z_1}\of{\exp z_2}.
 			\end{align*}
 			\item[(3)] $1=\exp 0=\of{\exp z}\of{\exp (-z)}$.
 			\item[(4)] $\exp (z+2\pi)=e^z\of{\cos 2\pi+i\sin 2\pi}=\exp z(1+i\cdot 0)=\exp z$.
@@ -709,34 +709,34 @@
 		\ \begin{center}
 			\begin{minipage}{.45\textwidth}
 				\begin{tikzpicture}[scale=2]
-					% draw axes
-					\draw[->] (-1.5,0) -- (1.5,0) node[right] {};
-					\draw[->] (0,-1.5) -- (0,1.5) node[above] {};
-					% add arrow
-					\draw[line width=0.5mm, red] (-1.5,.5) -- (1.5,.5) node[below left] {$i\theta_0$};
-					\draw[line width=0.5mm, blue] (.5,-1.5) -- (.5,1.5) node[right] {$x_0+iy$};
-					\draw[line width=0.5mm, dotted, red] (-1.5,.7) -- (1.5,.7) node[above left] {};
-					\draw[line width=0.5mm, dotted, blue] (.3,-1.5) -- (.3,1.5) node[right] {};
-					% draw point
-					\filldraw[black] (0,0) circle (.5pt) node[below left, black] {$O$};
-					\filldraw[blue] (.5,0) circle (1pt) node[right] {$x_0$};
+				% draw axes
+				\draw[->] (-1.5,0) -- (1.5,0) node[right] {};
+				\draw[->] (0,-1.5) -- (0,1.5) node[above] {};
+				% add arrow
+				\draw[line width=0.5mm, red] (-1.5,.5) -- (1.5,.5) node[below left] {$i\theta_0$};
+				\draw[line width=0.5mm, blue] (.5,-1.5) -- (.5,1.5) node[right] {$x_0+iy$};
+				\draw[line width=0.5mm, dotted, red] (-1.5,.7) -- (1.5,.7) node[above left] {};
+				\draw[line width=0.5mm, dotted, blue] (.3,-1.5) -- (.3,1.5) node[right] {};
+				% draw point
+				\filldraw[black] (0,0) circle (.5pt) node[below left, black] {$O$};
+				\filldraw[blue] (.5,0) circle (1pt) node[right] {$x_0$};
 				\end{tikzpicture}
 			\end{minipage}$\overset{w=\exp z}{\longrightarrow}$
 			\begin{minipage}{.45\textwidth}
 				\begin{tikzpicture}[scale=2]
-					% draw axes
-					\draw[->] (-1.5,0) -- (1.5,0) node[right] {};
-					\draw[->] (0,-1.5) -- (0,1.5) node[above] {};
-					% add arrow
-					%\draw[->] (0,0) -- (1,1) node[midway, above left] {};
-					% draw point
-					\draw[red] (0,0) circle (1pt) node[below left, black] {$O$};
-					%\draw[line width=.5mm, blue] (0,0) circle (30pt) node[above left] {$e^{x_0}$};
-					\draw[line width=.5mm, -, blue] (1,0) arc (0:360:1) node[right] {$e^{x_0}$};
-					\draw[line width=.5mm, red] (0,0) -- (1.1,1.1) node[midway, above left] {};
-					\draw[->, thick, red] (.5,0) arc (0:45:.5) node[midway, right, red] {$\theta$};
-					\draw[line width=.5mm, dotted, blue] (0,0) circle (25pt) node[above left] {};
-					\draw[line width=.5mm, dotted, red] (0,0) -- (0.35,1.4) node[midway, above left] {};
+				% draw axes
+				\draw[->] (-1.5,0) -- (1.5,0) node[right] {};
+				\draw[->] (0,-1.5) -- (0,1.5) node[above] {};
+				% add arrow
+				%\draw[->] (0,0) -- (1,1) node[midway, above left] {};
+				% draw point
+				\draw[red] (0,0) circle (1pt) node[below left, black] {$O$};
+				%\draw[line width=.5mm, blue] (0,0) circle (30pt) node[above left] {$e^{x_0}$};
+				\draw[line width=.5mm, -, blue] (1,0) arc (0:360:1) node[right] {$e^{x_0}$};
+				\draw[line width=.5mm, red] (0,0) -- (1.1,1.1) node[midway, above left] {};
+				\draw[->, thick, red] (.5,0) arc (0:45:.5) node[midway, right, red] {$\theta$};
+				\draw[line width=.5mm, dotted, blue] (0,0) circle (25pt) node[above left] {};
+				\draw[line width=.5mm, dotted, red] (0,0) -- (0.35,1.4) node[midway, above left] {};
 				\end{tikzpicture}
 			\end{minipage}
 		\end{center}
@@ -752,8 +752,8 @@
 	\begin{tcolorbox}[colback=white,colframe=defcolor,arc=5pt,title={\color{white}\bf Complex Trigonometric}]
 		\begin{definition}
 			Let $z\in\C$. Then \begin{align*}
-				\cos\of{z}:=\frac{1}{2}\left[\exp(iz)+\exp(-iz)\right],\quad
-				\sin\of{z}:=\frac{1}{2i}\left[\exp(iz)-\exp(-iz)\right].
+			\cos\of{z}:=\frac{1}{2}\left[\exp(iz)+\exp(-iz)\right],\quad
+			\sin\of{z}:=\frac{1}{2i}\left[\exp(iz)-\exp(-iz)\right].
 			\end{align*}
 		\end{definition}
 	\end{tcolorbox}
@@ -771,27 +771,27 @@
 	\begin{remark}
 		Let $z,z_1,z_2\in\C$. \begin{itemize}
 			\item $\begin{cases}
-				\sin z=0\Leftrightarrow z=n\pi& (n\in\Z),\\
-				\cos z=0\Leftrightarrow z=\of{n+\frac{1}{2}}\pi& (n\in\Z).
+			\sin z=0\Leftrightarrow z=n\pi& (n\in\Z),\\
+			\cos z=0\Leftrightarrow z=\of{n+\frac{1}{2}}\pi& (n\in\Z).
 			\end{cases}$
 			\item $\begin{cases}
-				\sin(3z)=3\sin z-4\sin^3z,\\
-				\cos(3z)=4\cos^3z-3\cos z.
+			\sin(3z)=3\sin z-4\sin^3z,\\
+			\cos(3z)=4\cos^3z-3\cos z.
 			\end{cases}$
 			\item $\begin{cases}
-				\sin^2\frac{z}{2}&=\displaystyle\frac{1-\cos z}{2}\\
-				\cos^2\frac{z}{2}&=\displaystyle\frac{1+\cos z}{2}\\
-				\tan^2\frac{z}{2}&=\displaystyle\frac{1-\cos z}{1+\cos z}\\
+			\sin^2\frac{z}{2}&=\displaystyle\frac{1-\cos z}{2}\\
+			\cos^2\frac{z}{2}&=\displaystyle\frac{1+\cos z}{2}\\
+			\tan^2\frac{z}{2}&=\displaystyle\frac{1-\cos z}{1+\cos z}\\
 			\end{cases}$
 			\item $\begin{cases}
-				\cos(z_1+z_2)&=\cos z_1\cos z_2-\sin z_1\sin z_2\\
-				\sin(z_1+z_2)&=\sin z_1\cos z_2-\cos z_1\sin z_2\\
-				\tan(z_1+z_2)&=\frac{\tan z_1+\tan z_2}{1-\tan z_1\tan z_2}
+			\cos(z_1+z_2)&=\cos z_1\cos z_2-\sin z_1\sin z_2\\
+			\sin(z_1+z_2)&=\sin z_1\cos z_2-\cos z_1\sin z_2\\
+			\tan(z_1+z_2)&=\frac{\tan z_1+\tan z_2}{1-\tan z_1\tan z_2}
 			\end{cases}$
 			\item $\begin{cases}
-				\sin(-z)&=-\sin z\\
-				\cos(-z)&=\cos z\\
-				\tan(-z)&=-\tan z
+			\sin(-z)&=-\sin z\\
+			\cos(-z)&=\cos z\\
+			\tan(-z)&=-\tan z
 			\end{cases}$
 		\end{itemize}
 	\end{remark}
@@ -801,8 +801,8 @@
 	\begin{tcolorbox}[colback=white,colframe=defcolor,arc=5pt,title={\color{white}\bf Complex Hyperbolic}]
 		\begin{definition}
 			Let $z\in\C$. Then \begin{align*}
-				\cosh\of{z}:&=\cos(iz)=\frac{1}{2}(e^z+e^{-z}),\\
-				\sinh\of{z}:&=\frac{1}{i}\sin(iz)=\frac{1}{2}(e^z-e^{-z}).
+			\cosh\of{z}:&=\cos(iz)=\frac{1}{2}(e^z+e^{-z}),\\
+			\sinh\of{z}:&=\frac{1}{i}\sin(iz)=\frac{1}{2}(e^z-e^{-z}).
 			\end{align*}
 		\end{definition}
 	\end{tcolorbox}
@@ -812,12 +812,12 @@
 			Let $z,z_1,z_2\in\C$. \begin{enumerate}[(1)]
 				\item $\cosh^z-\sinh^2z=1$
 				\item $\begin{cases}
-					\sinh(z_1+z_2)&=\sinh z_1\cosh z_2+\cosh z_1\sinh z_2,\\
-					\cosh(z_1+z_2)&=\cosh z_1\cosh z_2+\sinh z_1\sinh z_2.
+				\sinh(z_1+z_2)&=\sinh z_1\cosh z_2+\cosh z_1\sinh z_2,\\
+				\cosh(z_1+z_2)&=\cosh z_1\cosh z_2+\sinh z_1\sinh z_2.
 				\end{cases}$
 				\item $\begin{cases}
-					\cosh(-z)&=\cosh(z)\\
-					\sinh(-z)&=-\sinh(z)
+				\cosh(-z)&=\cosh(z)\\
+				\sinh(-z)&=-\sinh(z)
 				\end{cases}$
 			\end{enumerate}
 		\end{proposition}
@@ -894,8 +894,8 @@
 			\]
 			\item Let $f\of{z}=\conjugate{z}$ then \[
 			\lim\limits_{\Delta z\to 0}\frac{\conjugate{z+\Delta z}-\conjugate{z}}{\Delta z}=\lim\lim_{\Delta z\to 0}\frac{\conjugate{z}+\conjugate{\Delta z}-\conjugate{z}}{\Delta z}=\lim\limits_{\Delta z\to 0}\of{\frac{\conjugate{\Delta z}}{\Delta z}}=\begin{cases}
-				1 &\Delta z=\Delta x+i\cdot 0,\\
-				-1 &\Delta z= 0+i\cdot\Delta y.
+			1 &\Delta z=\Delta x+i\cdot 0,\\
+			-1 &\Delta z= 0+i\cdot\Delta y.
 			\end{cases}
 			\] Thus $\nexists f'(z)$ for all $z\in\C$.
 			\item Let $f\of{z}=\abs{z}^2=z\conjugate{z}$ then\[
@@ -923,12 +923,12 @@
 			\] We want to show that there an $r>0$ and a function $h:D\of{z_0,r}$ satisfying condition (a) and (b). Let $\varepsilon>0$. Define the function $h: D(z_0, \delta) \to \mathbb{C}$ by
 			\[
 			h(z) = \begin{cases}
-				\frac{f(z) - f(z_0)}{z - z_0} - f'(z_0) &:z\neq z_0,\\
-				0 &:z=z_0.
+			\frac{f(z) - f(z_0)}{z - z_0} - f'(z_0) &:z\neq z_0,\\
+			0 &:z=z_0.
 			\end{cases}
 			\] Then \begin{itemize}
 				\item[] (Case I) ($z\neq z_0$, \ie, $0<\abs{z-z_0}<\delta$) \begin{align*}
-					h(z)=\frac{f(z) - f(z_0)}{z - z_0} - f'(z_0)\overset{\text{Rearraning}}{\implies}f\of{z}=f\of{z_0}+[f'(z_0)+h(z)](z-z_0).
+				h(z)=\frac{f(z) - f(z_0)}{z - z_0} - f'(z_0)\overset{\text{Rearraning}}{\implies}f\of{z}=f\of{z_0}+[f'(z_0)+h(z)](z-z_0).
 				\end{align*}
 				\item[] (Case II) ($z= z_0$, \ie, $0=\abs{z-z_0}$)\[
 				f\of{z}=f\of{z_0}+[f'(z_0)+h(z)](z-z_0)\leftrightsquigarrow f\of{z_0}=f\of{z_0}+\crossout[red]{0}{[f'(z_0)+0]\cdot 0}.
@@ -984,7 +984,7 @@
 		\begin{theorem}
 			Let $U\of{\subseteq\C}$ be an open set, and let \[f:U\to\C:f(z) =f\of{x+yi} = u(x, y) + iv(x, y)
 			\] be a complex-valued function, where $u(x, y)$ and $v(x, y)$ are real-valued functions, that is, \begin{align*}
-				u:U\to\R&:(x,y)\mapsto \Re\of{f(x+iy)}\quad\text{and}\\ v:U\to\R&:\of{x,y}\mapsto\Im\of{f(x+iy)}.
+			u:U\to\R&:(x,y)\mapsto \Re\of{f(x+iy)}\quad\text{and}\\ v:U\to\R&:\of{x,y}\mapsto\Im\of{f(x+iy)}.
 			\end{align*} If $f(z)$ is differentiable at a point $z_0 = x_0 + iy_0$, then the partial derivatives of $u(x, y)$ and $v(x, y)$ satisfy the Cauchy-Riemann equations: 
 			\[
 			u_x=v_y\quad\text{and}\quad u_y=-v_x\quad\text{at $(x_0,y_0)$}.
@@ -998,24 +998,24 @@
 	
 	\begin{proof}
 		Let $f'(z_0)$ be the complex derivative of $f(z)$ at $z_0$. By definition, we have \begin{align*}
-			f'(z_0)=\lim_{\Delta z\to 0}\frac{f\of{z_0+\Delta z}-f\of{z_0}}{\Delta z}=\begin{cases}
-				\displaystyle\lim\limits_{\substack{\Delta x\to 0\\ \Delta y=0}}\frac{f\of{z_0+\Delta z}-f\of{z_0}}{\Delta z} &\cdots\cdots(1)\\
-				\displaystyle\lim\limits_{\substack{\Delta y\to 0\\ \Delta x=0}}\frac{f\of{z_0+\Delta z}-f\of{z_0}}{\Delta z}&\cdots\cdots(2).
-			\end{cases}
+		f'(z_0)=\lim_{\Delta z\to 0}\frac{f\of{z_0+\Delta z}-f\of{z_0}}{\Delta z}=\begin{cases}
+		\displaystyle\lim\limits_{\substack{\Delta x\to 0\\ \Delta y=0}}\frac{f\of{z_0+\Delta z}-f\of{z_0}}{\Delta z} &\cdots\cdots(1)\\
+		\displaystyle\lim\limits_{\substack{\Delta y\to 0\\ \Delta x=0}}\frac{f\of{z_0+\Delta z}-f\of{z_0}}{\Delta z}&\cdots\cdots(2).
+		\end{cases}
 		\end{align*}
 		
 		\begin{itemize}
 			\item[(1)] ($\Delta z=\Delta x+i\cdot 0$);
 			\begin{align*}
-				(1)&=\lim\limits_{\Delta x\to 0}\frac{\left[u(x_0+\Delta x, y_0)-u\of{x_0,y_0}\right]-i\left[v(x_0+\Delta x,y_0)-v\of{x_0,y_0}\right]}{\Delta x}\\
-				&=\frac{\partial u}{\partial x}\of{x_0,y_0}+\frac{\partial v}{\partial x}\of{x_0,y_0}\\
-				&= u_x+iv_x\bigg|_{z=z_0}.
+			(1)&=\lim\limits_{\Delta x\to 0}\frac{\left[u(x_0+\Delta x, y_0)-u\of{x_0,y_0}\right]-i\left[v(x_0+\Delta x,y_0)-v\of{x_0,y_0}\right]}{\Delta x}\\
+			&=\frac{\partial u}{\partial x}\of{x_0,y_0}+\frac{\partial v}{\partial x}\of{x_0,y_0}\\
+			&= u_x+iv_x\bigg|_{z=z_0}.
 			\end{align*}
 			\item[(2)] ($\Delta z=0+i\Delta y$);
 			\begin{align*}
-				(2)&=\lim\limits_{\Delta y\to 0}\frac{\left[u(x_0, y_0+\Delta y)-u\of{x_0,y_0}\right]-i\left[v(x_0,y_0+\Delta y)-v\of{x_0,y_0}\right]}{i\Delta y}\\
-				&=\frac{1}{i}\frac{\partial u}{\partial y}\of{x_0,y_0}+\frac{\partial v}{\partial y}\of{x_0,y_0}\\
-				&= v_y-iu_y\bigg|_{z=z_0}\quad\text{by multiplying $1=i/i$}.
+			(2)&=\lim\limits_{\Delta y\to 0}\frac{\left[u(x_0, y_0+\Delta y)-u\of{x_0,y_0}\right]-i\left[v(x_0,y_0+\Delta y)-v\of{x_0,y_0}\right]}{i\Delta y}\\
+			&=\frac{1}{i}\frac{\partial u}{\partial y}\of{x_0,y_0}+\frac{\partial v}{\partial y}\of{x_0,y_0}\\
+			&= v_y-iu_y\bigg|_{z=z_0}\quad\text{by multiplying $1=i/i$}.
 			\end{align*}
 		\end{itemize} Hence we have \[
 		(1)=(2)\implies u_x=v_y,\quad u_y=-v_x.
@@ -1024,8 +1024,8 @@
 	
 	\begin{remark}
 		\[\exists f'(z_0):f'(0)=u_x+iv_x\bigg|_{z=z_0}\iff\begin{cases}
-			\text{(i)}\ u,v\in C^1\\
-			\text{(ii) CR-Eq hold at}\ (x_0,y_0).
+		\text{(i)}\ u,v\in C^1\\
+		\text{(ii) CR-Eq hold at}\ (x_0,y_0).
 		\end{cases}\]
 	\end{remark}
 	\vspace{8pt}
@@ -1071,11 +1071,11 @@
 		The function $f:\C\to\C$ is defined by \[
 		f\of{z}=\exp z=e^{x+iy}=e^x\of{\cos y+i\sin y}
 		\] where $z\in\C$. Then we have \begin{align*}
-			u(x,y)&=\Re\of{e^{x+iy}}=e^x\cos y,\\
-			v(x,y)&=\Im\of{e^{x+iy}}=e^x\sin y.
+		u(x,y)&=\Re\of{e^{x+iy}}=e^x\cos y,\\
+		v(x,y)&=\Im\of{e^{x+iy}}=e^x\sin y.
 		\end{align*} Thus, \begin{align*}
-			\frac{\partial u}{\partial x}\of{x,y} &=& e^x\cos y &=& \frac{\partial v}{\partial y}\of{x,y},\\
-			\frac{\partial u}{\partial y}\of{x,y} &=& -e^x\sin y &=& -\frac{\partial v}{\partial x}\of{x,y},
+		\frac{\partial u}{\partial x}\of{x,y} &=& e^x\cos y &=& \frac{\partial v}{\partial y}\of{x,y},\\
+		\frac{\partial u}{\partial y}\of{x,y} &=& -e^x\sin y &=& -\frac{\partial v}{\partial x}\of{x,y},
 		\end{align*} which shows that the Cauchy-Riemann equations hold in $\C$. Since \[
 		f'\of{z}=\frac{\partial u}{\partial x}\of{x,y}+i\frac{\partial v}{\partial x}\of{x,y}=e^x\cos y+ie^x\sin y=\exp z,
 		\] we also obtain that \[
@@ -1091,11 +1091,11 @@
 		\begin{proof}
 			Let $f=u+iv$ then $\abs{f(z)}=u^2+v^2=c^2$. Note that \[
 			\begin{cases}
-				2u\cdot u_x+2v\cdot v_x=0\\
-				2u\cdot u_y+2v\cdot v_y=0
+			2u\cdot u_x+2v\cdot v_x=0\\
+			2u\cdot u_y+2v\cdot v_y=0
 			\end{cases}\overset{\text{by CR-Eq}}{\implies}\quad\begin{cases}
-				2uu_x+2v(-u_y)=0 \cdots\cdots(1)\\
-				2uu_y+2vu_x=0 \cdots\cdots(2)
+			2uu_x+2v(-u_y)=0 \cdots\cdots(1)\\
+			2uu_y+2vu_x=0 \cdots\cdots(2)
 			\end{cases}.
 			\] By computing $(1)\cdot u+(2)\cdot v$, we have \[
 			2u^2u_x+2v^2u_x=0\implies 2(u^2+v^2)u_x=0\implies 2\cdot c^2\cdot u_x=0.
@@ -1119,8 +1119,8 @@
 	\lim\limits_{z\to z_0}\frac{f(z)-f(z_0)}{z-z_0}=f'(z_0)\implies f(z)\approx f(z_0)+f'(z_0)(z-z_0).
 	\] Recall that, for $z_1=e^{i\theta_1}$ and $z_2=r_2e^{i\theta_2}$ \[
 	\begin{cases}
-		z_1z_2=r_1r_2e^{i(\theta_1+\theta_2)}\\
-		\arg(z_1z_2)=\arg(z_1)+\arg(z_2).
+	z_1z_2=r_1r_2e^{i(\theta_1+\theta_2)}\\
+	\arg(z_1z_2)=\arg(z_1)+\arg(z_2).
 	\end{cases}
 	\] Then \begin{enumerate}
 		\item $\arg(f(z)-f(0)\approx\arg\of{f'(z)(z-z_0)}=\arg(f'(z_0))+\arg(z-z_0)$.
@@ -1181,15 +1181,15 @@
 		\begin{proof}[\sol]
 			\begin{itemize}
 				\item[(S1)] \begin{align*}
-					\int_0^1\of{t+i}^3dt=\int_0^1\of{t^3+3t^2i-3t-i}dt&=\int_0^1\of{t^3-3t}dt+i\int_0^1\of{3t^2-1}dt\\
-					&=\frac{1}{4}t^4-\frac{3}{2}t^3\bigg|_0^1+i\left(t^3-t\bigg|_0^1\right)\\
-					&=\frac{1}{4}-\frac{3}{2}\\
-					&=-\frac{5}{4}.
+				\int_0^1\of{t+i}^3dt=\int_0^1\of{t^3+3t^2i-3t-i}dt&=\int_0^1\of{t^3-3t}dt+i\int_0^1\of{3t^2-1}dt\\
+				&=\frac{1}{4}t^4-\frac{3}{2}t^3\bigg|_0^1+i\left(t^3-t\bigg|_0^1\right)\\
+				&=\frac{1}{4}-\frac{3}{2}\\
+				&=-\frac{5}{4}.
 				\end{align*}
 				\item[(S2)] \begin{align*}
-					\int_0^1\of{t+i}^3dt=\frac{1}{4}\of{t+i}^4\bigg|_0^1=\frac{1}{4}\of{(1+i)^4-i^4}&=\frac{1}{4}\of{\of{1+4i+6i^2+4i^3+1}-1}\\
-					&=\frac{1}{4}\of{1-6}\\
-					&=-\frac{5}{4}.
+				\int_0^1\of{t+i}^3dt=\frac{1}{4}\of{t+i}^4\bigg|_0^1=\frac{1}{4}\of{(1+i)^4-i^4}&=\frac{1}{4}\of{\of{1+4i+6i^2+4i^3+1}-1}\\
+				&=\frac{1}{4}\of{1-6}\\
+				&=-\frac{5}{4}.
 				\end{align*}
 			\end{itemize}
 		\end{proof}
@@ -1206,44 +1206,44 @@
 	\end{tcolorbox}
 	\begin{remark}
 		\begin{align*}
-			\int_\gamma\abs{dz}&=\int_a^b\abs{z'\of{t}}dt\\
-			&=\int_a^b\sqrt{\of{\frac{dx}{dt}}^2+\of{\frac{dy}{dt}}^2}dt\\
-			&=\lim_{n\to\infty}\sum_{k=1}^{n}\sqrt{\of{\frac{\Delta x_k}{\Delta t}}^2+\of{\frac{\Delta y_k}{\Delta t}}^2}\Delta t.
+		\int_\gamma\abs{dz}&=\int_a^b\abs{z'\of{t}}dt\\
+		&=\int_a^b\sqrt{\of{\frac{dx}{dt}}^2+\of{\frac{dy}{dt}}^2}dt\\
+		&=\lim_{n\to\infty}\sum_{k=1}^{n}\sqrt{\of{\frac{\Delta x_k}{\Delta t}}^2+\of{\frac{\Delta y_k}{\Delta t}}^2}\Delta t.
 		\end{align*}
 	\end{remark}
 	\begin{example}
 		Consider a circle $\gamma$ with center $z_0$ and radius $R$:
 		\begin{center}
 			\begin{tikzpicture}[scale=1.8,>=Stealth]
-				% draw axes
-				%\draw[->, thick, black] (-2,0) -- (2,0) node[below right, black] {$\Re(z)$};
-				%\draw[->, thick, black] (0,-2) -- (0,2) node[above left, black] {$\Im(z)$};
-				
-				% draw unit circle
-				\draw[blue, thick] (0,0) circle (1cm) node[above left, blue] {$\gamma$};
-				
-				% draw point
-				\filldraw[red] (0,0) circle (0.08cm) node[below left, black] {$z_0$};
-				\filldraw[red] (0.7,0.7) circle (0.08cm) node[anchor=south west, black] {$z$};
-				
-				% draw radius
-				\draw[dashed, thick, red] (0,0) -- (0.7,0.7) node[midway, below right, black] {$R$};
-				
-				% draw angle
-				%\draw[->, thick, orange] (0.3,0) arc (0:45:0.3) node[midway, right, black] {$\theta$};
+			% draw axes
+			%\draw[->, thick, black] (-2,0) -- (2,0) node[below right, black] {$\Re(z)$};
+			%\draw[->, thick, black] (0,-2) -- (0,2) node[above left, black] {$\Im(z)$};
+			
+			% draw unit circle
+			\draw[blue, thick] (0,0) circle (1cm) node[above left, blue] {$\gamma$};
+			
+			% draw point
+			\filldraw[red] (0,0) circle (0.08cm) node[below left, black] {$z_0$};
+			\filldraw[red] (0.7,0.7) circle (0.08cm) node[anchor=south west, black] {$z$};
+			
+			% draw radius
+			\draw[dashed, thick, red] (0,0) -- (0.7,0.7) node[midway, below right, black] {$R$};
+			
+			% draw angle
+			%\draw[->, thick, orange] (0.3,0) arc (0:45:0.3) node[midway, right, black] {$\theta$};
 			\end{tikzpicture}
 		\end{center} For $t\in[0,2\pi]$, \[
 		z\of{t}=z_0+Re^{it}=z_0+R\cos t+iR\sin t.
 		\] Then 
 		\begin{align*}
-			\int_{\gamma}\abs{dz}=\int_0^{2\pi}\abs{z'\of{t}}dt
-			=\int_0^{2\pi}\abs{\frac{d}{dt}\of{z_0+Re^{it}}}dt
-			&=\int_0^{2\pi}\abs{Rie^{it}}dt\\
-			&=\int_0^{2\pi}\abs{Ri}\abs{e^{it}}dt\\
-			&=\int_0^{2\pi}\sqrt{R^2}\sqrt{\cos^2t+\sin^2t}dt\\
-			&=\int_0^{2\pi}Rdt\\
-			&=Rt\bigg|_0^{2\pi}\\
-			&=2\pi R.
+		\int_{\gamma}\abs{dz}=\int_0^{2\pi}\abs{z'\of{t}}dt
+		=\int_0^{2\pi}\abs{\frac{d}{dt}\of{z_0+Re^{it}}}dt
+		&=\int_0^{2\pi}\abs{Rie^{it}}dt\\
+		&=\int_0^{2\pi}\abs{Ri}\abs{e^{it}}dt\\
+		&=\int_0^{2\pi}\sqrt{R^2}\sqrt{\cos^2t+\sin^2t}dt\\
+		&=\int_0^{2\pi}Rdt\\
+		&=Rt\bigg|_0^{2\pi}\\
+		&=2\pi R.
 		\end{align*}
 	\end{example}
 	
@@ -1258,18 +1258,18 @@
 				with $x,y:[a,b]\to\R$,
 			\end{enumerate} 
 			we define \begin{align*}
-				\int_\gamma f\of{z}dz:&=\int_a^bf\of{\gamma\of{t}}\gamma'\of{t}dt\\
-				&=\int_a^b\of{u\of{\gamma\of{t}}+iv\of{\gamma\of{t}}}\cdot\of{x'\of{t}+iy'\of{t}}dt\\
-				&=\int_a^b\of{u\of{\gamma\of{t}}\cdot x'\of{t}-v\of{\gamma\of{t}}\cdot y'\of{t}}dt\\
-				&\hspace{5mm} +i\int_a^b\of{u\of{\gamma\of{t}}\cdot x'\of{t}+v\of{\gamma\of{t}}\cdot y'\of{t}}dt.
+			\int_\gamma f\of{z}dz:&=\int_a^bf\of{\gamma\of{t}}\gamma'\of{t}dt\\
+			&=\int_a^b\of{u\of{\gamma\of{t}}+iv\of{\gamma\of{t}}}\cdot\of{x'\of{t}+iy'\of{t}}dt\\
+			&=\int_a^b\of{u\of{\gamma\of{t}}\cdot x'\of{t}-v\of{\gamma\of{t}}\cdot y'\of{t}}dt\\
+			&\hspace{5mm} +i\int_a^b\of{u\of{\gamma\of{t}}\cdot x'\of{t}+v\of{\gamma\of{t}}\cdot y'\of{t}}dt.
 			\end{align*}
 		\end{definition}
 	\end{tcolorbox}
 	\begin{remark}
 		For $c_k\in\left[z_{k-1},z_k\right]$,\begin{align*}
-			\int_\gamma f\of{z}dz=\lim_{n\to\infty}\sum_{k=1}^nf\of{c_k}\Delta z_k=\lim_{n\to\infty}\sum_{k=1}^nf\of{c_k}\of{\frac{\Delta x}{\Delta t}+i\frac{\Delta y}{\Delta t}}\Delta t
-			&=\int_a^bf\of{\gamma\of{t}}\of{x'\of{t}+iy'\of{t}}dt\\
-			&=\int_a^bf\of{\gamma\of{t}}\gamma'\of{t}dt.
+		\int_\gamma f\of{z}dz=\lim_{n\to\infty}\sum_{k=1}^nf\of{c_k}\Delta z_k=\lim_{n\to\infty}\sum_{k=1}^nf\of{c_k}\of{\frac{\Delta x}{\Delta t}+i\frac{\Delta y}{\Delta t}}\Delta t
+		&=\int_a^bf\of{\gamma\of{t}}\of{x'\of{t}+iy'\of{t}}dt\\
+		&=\int_a^bf\of{\gamma\of{t}}\gamma'\of{t}dt.
 		\end{align*}
 	\end{remark}
 	\begin{example}
@@ -1277,11 +1277,11 @@
 		f:\C\setminus\set{0}\to\C:f\of{z}=\frac{1}{z}
 		\] and two smooth paths
 		\begin{align*}
-			\gamma_1=\exp\of{it},\quad t\in\left[0,2\pi\right]\\
-			\gamma_2=\exp\of{2it},\quad t\in\left[0,\pi\right].
+		\gamma_1=\exp\of{it},\quad t\in\left[0,2\pi\right]\\
+		\gamma_2=\exp\of{2it},\quad t\in\left[0,\pi\right].
 		\end{align*} Then \begin{align*}
-			\int_{\gamma_1}f\of{z}dz=\int_{0}^{2\pi}f\of{\exp\of{it}}i\exp\of{it}dt=\int_0^{2\pi}idt=it\bigg|_{0}^{2\pi}=2\pi i,\\
-			\int_{\gamma_2}f\of{z}dz=\int_{0}^{\pi}f\of{\exp\of{2it}}2i\exp\of{2it}dt=\int_0^{\pi}2idt=2it\bigg|_{0}^{\pi}=2\pi i.
+		\int_{\gamma_1}f\of{z}dz=\int_{0}^{2\pi}f\of{\exp\of{it}}i\exp\of{it}dt=\int_0^{2\pi}idt=it\bigg|_{0}^{2\pi}=2\pi i,\\
+		\int_{\gamma_2}f\of{z}dz=\int_{0}^{\pi}f\of{\exp\of{2it}}2i\exp\of{2it}dt=\int_0^{\pi}2idt=2it\bigg|_{0}^{\pi}=2\pi i.
 		\end{align*}
 	\end{example}
 	
@@ -1295,11 +1295,11 @@
 				\includegraphics[scale=0.25]{equivalent_paths.png}
 			\end{center}
 			\begin{align*}
-				\int_{\tilde{\gamma}}f\of{z}dz
-				&=\int_a^bf\of{\tilde{\gamma}\of{t}}{\tilde{\gamma}'\of{t}}dt \\
-				&=\int_a^bf\of{\gamma\of{\varphi\of{t}}}\gamma'\of{\varphi\of{t}}\varphi'\of{t}dt\\
-				&=\int_c^df\of{\gamma\of{\tau}}\gamma'\of{\tau}d\tau\quad\text{by $\tau=\varphi\of{t}$}\\
-				&=\int_{\gamma}f\of{z}dz.
+			\int_{\tilde{\gamma}}f\of{z}dz
+			&=\int_a^bf\of{\tilde{\gamma}\of{t}}{\tilde{\gamma}'\of{t}}dt \\
+			&=\int_a^bf\of{\gamma\of{\varphi\of{t}}}\gamma'\of{\varphi\of{t}}\varphi'\of{t}dt\\
+			&=\int_c^df\of{\gamma\of{\tau}}\gamma'\of{\tau}d\tau\quad\text{by $\tau=\varphi\of{t}$}\\
+			&=\int_{\gamma}f\of{z}dz.
 			\end{align*}
 		\end{proposition}
 	\end{tcolorbox}
@@ -1309,8 +1309,8 @@
 		\begin{theorem}
 			Let $C$ be a circular path with center $z_0$ and radius $r>0$ traversed in the anti-clockwise direction. Then \[
 			\int_C\of{z-z_0}^ndz=\begin{cases}
-				2\pi i &:n= -1,\\
-				0 &:n\neq -1.
+			2\pi i &:n= -1,\\
+			0 &:n\neq -1.
 			\end{cases}
 			\]
 		\end{theorem}
@@ -1319,17 +1319,17 @@
 		\begin{itemize}
 			\item[(1)] Let $n\neq -1$ then
 			\begin{align*}
-				\int_C\of{z-z_0}^ndz&=\int_0^{2\pi}\of{z_0+re^{it}-z_0}^n\cdot ire^{it}dt\\
-				&=\int_0^{2\pi}r^ne^{i nt}\cdot ire^{it}dt\\
-				&=ir^{n+1}\int_0^{2\pi}e^{i(n+1)t}dt\\
-				&=ir^{n+1}\left[\frac{1}{i(n+1)}e^{i(n+1)t}\right]_0^{2\pi}\\
-				&=0.
+			\int_C\of{z-z_0}^ndz&=\int_0^{2\pi}\of{z_0+re^{it}-z_0}^n\cdot ire^{it}dt\\
+			&=\int_0^{2\pi}r^ne^{i nt}\cdot ire^{it}dt\\
+			&=ir^{n+1}\int_0^{2\pi}e^{i(n+1)t}dt\\
+			&=ir^{n+1}\left[\frac{1}{i(n+1)}e^{i(n+1)t}\right]_0^{2\pi}\\
+			&=0.
 			\end{align*}
 			\item[(2)] Let $n = -1$ then
 			\begin{align*}
-				\int_C\of{z-z_0}^{-1}dz=\int_0^{2\pi}\of{re^{it}}^{-1}\cdot ire^{it}dt
-				=\int_0^{2\pi}i dt
-				=2\pi i.
+			\int_C\of{z-z_0}^{-1}dz=\int_0^{2\pi}\of{re^{it}}^{-1}\cdot ire^{it}dt
+			=\int_0^{2\pi}i dt
+			=2\pi i.
 			\end{align*}
 		\end{itemize}
 	\end{proof}
@@ -1338,23 +1338,23 @@
 		Consider the following path: \begin{center}
 			
 			\begin{tikzpicture}[scale=1.1]
-				% draw axes
-				\draw[->] (-1.5,0) -- (1.5,0) node[right] {$\Re(z)$};
-				\draw[->] (0,-1.5) -- (0,1.5) node[above] {$\Im(z)$};
-				% add arrow
-				%\draw[->] (0,0) -- (1,1) node[midway, above left] {};
-				% draw point
-				\filldraw[black] (1,1) circle (2pt) node[anchor=south west] {$1+i$};
-				\draw[dotted] (0,0) -- (1,1) node[] {};
-				
-				\draw[line width=0.5mm, ->, thick, red] (0,1) arc (90:360:1) node[midway, left, red] {$C_3$};
-				\draw[line width=0.5mm, blue, ->] (1,1) -- (0,1) node[above right] {$C_2$};
-				\draw[line width=0.5mm, green, ->] (1,0) -- (1,1) node[midway, right] {$C_1$};
+			% draw axes
+			\draw[->] (-1.5,0) -- (1.5,0) node[right] {$\Re(z)$};
+			\draw[->] (0,-1.5) -- (0,1.5) node[above] {$\Im(z)$};
+			% add arrow
+			%\draw[->] (0,0) -- (1,1) node[midway, above left] {};
+			% draw point
+			\filldraw[black] (1,1) circle (2pt) node[anchor=south west] {$1+i$};
+			\draw[dotted] (0,0) -- (1,1) node[] {};
+			
+			\draw[line width=0.5mm, ->, thick, red] (0,1) arc (90:360:1) node[midway, left, red] {$C_3$};
+			\draw[line width=0.5mm, blue, ->] (1,1) -- (0,1) node[above right] {$C_2$};
+			\draw[line width=0.5mm, green, ->] (1,0) -- (1,1) node[midway, right] {$C_1$};
 			\end{tikzpicture}
 		\end{center} with \begin{align*}
-			C_1 &: z_1(t)=1+ti (0\leq t\leq 1)\\
-			C_2 &: z_2(t)=(1-t)+i (0\leq t\leq 1)\\
-			C_3 &: z_3(t)=e^{it} (\pi/2\leq t\leq 2\pi).
+		C_1 &: z_1(t)=1+ti (0\leq t\leq 1)\\
+		C_2 &: z_2(t)=(1-t)+i (0\leq t\leq 1)\\
+		C_3 &: z_3(t)=e^{it} (\pi/2\leq t\leq 2\pi).
 		\end{align*} Let $C=C_1+C_2+C_3$. Find $\int_C\conjugate{z}dz$.
 		\begin{proof}[\sol]
 			\[
@@ -1385,11 +1385,11 @@
 		Note that $-\gamma:[a,b]\to\C$ is defined by \[
 		\of{-\gamma}\of{t}=\gamma\of{a+b-t}.
 		\]\begin{align*}
-			\int_{-\gamma}f\of{z}dz &=\int_a^bf\of{\of{-\gamma}\of{t}}\of{-\gamma}'\of{t}dt\\
-			&=\int_a^bf\of{\gamma\of{a+b-t}}\frac{d}{dt}\left[\of{-\gamma}\of{t}\right]dt\\
-			&=\int_a^bf\of{\gamma\of{a+b-t}}\gamma'\of{a+b-t}\of{-1}dt\\
-			&=\int_b^af\of{\gamma\of{\tau}}\gamma'\of{\tau}d\tau\quad\text{by $\tau:=a+b-t$, \ie, $d\tau=-dt$}\\
-			&=-\int_a^bf\of{z}dz.
+		\int_{-\gamma}f\of{z}dz &=\int_a^bf\of{\of{-\gamma}\of{t}}\of{-\gamma}'\of{t}dt\\
+		&=\int_a^bf\of{\gamma\of{a+b-t}}\frac{d}{dt}\left[\of{-\gamma}\of{t}\right]dt\\
+		&=\int_a^bf\of{\gamma\of{a+b-t}}\gamma'\of{a+b-t}\of{-1}dt\\
+		&=\int_b^af\of{\gamma\of{\tau}}\gamma'\of{\tau}d\tau\quad\text{by $\tau:=a+b-t$, \ie, $d\tau=-dt$}\\
+		&=-\int_a^bf\of{z}dz.
 		\end{align*}
 	\end{proof}
 	\vspace{4pt}
@@ -1397,8 +1397,8 @@
 		\begin{proposition}
 			Let $\gamma_1:[a_1,b_1]\to D$ and $\gamma_2:[a_2,b_2]\to D$ be two paths such that $\gamma_1\of{b_1}=\gamma_2\of{a_2}$. Define the concatenation of paths $\gamma_1+\gamma_2:\left[a_1,b_1+b_2-a_2\right]$ as follows: \[
 			\of{\gamma_1+\gamma_2}\of{t}=\begin{cases}
-				\gamma_1\of{t} &:t\in[a_1,b_1],\\
-				\gamma_2\of{t-b_1+a_2} &:t\in[b_1,b_1+b_2-a_2].
+			\gamma_1\of{t} &:t\in[a_1,b_1],\\
+			\gamma_2\of{t-b_1+a_2} &:t\in[b_1,b_1+b_2-a_2].
 			\end{cases}
 			\] Then \[
 			\int_{\gamma_1+\gamma_2}f\of{z}dz=\int_{\gamma_1}f\of{z}dz+\int_{\gamma_2}f\of{z}dz.
@@ -1421,21 +1421,21 @@
 		Consider first a curve $\varphi:[a,b]\to\C$. We claim that \[
 		\abs{\int_a^b\varphi\of{t}dt}\leq\int_a^b\abs{\varphi\of{t}}dt.
 		\] Let $\displaystyle\int_a^b\varphi\of{t}dt=re^{i\theta}$, where $r\geq 0$ and $\theta\in(-\pi,\pi]$. Then \begin{align*}
-			\abs{\int_a^b\varphi\of{t}dt}=r
-			&=e^{-i\theta}\int_a^b\varphi\of{t}dt\quad\because\int_a^b\varphi\of{t}dt=re^{i\theta}\\
-			&=\int_a^be^{-i\theta}\varphi\of{t}dt\\
-			&=\int_a^b\Re\of{e^{-i\theta}\varphi\of{t}}dt\quad\because\abs{\int_a^b\varphi\of{t}dt}\in\R\\
-			&\leq\int_a^b\abs{\Re\of{e^{-i\theta}\varphi\of{t}}}dt \\
-			&\leq\int_a^b\abs{\of{e^{-i\theta}\varphi\of{t}}}dt\quad\because\abs{\Re\of{z}}\leq\abs{z}\\
-			&=\int_a^b\abs{\varphi\of{t}}dt\quad\because \abs{e^{-i\theta}}=1.
+		\abs{\int_a^b\varphi\of{t}dt}=r
+		&=e^{-i\theta}\int_a^b\varphi\of{t}dt\quad\because\int_a^b\varphi\of{t}dt=re^{i\theta}\\
+		&=\int_a^be^{-i\theta}\varphi\of{t}dt\\
+		&=\int_a^b\Re\of{e^{-i\theta}\varphi\of{t}}dt\quad\because\abs{\int_a^b\varphi\of{t}dt}\in\R\\
+		&\leq\int_a^b\abs{\Re\of{e^{-i\theta}\varphi\of{t}}}dt \\
+		&\leq\int_a^b\abs{\of{e^{-i\theta}\varphi\of{t}}}dt\quad\because\abs{\Re\of{z}}\leq\abs{z}\\
+		&=\int_a^b\abs{\varphi\of{t}}dt\quad\because \abs{e^{-i\theta}}=1.
 		\end{align*}
 		
 		Let $\varphi\of{t}:=f\of{\gamma\of{t}}\cdot\gamma'\of{t}$ with $t\in[a,b]$. Then
 		\begin{align*}
-			\abs{\int_\gamma f\of{z}dz}&=\abs{\int_a^b f\of{\gamma\of{t}}\gamma'\of{t}dt}\\
-			&\leq{\int_a^b \abs{f\of{\gamma\of{t}}\gamma'\of{t}}dt}\\
-			&=\int_a^b\abs{f\of{\gamma\of{t}}}\abs{\gamma'\of{t}}dt\\
-			&\leq\max_{t\in[a,b]}\abs{f\of{\gamma\of{t}}}\cdot\int_a^b\abs{\gamma'\of{t}}dt.
+		\abs{\int_\gamma f\of{z}dz}&=\abs{\int_a^b f\of{\gamma\of{t}}\gamma'\of{t}dt}\\
+		&\leq{\int_a^b \abs{f\of{\gamma\of{t}}\gamma'\of{t}}dt}\\
+		&=\int_a^b\abs{f\of{\gamma\of{t}}}\abs{\gamma'\of{t}}dt\\
+		&\leq\max_{t\in[a,b]}\abs{f\of{\gamma\of{t}}}\cdot\int_a^b\abs{\gamma'\of{t}}dt.
 		\end{align*}
 	\end{proof}
 	
@@ -1455,19 +1455,19 @@
 	\end{tcolorbox}
 	\begin{proof}
 		For $z=x+iy\in D$, where $x,y\in\R$, we define the real-valued functions $U,V,u,v$ by \begin{align*}
-			F(x+iy)&=U(x,y)+iV(x,y),\\
-			f(x+iy)&=u(x,y)+iv(x,y).
+		F(x+iy)&=U(x,y)+iV(x,y),\\
+		f(x+iy)&=u(x,y)+iv(x,y).
 		\end{align*} Also, set $\gamma\of{t}=x\of{t}+iy\of{t}$ ($t\in[a,b]$). Then
 		\begin{align*}
-			\int_\gamma f\of{z}dz&=\int_a^bf\of{\gamma\of{t}}\gamma'\of{t}dt\\
-			&=\int_a^b\of{u+iv}\of{x'+iy'}dt\\
-			&=\int_a^b\of{ux'-vy'}dt +i\int_a^b\of{vx'+uy'}dt\\
-			&=\int_a^b\of{U_xx'-V_xy'}dt +i\int_a^b\of{V_xx'+U_xy'}dt\quad\because F'=U_x+iV_x=f=u+iv\\
-			&=\int_a^b\of{U_xx'+U_yy'}dt +i\int_a^b\of{V_xx'+V_yy'}dt\quad\text{by CR-Eqs: $U_x=V_y$, $U_y=-V_x$}\\
-			&=\int_a^b\frac{d}{dt}\left[U(x,y)\right]dt+i\int_a^b\frac{d}{dt}\left[V(x,y)\right]dt\\
-			&=U\of{x(b),y(b)}-U\of{x(a),y(a)}+i\of{V\of{x(b),y(b)}-V\of{x(a),y(a)}}\\
-			&=\of{U\of{x(b),y(b)}+U\of{x(a),y(a)}}-\of{V\of{x(b),y(b)}+V\of{x(a),y(a)}}\\
-			&=F\of{\gamma\of{b}}-F\of{\gamma\of{a}}.
+		\int_\gamma f\of{z}dz&=\int_a^bf\of{\gamma\of{t}}\gamma'\of{t}dt\\
+		&=\int_a^b\of{u+iv}\of{x'+iy'}dt\\
+		&=\int_a^b\of{ux'-vy'}dt +i\int_a^b\of{vx'+uy'}dt\\
+		&=\int_a^b\of{U_xx'-V_xy'}dt +i\int_a^b\of{V_xx'+U_xy'}dt\quad\because F'=U_x+iV_x=f=u+iv\\
+		&=\int_a^b\of{U_xx'+U_yy'}dt +i\int_a^b\of{V_xx'+V_yy'}dt\quad\text{by CR-Eqs: $U_x=V_y$, $U_y=-V_x$}\\
+		&=\int_a^b\frac{d}{dt}\left[U(x,y)\right]dt+i\int_a^b\frac{d}{dt}\left[V(x,y)\right]dt\\
+		&=U\of{x(b),y(b)}-U\of{x(a),y(a)}+i\of{V\of{x(b),y(b)}-V\of{x(a),y(a)}}\\
+		&=\of{U\of{x(b),y(b)}+U\of{x(a),y(a)}}-\of{V\of{x(b),y(b)}+V\of{x(a),y(a)}}\\
+		&=F\of{\gamma\of{b}}-F\of{\gamma\of{a}}.
 		\end{align*}
 	\end{proof}
 	
@@ -1487,26 +1487,26 @@
 	\vspace{8pt}
 	\begin{example}
 		Consider \begin{align*}
-			\gamma_0&:[0,1]\to\C:\gamma_0(t)=4e^{2\pi it},\\
-			\gamma_1&:[0,1]\to\C:\gamma_1(t)=2i+e^{2\pi it}.
+		\gamma_0&:[0,1]\to\C:\gamma_0(t)=4e^{2\pi it},\\
+		\gamma_1&:[0,1]\to\C:\gamma_1(t)=2i+e^{2\pi it}.
 		\end{align*}\begin{center}
 			\begin{tikzpicture}[scale=1]
-				% draw axes
-				\draw[->] (-5,0) -- (5,0) node[right] {$\Re(z)$};
-				\draw[->] (0,-5) -- (0,5) node[above] {$\Im(z)$};
-				% add arrow
-				%\draw[->] (0,0) -- (1,1) node[midway, above left] {};
-				% draw point
-				\filldraw[blue] (4,0) circle (2pt) node[anchor=south west, black] {$4$};
-				\filldraw[blue] (1,2) circle (2pt) node[anchor=south west] {};
-				\filldraw[blue] (1.5,1.7) circle (2pt) node[anchor=south west] {};
-				\filldraw[black] (0,2) circle (2pt) node[anchor=south west] {$2i$};
-				
-				\draw[line width=0.5mm, -, thick, black] (4,0) arc (0:360:4) node[midway, above right] {$\gamma_0$};
-				\draw[line width=0.5mm, -, thick, black] (1,2) arc (0:360:1) node[above right] {$\gamma_1$};
-				\draw[line width=0.5mm, -, thick, red] (1.5,1.7) arc (0:360:1.5) node[midway, left, red] {};
-				\draw[line width=0.5mm, -, thick, blue] (4,0) -- (1,2) node[] {};
-				%\draw[line width=0.5mm, green, ->] (1,0) -- (1,1) node[midway, right] {$C_1$};
+			% draw axes
+			\draw[->] (-5,0) -- (5,0) node[right] {$\Re(z)$};
+			\draw[->] (0,-5) -- (0,5) node[above] {$\Im(z)$};
+			% add arrow
+			%\draw[->] (0,0) -- (1,1) node[midway, above left] {};
+			% draw point
+			\filldraw[blue] (4,0) circle (2pt) node[anchor=south west, black] {$4$};
+			\filldraw[blue] (1,2) circle (2pt) node[anchor=south west] {};
+			\filldraw[blue] (1.5,1.7) circle (2pt) node[anchor=south west] {};
+			\filldraw[black] (0,2) circle (2pt) node[anchor=south west] {$2i$};
+			
+			\draw[line width=0.5mm, -, thick, black] (4,0) arc (0:360:4) node[midway, above right] {$\gamma_0$};
+			\draw[line width=0.5mm, -, thick, black] (1,2) arc (0:360:1) node[above right] {$\gamma_1$};
+			\draw[line width=0.5mm, -, thick, red] (1.5,1.7) arc (0:360:1.5) node[midway, left, red] {};
+			\draw[line width=0.5mm, -, thick, blue] (4,0) -- (1,2) node[] {};
+			%\draw[line width=0.5mm, green, ->] (1,0) -- (1,1) node[midway, right] {$C_1$};
 			\end{tikzpicture}
 		\end{center} Then $\gamma_0$ is $\C$-homotopic to $\gamma_1$ by \[
 		H(t,s)=(1-s)\gamma_0(t)+s\gamma_1(t).
@@ -1532,14 +1532,14 @@
 		\left[\forall s\in[0,1]:\frac{d}{ds}\left[I(s)\right]=0\right]\implies I(0)=I(1).
 		\] We claim that $\displaystyle\frac{d}{ds}\left[I(s)\right]=0$ for $s\in[0,1]$:
 		\begin{align*}
-			\frac{d}{ds}\left[I(s)\right]&=\frac{d}{ds}\left[\int_{\gamma_s}f\of{z}dz\right]=\frac{d}{ds}\left[\int_0^1f\of{\gamma_s\of{t}}\gamma_s'\of{t}dt\right]\\
-			&=\frac{d}{ds}\left[\int_0^1f\of{H\of{t,s}}H_t\of{t,s}dt\right]\\
-			&=\int_0^1\frac{\partial}{\partial s}\left[f\of{H\of{t,s}}\frac{\partial}{\partial t}H\of{t,s}\right]dt\\
-			&=\int_0^1\left(f'\of{H(t,s)}\cdot \frac{\partial}{\partial s}H\of{t,s}\cdot \frac{\partial}{\partial t}H\of{t,s}+f\of{H(t,s)}\cdot \frac{\partial^2}{\partial s\partial t}H\of{t,s}\right)dt\\
-			&=\int_0^1\frac{\partial}{\partial t}\left[f\of{H(t,s)}\frac{\partial }{\partial s}H\of{t,s}\right]dt\quad\because H\in C^2\\
-			&=\left[f\of{H(t,s)}\frac{\partial }{\partial s}H\of{t,s}\right]_0^1\\
-			&=f\of{H\of{1,s}}\frac{\partial}{\partial s}H\of{1,s}-f\of{H\of{0,s}}\frac{\partial}{\partial s}H\of{0,s}\\
-			&=0,
+		\frac{d}{ds}\left[I(s)\right]&=\frac{d}{ds}\left[\int_{\gamma_s}f\of{z}dz\right]=\frac{d}{ds}\left[\int_0^1f\of{\gamma_s\of{t}}\gamma_s'\of{t}dt\right]\\
+		&=\frac{d}{ds}\left[\int_0^1f\of{H\of{t,s}}H_t\of{t,s}dt\right]\\
+		&=\int_0^1\frac{\partial}{\partial s}\left[f\of{H\of{t,s}}\frac{\partial}{\partial t}H\of{t,s}\right]dt\\
+		&=\int_0^1\left(f'\of{H(t,s)}\cdot \frac{\partial}{\partial s}H\of{t,s}\cdot \frac{\partial}{\partial t}H\of{t,s}+f\of{H(t,s)}\cdot \frac{\partial^2}{\partial s\partial t}H\of{t,s}\right)dt\\
+		&=\int_0^1\frac{\partial}{\partial t}\left[f\of{H(t,s)}\frac{\partial }{\partial s}H\of{t,s}\right]dt\quad\because H\in C^2\\
+		&=\left[f\of{H(t,s)}\frac{\partial }{\partial s}H\of{t,s}\right]_0^1\\
+		&=f\of{H\of{1,s}}\frac{\partial}{\partial s}H\of{1,s}-f\of{H\of{0,s}}\frac{\partial}{\partial s}H\of{0,s}\\
+		&=0,
 		\end{align*} since \begin{enumerate}[(i)]
 			\item By (H3), $H\of{1,s}=H\of{0,s}$ holds.
 			\item $\displaystyle\frac{\partial}{\partial s}H\of{1,s}=\lim_{h\to 0}\frac{H\of{1,s+h}-H\of{1,s}}{h}=\lim_{h\to 0}\frac{H\of{0,s+h}-H\of{0,s}}{h}=\frac{\partial}{\partial s}H\of{0,s}$.
@@ -1561,37 +1561,37 @@
 	\begin{remark}[Simply Connected Domain]
 		\ \begin{center}
 			\begin{tikzpicture}[scale=1.5]
-				
-				% Connected and simply connected
-				\filldraw[fill=green!20] (0,0) ellipse (1cm and 0.5cm);
-				\draw (0.8,0) node {$D$};
-				\draw (0,-1) node {Connected (\textcolor{blue}{O})};
-				\draw (0,-1.4) node {Simply connected (\textcolor{blue}{O})};
-				
-				% Non-connected and simply connected
-				\filldraw[fill=green!20] (4.5,0) circle (0.4cm);
-				\draw (4.5,0) node {$D_1$};
-				\filldraw[fill=green!20] (3.5,0) circle (0.4cm);
-				\draw (3.5,0) node {$D_2$};
-				\draw (4,-1) node {Connected (\textcolor{red}{X})};
-				\draw (4,-1.4) node {Simply connected (\textcolor{blue}{O})};
-				
-				% Connected and non simply connected
-				\filldraw[fill=green!20] (0,-3) ellipse (1cm and 0.7cm);
-				\draw (0.8,-3) node {$D$};
-				\draw (0,-4) node {Connected (\textcolor{blue}{O})};
-				\draw (0,-4.4) node {Simply connected (\textcolor{red}{X})};
-				\filldraw[fill=white] (0,-3) circle (0.2cm);
-				
-				% Non-connected and non simply connected
-				\filldraw[fill=green!20] (4.8,-3) circle (0.6cm);
-				\draw (4.8,-3) node {$D_1$};
-				\filldraw[fill=green!20] (3.2,-3) circle (0.6cm);
-				\filldraw[fill=white] (3.2,-3) circle (0.1cm);
-				\draw (3.5,-3) node {$D_2$};
-				\draw (4,-4) node {Connected (\textcolor{red}{X})};
-				\draw (4,-4.4) node {Simply connected (\textcolor{red}{X})};
-				
+			
+			% Connected and simply connected
+			\filldraw[fill=green!20] (0,0) ellipse (1cm and 0.5cm);
+			\draw (0.8,0) node {$D$};
+			\draw (0,-1) node {Connected (\textcolor{blue}{O})};
+			\draw (0,-1.4) node {Simply connected (\textcolor{blue}{O})};
+			
+			% Non-connected and simply connected
+			\filldraw[fill=green!20] (4.5,0) circle (0.4cm);
+			\draw (4.5,0) node {$D_1$};
+			\filldraw[fill=green!20] (3.5,0) circle (0.4cm);
+			\draw (3.5,0) node {$D_2$};
+			\draw (4,-1) node {Connected (\textcolor{red}{X})};
+			\draw (4,-1.4) node {Simply connected (\textcolor{blue}{O})};
+			
+			% Connected and non simply connected
+			\filldraw[fill=green!20] (0,-3) ellipse (1cm and 0.7cm);
+			\draw (0.8,-3) node {$D$};
+			\draw (0,-4) node {Connected (\textcolor{blue}{O})};
+			\draw (0,-4.4) node {Simply connected (\textcolor{red}{X})};
+			\filldraw[fill=white] (0,-3) circle (0.2cm);
+			
+			% Non-connected and non simply connected
+			\filldraw[fill=green!20] (4.8,-3) circle (0.6cm);
+			\draw (4.8,-3) node {$D_1$};
+			\filldraw[fill=green!20] (3.2,-3) circle (0.6cm);
+			\filldraw[fill=white] (3.2,-3) circle (0.1cm);
+			\draw (3.5,-3) node {$D_2$};
+			\draw (4,-4) node {Connected (\textcolor{red}{X})};
+			\draw (4,-4.4) node {Simply connected (\textcolor{red}{X})};
+			
 			\end{tikzpicture}
 		\end{center}
 	\end{remark}
@@ -1615,8 +1615,8 @@
 		\] where $\gamma_z$ is a path joining $p$ to $z$. \begin{enumerate}[(i)]
 			\item ($F$ is well-defined) Clearly, $\gamma:=\gamma_z+\of{-\tilde{\gamma_z}}$ is closed. Then
 			\begin{align*}
-				\int_{\gamma}f\of{\zeta}d\zeta=0&\implies \int_{\gamma_z+\of{-\tilde{\gamma_z}}}f\of{\zeta}d\zeta=0\\
-				&\implies\int_{\gamma}f\of{\zeta}d\zeta=\int_{\tilde{\gamma_z}}f\of{\zeta}d\zeta
+			\int_{\gamma}f\of{\zeta}d\zeta=0&\implies \int_{\gamma_z+\of{-\tilde{\gamma_z}}}f\of{\zeta}d\zeta=0\\
+			&\implies\int_{\gamma}f\of{\zeta}d\zeta=\int_{\tilde{\gamma_z}}f\of{\zeta}d\zeta
 			\end{align*} That is, Cauchy Integral Theorem gives $F$ is well-defined.
 			\item (Holomorphicity of $F$ and $F'=f$ in $D$) Since $f$ is holomorphic in $D$, it is also continuous there. Let $\varepsilon>0$. Then \[
 			\exists\delta>0:\forall z\in D:\abs{w-z}<\delta\implies\abs{f\of{w}-f\of{z}}<\varepsilon.
@@ -1627,15 +1627,15 @@
 			\] Note that \[
 			w-z=\zeta\bigg|_z^w=\int_{\gamma_{zw}}\frac{d}{d\zeta}\left[\zeta\right] d\zeta=\int_{\gamma_{zw}}1d\zeta.
 			\]Then \begin{align*}
-				\frac{F\of{w}-F\of{z}}{w-z}-f\of{z}&=\frac{1}{w-z}\int_{\gamma_{zw}}f\of{\zeta}d\zeta-f\of{z}\\
-				&=\frac{1}{w-z}\int_{\gamma_{zw}}f\of{\zeta}d\zeta-f\of{z}\cdot\frac{1}{w-z}\int_{\gamma_{zw}}1d\zeta\\
-				&=\frac{1}{w-z}\int_{\gamma_{zw}}\of{f\of{\zeta}-f\of{z}}d\zeta,
+			\frac{F\of{w}-F\of{z}}{w-z}-f\of{z}&=\frac{1}{w-z}\int_{\gamma_{zw}}f\of{\zeta}d\zeta-f\of{z}\\
+			&=\frac{1}{w-z}\int_{\gamma_{zw}}f\of{\zeta}d\zeta-f\of{z}\cdot\frac{1}{w-z}\int_{\gamma_{zw}}1d\zeta\\
+			&=\frac{1}{w-z}\int_{\gamma_{zw}}\of{f\of{\zeta}-f\of{z}}d\zeta,
 			\end{align*} and so \begin{align*}
-				\abs{\frac{F\of{w}-F\of{z}}{w-z}-f\of{z}}&=\abs{\frac{1}{w-z}\int_{\gamma_{zw}}\of{f\of{\zeta}-f\of{z}}d\zeta}\\
-				&=\frac{1}{\abs{w-z}}\abs{\int_{\gamma_{zw}}\of{f\of{\zeta}-f\of{z}}d\zeta}\\
-				&\leq\frac{1}{\abs{w-z}}\cdot\max_{\zeta\in\gamma_{zw}}\abs{f\of{\zeta}-f\of{z}}\cdot\int_{\gamma_{zw}}\abs{dz}\\
-				&<\frac{1}{\abs{w-z}}\cdot\varepsilon\cdot\abs{w-z}\\
-				&=\varepsilon.
+			\abs{\frac{F\of{w}-F\of{z}}{w-z}-f\of{z}}&=\abs{\frac{1}{w-z}\int_{\gamma_{zw}}\of{f\of{\zeta}-f\of{z}}d\zeta}\\
+			&=\frac{1}{\abs{w-z}}\abs{\int_{\gamma_{zw}}\of{f\of{\zeta}-f\of{z}}d\zeta}\\
+			&\leq\frac{1}{\abs{w-z}}\cdot\max_{\zeta\in\gamma_{zw}}\abs{f\of{\zeta}-f\of{z}}\cdot\int_{\gamma_{zw}}\abs{dz}\\
+			&<\frac{1}{\abs{w-z}}\cdot\varepsilon\cdot\abs{w-z}\\
+			&=\varepsilon.
 			\end{align*} Thus $F'\of{z}=f\of{z}$, and $F$ is holomorphic.
 		\end{enumerate}
 	\end{proof}
@@ -1663,13 +1663,13 @@
 		\] Note that \[
 		\int\frac{1}{z-z_0}dz=2\pi i.
 		\] Thus, \begin{align*}
-			\abs{\frac{1}{2\pi i}\int_{C_r}\frac{f\of{z}}{z-z_0}dz-f\of{z_0}}&=
-			\abs{\frac{1}{2\pi i}\int_{C_\delta}\frac{f\of{z}}{z-z_0}dz-f\of{z_0}}\\
-			&=\abs{\frac{1}{2\pi i}\int_{C_\delta}\frac{f\of{z}}{z-z_0}dz-\frac{1}{2\pi i}\cdot f\of{z_0}\cdot\int_{C_\delta}\frac{1}{z-z_0}dz}\\
-			&=\abs{\frac{1}{2\pi i}\int_{C_\delta}\frac{f\of{z}-f\of{z_0}}{z-z_0}dz}\\
-			&\leq\frac{1}{\abs{2\pi i}}\cdot\max_{\substack{z\in C_\delta\\ (\abs{z-z_0}=\delta)}}\abs{\frac{f\of{z}-f\of{z_0}}{z-z_0}}\cdot\int_{C_\delta}\abs{dz}\\
-			&<\frac{1}{2\pi}\cdot\frac{\varepsilon}{\delta}\cdot 2\pi\delta\\
-			&=\varepsilon.
+		\abs{\frac{1}{2\pi i}\int_{C_r}\frac{f\of{z}}{z-z_0}dz-f\of{z_0}}&=
+		\abs{\frac{1}{2\pi i}\int_{C_\delta}\frac{f\of{z}}{z-z_0}dz-f\of{z_0}}\\
+		&=\abs{\frac{1}{2\pi i}\int_{C_\delta}\frac{f\of{z}}{z-z_0}dz-\frac{1}{2\pi i}\cdot f\of{z_0}\cdot\int_{C_\delta}\frac{1}{z-z_0}dz}\\
+		&=\abs{\frac{1}{2\pi i}\int_{C_\delta}\frac{f\of{z}-f\of{z_0}}{z-z_0}dz}\\
+		&\leq\frac{1}{\abs{2\pi i}}\cdot\max_{\substack{z\in C_\delta\\ (\abs{z-z_0}=\delta)}}\abs{\frac{f\of{z}-f\of{z_0}}{z-z_0}}\cdot\int_{C_\delta}\abs{dz}\\
+		&<\frac{1}{2\pi}\cdot\frac{\varepsilon}{\delta}\cdot 2\pi\delta\\
+		&=\varepsilon.
 		\end{align*}
 	\end{proof}
 	
@@ -1688,7 +1688,7 @@
 		Since $\displaystyle\frac{f\of{z}}{z-w
 		}$ is holomorphic in $D\setminus\set{w}$ and $C_\delta$ is $D\setminus\set{w}$-homotopic to $C_{r}$,
 		\begin{align*}
-			f\of{w}=\frac{1}{2\pi i}\int_{C_\delta}\frac{f\of{z}}{z-w}dz=\frac{1}{2\pi i}\int_{C_r}\frac{f\of{z}}{z-w}dz.
+		f\of{w}=\frac{1}{2\pi i}\int_{C_\delta}\frac{f\of{z}}{z-w}dz=\frac{1}{2\pi i}\int_{C_r}\frac{f\of{z}}{z-w}dz.
 		\end{align*}
 	\end{proof}
 	
@@ -1719,9 +1719,9 @@
 	\end{remark}
 	\begin{proof}
 		(Naive Proof) Let $\displaystyle f\of{z}=\frac{1}{2\pi i}\int_\gamma\frac{f\of{\zeta}}{\zeta-z}d\zeta$. Then \begin{align*}
-			f'\of{z}&=\frac{1}{2\pi i}\frac{d}{dz}\left[\int_\gamma\frac{f\of{\zeta}}{\zeta-z}d\zeta\right]\\
-			&=\frac{1}{2\pi i}\int_\gamma\frac{d}{dz}\left[\frac{f\of{\zeta}}{\zeta-z}\right]d\zeta\quad\text{(an assumption)}\\
-			&=\frac{1}{2\pi i}\int_\gamma\frac{f\of{\zeta}}{\of{\zeta-z}^2}d\zeta,
+		f'\of{z}&=\frac{1}{2\pi i}\frac{d}{dz}\left[\int_\gamma\frac{f\of{\zeta}}{\zeta-z}d\zeta\right]\\
+		&=\frac{1}{2\pi i}\int_\gamma\frac{d}{dz}\left[\frac{f\of{\zeta}}{\zeta-z}\right]d\zeta\quad\text{(an assumption)}\\
+		&=\frac{1}{2\pi i}\int_\gamma\frac{f\of{\zeta}}{\of{\zeta-z}^2}d\zeta,
 		\end{align*} and $f''\of{z}=\displaystyle\frac{1}{2\pi i}\cdot 2\int_\gamma\frac{f\of{\zeta}}{\of{\zeta-z}^3}d\zeta$. Thus \[
 		f^{\of{n}}\of{z}=\frac{n!}{2\pi i}\int_\gamma\frac{f\of{\zeta}}{\of{\zeta-z}^{n+1}}d\zeta.
 		\]
@@ -1740,9 +1740,9 @@
 		\] By generalized Cauchy integral theorem, \[
 		f'\of{w}=\frac{1}{2\pi i}\int_\gamma\frac{f\of{z}}{\of{z-w}^2}dz,
 		\] and so \begin{align*}
-			\abs{f'\of{w}}=\abs{\frac{1}{2\pi i}\int_\gamma\frac{f\of{z}}{\of{z-w}^2}dz}&\leq\abs{\frac{1}{2\pi i}}\cdot\max_{z\in\gamma}\abs{\frac{f\of{z}}{\of{z-w}^2}}\cdot\int_\gamma\abs{dz}\\
-			&\leq\frac{1}{2\pi}\cdot\frac{M}{R^2}\cdot 2\pi R\\
-			&=\frac{M}{R}.
+		\abs{f'\of{w}}=\abs{\frac{1}{2\pi i}\int_\gamma\frac{f\of{z}}{\of{z-w}^2}dz}&\leq\abs{\frac{1}{2\pi i}}\cdot\max_{z\in\gamma}\abs{\frac{f\of{z}}{\of{z-w}^2}}\cdot\int_\gamma\abs{dz}\\
+		&\leq\frac{1}{2\pi}\cdot\frac{M}{R^2}\cdot 2\pi R\\
+		&=\frac{M}{R}.
 		\end{align*} Since $R>0$ was arbitrary, it follows that $f'\of{w}=0$, and hence $f$ is constant.
 	\end{proof}
 	
@@ -1772,8 +1772,8 @@
 	\end{tcolorbox}
 	\begin{proof}
 		Let $z_0\in D$. Consider $z\in D$ with $z\neq z_0$. For two distinct path $\gamma_1,\gamma_2$ joining $z_0$ to $z$, define $\gamma:=\gamma_1+\of{-\gamma_2}$. Then \begin{align*}
-			&\oint_\gamma f\of{\zeta}d\zeta=\int_{\gamma_1}f\of{\zeta}d\zeta-\int_{\gamma_2}f\of{\zeta}d\zeta=0\\
-			\implies&\int_{\gamma_1}f\of{\zeta}d\zeta=\int_{\gamma_2}f\of{\zeta}d\zeta.
+		&\oint_\gamma f\of{\zeta}d\zeta=\int_{\gamma_1}f\of{\zeta}d\zeta-\int_{\gamma_2}f\of{\zeta}d\zeta=0\\
+		\implies&\int_{\gamma_1}f\of{\zeta}d\zeta=\int_{\gamma_2}f\of{\zeta}d\zeta.
 		\end{align*} We define \[
 		F\of{z}:=\int_{z_0}^zf\of{\zeta}d\zeta.
 		\] Then $F'\of{z}=f\of{z}$ and $F\in\Hol$, and so $F^{(n)}\in\Hol$. Thus, $\exists F''\of{z}$ and then $F''\of{z}=f'\of{z}$. Hence $f$ is holomorphic in $D$.
@@ -1784,9 +1784,9 @@
 	\subsection{Line Integral of Real function}
 	
 	\begin{align*}
-		\int_C\textbf{F}\cdot d\textbf{r}:&=\int_a^b\textbf{F}\of{x(t),y(t)}\cdot\of{x'(t),y'(t)}dt\\
-		&=\int_a^bP\of{x(t),y(t)}\frac{dx(t)}{dt}dt+\int_a^bQ\of{x(t),y(t)}\frac{dy(t)}{dt}dt\\
-		&=\int_C Pdx+Qdy.
+	\int_C\textbf{F}\cdot d\textbf{r}:&=\int_a^b\textbf{F}\of{x(t),y(t)}\cdot\of{x'(t),y'(t)}dt\\
+	&=\int_a^bP\of{x(t),y(t)}\frac{dx(t)}{dt}dt+\int_a^bQ\of{x(t),y(t)}\frac{dy(t)}{dt}dt\\
+	&=\int_C Pdx+Qdy.
 	\end{align*}
 	\vspace{4pt}
 	\begin{example}
@@ -1807,18 +1807,19 @@
 	\vspace{4pt}
 	\begin{remark}
 		Let $f:=Pdx+Qdy$ then \begin{align*}
-			df=d\of{Pdx+Qdy}&=(dPdx+Pd(dx))+(dQdy+Qd(dy))\\
-			&=dPdx+dQdy\quad\because d(dx)=0=d(dy)\\
-			&=\of{P_xdx+P_ydy}dx+\of{Q_xdx+Q_ydy}dy\\
-			&=P_ydydx+Q_xdxdy\quad\because dxdx=0=dydy\\
-			&=\of{Q_x-P_y}dxdy\quad\because dxdy=-dydx.
+		df=d\of{Pdx+Qdy}&=(dPdx+Pd(dx))+(dQdy+Qd(dy))\\
+		&=dPdx+dQdy\quad\because d(dx)=0=d(dy)\\
+		&=\of{P_xdx+P_ydy}dx+\of{Q_xdx+Q_ydy}dy\\
+		&=P_ydydx+Q_xdxdy\quad\because dxdx=0=dydy\\
+		&=\of{Q_x-P_y}dxdy\quad\because dxdy=-dydx.
 		\end{align*}
 	\end{remark}
 	\vspace{4pt}
 	\begin{example}
-		\[
-		\int_{C=\partial R}\of{x^2+y^2}dx+\of{2xy}dy=\iint_R\left[\frac{\partial}{\partial x}2xy-\frac{\partial}{\partial y}\of{x^2+y^2}\right]dxdy=\iint_R\of{2y-2y}dxdy=0.
-		\]
+		\begin{align*}
+		\int_{C=\partial R}\of{x^2+y^2}dx+\of{2xy}dy&=\iint_R\left[\frac{\partial\of{2xy}}{\partial x}-\frac{\partial\of{x^2+y^2}}{\partial y}\right]dxdy\\
+		&=\iint_R\of{2y-2y}dxdy=0.
+		\end{align*}
 	\end{example}
 	
 	\newpage
@@ -1839,12 +1840,12 @@
 	\vspace{4pt}
 	\begin{example}
 		Let $C(t)=a\cos t+ib\sin t$ for $t\in[0,2\pi]$. Then \begin{align*}
-			\int_C\conjugate{z}dz&=\int_0^{2\pi}\of{x(t)-iy(t)}\of{x'(t)+iy'(t)}dt\\
-			&=\int_0^{2\pi}\of{xx'+yy'}dt+i\int_0^{2\pi}\of{-yx'+xy'}dt\\
-			&=\oint_Cxdx+ydy+i\oint_C\of{-y}dx+xdy\\
-			&=\iint_R\of{\frac{\partial}{\partial x}y-\frac{\partial}{\partial y}x}dxdy+i\iint_R\of{\frac{\partial}{\partial x}x-\frac{\partial}{\partial y}\of{-y}}dxdy\\
-			&=0+i2\iint_Rdxdy\\
-			&=2i\cdot\text{Area($C$)}.
+		\int_C\conjugate{z}dz&=\int_0^{2\pi}\of{x(t)-iy(t)}\of{x'(t)+iy'(t)}dt\\
+		&=\int_0^{2\pi}\of{xx'+yy'}dt+i\int_0^{2\pi}\of{-yx'+xy'}dt\\
+		&=\oint_Cxdx+ydy+i\oint_C\of{-y}dx+xdy\\
+		&=\iint_R\of{\frac{\partial}{\partial x}y-\frac{\partial}{\partial y}x}dxdy+i\iint_R\of{\frac{\partial}{\partial x}x-\frac{\partial}{\partial y}\of{-y}}dxdy\\
+		&=0+i2\iint_Rdxdy\\
+		&=2i\cdot\text{Area($C$)}.
 		\end{align*}
 		Thus, \[
 		\text{Area($C$)}=\frac{1}{2i}\int_C\conjugate{z}dz.
@@ -1869,32 +1870,32 @@
 		\] with $C\of{t}=3e^{it}$ for $t\in[0,2\pi]$.
 		\begin{center}
 			\begin{tikzpicture}[scale=1.25]
-				\begin{axis}[
-					xmin=-4, xmax=4,
-					ymin=-4, ymax=4,
-					axis lines=center,
-					xlabel={$\Re$},
-					ylabel={$\Im$},
-					xlabel style={anchor=west},
-					ylabel style={anchor=south},
-					xtick={-3,3},
-					ytick={-1,1},
-					grid=major,
-					domain=0:2*pi,
-					samples=100,
-					variable=\t,
-					legend pos=outer north east,
-					]
-					
-					% Contour C(t) = 3e^{it}
-					\addplot[smooth, color=blue, thick] ({3*cos(deg(\t))}, {3*sin(deg(\t))});
-					\addlegendentry{$C(t) = 3e^{it}$}
-					
-					% Poles at i and -i
-					\node[circle, draw, red, fill=red, inner sep=1pt, label=right:$i$] at (axis cs:0,1) {};
-					\node[circle, draw, red, fill=red, inner sep=1pt, label=right:$-i$] at (axis cs:0,-1) {};
-					
-				\end{axis}
+			\begin{axis}[
+			xmin=-4, xmax=4,
+			ymin=-4, ymax=4,
+			axis lines=center,
+			xlabel={$\Re$},
+			ylabel={$\Im$},
+			xlabel style={anchor=west},
+			ylabel style={anchor=south},
+			xtick={-3,3},
+			ytick={-1,1},
+			grid=major,
+			domain=0:2*pi,
+			samples=100,
+			variable=\t,
+			legend pos=outer north east,
+			]
+			
+			% Contour C(t) = 3e^{it}
+			\addplot[smooth, color=blue, thick] ({3*cos(deg(\t))}, {3*sin(deg(\t))});
+			\addlegendentry{$C(t) = 3e^{it}$}
+			
+			% Poles at i and -i
+			\node[circle, draw, red, fill=red, inner sep=1pt, label=right:$i$] at (axis cs:0,1) {};
+			\node[circle, draw, red, fill=red, inner sep=1pt, label=right:$-i$] at (axis cs:0,-1) {};
+			
+			\end{axis}
 			\end{tikzpicture}
 		\end{center}
 		
@@ -1902,12 +1903,12 @@
 			Note that \[
 			\frac{1}{z^2+1}=\frac{1}{\of{z+i}\of{z-i}}=\frac{1}{2i}\of{\frac{1}{z-i}-\frac{1}{z+i}}.
 			\] Let $f(z)=e^{\alpha z}$ then \begin{align*}
-				\frac{1}{2\pi i}\oint_C\frac{e^{\alpha z}}{z^2+1}dz&=\frac{1}{2\pi i}\oint_C\frac{f\of{z}}{2i}\of{\frac{1}{z-i}-\frac{1}{z+i}}dz\\
-				&=\frac{1}{2\pi i}\frac{1}{2i}\oint_C\of{\frac{f\of{z}}{z-i}-\frac{f\of{z}}{z+i}}dz\\
-				&=\frac{1}{2i}\left[\frac{1}{2\pi i}\int_C\frac{f\of{z}}{z-i}dz-\frac{1}{2\pi i}\int_C\frac{f\of{z}}{z+i}dz\right]\\
-				&=\frac{1}{2i}\of{f\of{i}-f\of{-i}}\quad\text{by Cauchy Integral formula}\\
-				&=\frac{e^{\alpha i}-e^{-\alpha i}}{2i}\\
-				&=\sin\alpha.
+			\frac{1}{2\pi i}\oint_C\frac{e^{\alpha z}}{z^2+1}dz&=\frac{1}{2\pi i}\oint_C\frac{f\of{z}}{2i}\of{\frac{1}{z-i}-\frac{1}{z+i}}dz\\
+			&=\frac{1}{2\pi i}\frac{1}{2i}\oint_C\of{\frac{f\of{z}}{z-i}-\frac{f\of{z}}{z+i}}dz\\
+			&=\frac{1}{2i}\left[\frac{1}{2\pi i}\int_C\frac{f\of{z}}{z-i}dz-\frac{1}{2\pi i}\int_C\frac{f\of{z}}{z+i}dz\right]\\
+			&=\frac{1}{2i}\of{f\of{i}-f\of{-i}}\quad\text{by Cauchy Integral formula}\\
+			&=\frac{e^{\alpha i}-e^{-\alpha i}}{2i}\\
+			&=\sin\alpha.
 			\end{align*}
 		\end{proof}
 	\end{exercise}
