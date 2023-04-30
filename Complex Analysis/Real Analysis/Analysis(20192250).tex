@@ -1,0 +1,1604 @@
+\documentclass[12pt,a4paper]{article}
+\usepackage[left=1cm,right=1cm,top=1.5cm,bottom=1.5cm,a4paper]{geometry}
+
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{makeidx}
+\usepackage{graphicx}
+\usepackage{amsthm}
+
+\usepackage{mathtools}
+
+\usepackage{commath} %absolute value
+\usepackage{siunitx} %degree
+
+\usepackage{xcolor}
+\usepackage{cancel}
+\newcommand\crossout[3][black]{\renewcommand\CancelColor{\color{#1}}\cancelto{#2}{#3}}
+\newcommand\ncrossout[2][black]{\renewcommand\CancelColor{\color{#1}}\cancel{#2}}
+
+\usepackage{hyperref}
+
+\usepackage{color}
+\usepackage[many]{tcolorbox}
+\usepackage{enumerate}
+\usepackage{booktabs}
+\usepackage{gensymb} %degree
+
+\usepackage{chngcntr}
+\counterwithin*{section}{part}
+
+%************************************************************************
+\newcounter{Cequ}
+\newcounter{Caux}
+
+\newenvironment{CEquation}
+{\stepcounter{Cequ}%
+	\addtocounter{equation}{-1}%
+	\renewcommand\theequation{\arabic{Cequ}}\equation}
+{\endequation}
+
+\newenvironment{CAlign}
+{\setcounter{Caux}{\theequation}
+	\setcounter{equation}{\theCequ}%
+	\renewcommand\theequation{\arabic{equation}}
+	\align}
+{\endalign\setcounter{Cequ}{\value{equation}}\setcounter{equation}{\theCaux}}
+%************************************************************************
+
+\newcommand{\twoelemnt}[2]{\langle #1, #2\rangle}
+\newcommand{\threlemnt}[3]{\langle #1, #2, #3\rangle}
+\newcommand{\dispsty}{\displaystyle}
+
+
+\newcommand{\makeline}{\rule{\linewidth}{1pt}}
+\newcommand{\sol}{\textcolor{magenta}{\bf \textit{Sol.}}\quad}
+\newcommand{\eg}{\textcolor{blue}{\bf e.g.\ \quad }}
+\newcommand{\ie}{\textit{i.e.}}
+
+\author{Ji Yong-Hyeon}
+\title{\bf\Huge Analysis}
+
+\begin{document}
+\maketitle
+\tableofcontents
+\newpage
+
+\part{Introduction to Real Number System}
+
+\section{The Real Number System}
+
+\subsection{Principle of Mathematical Induction}
+\begin{tcolorbox}[colback=white]
+	\textbf{Axiom.} (\textit{Well-ordering Principle}) Every nonempty subset of $\mathbb{N}$(or $\mathbb{Z}_{\geq 0}$) has  a least element.
+\end{tcolorbox}
+
+\subsection{The Algebraic Properties of Real Number $\mathbb{R}$}
+\begin{tcolorbox}[colback=white]
+	\textbf{Definition.} A \textbf{binary operation} $B$ on a set $F$ is a function from $F\times F$ into $F$.
+\end{tcolorbox}
+
+\subsection{The Order Properties of Real Number $\mathbb{R}$}
+\begin{tcolorbox}[colback=white]
+	\textbf{Axiom.} (\textit{Axiom of order}) A relation $<$ defined on $\mathbb{R}\times\mathbb{R}$ satisfies the following axiom of order: \begin{enumerate}
+		\item  \hypertarget{trichotomy}{}For $a,b\in\mathbb{R}$, exactly one of the following holds (property of trichotomy): \[
+		a=b,\quad a<b\quad \text{or}\quad b<a.
+		\]
+		\item For $a,b\in\mathbb{R}$, if $0<a$ and $0<b$ then $0<a+b$ and $0<ab$.
+		\item For $a,b,c\in\mathbb{R}$, if $a<b$ then $a+c<b+c$.
+	\end{enumerate}
+\end{tcolorbox}
+\
+\begin{tcolorbox}[colback=white]
+	\textbf{Theorem.} For $a,b\in\mathbb{R}$, if $a<b$ then \[
+	a<\frac{1}{2}(a+b)<b.
+	\]\begin{proof}
+		\(a=\frac{1}{2}(a+a)<\frac{1}{2}(a+b)<\frac{1}{2}(b+b)=b \).
+	\end{proof}
+\end{tcolorbox}
+\begin{tcolorbox}[colback=white]
+	\textbf{Corollary.} For $a\in\mathbb{R}^+$ \[
+	0<\frac{1}{2}<a.
+	\]
+\end{tcolorbox}
+\begin{tcolorbox}[colback=white]
+	\textbf{Corollary.} If $a\in\mathbb{R}$ satisfies $0\leq a<\varepsilon$ for every $\varepsilon>0$ then \[
+	a=0.
+	\]
+\end{tcolorbox}\
+\\
+If $a\neq0$, then one of the number $a$ and $-a$ is strictly positive by \hyperlink{trichotomy}{the trichotomy property}. The \textbf{absolute value} of $a\neq0$ is defined to be the strictly positive one of the pair $\set{a, -a}$, and the absolute value of 0 is defined to be 0.
+
+\begin{tcolorbox}[colback=white]
+	\textbf{Definition.} If $a\in\mathbb{R}$, the \textbf{absolute value} of $a$ is denoted by $\abs{a}$ and is defined by \[\abs{a}=\begin{cases}
+		a &\text{if}\ a\geq0\\
+		-a &\text{if}\ a<0
+	\end{cases}
+	\]
+\end{tcolorbox}
+\
+\begin{tcolorbox}[colback=white]
+	\textbf{Theorem.} (\textbf{Triangle inequality}) If $a,b\in\mathbb{R}$ then\[
+	\abs{a+b}\leq\abs{a}+\abs{b}.
+	\]
+\end{tcolorbox}
+\begin{tcolorbox}[colback=white]
+	\textbf{Corollary.} If $a,b\in\mathbb{R}$ then \begin{enumerate}
+		\item $||a|-|b||\leq\abs{a}-\abs{b}$.
+		\item $\abs{a-b}\leq\abs{a}+\abs{b}$.
+	\end{enumerate}
+\end{tcolorbox}
+\begin{tcolorbox}[colback=white]
+	\textbf{Corollary.} If $a_1,a_2,\cdots,a_n\in\mathbb{R}$ then \[
+	\abs{a_1+a_2+\cdots+a_n}\leq\abs{a_1}+\abs{a_2}+\cdots+\abs{a_n}.
+	\]
+\end{tcolorbox}
+\
+\begin{tcolorbox}[colback=white]
+	\textbf{Theorem.} Let $a,b\in\mathbb{R}$. For arbitrary $\varepsilon>0$, if $\abs{a-b}<\varepsilon$ then \[
+	a=b.
+	\]\tcblower
+	\textbf{Note.} In analysis, $a=b\iff\forall\varepsilon>0$, $\abs{a-b}<\varepsilon$.
+\end{tcolorbox}
+
+\newpage
+\subsection{The Completeness Property of Real Number $\mathbb{R}$}
+
+\begin{tcolorbox}[colback=white]
+	\textbf{Definition.} Let $X$ be a nonempty subset of $\mathbb{R}$. \begin{enumerate}
+		\item The set $X$ is said to be \textbf{bounded above} if $\exists a\in\mathbb{R}$ such that $x\leq a$ for all $x\in X$. Each number $a$ is called an \textbf{upper bound} of $X$.
+		\item The set $X$ is said to be \textbf{bounded below} if $\exists b\in\mathbb{R}$ such that $b\leq x$ for all $x\in X$. Each number $a$ is called a \textbf{lower bound} of $X$.
+		\item The set $X$ is said to be bounded if it is both bound above and bounded below.
+	\end{enumerate}
+\end{tcolorbox}
+\begin{tcolorbox}[colback=white]
+	\textbf{Definition.} Let $X$ be a nonempty subset of $\mathbb{R}$. \begin{enumerate}
+		\item If $X$ is bounded above then a number $a$ is said to be a \textbf{supremum}(or a \textbf{least upper bound}) of $X$ if it satisfies the following conditions: \begin{itemize}
+			\item[(a)] $a$ is an upper bound of $X$
+			\item[(b)] if $b$ is any upper bound of $X$ then $a\leq b$.
+		\end{itemize}
+		\item If $X$ is bounded below then a number $b$ is said to be a \textbf{infimum}(or a \textbf{greatest lower bound}) of $X$ if it satisfies the following conditions: \begin{itemize}
+			\item[(a)] $b$ is a lower bound of $X$
+			\item[(b)] if $a$ is any lower bound of $X$ then $a\geq b$.
+		\end{itemize}
+	\end{enumerate}
+\end{tcolorbox}
+\
+\begin{tcolorbox}[colback=white]
+	\textbf{Theorem.} Let $A$ be a bounded above, nonempty subset of $\mathbb{R}$ and $a\in\mathbb{R}$ is an upper bound of $A$. Then the following statements are equivalent: \begin{enumerate}
+		\item $a=\sup A$.
+		\item $\forall b\in\mathbb{R}$ satisfying $b<a$, $\exists x\in A$ such that $b<x\leq a$.
+	\end{enumerate}
+\end{tcolorbox}
+\
+\begin{tcolorbox}[colback=white]
+	\textbf{Axiom.} (\textit{Completeness property of real number}) Every non-empty set of real numbers which has an upper bound also has a supremum in $\mathbb{R}$.
+\end{tcolorbox}
+This axiom is also called \textit{supremum property} of real number.\\
+\\
+\eg Assume that only rational numbers $\mathbb{Q}$ exists. Let us consider a set \[
+X=\set{1.4, 1.41, 1.414, 1.4142, 1.414213, 1.4142135, \cdots}.
+\] Then $X$ has an upper bound 2. However, $\sup X=\sqrt{2}\notin\mathbb{Q}$. It means that $\mathbb{Q}$ is not complete.\\
+
+\begin{tcolorbox}[colback=white]
+	\textbf{Theorem.} Every nonempty set of real numbers which has a lower bound has an infimum in $\mathbb{R}$.
+\end{tcolorbox}
+
+\newpage
+\part{Sequences and Series in Real Number}
+
+\section{Sequence in Real Number}
+
+\subsection{Convergent Sequences}
+\begin{tcolorbox}[colback=white]
+	\textbf{Definition.} \textbf{A sequence of real number}(or \textbf{a sequence} in $\mathbb{R}$) is a function defined on the set $\mathbb{N}$ whose range is contained in the set $\mathbb{R}$.
+\end{tcolorbox}\
+\\
+Consider \begin{center}
+	\textcolor{red}{$\lim\limits_{n\to\infty}$}\textcolor{blue}{$a_n=L$}.
+\end{center} To define the limit of a sequence, we need to make the concepts \textcolor{blue}{\bf close to} and \textcolor{red}{\bf for all large positive integers} $n$ precise.\begin{itemize}
+	\item[\textcolor{blue}{\bf 1.}] $\forall\varepsilon>0$, $\abs{a_n-L}<\varepsilon$. \\
+	\\
+	\textbf{e.g.} Consider $\dispsty\lim\limits_{n\to\infty}\frac{1}{n}=0$. Let $\varepsilon=0.1$. Then $\abs{a_n-L}<0.1$ and so \[
+	\frac{1}{n}<0.1 \Rightarrow n>10.
+	\] Hence, after 11-th term, $1/n=0$ $(a_n=L)$.
+	\item[\textcolor{red}{\bf 2.}] ``there exists $N(\varepsilon)\in\mathbb{N}$ such that if $n\geq N(\varepsilon)$'' then $a_n=L$.
+\end{itemize}
+\begin{tcolorbox}[colback=white]
+	\textbf{Definition} A sequence $\set{a_n}$ in $\mathbb{R}$ is said to \textbf{converge} to $L\in\mathbb{R}$ or $L$ is said to be a \textbf{limit} of $\set{a_n}$, if for every $\varepsilon>0$ there exists a natural number $N(\varepsilon)$ such that for all $n\geq N(\varepsilon)$, the term $a_n$ satisfy \[
+	\abs{a_n-L}<\varepsilon.
+	\] If a sequence has a limit, we say that the sequence is \textbf{convergent}; if it has no limit, we say that the sequence is \textbf{divergent}.
+\end{tcolorbox}\
+\\
+\textbf{Note.} \[
+\lim\limits_{n\to\infty}a_n=L\iff\forall\varepsilon>0,\ \exists N(\varepsilon)\in\mathbb{N}\ \text{such that}\ \text{if}\ n\geq N(\varepsilon)\ \text{then}\ \abs{a_n-L}<\varepsilon. 
+\]
+\\
+\eg Prove that the sequence \[
+\set{a_n}=\set{\frac{1}{n}:n\in\mathbb{N}}
+\] converges to 0.\begin{proof}[\sol]
+	Let $\varepsilon>0$. Then $\dispsty\exists N>\frac{1}{\varepsilon}$ such that if $n\geq N$, \[
+	\abs{a_n-0}=\frac{1}{n}\leq\frac{1}{N}<\varepsilon.
+	\]
+\end{proof}
+
+\begin{tcolorbox}[colback=white]
+	\textbf{Theorem.} (\textbf{Uniqueness of limits}) The limit of a sequence in $\mathbb{R}$ is unique. That is, if a sequence $\set{a_n}$ has limit $L_1$ and $L_2$ then $L_1=L_2$.\tcblower\begin{proof}
+		Let $\varepsilon>0$. Since $\lim\limits_{n\to\infty}a_n=L_1$, $\exists N_1\in\mathbb{N}$ such that if $n\geq N_1$ then $\dispsty\abs{a_n-L_1}<\frac{\varepsilon}{2}$. \par And since $\lim\limits_{n\to\infty}a_n=L_2$, $\exists N_2\in\mathbb{N}$ such that if $n\geq N_2$ then $\dispsty\abs{a_n-L_2}<\frac{\varepsilon}{2}$. Let $N=\max\set{N_1,N_2}$. Then if $n\geq N$, \begin{align*}
+		\abs{L_1-L_2} &= \abs{L_1-L_2+a_n-a_n} \\
+		&=\abs{(a_n-L_2)-(a_n-L_1)} \\
+		&=\abs{a_n-L_1}+\abs{a_n-L_2} \\
+		&<\frac{\varepsilon}{2}+\frac{\varepsilon}{2}=\varepsilon.
+		\end{align*}
+	\end{proof}
+\end{tcolorbox}
+\
+\begin{tcolorbox}[colback=white]
+	\textbf{Definition.} Let $\set{a_n}$ be a sequence of real numbers. \begin{enumerate}
+		\item $\set{a_n}$ is said to be \textbf{bounded above} if there exists a real number $M$ such that for all $n\in\mathbb{N}$, \[
+		a_n\leq M.
+		\]
+		\item $\set{a_n}$ is said to be \textbf{bounded below} if there exists a real number $M$ such that for all $n\in\mathbb{N}$, \[
+		a_n\geq M.
+		\]
+		\item $\set{a_n}$ is said to be \textbf{bounded} when it is both bounded above and bounded below, i.e., if there exists a real number $M>0$ such that for all $n\in\mathbb{N}$, \[
+		\abs{a_n}\leq M.
+		\]
+	\end{enumerate}
+\end{tcolorbox}
+\
+\begin{tcolorbox}[colback=white]
+	\textbf{Theorem.} A convergent sequence of real numbers is bounded. That is, if $\set{a_n}$ converges to $L$, there exists $M>0$ such that \[
+	\abs{a_n}\leq M
+	\] for all $n\in\mathbb{N}$.
+	\tcblower\begin{proof}
+		Since $\lim\limits_{n\to\infty}a_n=L$, for $\varepsilon=1>0$, $\exists N\in\mathbb{N}$ such that if $n\geq N$ then $\abs{a_n-L}<1$. Note that \[
+		\abs{a_n}=\abs{a_n-L+L}\leq\abs{a_n-L}+\abs{L}<1+\abs{L}.
+		\] Let $M=\max\set{\abs{a_1},\abs{a_2},\cdots,\abs{a_{N-1}}, 1+\abs{L}}$. Then \[
+		\abs{a_n}\leq M
+		\] for all $n\in\mathbb{N}$.
+	\end{proof}
+\end{tcolorbox}
+
+\subsection{Limit Theorem}
+\begin{tcolorbox}[colback=white]
+	\textbf{Theorem.} Let $\set{a_n}$ and $\set{b_n}$ be sequences of real numbers that converges to $x$ and $y$, respectively. Then \begin{enumerate}
+		\item For $k\in\mathbb{R}$, $\set{ka_n}$ converges to $kx$.
+		\item $\set{a_n+b_n}$ converges to $x+y$.
+		\item $\set{a_nb_n}$ converges to $xy$.
+		\item If $\set{b_n}$ is a sequence of non-zero numbers that converges to non-zero number $y$ then $\set{a_n/b_n}$ converges to $x/y$.
+	\end{enumerate}\tcblower\begin{proof}
+	\ \begin{itemize}
+		\item[3.] $\dispsty\lim\limits_{n\to\infty}a_nb_n=xy$.\\
+		\\
+		Note that, since $\set{a_n}$ converges, $\exists M>0$ such that $\abs{a_n}\leq M$ for all $n\in\mathbb{N}$. \\
+		Let $\varepsilon>0$. Since $\lim\limits_{n\to\infty}b_n=y$, $\exists N_1\in\mathbb{N}$ such that if $n\geq N_1$ then $\dispsty\abs{b_n-y}<\frac{\varepsilon}{2M}$. And since $\lim\limits_{n\to\infty}a_n=x$, $\exists N_2\in\mathbb{N}$ such that if $n\geq N_2$ then $\dispsty\abs{a_n-x}<\frac{\varepsilon}{2\abs{y}+1}$. Let $N=\max\set{N_1,N_2}$.
+		Then if $n\geq N$, \begin{align*}
+			\abs{a_nb_n-xy} &=\abs{a_nb_n-a_ny+a_ny-xy} \\
+			&\leq \abs{a_n}\abs{b_n-y}+\abs{a_n-x}\abs{y} \\
+			&< M\frac{\varepsilon}{2M} + \frac{\varepsilon}{2\abs{y}+1}\abs{y} \\
+			&<\frac{\varepsilon}{2}+\frac{\varepsilon}{2}=\varepsilon.
+		\end{align*}
+		\item[4.] $\dispsty\lim\limits_{n\to\infty}\frac{1}{b_n}=\frac{1}{y}$ with $b_n\neq 0$ and $y\neq 0$.
+		\\
+		\\
+		Since $\lim\limits_{n\to\infty}b_n=y$, for $\dispsty\frac{\abs{y}}{2}$, $\exists N_1\in\mathbb{N}$ such that if $n\geq N_1$ then $\abs{b_n-y}<\dispsty\frac{\abs{y}}{2}$.\\ 
+		By corollary $-\abs{a-b}\leq \abs{a}-\abs{b}$, \[
+		\abs{b_n}\geq\abs{y}-\abs{b_n-y}>\abs{y}-\frac{\abs{y}}{2},
+		\] and so $\dispsty\frac{1}{\abs{b_n}}<\frac{2}{\abs{y}}$.\\
+		\\
+		Let $\varepsilon>0$. Since $\set{b_n}$ converges, $\exists N_2\in\mathbb{N}$ such that if $n\geq N_2$ then $\abs{b_n-y}<\dispsty\frac{\abs{y}^2}{2}\varepsilon$. Let $N=\max\set{N_1,N_2}$. Then if $n\geq N$, \[
+		\abs{\frac{1}{b_n}-\frac{1}{y}}=\frac{\abs{b_n-y}}{\abs{b_n}\abs{y}}<\frac{2}{\abs{y}}\cdot\frac{1}{\abs{y}}\cdot\frac{\abs{y}^2}{2}\varepsilon=\varepsilon.
+		\]
+	\end{itemize}
+\end{proof}
+\end{tcolorbox}
+	
+\begin{tcolorbox}[colback=white]
+	\textbf{Theorem.} (\textbf{Squeeze Theorem}) Let $\set{a_n}$ and $\set{b_n}$ are convergent sequences of real numbers such that \[
+	\lim\limits_{n\to\infty}a_n=\lim\limits_{n\to\infty}b_n=L.
+	\] If $\set{c_n}$ be a sequence of real numbers such that $a_n\leq c_n\leq b_n$ for all $n\in\mathbb{N}$ then \[
+	\lim\limits_{n\to\infty}c_n=L.
+	\]\tcblower\begin{proof}
+		Let $\varepsilon>0$. Since $\lim\limits_{n\to\infty}a_n=L$, $\exists N_1\in\mathbb{N}$ such that if $n\geq N_1$ then \[
+		\abs{a_n-L}<\varepsilon\ \text{implies}\ L-\varepsilon<a_n.
+		\] Since $\lim\limits_{n\to\infty}b_n=L$, $\exists N_2\in\mathbb{N}$ such that if $n\geq N_2$ then \[
+		\abs{b_n-L}<\varepsilon\ \text{implies}\ b_n<L+\varepsilon.
+		\] Let $N=\max\set{N_1,N_2}$. Then if $n\geq N$, \[
+		L-\varepsilon<a_n\leq c_n\leq b_n<L+\varepsilon,
+		\] and so $\abs{c_n-L}<\varepsilon$.
+	\end{proof}
+\end{tcolorbox}\
+\\
+\eg Prove that \[
+\lim\limits_{n\to\infty}n^{\frac{1}{n}}=1.
+\]\begin{proof}[\sol]
+	Let $a_n=n^{\frac{1}{n}}-1$. Then \[
+	n=(1+a_n)^n=1+\binom{n}{1}a_n+\binom{n}{2}(a_n)^2+\cdots+(a_n)^n.
+	\] Note that $a_n\geq 0$. Since $\dispsty n>\binom{n}{2}(a_n)^2=\frac{n(n-1)}{2}(a_n)^2$, \[
+	0\leq a_n<\sqrt{\frac{2}{n-1}}.
+	\] Since $\dispsty\lim\limits_{n\to\infty}\sqrt{\frac{2}{n-1}}=0$, by squeeze theorem, $\lim\limits_{n\to\infty}a_n=0$, and so $\dispsty\lim\limits_{n\to\infty}n^{\frac{1}{n}}=1$.
+\end{proof}
+
+\newpage
+\subsection{Monotone Sequences}
+\begin{tcolorbox}[colback=white]
+	\textbf{Definition.} Let $\set{a_n}$ be a sequence of real numbers. $\set{a_n}$ is (strictly) \textbf{monotone} if it is either (strictly) increasing or (strictly) decreasing.
+\end{tcolorbox}
+\
+\begin{tcolorbox}[colback=white]
+	\textbf{Theorem.} (\textbf{Monotone convergence theorem}) A monotone sequence of real numbers is convergent if and only if it is bounded. Further: \begin{enumerate}
+		\item If $\set{a_n}$ is bounded increasing sequence then \[
+		\lim\limits_{n\to\infty}a_n=\sup\set{a_n:n\in\mathbb{N}}.
+		\]
+		\item If $\set{a_n}$ is bounded decreasing sequence then \[
+		\lim\limits_{n\to\infty}a_n=\inf\set{a_n:n\in\mathbb{N}}.
+		\]
+		\item Bounded monotone sequence is convergent.
+	\end{enumerate}\tcblower\begin{proof}
+	Let $S=\set{a_n:n\in\mathbb{N}}$. Then $S\neq\varnothing$ and, since $\set{a_n}$ is bounded, $S$ has an upper bound. Thus, $\exists\sup S=\sup\set{a_n:n\in\mathbb{N}}=L$.\\
+	\\
+	Let $\varepsilon>0$. Since $L-\varepsilon$ is not an upper bound of $S$, $\exists N\in\mathbb{N}$ such that \[
+	L-\varepsilon<a_N.
+	\] Since $\set{a_n}$ is increasing sequence, $a_N\leq a_n$ whenever $n\geq N$, so that for all $n\geq N$, \[
+	L-\varepsilon<a_N\leq a_n\leq L<L+\varepsilon.
+	\] Thus, $\exists N\in\mathbb{N}$ such that if $n\geq N$, \[
+	\abs{a_n-L}<\varepsilon.
+	\] Hence, \[
+	\lim\limits_{n\to\infty}a_n=\sup\set{a_n:n\in\mathbb{N}}.
+	\]
+\end{proof}
+\end{tcolorbox}\
+\\
+\eg \textcolor{blue}{\bf (Recurrence formula)} Let $\set{b_n}$ be defined inductively by \[
+b_1=3,\quad b_{n+1}=\frac{b_n}{2}+\frac{3}{b_n}
+\] for all $n\geq 1$. Show that $\set{b_n}$ is convergent and $\lim\limits_{n\to\infty}b_n=\sqrt{6}$.
+\begin{proof}[\sol]
+	Since $\set{b_n}$ is decreasing and $0<b_n\leq 3$, i.e., $\set{b_n}$ is bounded, $\exists\lim\limits_{n\to\infty}b_n=L$. Then \[
+	L=\frac{L}{2}+\frac{3}{L},
+	\] so that $L^2=6$, i.e., $L=\sqrt{6}$. Hence $\lim\limits_{n\to\infty}b_n=\sqrt{6}$.
+\end{proof}
+
+\subsection{Subsequences and the Cauchy Criterion}
+\begin{tcolorbox}[colback=white]
+	\textbf{Definition.} Let $\set{a_n}$ be a sequence of real numbers and let $n_1<n_2<\cdots<n_k<\cdots$ be a strictly increasing sequence of natural numbers. Then $\set{a_{n_k}}:=\set{a_{n_k}}_{k=1}^\infty$ is called \textbf{subsequence} of $\set{a_n}$.
+\end{tcolorbox}
+\
+\begin{tcolorbox}[colback=white]
+	\textbf{Theorem.} If a sequence $\set{a_n}$ of real numbers converges to a real number $L$ if and only if any subsequence $\set{a_{n_k}}$ of $\set{a_n}$ converges to $L$.\tcblower\begin{proof}
+		We show that \[
+		\lim\limits_{n\to\infty}a_n=L\iff\exists\lim\limits_{k\to\infty}a_{n_k}=L.
+		\] $(\Rightarrow)$ Let $\varepsilon>0$. Since $\lim\limits_{n\to\infty}a_n=L$, $\exists N\in\mathbb{N}$ such that if $k\geq N$ then $\abs{a_k-L}<\varepsilon$. Since $n_k\geq k$, if $n_k\geq k\geq N$ then $\abs{a_{n_k}-L}<\varepsilon$. Thus, $\lim\limits_{k\to\infty}a_{n_k}=L$.  \\
+		\\
+		($\Leftarrow$) Since $\set{a_n}$ is subsequence of $\set{a_n}$, $\exists\lim\limits_{n\to\infty}a_n=L$.
+	\end{proof}
+\end{tcolorbox}
+\begin{tcolorbox}[colback=white]
+	\textbf{Corollary.} Let $\set{a_n}$ be a sequence of real numbers. \begin{enumerate}
+		\item If $\set{a_n}$ converges and there exists a subsequence converging to $L$ then $\set{a_n}$ converges to $L$.
+		\item If $\set{a_n}$ has two convergent subsequence whose limits are not equal then $\set{a_n}$
+		diverges.
+		\item If a subsequence of $\set{a_n}$ diverges then $\set{a_n}$ diverges.
+	\end{enumerate}
+\end{tcolorbox}
+\
+\begin{tcolorbox}[colback=white]
+	\textbf{Definition.} We say that a sequence of intervals $\set{I_n:n\in\mathbb{N}}$ is \textbf{nested} if the following chain of inclusions holds $I_1\supseteq I_2\supseteq\cdots\supseteq I_n\supseteq I_{n+1}\supseteq\cdots$.
+\end{tcolorbox}
+\
+\begin{tcolorbox}[colback=white]
+	\textbf{Theorem.} (\textbf{Nested intervals property}) If $I_n=[a_n,b_n]$ is a nested sequence of closed bounded intervals then there exists a $x\in\mathbb{R}$ such that $x\in I_n$ for all $n\in\mathbb{N}$.
+\end{tcolorbox}
+
+\begin{tcolorbox}[colback=white]
+	\textbf{Theorem.} If $I_n=[a_n,b_n]$ is a nested sequence of closed bounded intervals such that the lengths $b_n-a_n$ of $I_n$ satisfy \[
+	\lim\limits_{n\to\infty}(b_n-a_n)=0
+	\] then the number $x\in I_n$ for all $n\in\mathbb{N}$ is unique.\tcblower\begin{proof}
+		Let $A=\set{a_n:n\in\mathbb{N}}$ and $B=\set{b_n:n\in\mathbb{N}}$. Since $A\neq\varnothing$ and $A$ has an upper bound, $\exists\sup A=a$. Similarly, $\exists\inf B=b$. Since $a_n\leq a\leq b\leq b_n$, \[
+		I=[a,b]\subseteq I_n
+		\] for all $n\in\mathbb{N}$. Since $\set{a_n}$ is bounded and increasing, $\lim\limits_{n\to\infty}a_n=a$. Similarly, $\lim\limits_{n\to\infty}b_n=b$. Since $a_n\leq a$ and $b\leq b_n$, for any $n\in\mathbb{N}$, \[
+		0\leq b-a\leq b_n-a_n.
+		\] By squeeze theorem, \[
+		\lim\limits_{n\to\infty}(b-a)=0,
+		\] that is, $a=b$.
+	\end{proof}
+\end{tcolorbox}
+\
+\begin{tcolorbox}[colback=white]
+	\textbf{Theorem.} (\textbf{Bolzano-Weierstrass theorem}) A bounded sequence of real numbers has a convergent subsequence.
+\end{tcolorbox}
+\
+\begin{tcolorbox}[colback=white]
+	\textbf{Definition.} A sequence $\set{a_n}$ of real number is said to be a \textbf{Cauchy sequence} if for every $\varepsilon>0$ there exists a natural number $N$ such that for all natural numbers $n,m\geq N$, the terms $a_n$ and $a_m$ satisfy \[
+	\abs{a_n-a_m}<\varepsilon.
+	\]\tcblower
+	\textbf{Note.} $\set{a_n}$ is a Cauchy sequence : $\forall\varepsilon>0$, $\exists N\in\mathbb{N}$ such that if $n,m\geq N$ then $\abs{a_n-a_m}<\varepsilon$.
+\end{tcolorbox}
+\newpage
+\begin{tcolorbox}[colback=white]
+	\hypertarget{cauchyLemma}{}\textbf{Lemma.} If $\set{a_n}$ is a convergent sequence of real numbers, then $\set{a_n}$ is a Cauchy sequence. \tcblower\begin{proof}
+		Let $\lim\limits_{n\to\infty}a_n=L$ and let $\varepsilon>0$. Then $\exists N\in\mathbb{N}$ such that if $n\geq N$ then $\abs{a_n-L}<\dispsty\frac{\varepsilon}{2}$. If $m,n\geq N$ then \[
+		\abs{a_n-a_m} = \abs{a_n-L+L-a_m}\leq\abs{a_n-L}+\abs{a_m-L}<\frac{\varepsilon}{2}+\frac{\varepsilon}{2}=\varepsilon.
+		\] Hence $\set{a_n}$ is a Cauchy sequence.
+	\end{proof}
+\end{tcolorbox}
+
+\begin{tcolorbox}[colback=white]
+	\textbf{Lemma.} A Cauchy sequence of real number is bounded.
+	\tcblower\begin{proof}
+		Let $\varepsilon=1$. Since $\set{a_n}$ is a Cauchy sequence, $\exists N\in\mathbb{N}$ such that if $n,N\geq N$ then \[
+		\abs{a_n-a_N}<1\ \text{implies}\ \abs{a_n}<1+\abs{a_N}.
+		\] Let $M=\max\set{\abs{a_1},\abs{a_2},\cdots,\abs{a_{N-1}},1+\abs{a_N} }$. Then \[
+		\abs{a_n}\leq M
+		\] for all $n\in\mathbb{N}$. Hence $\set{a_n}$ is bounded.
+	\end{proof}
+\end{tcolorbox}
+\
+\begin{tcolorbox}[colback=white]
+	\textbf{Theorem.} (\textbf{Cauchy convergence criterion}) A sequence of real number is convergent if and only if it is a Cauchy sequence.\tcblower\begin{proof}
+		($\Rightarrow$) It is proved in \hyperlink{cauchyLemma}{\bf Lemma}.\\
+		($\Leftarrow$) Let $\varepsilon>0$. Since $\set{a_n}$ is bounded, by Bolzano-Weierstrass Theorem, $\exists\set{a_{n_k}}$, a subsequence of $\set{a_n}$ such that $\lim\limits_{k\to\infty}a_{n_k}=L$. This implies $\exists N_1\in\mathbb{N}$ such that if $n_k\geq k\geq N$ then $\abs{a_{n_k}-L}<\dispsty\frac{\varepsilon}{2}$. Since $\set{a_n}$ is a Cauchy sequence, $\exists N_2\in\mathbb{N}$ such that if $n,m\geq N_2$ then $\abs{a_n-a_m}<\dispsty\frac{\varepsilon}{2}$. Let $N=\max\set{N_1,N_2}$. Then if $n_k\geq k\geq N$, \[
+		\abs{a_k-L}=\abs{a_k-a_{n_k}+a_{n_k}-L}\leq\abs{a_k-a_{n_k}}+\abs{a_{n_k}-L}<\frac{\varepsilon}{2}+\frac{\varepsilon}{2}=\varepsilon.
+		\]
+	\end{proof}
+\end{tcolorbox}
+\newpage
+\begin{tcolorbox}[colback=white]
+	\textbf{Definition.} We say that sequence $\set{a_n}$ of real numbers is \textbf{contractive} if there exists a constant $\alpha$, $0<\alpha<1$ such that \[
+	\abs{a_{n+2}-a_{n+1}}\leq\alpha\abs{a_{n+1}-a_n}
+	\] for all $n\in\mathbb{N}$. The number $\alpha$ is called the \textbf{constant of the contractive sequence}.
+\end{tcolorbox}
+\begin{tcolorbox}[colback=white]
+	\textbf{Theorem.} Every contractive sequence is a Cauchy sequence, and therefore is convergent.
+	\tcblower\begin{proof}
+		Let $\varepsilon>0$. Since $\set{a_n}$ is contractive, $\exists\alpha$, $0<\alpha<1$, such that \begin{align*}
+		\abs{a_{n+2}-a_{n+1}}&\leq\alpha\abs{a_{n+1}-a_n} \\
+		&\leq\alpha^2\abs{a_n-a_{n-1}} \\
+		&\leq\alpha^3\abs{a_{n-1}-a_{n-2}} \\
+		&\leq\cdots \\
+		&\leq\alpha^n\abs{a_2-a_1}.
+		\end{align*} Then, for $m>n\geq N$, \begin{align*}
+		\abs{a_m-a_n}&=\abs{a_m-a_{m-1}+a_{m-1}+\cdots-a_{n+1}+a_{n+1}-a_n} \\
+		&\leq\abs{a_m-a_{m-1}}+\abs{a_{m-1}-a_{m-2}}+\cdots+\abs{a_{n+2}-a_{n+1}}+\abs{a_{n+1}-a_n} \\
+		&\leq\alpha^{m-2}\abs{a_2-a_1}+\alpha^{m-3}\abs{a_2-a_1}+\cdots+\alpha^{n}\abs{a_2-a_1}+\alpha^{n-1}\abs{a_2-a_1} \\
+		&\leq(\alpha^{n-1}+\alpha^n+\cdots+\alpha^{m-3}+\alpha^{m-2})\abs{a_2-a_1}\\
+		&\leq\frac{a^{n-1}(1-\alpha^{m-n})}{1-\alpha}\abs{a_2-a_1} \\
+		&\leq\frac{\alpha^{n-1}}{1-\alpha}\abs{a_2-a_1} \\
+		&\leq\frac{\alpha^N}{1-\alpha}\abs{a_2-a_1}<\varepsilon.
+		\end{align*} This implies \[
+		N<\frac{\ln\left(\dispsty\frac{\varepsilon(1-\alpha)}{\abs{a_2-a_1}}\right)}{\ln\alpha}.
+		\] By \textit{the completeness axiom of real number}, there exists $N$. Hence $\set{a_n}$ is a Cauchy sequence.
+	\end{proof}
+\end{tcolorbox}
+
+\newpage
+\begin{tcolorbox}[colback=white]
+	\textbf{Definition.} Let $\set{a_n}$ be a sequence of real numbers. \begin{enumerate}
+		\item We say that $\set{a_n}$ \textbf{diverges to infinity}(or \textbf{tends to infinity}) if for every $M\in\mathbb{R}$, there exists a natural number $N$ such that if $n\geq N$ then \[
+		a_n>M
+		\] and write \[
+		\lim\limits_{n\to\infty}a_n=+\infty.
+		\]
+		\item We say that $\set{a_n}$ \textbf{diverges to minus infinity}(or \textbf{tends to minus infinity}) if for every $M\in\mathbb{R}$, there exists a natural number $N$ such that if $n\geq N$ then \[
+		a_n<M
+		\] and write \[
+		\lim\limits_{n\to\infty}a_n=-\infty.
+		\]
+		\item We say that $\set{a_n}$ is \textbf{properly divergent} in case we have either \[
+		\lim\limits_{n\to\infty}a_n=+\infty\quad\text{or}\quad\lim\limits_{n\to\infty}a_n=-\infty.
+		\]
+	\end{enumerate}\tcblower
+	\textbf{Note.} $\lim\limits_{n\to\infty}a_n=\pm\infty$ $\iff$ $\forall M\in\mathbb{R}$, $\exists N\in\mathbb{N}$ such that if $n\geq N$ then $a_n>M$(or $a_n<M$).
+\end{tcolorbox}
+\
+\begin{tcolorbox}[colback=white]
+	\textbf{Theorem.} Let $\set{a_n}$ and $\set{b_n}$ be two sequences of real numbers such that \[
+	\lim\limits_{n\to\infty}a_n=+\infty\quad\text{and}\quad\lim\limits_{n\to\infty}b_n>0
+	\] then \[
+	\lim\limits_{n\to\infty}a_nb_n=+\infty.
+	\]\tcblower\begin{proof}
+		Let $M>0$. Since $\lim\limits_{n\to\infty}b_n>0$, $\exists L=\frac{1}{2}\lim\limits_{n\to\infty}b_n\in\mathbb{R}$ such that $0<L<\lim\limits_{n\to\infty}b_n$ and $\exists N_1\in\mathbb{N}$ such that if $n\geq N_1$ then $b_n>L$. Since $\lim\limits_{n\to\infty}a_n=+\infty$, $\exists N_2\in\mathbb{N}$ such that if $n\geq N_2$ then $a_n>\frac{M}{L}$. Let $N=\max\set{N_1,N_2}$. Then if $n\geq N$, \[
+		a_nb_n>\frac{M}{L}L=M.
+		\] Hence $\lim\limits_{n\to\infty}a_nb_n=+\infty$.
+	\end{proof}
+\end{tcolorbox}
+\
+\begin{tcolorbox}[colback=white]
+	\textbf{Theorem.} A monotone sequence of real numbers is properly divergent if and only if it is unbounded.
+	\begin{enumerate}
+		\item If $\set{a_n}$ is an bounded increasing sequence then \[
+		\lim\limits_{n\to\infty}a_n=+\infty.
+		\]
+		\item If $\set{a_n}$ is an bounded decreasing sequence then \[
+		\lim\limits_{n\to\infty}a_n=-\infty.
+		\]
+	\end{enumerate}\tcblower\begin{proof}
+	Let $M\in\mathbb{R}$. Since $\set{a_n}$ is increasing and unbounded $\exists N\in\mathbb{N}$ such that $a_N>M$. If $n\geq N$, \[
+	a_n\geq a_N>M.
+	\] Hence, $\lim\limits_{n\to\infty}a_n=+\infty$.
+\end{proof}
+\end{tcolorbox}
+\
+\begin{tcolorbox}[colback=white]
+	\textbf{Theorem.} Let $\set{a_n}$ and $\set{b_n}$ be two sequences of real numbers and suppose that for all $n\in\mathbb{N}$, \[
+	a_n\leq b_n.
+	\] Then the followings are holds: \begin{align*}
+	\text{If}\ \lim\limits_{n\to\infty}a_n=+\infty\ \text{then}\ \lim\limits_{n\to\infty}b_n=+\infty \\
+	\text{If}\ \lim\limits_{n\to\infty}b_n=-\infty\ \text{then}\ \lim\limits_{n\to\infty}a_n=-\infty
+	\end{align*}\tcblower\begin{proof}
+		Let $M\in\mathbb{R}$. Since $\lim\limits_{n\to\infty}a_n=+\infty$, $\exists N\in\mathbb{N}$ such that if $n\geq N$ then $a_n>M$. Since $a_n\leq b_n$, $b_n>M$. Hence $\lim\limits_{n\to\infty}b_n=+\infty$.
+	\end{proof}
+\end{tcolorbox}
+\
+\begin{tcolorbox}[colback=white]
+	\textbf{Theorem.} (\textbf{Limit comparison theorem}) Let $\set{a_n}$ and $\set{b_n}$ be two sequences of positive real numbers and suppose that for some positive real number $L>0$, we have \[
+	\lim\limits_{n\to\infty}\frac{a_n}{b_n} = L.
+	\] Then \[
+	\lim\limits_{n\to\infty}a_n=+\infty\ \text{if and only if}\ \lim\limits_{n\to\infty}b_n=+\infty.
+	\]
+\end{tcolorbox}
+
+\begin{tcolorbox}[colback=white]
+	\textbf{Theorem.} Let $\set{a_n}$ be a sequence of real numbers such that $a_n>0$ for all $n\in\mathbb{N}$. Then \[
+	\lim\limits_{n\to\infty}a_n=+\infty\ \text{if and only if}\ \lim\limits_{n\to\infty}\frac{1}{a_n}=0.
+	\]\tcblower\begin{proof}
+		($\Rightarrow$) Let $\varepsilon>0$. Since $\lim\limits_{n\to\infty}a_n=+\infty$, for $M(=\dispsty\frac{1}{\varepsilon})\in\mathbb{R}$, $\exists N\in\mathbb{N}$ such that if $n\geq N$ then $a_n>M(=\dispsty\frac{1}{\varepsilon})$ implies \[
+		\abs{\frac{1}{a_n}}=\frac{1}{a_n}<\varepsilon.
+		\]
+		($\Leftarrow$) Let $M\in\mathbb{R}^+$. Since $\lim\limits_{n\to\infty}\dispsty\frac{1}{a_n}=0$, for $\varepsilon(=\dispsty\frac{1}{M})>0$, $\exists N\in\mathbb{N}$ such that if $n\geq N$ then \[
+		\dispsty\abs{\frac{1}{a_n}-0}=\frac{1}{a_n}<\varepsilon(=\frac{1}{M})
+		\] implies \[
+		a_n>M.
+		\]
+	\end{proof}
+\end{tcolorbox}
+\
+\begin{tcolorbox}[colback=white]
+	\textbf{Definition.} Let $\set{a_n}$ be a sequence of real numbers. \begin{enumerate}
+		\item Let $A_k=\sup\set{a_k,a_{k+1},\cdots}=\sup\set{a_n:n\geq k}$. Then $L$ is the \textbf{limit superior} of $\set{a_n}$ if \[
+		L:=\lim\limits_{k\to\infty}A_k=\lim\limits_{k\to\infty}\sup a_k.
+		\]
+		\item Let $B_k=\inf\set{a_k,a_{k+1},\cdots}=\inf\set{a_n:n\geq k}$. Then $L$ is the \textbf{limit inferior} of $\set{a_n}$ if \[
+		L:=\lim\limits_{k\to\infty}B_k=\lim\limits_{k\to\infty}\inf a_k.
+		\]
+	\end{enumerate}
+\end{tcolorbox}\
+\newpage
+\begin{tcolorbox}[colback=white]
+	\textbf{Theorem.} Let $\set{a_n}$ be a bounded sequence of real numbers. Then \[
+	\lim\limits_{n\to\infty}a_n=L\quad \text{if and only if}\quad L=\limsup a_n = \liminf a_n.
+	\]\tcblower\begin{proof}
+		($\Rightarrow$) Let $\varepsilon>0$. Since $\lim\limits_{n\to\infty}a_n=L$, $\exists N\in\mathbb{N}$ such that if $n\geq N$ then $\abs{a_n-L}<\dispsty\frac{\varepsilon}{2}$, i.e., \[
+		L-\frac{\varepsilon}{2}<a_n<L+\frac{\varepsilon}{2}.
+		\] Thus, if $n\geq N$, \[
+		L-\varepsilon<L-\frac{\varepsilon}{2}<\sup\set{a_n,a_{n+1},a_{n+2},\cdots}\leq L+\frac{\varepsilon}{2}<L+\varepsilon,
+		\] and so $\abs{\sup\set{a_n,a_{n+1},a_{n+2},\cdots}-L}<\varepsilon$. Hence $\limsup a_n=L$. Similarly, $\liminf a_n=L$.\\
+		\\
+		($\Leftarrow$) Let $\varepsilon>0$. Since $\limsup a_n=L$, $\exists N_1\in\mathbb{N}$ such that if $n\geq N_1$ then $\abs{\sup\set{a_n,a_{n+1},a_{n+2},\cdots}-L}<\varepsilon$. This implies \[
+		a_n\leq\sup\set{a_n,a_{n+1},a_{n+2},\cdots}<L+\varepsilon.
+		\] Since $\liminf a_n=L$, $\exists N_2\in\mathbb{N}$ such that if $n\geq N_2$ then $\abs{\inf\set{a_n,a_{n+1},a_{n+2},\cdots}-L}<\varepsilon$. This implies \[
+		L-\varepsilon<\inf\set{a_n,a_{n+1},a_{n+2},\cdots}\leq a_n.
+		\] Let $N=\max\set{N_1,N_2}$. Then if $n\geq N$, \[
+		L-\varepsilon<a_n<\L+\varepsilon,\quad \text{i.e.,}\quad \abs{a_n-L}<\varepsilon.
+		\] Hence $\lim\limits_{n\to\infty}a_n=L$.
+	\end{proof}
+\end{tcolorbox}
+
+\newpage
+\section{Infinite Series}
+
+\subsection{Introduction to Infinite Series}
+\begin{tcolorbox}[colback=white]
+	\textbf{Definition.} If $\set{a_n}$ is a sequence is $\mathbb{R}$ then the \textbf{infinite series}(or simply the series) generated by $\set{a_n}$ is the sequence $\set{S_k}$ defined by \begin{align*}
+	S_1 &:= a_1 \\
+	S_2 &:= a_1+a_2 \\
+	&\vdots\\
+	S_k&:=a_1+a_2+\cdots+a_{k-1}+a_k
+	&\vdots\\
+	\end{align*} The number of $a_k$ are called the \textbf{terms} of the series and the numbers $S_k$ are called the \textbf{partial sums} of this series. If \[
+	\lim\limits_{k\to\infty}S_k
+	\] exists, we say that his series is \textbf{convergent} and call this limit the \textbf{sum} or the \textbf{value} of this series. If this limit does not exits, we say that the series $\set{S_k}$ is \textbf{divergent}.
+\end{tcolorbox}
+
+\subsubsection*{*\ The $n$-th Term Test}
+\addcontentsline{toc}{subsubsection}{*\ The $n$-th Term Test}
+\begin{tcolorbox}[colback=white]
+	\textbf{Theorem.} (\textbf{The $n$-th term test}) If the series $\sum a_n$ converges then \[
+	\lim\limits_{n\to\infty}a_n=0.
+	\]\tcblower\begin{proof}
+		Let $S_n=\sum_{k=1}^na_k$ and let $\lim\limits_{n\to\infty}S_n=L$. Then, since $a_n=S_n-S_{n-1}$, \[
+		\lim\limits_{n\to\infty}a_n = \lim\limits_{n\to\infty}S_n-\lim\limits_{n\to\infty}S_{n-1}=L-L=0.
+		\]
+	\end{proof}
+\end{tcolorbox}
+\begin{tcolorbox}[colback=white]
+	\textbf{Corollary.} If $\lim\limits_{n\to\infty}a_n\neq 0$ then the series $\sum a_n$ diverges.
+\end{tcolorbox}
+
+\subsubsection*{*\ Cauchy criterion for series}
+\addcontentsline{toc}{subsubsection}{*\ Cauchy criterion for series}
+\textbf{Recall.} \[
+\set{a_n}\ \text{is a Cauchy sequence}\iff\forall\varepsilon>0, \exists N\in\mathbb{N}\ \text{s.t.}\ \text{if}\ n,m\geq N,\ \text{then}\ \abs{a_n-a_m}<\varepsilon.
+\]
+\begin{tcolorbox}[colback=white]
+	\textbf{Theorem.} (\textbf{Cauchy criterion for series}) The series $\sum a_n$ converges if and only if for every $\varepsilon>0$ there exists $N\in\mathbb{N}$ such that if $m>n\geq N$ then \[
+	\abs{S_m-S_n}=\abs{a_{n+1}+a_{n+2}+\cdots+a_m}<\varepsilon.
+	\]
+\end{tcolorbox}
+\begin{tcolorbox}[colback=white]
+	\textbf{Corollary.} The series $\sum a_n$ converges if and only if for every $\varepsilon>0$ there exists $N\in\mathbb{N}$ such that if $n\geq N$ then \[
+	\sum_{k=n}^\infty\abs{a_k}<\varepsilon.
+	\]
+\end{tcolorbox}
+
+\subsection{Convergence Test Part I: Comparison, Limit Comparison \& Integral Tests}
+
+\begin{tcolorbox}[colback=white]
+	\textbf{Theorem.} (\textbf{Comparison test}) Let $\set{a_n}$ and $\set{b_n}$ be real sequences and suppose that $0\leq a_n\leq b_n$ for $n\in\mathbb{N}$. Then \begin{enumerate}
+		\item The convergence of $\sum b_n$ implies the convergence of $\sum a_n$.
+		\item The divergence of $\sum a_n$ implies the divergence of $\sum b_n$.
+	\end{enumerate}\tcblower\begin{proof}
+	Let $\varepsilon>0$. Since $\exists\sum_{n=1}^{\infty}b_n$, $\exists N\in\mathbb{N}$ such that if $m>n\geq N$ then \[
+	\abs{b_{n+1}+b_{n+2}+\cdots+b_m }<\varepsilon.
+	\] Since $0\leq a_n\leq b_n$, \begin{align*}
+	\abs{a_{n+1}+a_{n+2}+\cdots+a_m } &= a_{n+1}+a_{n+2}+\cdots+a_m \\
+	&\leq b_{n+1}+b_{n+2}+\cdots+b_m \\
+	&=\abs{b_{n+1}+b_{n+2}+\cdots+b_m }<\varepsilon.
+	\end{align*} Hence, $\exists\sum_{n=1}^\infty a_n$.
+\end{proof}
+\end{tcolorbox}\
+\\
+\eg (\textcolor{blue}{\bf The $p$-series}) The p-series \[
+\sum_{n=1}^\infty\frac{1}{n^p}
+\] converges when $p>1$ and diverges when $(0<)p\leq 1$.\\
+\\
+\eg The series \[
+\sum_{n=1}^\infty\frac{1}{3n^3}
+\] converges. Then the series \[
+\sum_{n=1}^\infty\frac{1}{3n^3-1}
+\] converges?\begin{proof}[\sol]
+	Since $\dispsty\frac{1}{3n^3-1}<\frac{1}{n^3}$,\ $\dispsty\sum_{n=1}^\infty\frac{1}{3n^3-1}$ converges.
+\end{proof}
+
+\begin{tcolorbox}[colback=white]
+	\textbf{Theorem.} (\textbf{Limit comparison test}) Let $\set{a_n}$ and $\set{b_n}$ are strictly positive sequences and suppose that the following limit exists in $\mathbb{R}$ \[
+	r=\lim\limits_{n\to\infty}\frac{a_n}{b_n}.
+	\]\begin{enumerate}
+		\item If $r\neq 0$ then $\sum a_n$ is convergent (divergent) if and only if $\sum b_n$ is convergent (divergent).
+		\item If $r=0$ and if $\sum b_n$ is convergent then $\sum a_n$ is convergent.
+	\end{enumerate}\tcblower\begin{proof}
+	Let $\dispsty a_n=\frac{1}{n^p}$ and $\dispsty b_n=\frac{1}{n^q}$. Then $\dispsty
+	r=\lim\limits_{n\to\infty}\frac{a_n}{b_n}=\lim\limits_{n\to\infty}\frac{n^q}{n^p}$. \begin{enumerate}
+		\item Let $r\neq 0$, i.e., $p=q$. Thus, \[
+		\exists\sum_{n=1}^\infty a_n\iff\exists\sum_{n=1}^\infty b_n.
+		\]
+		\item Let $r=0$, i.e., $p>q$. If $\exists\sum_{n=1}^\infty b_n$ with $q>1$, then \[
+		\exists\sum_{n=1}^\infty a_n\ \text{with}\ p>q>1.
+		\]
+	\end{enumerate}\
+\\ (\textbf{Another proof}) For $\varepsilon=1>0$, $\exists N\in\mathbb{N}$ such that if $n\geq N$ then \[
+\abs{\frac{a_n}{b_n}-r}<1,\ \text{i.e.,}\ (r-1)b_n<a_n<(r+1)b_n
+\]That is, for $c\in\mathbb{R}$, $\exists N\in\mathbb{N}$ such that if $n\geq N$ then \[
+	\frac{r}{c}b_n\leq a_n\leq crb_n.
+	\] So \[
+	\frac{r}{c}\sum_{n=1}^\infty b_n\leq \sum_{n=1}^\infty a_n\leq cr\sum_{n=1}^\infty b_n.
+	\]
+\end{proof}
+\end{tcolorbox}
+
+\begin{tcolorbox}[colback=white]
+	\textbf{Theorem.} Let $f:[1,\infty)\to\mathbb{R}$ be a positive, decreasing function on $[1,\infty)$. Then the series $\sum_{k=1}^\infty f(k)$ converges if and only if the improper integral \[
+	\int_{1}^\infty f(x)\ dx = \lim\limits_{b\to\infty}\int_{1}^bf(x)\ dx
+	\] exists. In the case of convergence, the partial sum $S_n=\sum_{k=1}^nf(k)$ and the sum $S=\sum_{k=1}^\infty f(k)$ satisfy the estimate \[
+	\int_{n+1}^\infty f(x)\ dx\leq S-S_n\leq\int_{n}^\infty f(x)\ dx.
+	\]\tcblower\begin{proof}
+		Since $f$ is positive and decreasing on the interval $[k-1,k]$, we have \[
+		f(k)\leq\int_{k-1}^k f(x)\ dx\leq f(k-1).
+		\] And then \[
+		\sum_{k=2}^nf(k)\leq\sum_{k=2}^n\int_{k-1}^k f(x)\ dx\leq\sum_{k=2}^nf(k-1),
+		\] and so \[
+		S_n-f(1)\leq\int_{1}^nf(x)\ dx\leq S_{n-1}.
+		\] Consequently, \[
+		\lim\limits_{n\to\infty}S_n-f(1)\leq\int_{1}^\infty f(x)\ dx\leq \lim\limits_{n\to\infty}S_{n-1}.
+		\] By Comparison test, \[
+		\exists\sum_{n=1}^\infty f(n)\iff\exists\int_{1}^\infty f(x)\ dx.
+		\]
+	\end{proof}
+\end{tcolorbox}
+
+\newpage
+\subsection{Absolute Convergence}
+\begin{tcolorbox}[colback=white]
+	\textbf{Definition.} Let $\set{a_n}$ be a sequence in $\mathbb{R}$. We say that the series $\sum a_n$ is \textbf{absolutely convergent} if the series $\sum\abs{a_n}$ is convergent in $\mathbb{R}$. A series is said to be \textbf{conditionally}(or \textbf{non-absolutely}) \textbf{convergent} if it is convergent, but it is not absolutely convergent.
+\end{tcolorbox}
+
+\begin{tcolorbox}[colback=white]
+	\textbf{Theorem.} (\textbf{Absolute convergence test}) If a series $\sum a_n$ in $\mathbb{R}$ is absolutely convergent then it is convergent.\tcblower\begin{proof}
+		Let $\varepsilon>0$. Since $\exists\sum_{n=1}^\infty\abs{a_n}$, $\exists N\in\mathbb{N}$ such that if $m>n\geq N$, \[
+		\abs{\abs{a_{n+1}}+\abs{a_{n+2}}+\cdots+\abs{a_m}}<\varepsilon.
+		\] By triangle inequality, \[
+		\abs{\abs{a_{n+1}}+\abs{a_{n+2}}+\cdots+\abs{a_m}}\leq \abs{a_{n+1}}+\abs{a_{n+2}}+\cdots+\abs{a_m}<\varepsilon.
+		\] Hence, $\exists\sum_{n=1}^\infty a_n$ by Cauchy criterion.
+	\end{proof}
+\end{tcolorbox}
+
+\newpage
+\subsection{Convergence Test Part II: Root and Ratio Tests}
+\begin{tcolorbox}[enhanced, breakable, colback=white]
+	\textbf{Theorem.} (\textbf{Root test}) Let $\sum a_n$ be a series such that \[
+	r=\lim\limits_{n\to\infty}\abs{a_n}^{\frac{1}{n}}.
+	\]\begin{enumerate}
+		\item If $r<1$ then the series $\sum a_n$ is absolutely convergent.
+		\item If $r>1$ then the series $\sum a_n$ is divergent.
+		\item If $r=1$ then this test gives no information.
+	\end{enumerate}\tcblower\begin{proof}
+		\ \begin{enumerate}
+			\item Let $r<1$. Since $\lim\limits_{n\to\infty}\abs{a_n}^{\frac{1}{n}}=r$, for $\varepsilon>0$ such that $r+\varepsilon<1$, $\exists N\in\mathbb{N}$ such that if $n\geq N$, then \[
+			\abs{\abs{a_n}^{\frac{1}{n}}-r}<\varepsilon.
+			\] This implies that \begin{align*}
+			0&\leq \abs{a_n}^{\frac{1}{n}}<r+\varepsilon, \\
+			0&\leq\abs{a_n}<(r+\varepsilon)^n.
+			\end{align*} Since $r+\varepsilon<1$, $\exists\sum_{n=N}^\infty(r+\varepsilon)^n$. By the comparison test, $\exists\sum_{n=N}^\infty\abs{a_n}$. Since $\exists\sum_{n=1}^{N-1}\abs{a_n}$, \[
+			\exists\sum_{n=1}^\infty\abs{a_n}.
+			\]
+			\item Let $r>1$. Since $\lim\limits_{n\to\infty}\abs{a_n}^{\frac{1}{n}}=r$, for $\varepsilon>0$ such that $r-\varepsilon>1$, $\exists N\in\mathbb{N}$ such that if $n\geq N$, then \[
+			\abs{\abs{a_n}^{\frac{1}{n}}-r}<\varepsilon.
+			\] This implies that \begin{align*}
+			r-\varepsilon&<\abs{a_n}^{\frac{1}{n}}, \\
+			(r-\varepsilon)^n&<\abs{a_n}.
+			\end{align*} Since $r-\varepsilon>1$ and by comparison test, \[
+			\nexists\sum_{n=N}^\infty(r-\varepsilon)^n\implies\nexists\sum_{n=N}^\infty\abs{a_n}\implies \nexists\sum_{n=1}^\infty\abs{a_n}.
+			\]
+		\end{enumerate}
+	\end{proof}
+\end{tcolorbox}
+\
+\begin{tcolorbox}[colback=white]
+	\textbf{Theorem.} (\textbf{Ratio test}) Let $\sum a_n$ be a series such that \[
+	r=\lim\limits_{n\to\infty}\abs{\frac{a_{n+1}}{a_n}}.
+	\]\begin{enumerate}
+		\item If $r<1$ then the series $\sum a_n$ is absolutely convergent.
+		\item If $r>1$ then the series $\sum a_n$ is divergent.
+		\item If $r=1$ then this test gives no information.
+	\end{enumerate}\tcblower\begin{proof}
+		It is similar to Root test.
+	\end{proof}
+\end{tcolorbox}\
+\\
+\eg Prove that \[
+\sum_{n=1}^\infty\frac{1}{n!}
+\] converges.\begin{proof}
+	Let $a_n=\dispsty\frac{1}{n!}$. Since \[
+	r=\lim\limits_{n\to\infty}\abs{\frac{a_{n+1}}{a_n}}=\lim\limits_{n\to\infty}\abs{\frac{1}{(n+1)!}\cdot n!} = \lim\limits_{n\to\infty}\frac{1}{n+1}=0<1,
+	\] $\sum_{n=1}^\infty a_n$ converges.
+\end{proof}
+
+\newpage
+\subsection{Alternating Series}
+\begin{tcolorbox}[colback=white]
+	\textbf{Definition} (\textbf{Alternating series}) A sequence $\set{a_n}$ of nonzero real numbers is said to be \textbf{alternating} if the terms $(-1)^{n+1}a_n, n\in\mathbb{N}$, are all positive(or all negative) real numbers. If the sequence $\set{a_n}$ is alternating, we say that the series $\sum a_n$ it generates is an \textbf{alternating series}.
+\end{tcolorbox}
+\
+\begin{tcolorbox}[colback=white]
+	\textbf{Theorem.} (\textbf{Alternating series test}) Let $\set{a_n}$ be a decreasing sequence of strictly positive numbers with $\lim a_n=0$. Then the alternating series $\sum(-1)^{n+1}a_n$ is convergent.\tcblower\begin{proof}
+		Let \[
+		S_n:=\sum_{k=1}^n(-1)^{k+1}a_k.
+		\] Then since \begin{align*}
+		S_{2n} &=(a_1-a_2)+(a_3-a_4)+(a_5-a_6)+\cdots+(a_{2n}-a_{2n}) \\
+		&\leq(a_1-a_2)+(a_3-a_4)+(a_5-a_6)+\cdots+(a_{2n}-a_{2n})+(a_{2n+1}+a_{2n+2})=S_{2(n+1)},
+		\end{align*} $\set{S_{2n}}$ is increasing. Since \begin{align*}
+		S_{2n} &=a_1-(a_2-a_3)-(a_4-a_5)-\cdots-(a_{2n-2}-a_{2n-1})-a_{2n} \\
+		&\leq a_1,
+		\end{align*} $\set{S_{2n}}$ is bounded. By monotone convergence theorem, $\exists\lim\limits_{n\to\infty}S_{2n}=S$.\\
+		\\
+		We must show that $\lim\limits_{n\to\infty}S_{2n+1}=S$. Let $\varepsilon>0$. Since $\lim\limits_{n\to\infty}S_{2n}=S$, $\exists N_1\in\mathbb{N}$ such that if $(2n>)n\geq N_1$ then \[
+		\abs{S_{2n}-S}<\frac{\varepsilon}{2}.
+		\] Since $\exists\lim\limits_{n\to\infty}S_{2n}=\lim\limits_{n\to\infty}\sum_{k=1}^{2n}(-1)^{k+1}a_k$, by the $n$-th term test, \[
+		\lim\limits_{n\to\infty}(-1)^{n+1}a_n=0.
+		\] Then $\exists N_2\in\mathbb{N}$ such that if $(2n+1)>n\geq N_2$, then \[
+		\abs{(-1)^{2n+2}a_{2n+1}}<\frac{\varepsilon}{2}\implies \abs{a_{2n+1}}<\frac{\varepsilon}{2}.
+		\] Let $N=\max\set{N_1,N_2}$. Then if $n\geq N$, \begin{align*}
+		\abs{S_{2n+1}-S}&=\abs{S_{2n}+a_{2n+1}-S} \\
+		&\leq \abs{S_{2n}-S}+\abs{a_{2n+1}} <\varepsilon.
+		\end{align*} Hence, $\lim\limits_{n\to\infty}S_{2n+1}=S$.
+	\end{proof}
+\end{tcolorbox}
+\
+\begin{tcolorbox}[colback=white]
+	\textbf{Lemma.} (\textbf{Abel's lemma}) Let $\set{a_n}$ and $\set{b_n}$ sequences in $\mathbb{R}$ and let the parital sums of $\sum b_n$ be denoted by $\set{S_n}$ with $S_0=0$. If $m>n$ then \[
+	\sum_{k=n+1}^ma_kb_k=(a_mS_m-a_{n+1}S_n)+\sum_{k=n+1}^{m-1}(a_k-a_{k+1})S_k.
+	\]\tcblower\begin{proof}
+		Let $S_n=\dispsty\sum_{k=1}^n b_k$ with $S_0=0$. Then \begin{align*}
+		\sum_{k=n+1}^ma_kb_k&=\sum_{k=n+1}^ma_k(S_k-S_{k-1}) \\
+		&=\sum_{k=n+1}^ma_kS_k-\sum_{k=n+1}^ma_kS_{k-1} \\
+		&=a_{n+1}S_{n+1}+a_{n+2}S_{n+2} +\cdots+a_{m-1}S_{m-1}+a_mS_m \\
+		-(a_{n+1}S_{n}&+a_{n+2}S_{n+1}+a_{n+3}S_{n+2} +\cdots+a_mS_{m-1}) \\
+		&=a_mS_m-a_{n+1}S_n+\sum_{k=n+1}^{m-1}(a_k-a_{k+1})S_k
+		\end{align*}
+	\end{proof}
+\end{tcolorbox}
+\
+\begin{tcolorbox}[colback=white]
+	\textbf{Theorem.} (\textbf{Dirichlet's test}) If $\set{a_n}$ is a decreasing sequence with $\lim a_n=0$ and if the partial sums $\set{S_n}$ of $\sum b_n$ are bounded then $\sum a_nb_n$ is convergent.\tcblower\begin{proof}
+		Let $\varepsilon>0$. Since $S_n$ is bounded, $\exists B>0$ such that \[
+		\abs{S_n}\leq M
+		\] for all $n\in\mathbb{N}$. Since $\lim\limits_{n\to\infty}a_n=0$, $\exists N\in\mathbb{N}$ such that if $n\geq N$ then \[
+		\abs{a_n}<\frac{\varepsilon}{2B}.
+		\] Since $\dispsty\sum_{k=n+1}^ma_kb_k=(a_mS_m-a_{n+1}S_n)+\sum_{k=n+1}^{m-1}(a_k-a_{k+1})S_k$, if $m>n\geq N$, then \begin{align*}
+		\abs{\sum_{k=n+1}^ma_kb_k}&=\abs{(a_mS_m-a_{n+1}S_n)+\sum_{k=n+1}^{m-1}(a_k-a_{k+1})S_k} \\
+		&=\abs{a_mS_m}+\abs{a_{n+1}S_n}+\abs{\sum_{k=n+1}^{m-1}(a_k-a_{k+1})S_k} \\
+		&\leq a_m\abs{S_m}+a_{n+1}\abs{S_n}+\sum_{k=n+1}^{m-1}(a_k-a_{k+1})\abs{S_k} \\
+		&\leq a_mB+a_{n+1}B+\sum_{k=n+1}^{m-1}(a_k-a_{k+1})B \\
+		&=(a_m+a_{n+1})B+(a_{n+1}+a_m)B \\
+		&=2a_{n+1}B<\varepsilon.
+		\end{align*} Hence, $\exists\sum_{n=1}^\infty a_nb_n$.
+	\end{proof}
+\end{tcolorbox}
+\
+\begin{tcolorbox}[colback=white]
+	\textbf{Theorem.} (\textbf{Abel's test}) If $\set{a_n}$ is a convergent monotone sequence and the series $\sum b_n$ is convergent, then the series $\sum a_nb_n$ is also convergent.\tcblower\begin{proof}
+		Let $S_n=\dispsty\sum_{k=1}^nb_k$. Since $\exists\lim\limits_{n\to\infty}S_n$, $\sum_{k=1}^nb_k$ is bounded. \begin{enumerate}
+			\item Let $\set{a_n}$ be a decreasing sequence and $\lim\limits_{n\to\infty}a_n=L$. \par
+			Let $c_n=a_n-L$. Then $\set{c_n}$ is decreasing and \[
+			\lim\limits_{n\to\infty}c_n=0.
+			\] Since $\dispsty\sum_{n=1}^\infty a_nb_n=\sum_{n=1}^\infty(c_n-L)b_n=\sum_{n=1}^\infty c_nb_n+\sum_{n=1}^\infty Lb_n$, $\exists\sum_{n=1}^\infty a_nb_n$.
+			\item  Let $\set{a_n}$ be a increasing sequence and $\lim\limits_{n\to\infty}a_n=L$. \par
+			Let $d_n=L-a_n$. Then $\set{d_n}$ is decreasing and \[
+			\lim\limits_{n\to\infty}d_n=0.
+			\] Since $\dispsty\sum_{n=1}^\infty a_nb_n=\sum_{n=1}^\infty(L-d_n)b_n=\sum_{n=1}^\infty Lb_n-\sum_{n=1}^\infty d_nb_n$, $\exists\sum_{n=1}^\infty a_nb_n$.
+		\end{enumerate}
+	\end{proof}
+\end{tcolorbox}
+\
+\begin{tcolorbox}[colback=white]
+	\textbf{Theorem.} (\textbf{Cauchy Condensation Test}) Let $\sum a_n$ be a series of monotone decreasing positive numbers. Then \[
+	\sum_{n=1}^\infty a_n\ \text{converges if and only if}\ \sum_{n=1}^\infty2^na_{2^n}\ \text{converges}.
+	\]\tcblower\begin{proof}
+		Let $\dispsty S_n=\sum_{k=1}^na_k$. Then \[
+		S_{2^n}=(a_1+a_2+\cdots+a_{2^n})\quad\text{and}\quad\sum_{n=1}^\infty S_{2^n}=\sum_{n=1}^\infty S_n.
+		\] Then \begin{align*}
+		S_{2^n} &= a_1+a_2+a_3+a_4+a_5+a_6+a_7+a_8+\cdots+a_{2^n} \\
+		&\leq a_1+(a_2+a_2)+(a_4+a_4+a_4+a_4)+(\underbrace{a_{2^{n-1}}+a_{2^{n-1}}+\cdots+a_{2^{n-1}}}_{2^{n-1}\ \text{times}})+a_{2^n} \\
+		&=a_1+2a_2+4a_4+\cdots+2^{n-1}a_{2^{n-1}}+a_{2^n}
+		\end{align*}. Since \begin{align*}
+		S_{2^n} &= a_1+a_2+a_3+a_4+a_5+a_6+a_7+a_8+\cdots+a_{2^n} \\
+		&\geq \frac{1}{2}a_1+a_2+(a_4+a_4)+(a_8+a_8+a_8+a_8)+\cdots+(\underbrace{a_{2^n}+a_{2^n}+\cdots+a_{2^n}}_{2^n\ \text{times}}) \\
+		&=\frac{1}{2}(a_1+2a_2+4a_4+8a_8+\cdots+2^na_{2^n}),
+		\end{align*} by comparison test, we can conclude that \[
+		\exists\sum_{n=1}^\infty a_n\iff\exists\sum_{n=1}^\infty 2^na_{2^n}.
+		\]
+	\end{proof}
+\end{tcolorbox}
+
+
+
+\newpage
+\part{Functions in Real number}
+
+\section{Limits of Functions}
+
+\subsection{Limits of Functions}
+\begin{tcolorbox}[colback=white]
+	\textbf{Definition.} Let $a\in\mathbb{R}$ and let $\varepsilon>0$. \begin{enumerate}
+		\item The \textbf{$\varepsilon$-neighborhood} of $a$ is the set \[
+		\mathcal{N}_\varepsilon(a) := \set{x\in\mathbb{R}:\abs{x-a}<\varepsilon}=\set{x\in\mathbb{N}:a-\varepsilon<x<a+\varepsilon}.
+		\]
+		\item $D$ is called the \textbf{neighborhood} of $a$ if there exists an $\varepsilon$-neighborhood $\mathcal{N}_\varepsilon(a)$ such that \[
+		\mathcal{N}_\varepsilon(a)\subset D.
+		\]
+		\item The \textbf{$\varepsilon$-deleted neighborhood} of $a$ is the set \[
+		\mathcal{N}_\varepsilon^*(a) := \set{x\in\mathbb{R}:0<\abs{x-a}<\varepsilon}=\set{x\in\mathbb{N}:a-\varepsilon<x<a+\varepsilon}\setminus\set{a}.
+		\]
+	\end{enumerate}
+\end{tcolorbox}
+\
+\begin{tcolorbox}[colback=white]
+	\textbf{Definition.} Let $D\in\mathbb{R}$. A point $a$ is an \textbf{accumulation point} or \textbf{cluster point} (or \textbf{limit point}) of $D$ if for every $\delta$-neighborhood $\mathcal{N}_\delta(a)$ of $a$ contains at least one point of $D$ distinct from $a$, i.e., \[
+	(a-\delta,a+\delta)\cap(D\setminus\set{a})\neq\varnothing,
+	\]
+\end{tcolorbox}\
+\\
+\begin{tcolorbox}[colback=white]
+	\textbf{Theorem.} A number $a\in\mathbb{R}$ is an accumulation point of a subset $D\subseteq\mathbb{R}$ if any only if there exists a sequence $\set{a_n}$ in $D$ such that for all $n\in\mathbb{N}$ \[
+	\lim\limits_{n\to\infty}a_n=a\quad\text{and}\quad a_n\neq a.
+	\]\tcblower\begin{proof}
+		($\Rightarrow$) Let $a$ be an accumulation point of $D\in\mathbb{R}$. Then, for $n\in\mathbb{N}$, $\exists a_n\in D$ such that \[
+		a_n\in\left(a-\frac{1}{n},\ a+\frac{1}{n} \right)-\set{a}.
+		\] And this implies \[
+		0<\abs{a_n-a}<\frac{1}{n}.
+		\] By squeeze theorem, $\lim\limits_{n\to\infty}a_n=a$.\\
+		\\
+		($\Leftarrow$) Let $\exists\set{a_n}$ such that $\lim\limits_{n\to\infty}a_n=a$ and $a_n\neq a$. Let $\varepsilon>0$/ Since $\lim\limits_{n\to\infty}a_n=a$, $\exists N\in\mathbb{N}$ such that if $n\geq N$ then $0<\abs{a_n-a}<\varepsilon$ and $0<\abs{a_N-a}<\varepsilon$ also. Hence, $a$ is an accumulation point of $D$.
+	\end{proof}
+\end{tcolorbox}
+\
+\begin{tcolorbox}[colback=white]
+	\textbf{Definition.} Let $D\in\mathbb{R}$ and $a$ be an accumulation point of $D$. A function $f:D\to\mathbb{R}$, a real number $L$ is said to be a \textbf{limit} of $f$ at $a$ if for given $\varepsilon>0$, there exists a $\delta(\varepsilon)>0$ such that if $x\in D$ and $0<\abs{x-a}<\delta(\varepsilon)$ then \[
+	\abs{f(x)-L}<\varepsilon.
+	\] If the limit of $f$ at $a$ doest not exists, we say that $f$ \textbf{diverges} at $a$.
+\end{tcolorbox}\
+\\ \textbf{Note.} \begin{itemize}
+	\item (\textbf{Limit of sequence})\quad $\forall\varepsilon>0$, $\exists N(\varepsilon)\in\mathbb{N}$ such that \[
+	\text{if}\quad n\geq N(\varepsilon)\quad\text{then}\quad\abs{a_n-L}<\varepsilon.
+	\]
+	\item (\textbf{Limit of function})\quad $\forall\varepsilon>0$, $\exists \delta(\varepsilon)>0$ such that \[
+	\text{if}\quad 0<\abs{x-a}<\delta\quad\text{then}\quad\abs{f(x)-L}<\varepsilon.
+	\]
+\end{itemize}
+
+\begin{tcolorbox}[colback=white]
+	\textbf{Theorem.} (\textbf{Uniqueness of limits}) Let $f:D\to\mathbb{R}$ be a function and if $a$ is an accumulation point of $D$ then $f$ can have only one limit at $a$.\tcblower\begin{proof}
+		Let $\lim\limits_{x\to a}f(x)=L_1$ and $\lim\limits_{x\to a}f(x)=L_2$. Let $\varepsilon>0$. Since $\lim\limits_{x\to a}f(x)=L_1$, $\exists\delta_1>0$ such that if $0<\abs{x-a}<\delta_1$ then $\dispsty\abs{f(x)-L_1}<\frac{\varepsilon}{2}$. Since $\lim\limits_{x\to a}f(x)=L_2$, $\exists\delta_2>0$ such that if $0<\abs{x-a}<\delta_1$ then $\dispsty\abs{f(x)-L_2}<\frac{\varepsilon}{2}$. Let $\delta=\min\set{\delta_1,\delta_2}$. Then if $0<\abs{x-a}<\delta$ then \[
+		\abs{L_1-L_2}=\abs{L_1-f(x)+f(x)-L_2}\leq\abs{f(x)-L_1}+\abs{f(x)-L_2}<\varepsilon.
+		\] Hence $L_1=L_2$.
+	\end{proof}
+\end{tcolorbox}\
+\\
+\begin{tcolorbox}[colback=white]
+	\textbf{Definition.} Let $f:D\to\mathbb{R}$ be a function. \begin{enumerate}
+		\item If $a$ is an accumulation point of $D\cap(a,\infty)$, then we say that $L\in\mathbb{R}$ is a \textbf{right-hand limit} of $f$ at $a$ if given any $\varepsilon>0$, there exists a $\delta>0$ such that all $x\in D$ with $a<x<a+\delta$, \[
+		\abs{f(x)-L}<\varepsilon.
+		\] In this case, we write \[
+		\lim\limits_{x\to a+}f(x)=L\quad\text{or}\quad f(a+)=L.
+		\]
+		\item If $a$ is an accumulation point of $D\cap(-\infty,a)$, then we say that $L\in\mathbb{R}$ is a \textbf{left-hand limit} of $f$ at $a$ if given any $\varepsilon>0$, there exists a $\delta>0$ such that all $x\in D$ with $a-\delta<x<a$, \[
+		\abs{f(x)-L}<\varepsilon.
+		\] In this case, we write \[
+		\lim\limits_{x\to a-}f(x)=L\quad\text{or}\quad f(a-)=L.
+		\]
+	\end{enumerate}\tcblower
+	\textbf{Note.} \begin{align*}
+	\lim\limits_{x\to a+}f(x)=L &\iff\forall\varepsilon>0,\ \exists\delta>0\ \text{such that if $a<x<a+\delta$ then $\abs{f(x)-L}<\varepsilon$}.\\
+	\lim\limits_{x\to a-}f(x)=L &\iff\forall\varepsilon>0,\ \exists\delta>0\ \text{such that if $a-\delta<x<a$ then $\abs{f(x)-L}<\varepsilon$}.
+	\end{align*}
+\end{tcolorbox}
+\
+\begin{tcolorbox}[colback=white]
+	\textbf{Theorem.} Let $f:D\to\mathbb{R}$ be a function and $a$ be an accumulation point of $D\cap(a,\infty)$ and $D\cap(-\infty,a)$. Then \[
+	\lim\limits_{x\to a}f(x)=L\quad \text{if and only if}\quad \lim\limits_{x\to a+} = L=\lim\limits_{x\to a-}f(x).
+	\]\tcblower\begin{proof}
+		($\Rightarrow$) Let $\varepsilon>0$. Since $\lim\limits_{x\to a}f(x)=L$, $\exists\delta>0$ such that \[
+		\text{if}\ 0<\abs{x-a}<\delta\ \text{then}\ \abs{f(x)-L}<\varepsilon.
+		\] Thus \begin{align*}
+		\text{if}\ a<x<a+\delta\ \text{then}\ \abs{f(x)-L}<\varepsilon,\ \text{i.e.,}\ \lim\limits_{x\to a+}f(x) = L, \\
+		\text{if}\ a-\delta<x<a\ \text{then}\ \abs{f(x)-L}<\varepsilon,\ \text{i.e.,}\ \lim\limits_{x\to a-}f(x) = L.
+		\end{align*}\
+		\\
+		($\Leftarrow$) Let $\varepsilon>0$. Since $\lim\limits_{x\to a+}f(x)=L$, $\exists\delta_1>0$ such that \[
+		\text{if}\ a<x<a+\delta_1\ \text{then}\ \abs{f(x)-L}<\varepsilon.
+		\] Since $\lim\limits_{x\to a-}f(x)=L$, $\exists\delta_2>0$ such that \[
+		\text{if}\ a-\delta_2<x<a\ \text{then}\ \abs{f(x)-L}<\varepsilon.
+		\] Let $\delta=\min\set{\delta_1,\delta_2}$. Then if $0<\abs{x-a}<\delta$,\ $\abs{f(x)-L}<\varepsilon$. $\therefore\lim\limits_{x\to a}f(x)=L$.
+	\end{proof}
+\end{tcolorbox}\
+
+\subsection{Some Properties}
+\begin{tcolorbox}[colback=white]
+	\textbf{Theorem.} (\textbf{Sequential criterion}) Let $f:D\to\mathbb{R}$ be a function and $a$ be an accumulation point of $D$. Then the following are equivalent.\begin{enumerate}
+		\item \(\lim\limits_{x\to a}f(x)=L\).
+		\item For every sequence $\set{x_n}$ in $D$ that converges to $a$ such that $x_n\neq a$ for all $n\in\mathbb{N}$, \[
+		\lim\limits_{n\to\infty}f(x_n)=L.
+		\]
+	\end{enumerate}\tcblower\begin{proof}
+	($\Rightarrow$) Let $\varepsilon>0$. Since $\lim\limits_{x\to a}=L$, $\exists\delta>0$ such that if $0<\abs{x-a}<\delta$ then \[
+	\abs{f(x)-L}<\varepsilon.
+	\] Since $\lim\limits_{n\to\infty}x_n=a$ and $x_n\neq a$, for given $\delta>0$, $\exists N\in\mathbb{N}$ such that if $n\geq N$ then \[
+	0<\abs{x_n-a}<\delta.
+	\] Since $x_n\in D$,\ $\abs{f(x)-L}<\varepsilon$. $\therefore\lim\limits_{n\to\infty}f(x_n)=L$.\\
+	\\
+	($\Leftarrow$) Assume that $\lim\limits_{x\to a}f(x)\neq L$, i.e., $\exists\varepsilon>0$, $\forall\delta>0$, $\exists x\in D$ such that \[
+	0<\abs{x-a}<\delta\quad \text{but}\quad \abs{f(x)-L}\geq\varepsilon.
+	\] Since $\lim\limits_{n\to\infty}x_n=a$ and $x_n\neq a$, for $n\in\mathbb{N}$, $\exists x_n\in D$ such that \[
+	0<\abs{x_n-a}<\frac{1}{n}\quad\Longrightarrow\quad\abs{f(x_n)-L}\geq\varepsilon.
+	\] Since $\lim\limits_{n\to\infty}f(x_n)=L$, it is contradiction. Hence, $\lim\limits_{x\to a}f(x)=L$.
+\end{proof}
+\end{tcolorbox}\
+\\
+\textbf{Note.} \begin{align*}
+\lim\limits_{x\to a}f(x)=L \iff &\forall\varepsilon>0, \exists\delta>0\ \text{such that if}\ 0<\abs{x-a}<\delta,\ \text{for}\ x\in D,\ \text{then}\ \abs{f(x)-L}<\varepsilon. \\
+\lim\limits_{x\to a}f(x)\neq L \iff &\exists\varepsilon>0, \forall\delta>0,\ \exists x\in D\ \text{such that if}\ 0<\abs{x-a}<\delta\ \text{but}\ \abs{f(x)-L}\geq\varepsilon. \\
+\end{align*}
+\\
+\begin{tcolorbox}[colback=white]
+	\textbf{Theorem.} (\textbf{Divergence criterion}) Let $f:D\to\mathbb{R}$ be a function and $a$ be an accumulation point of $D$. Then the following are equivalent.\begin{enumerate}
+		\item \(\lim\limits_{x\to a}f(x)\neq L\).
+		\item There exists a sequence $\set{x_n}$ in $D$ with $x_n\neq a$ for all $n\in\mathbb{N}$ such that \[
+		\lim\limits_{n\to\infty}x_n=a\quad\text{but}\quad\lim\limits_{n\to\infty}f(x_n)\neq L.
+		\]
+	\end{enumerate}
+\end{tcolorbox}\
+\
+\begin{tcolorbox}[colback=white]
+	\textbf{Definition.} Let $f:D\to\mathbb{R}$ be a function and let $a$ be an accumulation point of $D$. We say that $f$ is \textbf{bounded} on a neighborhood of $a$ if there exists a $\mathcal{N}_\delta(a)$ and a constant $M>0$ such that for all $x\in D\cap\mathcal{N}_\delta(a)$, \[
+	\abs{f(x)}\leq M.
+	\]
+\end{tcolorbox}
+\
+\begin{tcolorbox}[colback=white]
+	\textbf{Theorem.} Let $f:D\to\mathbb{R}$ be a function and let $a$ be an accumulation point of $D$. If \[
+	\lim\limits_{x\to a}f(x) = L,
+	\] then $f$ is bounded on some neighborhood of $a$.\tcblower\begin{proof}
+		Let $\varepsilon=1$. Since $\lim\limits_{x\to a}f(x)=L$, $\exists\delta>0$ such that if $0<\abs{x-a}<\delta$ then $\abs{f(x)-L}<\varepsilon$. Let $x\in(a-\delta,a+\delta)\cap D$ and let \[
+		M:=\begin{cases}
+		1+\abs{L}, &a\notin D \\
+		\sup\set{1+\abs{L},\abs{f(a)}}, &a\in D
+		\end{cases}.
+		\] Then $\abs{f(x)}\leq M$, for $x\in(a-\delta,a+\delta)\cap D$.
+	\end{proof}
+\end{tcolorbox}
+\
+\begin{tcolorbox}[colback=white]
+	\textbf{Theorem.} Let $f:D\to\mathbb{R}$ and $g:D\to\mathbb{R}$ be functions and $a$ be an accumulation point of $D$. Further, let $k\in\mathbb{R}$. If \[
+	\lim\limits_{x\to a}f(x)=L\quad\text{and}\quad\lim\limits_{x\to a}g(x)=M
+	\] then: \begin{itemize}
+		\item[($i$)] \(\lim\limits_{x\to a}(fg)(x)=LM\).
+		\item[($ii$)] \(\lim\limits_{x\to a}(f/g)(x)=L/M\) where $M\neq 0$.
+	\end{itemize}\tcblower\begin{proof} Let $\varepsilon>0$. \begin{itemize}
+		\item[($i$)] Since $\lim\limits_{x\to a}f(x)=L$, $\exists\delta_1>0$ and $\exists F>0$ such that if $0<\abs{x-a}<\delta_1$ then $\abs{f(x)}\leq F$. \\
+		Since $\lim\limits_{x\to a}g(x)=M$, $\exists\delta_2>0$ such that if $0<\abs{x-a}<\delta_2$ then $\dispsty\abs{g(x)-M}<\frac{\varepsilon}{2F}$.\\
+		Since $\lim\limits_{x\to a}f(x)=L$, $\exists\delta_3>0$ such that if $0<\abs{x-a}<\delta_3$ then $\dispsty\abs{f(x)-L}<\frac{\varepsilon}{2\abs{M}+1}$.\\
+		\\
+		Let $\delta=\min\set{\delta_1,\delta_2,\delta_3}$. Then if \(0<\abs{x-a}<\delta\), then \begin{align*}
+		\abs{f(x)g(x)-LM}&\leq\abs{f(x)}\abs{g(x)-M}+\abs{f(x)-L}\abs{M} \\
+		&<F\cdot\frac{\varepsilon}{2F}+\frac{\varepsilon}{2\abs{M}+1}\cdot \abs{M} \\
+		&<\frac{\varepsilon}{2}+\frac{\varepsilon}{2}=\varepsilon.
+		\end{align*}\
+		\\
+		\item[($ii$)] Since $\lim\limits_{x\to a}g(x)=M$, for given $\dispsty\varepsilon=\frac{\abs{M}}{2}>0$, $\exists\delta_1>0$ such that if $0<\abs{x-a}<\delta_1$ then \[
+		\abs{\abs{g(x)}-\abs{M}}\leq\abs{g(x)-M}<\frac{\abs{M}}{2}\quad\Longrightarrow\quad\frac{\abs{M}}{2}<\abs{g(x)}\quad\Longrightarrow\quad \frac{1}{\abs{g(x)}}<\frac{2}{\abs{M}}.
+		\]
+		Since $\lim\limits_{x\to a}g(x)=M$, $\exists\delta_2>0$ such that if $0<\abs{x-a}<\delta_2$ then \[
+		\abs{g(x)-M}<\frac{\abs{M}^2}{2}\varepsilon.
+		\] Let $\delta=\min\set{\delta_1,\delta_2}$. Then if $0<\abs{x-a}<\delta$, then \begin{align*}
+		\abs{\frac{1}{g(x)}-\frac{1}{M}}&=\frac{1}{\abs{M}}\frac{1}{\abs{g(x)}}\abs{g(x)-M} \\
+		&<\frac{1}{\abs{M}}\frac{2}{\abs{M}}\frac{\abs{M}^2}{2}\varepsilon=\varepsilon.
+		\end{align*}
+	\end{itemize}
+	\end{proof}
+\end{tcolorbox}
+\
+\begin{tcolorbox}[colback=white]
+	\textbf{Definition.} Let $f:D\to\mathbb{R}$ be a function and $a$ be an accumulation point of $D$.\begin{enumerate}
+		\item We say that $f$ \textbf{approaches to infinity}(or \textbf{tend to infinity}) as $x\longrightarrow a$ if for every $M\in\mathbb{R}$ there exists $\delta=\delta(M)>0$ such that for all $x\in D$ with $0<\abs{x-a}<\delta$ then \[
+		f(x)>M\quad\text{and write}\quad\lim\limits_{x\to a}f(x)=\infty(\text{or}\ +\infty).
+		\]
+		\item We say that $f$ \textbf{approaches to minus infinity}(or \textbf{tend to minus infinity}) as $x\longrightarrow a$ if for every $M\in\mathbb{R}$ there exists $\delta=\delta(M)>0$ such that for all $x\in D$ with $0<\abs{x-a}<\delta$ then \[
+		f(x)<M\quad\text{and write}\quad\lim\limits_{x\to a}f(x)=-\infty.
+		\]
+	\end{enumerate}\tcblower
+	\textbf{Note.} \[
+	\lim\limits_{x\to a}f(x)=\infty\iff\forall M\in\mathbb{R},\ \exists\delta>0\ \text{such that if}\ 0<\abs{x-a}<\delta\ \text{then}\ f(x)>M.
+	\]
+\end{tcolorbox}
+\
+\begin{tcolorbox}[colback=white]
+	\textbf{Definition.} Let $f:D\to\mathbb{R}$ be a function \begin{enumerate}
+		\item We say that $L$ is a \textbf{limit} of $f$ as $x\longrightarrow\infty$ if given $\varepsilon>0$ there exists $M$ such that for any $x>M$, then \[
+		\abs{f(x)-L}<\varepsilon\quad\text{and write}\quad \lim\limits_{x\to\infty}f(x)=L.
+		\]
+		\item We say that f \textbf{approaches to infinity}(or \textbf{tend to infinity}) as $x\longrightarrow\infty$ if given any $M\in\mathbb{R}$ there exists $K\in\mathbb{R}$ such that for any $x>K$, then \[
+		f(x)>M\quad\text{and write}\quad \lim\limits_{x\to\infty}f(x)=\infty.
+		\]
+	\end{enumerate}\tcblower
+	\textbf{Note.} \begin{align*}
+	\lim\limits_{x\to \infty}f(x)=L\iff&\forall\varepsilon>0,\ \exists N\in\mathbb{R}\ \text{such that if}\ x>N\ \text{then}\ \abs{f(x)-L}<\varepsilon. \\
+	\lim\limits_{x\to \infty}f(x)=\infty\iff&\forall M\in\mathbb{R},\ \exists N\in\mathbb{R}\ \text{such that if}\ x>N\ \text{then}\ f(x)>M.
+	\end{align*}
+\end{tcolorbox}
+
+\newpage
+\section{Continuous Functions}
+
+\subsection{Continuous Functions}
+\begin{tcolorbox}[colback=white]
+	\textbf{Definition.} Let $f:D\to\mathbb{R}$ be a function and let $a\in D$. W say that $f$ is \textbf{continuous at} $a$ if, given any number $\varepsilon>0$ there exists $\delta>0$ such that if $x\in D$ satisfying $\abs{x-a}<\delta$ then \[
+	\abs{f(x)-f(x)}<\varepsilon.
+	\] If $f$ is continuous on every point of $D$, then we say that $f$ is \textbf{continuous on} $D$. If $f$ fails to be continuous at $a$, then we say that $f$ is \textbf{discontinuous at} $a$.\tcblower
+	\textbf{Note.}\[
+	\lim\limits_{x\to a}f(x)=f(a)\iff\forall\varepsilon>0,\exists\delta>0\ \text{such that if $\abs{x-a}<\delta$ then $\abs{f(x)-f(a)}<\varepsilon$}.
+	\]
+\end{tcolorbox}\
+\
+\begin{tcolorbox}[colback=white]
+	\textbf{Theorem.} (\textbf{Sequential criterion for continuity}) A function $f:D\to\mathbb{R}$ is continuous at the point $a\in D$ if and only if for every sequence $\set{x_n}$ in $D$ that converges to $a$, the sequence $\set{f(x_n)}$ converges to $f(a)$.
+\end{tcolorbox}
+\begin{tcolorbox}[colback=white]
+	\textbf{Theorem.} (\textbf{Discontinuity criterion}) A function $f:D\to\mathbb{R}$ is discontinuous at the point $a\in D$ if and only if for every sequence $\set{x_n}$ in $D$ that converges to $a$, but the sequence $\set{f(x_n)}$ does not converges to $f(a)$.
+\end{tcolorbox}
+\
+\begin{tcolorbox}[colback=white]
+	\textbf{Theorem.} Let $A,B\subseteq\mathbb{R}$ and let $f:A\to\mathbb{R}$ and $g:B\to\mathbb{R}$ be functions such that $f(A)\subseteq B$. If $f$ and $g$ are continuous at $a\in A$ and $b=f(a)\in B$, respectively, then the composition \[
+	g\circ f:A\to\mathbb{R}
+	\] is continuous at $a$.\tcblower\begin{proof}
+		Let $\varepsilon>0$. Since $g$ is continuous on $B$, $\exists\delta_1>0$ such that if $\abs{y-b}<\delta_1$, $y,b\in B$, then \[
+		\abs{g(y)-g(b)}<\varepsilon.
+		\] Since $f$ is continuous at $a$, for given $\delta_1$, $\exists\delta>0$ such that if $\abs{x-a}<\delta$, $x,a\in A$, then \[
+		\abs{f(x)-f(a)}<\delta_1.
+		\] Let $y=f(x)$ and $g=f(a)$. Since $f[A]\subseteq B$, $f(x),f(a)\in B$, \[
+		\abs{f(x)-f(a)}<\delta_1\implies \abs{g(f(x))-g(f(a))}<\varepsilon.
+		\] Hence, $g\circ f$ is continuous at $x=a$.
+	\end{proof}
+\end{tcolorbox}\
+
+\subsection{Properties of Continuous Functions}
+\begin{tcolorbox}[colback=white]
+	\textbf{Definition.} A function $f:D\to\mathbb{R}$ is said to be \textbf{bounded} on $D$ if there exists a constant $M>0$ such that \[
+	\abs{f(x)}\leq M
+	\] for all $x\in D$. On the other hand, $f$ is said to be \textbf{unbounded} on $D$ if given $M>0$, there exists a point $x\in D$ such that \[
+	\abs{f(x)}>M.
+	\]
+\end{tcolorbox}
+\
+\begin{tcolorbox}[colback=white]
+	\textbf{Theorem.} (\textbf{Boundedness theorem}) Let $f:[a,b]\to\mathbb{R}$ be continuous on $[a,b]$. Then $f$ is bounded on $[a,b]$.\tcblower\begin{proof}
+		Assume that $f$ is unbounded on $[a,b]$. For $n\in\mathbb{N}$, $\exists x_n\in[a,b]$ such that \[
+		\abs{f(x_n)}>n.
+		\] This implies that \[
+		\lim\limits_{n\to\infty}\abs{f(x_n)}\geq\lim\limits_{n\to\infty}n=\infty.
+		\] Since $a\leq x_n\leq b$ for all $n\in\mathbb{N}$, $\set{x_n}$ is a bounded sequence in $[a,b]$. By Bolzano-Weierstrass theorem, $\exists \set{x_{n_k}}$, a subsequence of $\set{x_n}$, such that \[
+		\lim\limits_{k\to\infty}x_{n_k}=c\in[a,b].
+		\] Since $f$ is continuous at $c\in[a,b]$, \[
+		\lim\limits_{k\to\infty}f(x_{n_k})=f(c)\implies \lim\limits_{k\to\infty}\abs{f(x_{n_k})}=\abs{f(c)}.
+		\] But $\lim\limits_{k\to\infty}\abs{f(x_{n_k})}\geq\lim\limits_{k\to\infty}n_k=\infty$. It is contradiction. Hence, $f$ is bounded on $[a,b]$.
+	\end{proof}
+\end{tcolorbox}
+\
+\begin{tcolorbox}[colback=white]
+	\textbf{Definition.} Let $f:D\to\mathbb{R}$ be a function. \begin{enumerate}
+		\item We say that $f$ has an \textbf{absolute maximum} on $D$ if there is a point $x^*$ such that \[
+		f(x^*)\geq f(x)\ \text{for all}\ x\in D.
+		\] In this case, $x^*$ is called an \textbf{absolute maximum point} for $f$ on $D$ if it exists.
+		\item We say that $f$ has an \textbf{absolute minimum} on $D$ if there is a point $x^*$ such that \[
+		f(x^*)\leq f(x)\ \text{for all}\ x\in D.
+		\] In this case, $x^*$ is called an \textbf{absolute minimum point} for $f$ on $D$ if it exists.
+	\end{enumerate}
+\end{tcolorbox}
+\
+\begin{tcolorbox}[colback=white]
+	\textbf{Theorem.} (\textbf{Maximum-Minimum theorem}) Let $f:[a,b]\to\mathbb{R}$ be a continuous function on $[a,b]$. Then $f$ has an absolute maximum and an absolute minimum on $[a,b]$, i.e., there exists $p,q\in[a,b]$ such that \[
+	f(p)\leq f(x)\leq f(q).
+	\]\tcblower\begin{proof}
+		Let $I=[a,b]$. Since $f$ is continuous on $I$, $\exists M>0$ such that \[
+		\abs{f(x)}\leq M
+		\] for all $x\in I$. Let $f(I)=\set{f(x):x\in I}$. Then $f(I)$ satisfies \begin{itemize}
+			\item[($i$)] $f(I)\neq\varnothing$;
+			\item[($ii$)] $f(I)$ has an upperbound $M$.
+		\end{itemize} By completeness of $\mathbb{R}$, $\exists\sup f(I)=s^*$. Let $n\in\mathbb{N}$. Since $s^*-\dispsty\frac{1}{n}$ is not an upperbound of $f(I)$, $\exists x_n\in I$ such that \[
+	s^*-\frac{1}{n}<f(x_n)\leq s^*
+	\] By squeeze theorem, $\lim\limits_{n\to\infty}f(x_n)=s^*$. Since $\set{x_n}$ is bounded on $I$, by Bolzano-Weierstrass theorem, $\exists\set{x_{n_k}}$, a subsequence of $\set{x_n}$, such that \[
+	\lim\limits_{k\to\infty}x_{n_k}=q\in I.
+	\] Since $s^*-\dispsty\frac{1}{n_k}<f(x_{n_k})\leq s^*$, \[
+	\lim\limits_{k\to\infty}f(x_{n_k})=s^*.
+	\] Since $f$ is continuous at $q\in[a,b]$, \[
+	\lim\limits_{k\to\infty}f(x_{n_k})=f(q)\implies f(x)\leq f(q)=s^*.
+	\]
+	\end{proof}
+\end{tcolorbox}
+\
+\begin{tcolorbox}[colback=white]
+	\textbf{Theorem.} (\textbf{Bolzano's intermediate value theorem}) Let $f:[a,b]\to\mathbb{R}$ be a continuous function on $[a,b]$ and $f(a)<f(b)$. If $r\in\mathbb{R}$ satisfies $f(a)<r<f(b)$, then there exists a point $c\in(a,b)$ such that \[
+	f(c)=r.
+	\]\tcblower\begin{proof}
+		Let $A=\set{x\in[a,b]: f(x)<r}$. Then \begin{itemize}
+			\item[($i$)] Since $a\in A$, $A\neq\varnothing$;
+			\item[($ii$)] $A$ has an upperbound $b$.
+		\end{itemize} Thus, $\exists c\in\sup A$. Let $n\in\mathbb{N}$. Since $c-\dispsty\frac{1}{n}$ is not an upperbound of $A$, $\exists x_n\in A$ such that \[
+	c-\frac{1}{n}<x_n\leq c.
+	\] Then \[
+		\lim\limits_{n\to\infty}x_n=c\in[a,b]\implies\lim\limits_{n\to\infty}f(x_n)=f(c).
+	\] Since $f(x_n)<r$, $\lim\limits_{n\to\infty}f(x_n)\leq r$, and so $f(c)\leq r$.\\
+	\\
+	Assume that $f(c)<r$ then $c\in A$. Since $f$ is continuous at $c\in[a,b]$, for $\varepsilon=\dispsty\frac{1}{2}(r-f(c))>0$, $\exists\delta>0$ such that if $\abs{x-c}<\delta$ then \[
+	\abs{f(x)-f(c)}<\varepsilon.
+	\] For $x\in(c,c+\delta)\cap(c,b]$, \begin{align*}
+	f(x)<f(c)+\varepsilon &=f(c)+\frac{1}{2}(r-f(c))\\
+	&=\frac{1}{2}(r+f(c)) \\
+	&<\frac{1}{2}(r+r)=r.
+	\end{align*} Thus $x\in A$. It is contradiction. Hence $f(c)=r$.
+	\end{proof}
+\end{tcolorbox}
+\newpage
+\begin{tcolorbox}[colback=white]
+	\textbf{Definition.} Let $f:D\to\mathbb{R}$ be a continuous function. A point $x$ is said to be a \textbf{fixed point} of $f$ in case \[
+	f(x)=x.
+	\]
+\end{tcolorbox}
+\
+\begin{tcolorbox}[colback=white]
+	\textbf{Theorem.} (\textbf{Fixed point theorem}) Let $f:[0,1]\to[0,1]$ be a continuous function then there exists a point $c\in[0,1]$ such that \[
+	f(c)=c.
+	\]\tcblower\begin{proof}
+		If $f(0)=0$ or $f(1)=1$, then $x=0$ or $x=1$, respectively. Let $f(0)\neq0$ and $f(1)\neq 1$. Define a function $g:[0,1]\to\mathbb{R}$ such that \[
+		g(x)=f(x)-x.
+		\] Then \begin{enumerate}
+			\item $g$ is continuous on $[0,1]$;
+			\item $g(0)=f(0)-0>0$;
+			\item $g(1)=f(1)-1<0$.
+		\end{enumerate} By Bolzano's intermediate value theorem, $\exists c\in(0,1)$ such that $g(c)=0$. This implies that \[
+	f(c)=c.
+	\]
+	\end{proof}
+\end{tcolorbox}
+
+\newpage
+\subsection{Uniformly Continuous Functions}
+
+\begin{tcolorbox}[colback=white]
+	\textbf{Definition.} (\textbf{Continuous function - revisited}) Let $f:D\to\mathbb{R}$ be a continuous function. Then, the following statements are equivalent:\begin{enumerate}
+		\item $f$ is continuous at every point $a\in D$.
+		\item Given $\varepsilon>0$ and $a\in D$, there exists $\delta(\varepsilon,a)>0$ such that for all $x\in D$ and $\abs{x-a}<\delta(\varepsilon,a)$ then \[
+		\abs{f(x)-f(a)}<\varepsilon.
+		\]
+	\end{enumerate}
+\end{tcolorbox}
+\
+\begin{tcolorbox}[colback=white]
+	\textbf{Definition.} (\textbf{Uniformly continuous function}) We say that $f:D\to\mathbb{R}$ is \textbf{uniformly continuous} on $D$ if for each $\varepsilon>0$ there exists a $\delta(\varepsilon)>0$ such that if $\abs{x-y}<\delta$, $x,y\in D$, then \[
+	\abs{f(x)-f(y)}<\varepsilon.
+	\]\tcblower
+	\textbf{Note.}
+	\begin{center}
+		$f$ is uniformly continuous on $D$\\
+		$\iff$ \\
+		$\forall\varepsilon>0$, $\exists\delta=\delta(\varepsilon)>0$ such that if for $x,y\in D$, $\abs{x-a}<\delta$ then $\abs{f(x)-f(y)}<\varepsilon$.
+	\end{center}
+\end{tcolorbox}
+\
+\begin{tcolorbox}[colback=white]
+	\textbf{Theorem.} (\textbf{Non-uniform continuity criteria}) Let $f:D\to\mathbb{R}$ be a function then the following statements are equivalent:\begin{enumerate}
+		\item $f$ is not uniformly continuous on $D$.
+		\item  There exists an $\varepsilon_0$ such that for every delta $\delta>0$ there are points $x,y\in D$ such that \[
+		\abs{x-y}<\delta\quad\text{and}\quad\abs{f(x)-f(y)}\geq\varepsilon_0.
+		\]
+		\item There exists an $\varepsilon_0>0$ and two sequences $\set{x_n}$ and $\set{y_n}$ in $D$ such that \[
+		\lim\limits_{n\to\infty}(x_n-y_n)=0\quad\text{and}\quad\abs{f(x_n)-f(y_n)}\geq\varepsilon_0
+		\] for all $n\in\mathbb{N}$.
+	\end{enumerate}
+\end{tcolorbox}
+\
+\begin{tcolorbox}[colback=white]
+	\textbf{Theorem.} (\textbf{Uniform continuity theorem}) Let $I=[a,b]$ be a closed interval and $f:I\to\mathbb{R}$ be a continuous function on $I$. Then $f$ is uniformly continuous on $I$.\tcblower\begin{proof}
+		Assume that $f$ is not uniformly continuous on $I$. Then $\exists\varepsilon>0$ and $\exists\set{x_n},\set{y_n}$ in $I$ such that \[
+		\abs{x_n-y_n}<\frac{1}{n}\quad\text{but}\quad \abs{f(x_n)-f(y_n)}\geq\varepsilon.
+		\] for all $n\in\mathbb{N}$. Since $a\leq x_n\leq b$, $\set{x_n}$ is bounded on $I$ and so $\exists\set{x_{n_k}}$, a subsequence of $\set{x_n}$ such that \[
+		\lim\limits_{k\to\infty}x_{n_k}=c\in I.
+		\] Then since \[
+		0\leq\abs{y_{n_k}-c}\leq\crossout[red]{0}{\abs{y_{n_k}-x_{n_k}}}+\crossout[red]{0}{\abs{x_{n_k}-c}},
+		\] we have $\lim\limits_{k\to\infty}y_{n_k}=c$. Since $f$ is continuous at $c\in I$, \[
+		\lim\limits_{k\to\infty}f(x_{n_k})=f(c)=\lim\limits_{k\to\infty}f(y_{n_k}).
+		\] But since \[
+		\abs{f(x_{n_k})-f(y_{n_k})}\geq\varepsilon
+		\] for all $n\in\mathbb{N}$, it is contradiction. Hence $f$ is uniformly continuous on $I$.
+	\end{proof}
+\end{tcolorbox}
+\
+\begin{tcolorbox}[colback=white]
+	\textbf{Definition.} (\textbf{Lipschitz function}) Let $f:D\to\mathbb{R}$ be a function. If there exists a constant $K>0$ such that \[
+	\abs{f(x)-f(y)}\leq K\abs{x-y}
+	\] for all $x,y\in D$, then $f$ is said to be a \textbf{Lipschitz function} or to satisfy a \textbf{Lipschitz condition} on $D$.
+\end{tcolorbox}
+\
+\begin{tcolorbox}[colback=white]
+	\textbf{Theorem.} If $f:D\to\mathbb{R}$ is a Lipschitz function, then $f$ is uniformly continuous on $D$.\tcblower\begin{proof}
+		Let $\varepsilon>0$. Since $f$ is a Lipschitz function, for $x,y\in D$, $\exists K>0$ such that \[
+		\abs{f(x)-f(y)}\leq K\abs{x-y}.
+		\] Let $\delta=\dispsty\frac{\varepsilon}{K}>0$ Then if $\abs{x-a}<\delta$, then \[
+		\abs{f(x)-f(y)}\leq K\abs{x-y}<K\delta=K\cdot\frac{\varepsilon}{K}=\varepsilon.
+		\] Hence, $f$ is uniformly continuous on $D$.
+	\end{proof}
+\end{tcolorbox}
+\
+\begin{tcolorbox}[colback=white]
+	\textbf{Theorem.} If $f:D\to\mathbb{R}$ is uniformly continuous on $D$ and if $\set{x_n}$ is a Cauchy sequence in $D$, then $\set{f(x_n)}$ is a Cauchy sequence in $\mathbb{R}$.\tcblower\begin{proof}
+		Let $\varepsilon>0$. Since $f$ is uniformly continuous on $D$, $\exists\delta(=\delta(\varepsilon))>0$ such that if $\abs{x-y}<\delta$, $x,y\in D$, then \[
+		\abs{f(x)-f(y)}<\varepsilon.
+		\] Since $\set{x_n}$ is a Cauchy sequence in $D$, for given $\delta>0$, $\exists N\in\mathbb{N}$ such that if $m,n\geq N$ then \[
+		\abs{x_m-x_n}<\delta.
+		\] Since $x_m,x_n\in D$, \[
+		\abs{f(x_m)-f(x_n)}<\varepsilon.
+		\] Hence, $\set{f(x_n)}$ is a Cauchy sequence.
+	\end{proof}
+\end{tcolorbox}\
+\\
+\textbf{Remark.} Note that $f(x)=x^{-1}$ is not uniformly continuous on $(0,1)$. Let \[
+x_n=\frac{1}{n}.
+\] Then $\set{x_n}$ is a Cauchy sequence in $(0,1)$ but \[
+\set{f(x_n)}=\set{n}
+\] is not a Cauchy sequence.
+\\
+\begin{tcolorbox}[colback=white]
+	\textbf{Theorem.} (\textbf{Continuous extension theorem}) A function $f:(a,b)\to\mathbb{R}$ is uniformly continuous on $(a,b)$ if and only if it can be defined at the endpoints $a$ and $b$ such that the extended function $f^*$ is continuous on $[a,b]$.\tcblower\begin{proof}
+		($\Leftarrow$) Since $f^*$ is uniformly continuous on $[a,b]$ by the uniform continuity theorem, $\forall\varepsilon>0$, $\exists\delta(=\delta(\varepsilon))>0$ such that if $\abs{x-y}<\delta$ and $x,y\in[a,b]$, then \[
+		\abs{f^*(x)-f^*(y)}<\varepsilon.
+		\] If $x,y\in(a,b)\subset[a,b]$ and $\abs{x-y}<\delta$, then \[
+		\abs{f(x)-f(y)}<\varepsilon,
+		\] since $f^*(x)=f(x)$ for all $x\in(a,b)$. \\
+		\\
+		($\Rightarrow$) Assume that $f$ is uniformly continuous on $(a,b)$. Let $\set{x_n}$ be a sequence in $(a,b)$ such that \[
+		\lim\limits_{n\to\infty}x_n=a.
+		\] Then since $\set{x_n}$ is Cauchy sequence in $(a,b)$, $\set{f(x_n)}$ is a Cauchy sequence in $\mathbb{R}$, i.e., \[
+		\exists\lim\limits_{n\to\infty}f(x_n)=p.
+		\] Let $\set{y_n}$ be a any other sequence in $(a,b)$ such that \[
+		\lim\limits_{n\to\infty}y_n=a.
+		\] Then $\lim\limits_{n\to\infty}(x_n-y_n)=0$ and so \begin{align*}
+		\lim\limits_{n\to\infty}f(y_n) &=\lim\limits_{n\to\infty}\{f(y_n)-f(x_n)+f(x_n)\} \\
+		&=\lim\limits_{n\to\infty}\{f(y_n)-f(x_n)\} +\lim\limits_{n\to\infty}f(x_n)=p.
+		\end{align*} That is, $\lim\limits_{n\to\infty}f(x_n)=\lim\limits_{x\to a}f(x)=p$. Similarly, $\exists\lim\limits_{x\to b}f(x)=q$. Define $f^*:[a,b]\to\mathbb{R}$ such that \[
+		f^*(x):=\begin{cases}
+		f(x) &, x\in(a,b) \\ p &, x=a \\ q &, x=b.
+		\end{cases}
+		\]
+	\end{proof}
+\end{tcolorbox}
+\
+\begin{tcolorbox}[colback=white]
+	\textbf{Definition.} (\textbf{One-sided continuous function}) Let $f:D\to\mathbb{R}$ be a function and $a\in D$. \begin{enumerate}
+		\item We say that $f$ is \textbf{right-continuous function} at $a$ if for every $\varepsilon>0$ there exists $\delta>0$ such that for all $x\in D$ with $a<x<a+\delta$ then \[
+		\abs{f(x)-f(a)}<\varepsilon.
+		\]
+		\item We say that $f$ is \textbf{left-continuous function} at $a$ if for every $\varepsilon>0$ there exists $\delta>0$ such that for all $x\in D$ with $a-\delta<x<a$ then \[
+		\abs{f(x)-f(a)}<\varepsilon.
+		\]
+	\end{enumerate}
+\end{tcolorbox}
+\begin{tcolorbox}[colback=white]
+	\textbf{Theorem.} Let $f:(a,b)\to\mathbb{R}$ be a function and $c\in(a,b)$. Then $f$ is right-continuous function at $c$ if and only if there exists $f(c+)$ and $f(c+)=f(c)$.
+\end{tcolorbox}
+\begin{tcolorbox}[colback=white]
+	\textbf{Theorem.} Let $f:(a,b)\to\mathbb{R}$ be a function and $c\in(a,b)$. Then $f$ is left-continuous function at $c$ if and only if there exists $f(c-)$ and $f(c-)=f(c)$.
+\end{tcolorbox}
+\
+\begin{tcolorbox}[colback=white]
+	\textbf{Definition.} Let $f:D\to\mathbb{R}$ be a function and $c\in D$. \begin{enumerate}
+		\item We say that $f$ is \textbf{discontinuous} at $a$ if $f$ does not defined at $a$ or there exists $\lim\limits_{x\to a}f(x)$ but does not equal to $f(a)$. In this cases, the point $a$ is called \textbf{removable discontinuous point}.
+		\item We say that $f$ is \textbf{jump discontinuous} at $a$ if there exists $f(a+)$ and $f(a-)$ but $f(a+)\neq f(a-)$.
+	\end{enumerate}
+\end{tcolorbox}
+\
+\begin{tcolorbox}[colback=white]
+	\textbf{Theorem.} Let $I\in\mathbb{R}$ be an open interval and let $f:I\to\mathbb{R}$ be an increasing function on $I$. Then for all $c\in I$ there exists $f(c+),f(c-)$ and \[
+	\sup\set{f(x):x<c, x\in I}=f(-c)\leq f(c)\leq f(c+) = \inf\set{f(x):c<x, x\in I}.
+	\] Moreover, if $c,d\in I$ satisfies $c<d$ then $f(c+)\leq f(d-)$.\tcblower\begin{proof}
+		Let $S=\set{f(x):x<c}$. Then since \begin{enumerate}
+			\item $S\neq\varnothing$;
+			\item $S$ has an upperbound $f(c)$,
+		\end{enumerate} $\exists\sup S=L$. We claim that $L=\lim\limits_{x\to c-}f(x)$.\\
+	\\ Let $\varepsilon>0$. Since $L-\varepsilon$ is not upperbound of $S$, $\exists x_c\in I$ such that \[
+	x_c<c\quad\text{and}\quad L-\varepsilon<f(x_c)\leq L.
+	\] let $\delta=c-x_c>0$. Then if $c-\delta<x<c$, \[
+	L-\varepsilon<f(x_c)\leq f(x)\leq L<L+\varepsilon,
+	\] i.e., $\abs{f(x)-L}<\varepsilon$. Hence, \[
+	\lim\limits_{x\to c-}f(x)=L\iff f(c-)=\sup\set{f(x):x<c}
+	\] and $\sup\set{f(x),x<c}\leq f(c)$.
+	\end{proof}
+\end{tcolorbox}
+\
+\begin{tcolorbox}[colback=white]
+	\textbf{Theorem.} (\textbf{Continuous inverse theorem}) Let $I\in\mathbb{R}$ be an interval and $f:I\to\mathbb{R}$ be strictly increasing (or decreasing) and continuous on $I$. Then the function $f^{-1}$ inverse to to $f$ strictly increasing (or decreasing) and continuous on $J:=f(I)$.
+\end{tcolorbox}
+
+\part{Differentiations and Integrations}
+\section{Differentiation}
+\subsection{Derivative \& Carath\'eodory's Theorem}
+
+\begin{tcolorbox}[colback=white]
+	\textbf{Definition.} Let $I\in\mathbb{R}$ be an interval, let $f:I\to\mathbb{R}$, and let $a\in I$. We say that a real number $L$ is the \textbf{derivative of} $f$ at $a$ if given any $\varepsilon>0$ there exists $\delta:=\delta(\varepsilon)>0$ such that if $x\in I$ satisfies $0<\abs{x-a}<\delta$, then \[
+	\abs{\frac{f(x)-f(a)}{x-a}-L}<\varepsilon.
+	\] In this case we say that $f$ is \textbf{differentiable} at $a$, and we write $f'(a)$ for $L$. In other words, the derivative of $f$ at $a$ is given by the limit \[
+	f'(a)=\lim\limits_{x\to a}\frac{f(x)-f(a)}{x-a}
+	\] provided this limit exists.
+\end{tcolorbox}
+\
+\begin{tcolorbox}[colback=white]
+	\textbf{Theorem.} If $f:I\to\mathbb{R}$ has a derivative at $a\in I$, then $f$ is continuous at $a$.\tcblower\begin{proof}
+		Since $\exists f'(a)$, \begin{align*}
+		\lim\limits_{x\to a}(f(x)-f(a)) &= \lim\limits_{x\to a}\frac{f(x)-f(a)}{(x-a)}(x-a) \\
+		&=\lim\limits_{x\to a}\frac{f(x)-f(a)}{x-a}\lim\limits_{x\to a}(x-a) \\
+		&=f'(a)\cdot 0 = 0.
+		\end{align*} Hence, $\lim\limits_{x\to a}f(x)=f(a)$.
+	\end{proof}
+\end{tcolorbox}
+\
+\begin{tcolorbox}[colback=white]
+	\textbf{Theorem.} (\textbf{Carath\'eodory's theorem}) Let $f$ be defined on an interval $I$ containing the point $a$. Then $f$ is differentiable at $a$ if and only if there exists a function $\varphi$ on $I$ that is continuous at $a$ and satisfies \[
+	f(x)-f(a)=\varphi(x)(x-a)\quad\text{for}\quad x\in I.
+	\] In this case, we have $\varphi(a)=f'(a)$.\tcblower\begin{proof}
+		($\Rightarrow$) Assume that $\exists f'(a)=\lim\limits_{x\to a}\dispsty\frac{f(x)-f(a)}{x-a}$. Define $\varphi:I\to\mathbb{R}$ such that \[
+		\varphi(x)=\begin{cases}
+		\dispsty\frac{f(x)-f(a)}{x-a} &, x\neq a \\
+		\\
+		f'(a) &, x=a
+		\end{cases}
+		\] Then \begin{itemize}
+			\item[($i$)] If $x\neq a$, then $f(x)-f(a)=\varphi(x)(x-a)$. \par
+			If $x=a$, then $0=\varphi(a)\cdot 0$.
+			\item[($ii$)] $\varphi$ is continuous at $a$.
+		\end{itemize} Moreover, $\varphi(a)=f'(a)$. \\
+	\\
+	($\Leftarrow$) Let $x\neq a$ and $x\to a$. The continuity of $\varphi$ implies that \[
+	\varphi(a)=\lim\limits_{x\to a}\varphi(x)=\lim\limits_{x\to a}\frac{f(x)-f(a)}{x-a}
+	\] exists. $\therefore$ $f$ is differentiable at $a$ and $\phi(a)=f'(a)$.
+	\end{proof}
+\end{tcolorbox}\
+\\
+\eg Let us consider the function $f$ defined by $f(x):=x^3$ for $x\in\mathbb{R}$. For $a\in\mathbb{R}$, we see from the factorization \[
+f(x)-f(a)=x^3-a^3=(x^2+ax+a^2)(x-a)
+\] that $\varpi(x):=x^2+ax+a^2$ satisfies the condition of Carathe\'odory's theorem. Therefore, we conclude that $f$ differentiable at $a\in\mathbb{R}$ and that \[
+f'(a)=\varphi(a)=3a^2.
+\]
+\
+\begin{tcolorbox}[colback=white]
+	\textbf{Theorem.} (\textbf{Chain rule}) Let $I,J$ be intervals in $\mathbb{R}$, let $g:J\to\mathbb{R}$ and $f:I\to\mathbb{R}$ be functions such that $f(I)\subseteq J$, and let $a\in I$. If $f$ is differentiable at $a$ and if $g$ is differentiable at $f(a)$, then the composite function $g\circ f$ is differentiable at $a$ and \[
+	(g\circ f)'(a)=g'(f(a))\cdot f'(a).
+	\]\tcblower\begin{proof}
+		Since $\exists f'(a)$, by Carath\'eodory's theorem, $\exists h:I\to\mathbb{R}$ such that \begin{enumerate}[($i$)]
+			\item $h$ is continuous at $a\in I$;
+			\item $f(x)-f(a)=h(x)(x-a)$;
+			\item $f'(a)=h(a)$.
+		\end{enumerate} 
+		Since $\exists g'(b)$ for $b=f(a)\in J$, by Carath\'eodory's theorem, $\exists H:I\to\mathbb{R}$ such that \begin{enumerate}[($i$)]
+			\item $H$ is continuous at $b\in J$;
+			\item $g(y)-g(b)=H(y)(y-b)$;
+			\item $g'(y)=H(y)$.
+		\end{enumerate} Since $f(I)\subseteq J$, $f(x)$ and $f(a)$ are in $J$. Then \begin{align*}
+		g(f(x))-g(f(a))&=H(f(x))(f(x)-f(a)) \\
+		&=H(f(x))h(x)(x-a).
+	\end{align*} Let $\varphi(x)=H(f(x))h(x)$. Then $\varphi:I\to\mathbb{R}$ is continuous at $a$ and \[
+	g(f(x))-g(f(a)) = \varphi(x)(x-a).
+	\] Thus $g(f(x))$ is differentiable at $a\in I$ and \[
+	(g\circ f)'(a)=\varphi(a)=H(f(a))h(a)=g'(f(a))f'(a).
+	\]
+	\end{proof}
+\end{tcolorbox}
+\
+\begin{tcolorbox}[colback=white]
+	\textbf{Theorem.} (\textbf{Differentiability of the inverse functions}) Let $I$ be an interval in $\mathbb{R}$ and let $f:I\to\mathbb{R}$ be strictly monotone and continuous on $I$. Let $J:=f(I)$ and let $g:J\to\mathbb{R}$ be the strictly monotone and continuous function inverse to $f$. If $f$ is differentiable at $a\in I$ and $f'(a)\neq 0$, then $g$ is differentiable at $b:=f(a)$ and \[
+	g'(f(a))=\frac{1}{f'(a)}.
+	\]\tcblower\begin{proof}
+		Since $\exists f'(a)\neq 0$, $\exists h:I\to\mathbb{R}$ such that \begin{enumerate}[($i$)]
+			\item $h$ is continuous at $a\in I$;
+			\item $f(x)-f(a)=h(x)(x-a)$l
+			\item $f'(a)=h(a)\neq0$.
+		\end{enumerate} Since $h(a)\neq 0$, $\exists\delta>0$ such that \[
+	h(x)\neq 0,\quad x\in(a-\delta,a+\delta)\cap I.
+	\] Let $\Omega=f[(a-\delta,a+\delta)\cap I]$. Then, for $y,b\in\Omega$ such that $y=f(x), b=f(a)$, \[
+	f(g(y))=y\quad\text{and}\quad f(g(b))=b
+	\] holds. Then \[
+	y-b=f(g(y))-f(g(b)) = h(g(y))(g(y)-g(b)).
+	\] Since $h(g(y))\neq0$, \[
+	g(y)-g(b)=\frac{1}{h(g(y))}(y-b),\ \text{where}\ \varphi(y)=\frac{1}{h(g(y))}.
+	\] Thus $g=f^{-1}$ is differentiable at $b=f(a)$ and \[
+	g'(b)=g'(f(a))=\frac{1}{h(a)}=\frac{1}{f'(a)}.
+	\]
+	\end{proof}
+\end{tcolorbox}
+
+\subsection{Rolle's and Mean Value Theorem}
+\begin{tcolorbox}[colback=white]
+	\textbf{Theorem.} (\textbf{Interior extremum theorem}) let $c$ be an interior point of the interval $I=(a,b)$ at which $f:I\to\mathbb{R}$ has a relative extremum. If the derivative of $f$ at $c$ exists, then \[
+	f'(c)=0.
+	\]\tcblower\begin{proof}
+		If $f'(c)>0$, then $\exists N_\delta(c)\in I$ of $c$ such that \[
+		\frac{f(x)-f(c)}{x-c}>0\quad\text{for}\quad x\in N_\delta(c), x\neq c.
+		\] If $c\in N_\delta(c)$ and $x>c$, then \[
+		f(x)-f(c)=(x-c)\cdot\frac{f(x)-f(c)}{x-c}>0.
+		\] But this contradicts the hypothesis that $f$ has a relative maximum at $c$. Similarly, we can not have $f'(c)<0$. Hence, $f'(c)=0$.
+	\end{proof}
+\end{tcolorbox}\
+\\
+\textbf{Remark.} \ \begin{enumerate}
+	\item Let us notice that the converse of Interior extremum theorem does not hold. For example, if $f(x):=x^3$ for $x\in\mathbb{R}$, then there exists $f'(0)=0$ but $f$ does not have relative extrema.
+	\item If $f:=\abs{x}$ on $[-1,1]$, then $f$ has an relative minimum at $x=0$; however, the derivative of $f$ fail to exists at $x=0$.
+\end{enumerate}
+\
+\begin{tcolorbox}[colback=white]
+	\textbf{Corollary.} Let $f:(a,b)\to\mathbb{R}$ be continuous on an interval $(a,b)$ and suppose that $f$ has a relative extremum at an interior point $c$ of $(a,b)$. Then either the derivative of $f$ at $c$ does not exist, or it is equal to zero.
+\end{tcolorbox}
+\
+\begin{tcolorbox}[colback=white]
+	\textbf{Theorem.} (\textbf{Rolle's theorem}) Suppose that $f$ is continuous on a closed interval $I=[a,b]$, that the derivative $f'$ exists at every point of the open interval $(a,b)$, and that $f(a)=f(b)=0$. Then there exists at least one point $c$ in $(a,b)$ such that \[
+	f'(c)=0.
+	\]
+\end{tcolorbox}
+\begin{tcolorbox}[colback=white]
+	\textbf{Theorem.} (\textbf{Mean value theorem of differential calculus}) Suppose that $f$ is continuous on a closed interval $I=[a,b]$, and that $f$ has a derivative in the open interval $(a,b)$. Then there exists at least one point $c$ such that \[
+	f(a)-f(b)=f'(c)(b-a).
+	\]\tcblower\begin{proof}
+		Define $g:[a,b]\to\mathbb{R}$ such that \[
+		g(x)=f(x)-f(a)-\frac{f(b)-f(a)}{b-a}(x-a).
+		\] Then \begin{enumerate}[($i$)]
+			\item $g$ is continuous on $[a,b]$;
+			\item $g$ is differentiable;
+			\item $g(a)=0=g(b)$.
+		\end{enumerate} By Rolle's theorem, $\exists c\in (a,b)$ such that $g'(c)=0$. Since \[
+	g'(x)=f'(x)-\frac{f(b)-f(a)}{b-a},
+	\] we have \[
+	f'(c)=\frac{f(b)-f(a)}{b-a}.
+	\] Hence, $f(b)-f(a)=f'(c)(b-a)$.
+	\end{proof}
+\end{tcolorbox}
+\
+\begin{tcolorbox}[colback=white]
+	\textbf{Theorem.} Let $f:I\to\mathbb{R}$ be differentiable on the interval $I$ and if the derivative $f'$ is bounded on $I$ then $f$ satisfies a Lipschitz condition on $I$ so that $f$ is uniformly continuous on $I$.\tcblower\begin{proof}
+		Since $\exists f'(x), x\in I$ and $f'$ is bounded, $\exists K>0$ such that \[
+		\abs{f'(x)}\leq K,\quad x\in I.
+		\] Let $a,b\in I$, $a<b$. Then by Mean-value theorem, $\exists c\in(a,b)$ such that \[
+		f(b)-f(a)=f'(c)(b-a).
+		\] This implies that \begin{align*}
+		\abs{f(b)-f(a)}&=\abs{f'(c)}\abs{b-a} \\
+		&\leq K\abs{b-a}.
+		\end{align*} Hence, $f$ is a Lipschitz function on $I$.
+	\end{proof}
+\end{tcolorbox}
+
+\subsection{L'Hospital's Rules}
+\begin{tcolorbox}[colback=white]
+	\textbf{Theorem.} (\textbf{Cauchy's mean value theorem of differential calculus}) Let $f$ and $g$ be continuous on $[a,b]$ and differentiable on $(a,b)$, and assume that $g'(x)\neq 0$ for all $x\in(a,b)$. Then there exists $c\in(a,b)$ such that \[
+	\frac{f(b)-f(a)}{g(b)-g(a)}=\frac{f'(c)}{g'(c)}.
+	\]
+\end{tcolorbox}
+\
+\begin{tcolorbox}[colback=white]
+	\textbf{Theorem.} (\textbf{L'Hopital's Rule - First}) Let $-\infty\leq a<b\leq\infty$ and let $f,g$ be differentiable on $(a,b)$ such that $g'(x)\neq 0$ for all $x\in(a,b)$. Suppose that \[
+	\lim\limits_{x\to a+}f(x)=\lim\limits_{x\to a+}g(x)=0.
+	\] Then \begin{enumerate}
+		\item If $\dispsty\lim\limits_{x\to a+}\frac{f'(x)}{g'(x)}=L$ then $\lim\limits_{x\to a+}\dispsty\frac{f(x)}{g(x)}=L$.
+		\item If $\dispsty\lim\limits_{x\to a+}\frac{f'(x)}{g'(x)}=\pm\infty$ then $\lim\limits_{x\to a+}\dispsty\frac{f(x)}{g(x)}=\pm\infty$.
+	\end{enumerate}
+\end{tcolorbox}
+
+\subsection{Taylor's Theorem}
+\newpage
+\begin{tcolorbox}[enhanced, breakable, colback=white]
+	\textbf{Theorem.} (\textbf{Taylor's theorem}) Let $n\in\mathbb{N}$, $I:=[a,b]$ and $f:I\to\mathbb{R}$ be such that $f$ and its derivatives $f', f'',\cdots,f^{(n)}$ are continuous on $I$ and that $f^{(n+1)}$ exists on $(a,b)$. If $a\in I$ then for any $x\in I$ there exists a point $c$ between $a$ and $x$ such that \begin{align*}
+	f(x)=f(a)&+f'(a)(x-a)+\frac{f''(a)}{2!}(x-a)^2+\cdots \\
+	&+\frac{f^{(n)}(a)}{n!}(x-a)^n + \frac{f^{(n+1)}(c)}{(n+1)!}(x-a)^{n+1}.
+	\end{align*}\tcblower\begin{proof}
+		Define $F:[a,x]\to\mathbb{R}$ such that \begin{align*}
+		F(t)=f(x)-f(t)&-f'(t)(x-t)-\frac{f''(t)}{2!}(x-t)^2\\
+		&-\cdots-\frac{f^{(n)}(t)}{n!}(x-t)^n.
+		\end{align*} We claim that $\exists c\in(a,x)$ such that \[
+		F(a)=\frac{f^{(n+1)}(c)}{(n+1)!}(x-a)^{n+1}.
+		\] Define $G:[a,x]\to\mathbb{R}$ such that \[
+		G(t)=F(t)-\left(\frac{x-t}{x-a}\right)^{n+1}F(a).
+		\] Then \begin{enumerate}[($i$)]
+			\item $G$ is continuous on $[a,x]$;
+			\item $G$ is differentiable on $(a,x)$;
+			\item $G(a)=0=G(x)$.
+		\end{enumerate} By Rolle's theorem, $\exists c\in(a,x)$ such that \[
+	G'(c)=0.
+	\] Since $\dispsty
+	G'(t)=F'(t)+\frac{(n+1)(x-t)^n}{(x-a)^{n+1}}F(a),
+	$ we have $\dispsty
+	F(a)= -\frac{(x-a)^{n+1}}{(n+1)(x-c)^n}F'(c).
+	$ Since \begin{align*}
+	F'(t) =& -f'(t) \\
+	&-f''(t)(x-t)+f'(t) \\
+	&-\frac{f'''(t)}{2!}(x-t)^2+f''(t)(x-t) \\
+	&-\cdots \\
+	&-\frac{f^{(n+1)}(t)}{n!}(x-t)^n+\frac{f^{(n)}(t)}{(n-1)!}(x-t)^{n-1},
+	\end{align*} we have \[
+	F'(c)=\frac{f^{(n+1)}(c)}{n!}(x-c)^n.
+	\] Hence, \[
+	F(a)= \frac{f^{(n+1)}(c)}{(n+1)!}(x-a)^{n+1}.
+	\]
+	\end{proof}
+\end{tcolorbox}
+\
+\\
+We shall use the notation $P_n(x)$ for the $n-th$ Taylor polynomial of $f$ \[
+P_n(x)=f(a)+f'(a)(x-a)+\frac{f''(a)}{2!}(x-a)^2+\cdots+\frac{f^{(n)}(a)}{n!}(x-a)^n.
+\] We shall use the notation $R_n(x)$ for the remainder of $f$. Thus we may write the conclusion of Taylor's theorem as \[
+f(x)=P_n(x)+R_n(x)
+\] where $R_n$ is given by \[
+R_n(x):=\frac{f^{(n+1)}(c)}{(n+1)!}(x-a)^{n+1}
+\] for some point $c$ between $x$ and $x_0$.\\
+\\
+This formula for $R_n$ is referrer to as the \textbf{Lagrange form}(or the derivative form) of the remainder.
+
+
+
+
+
+\end{document}
