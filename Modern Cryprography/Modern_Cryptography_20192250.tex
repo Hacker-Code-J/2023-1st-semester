@@ -1,0 +1,379 @@
+\documentclass[12pt,openany]{book}
+
+\usepackage{amsmath,amsthm,amsfonts,amscd} % Packages for mathematics
+
+% Colors
+\usepackage[dvipsnames]{xcolor}
+\definecolor{titleblue}{RGB}{0,53,128}
+\definecolor{chaptergray}{RGB}{140,140,140}
+\definecolor{sectiongray}{RGB}{180,180,180}
+
+\definecolor{thmcolor}{RGB}{231, 76, 60}
+\definecolor{defcolor}{RGB}{52, 152, 219}
+\definecolor{lemcolor}{RGB}{155, 89, 182}
+\definecolor{corcolor}{RGB}{46, 204, 113}
+\definecolor{procolor}{RGB}{241, 196, 15}
+
+% Fonts
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{newpxtext,newpxmath}
+\usepackage{sectsty}
+\allsectionsfont{\sffamily\color{titleblue}\mdseries}
+
+% Page layout
+\usepackage{geometry}
+\geometry{a4paper,left=1.5in,right=1in,top=1in,bottom=1in,heightrounded}
+\usepackage{fancyhdr}
+\fancyhf{}
+\fancyhead[LE,RO]{\thepage}
+\fancyhead[LO]{\nouppercase{\rightmark}}
+\fancyhead[RE]{\nouppercase{\leftmark}}
+\renewcommand{\headrulewidth}{0.5pt}
+\renewcommand{\footrulewidth}{0pt}
+
+% Chapter formatting
+\usepackage{titlesec}
+\titleformat{\chapter}[display]
+{\normalfont\sffamily\Huge\bfseries\color{titleblue}}{\chaptertitlename\ \thechapter}{20pt}{\Huge}
+\titleformat{\section}
+{\normalfont\sffamily\Large\bfseries\color{titleblue!100!gray}}{\thesection}{1em}{}
+\titleformat{\subsection}
+{\normalfont\sffamily\large\bfseries\color{titleblue!75!gray}}{\thesubsection}{1em}{}
+
+% Table of contents formatting
+\usepackage{tocloft}
+\renewcommand{\cftchapfont}{\sffamily\color{titleblue}\bfseries}
+\renewcommand{\cftsecfont}{\sffamily\color{chaptergray}}
+\renewcommand{\cftsubsecfont}{\sffamily\color{sectiongray}}
+\renewcommand{\cftchapleader}{\cftdotfill{\cftdotsep}}
+
+% Hyperlinks
+\usepackage{hyperref}
+\hypersetup{
+	colorlinks=true,
+	linkcolor=titleblue,
+	filecolor=black,      
+	urlcolor=titleblue,
+}
+
+\makeatletter
+\newcommand\xleftrightarrow[2][]{%
+\ext@arrow 9999{\longleftrightarrowfill@}{#1}{#2}}
+\newcommand\longleftrightarrowfill@{%
+\arrowfill@\leftarrow\relbar\rightarrow}
+\makeatother
+
+%---------------------------My Preamble
+\newcommand{\mathcolorbox}[2]{\colorbox{#1}{$\displaystyle #2$}}
+\usepackage{multirow}
+\usepackage{enumerate}
+\usepackage{enumitem}
+\usepackage{booktabs}
+\usepackage{graphicx}
+\usepackage{tikz-cd}
+\usetikzlibrary{shapes,positioning,decorations.pathreplacing}
+
+\usepackage[most]{tcolorbox}
+\tcbset{colback=white, arc=5pt}
+
+%Theorem
+\newtheorem{axiom}{Axiom}[section]
+\newtheorem{theorem}{Theorem}[chapter]
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{corollary}{Corollary}[theorem]
+\newtheorem{lemma}[theorem]{Lemma}
+
+\theoremstyle{definition}
+\newtheorem{definition}{Definition}[chapter]
+\newtheorem{remark}{Remark}[section]
+\newtheorem{note}{Note}[section]
+\newtheorem{exercise}{Exercise}[section]
+\newtheorem{example}{Example}[section]
+
+%New Command
+\newcommand{\set}[1]{\left\{#1\right\}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\F}{\mathbb{F}}
+\newcommand{\nbhd}{\mathcal{N}}
+
+\newcommand{\inv}[1]{#1^{-1}}
+
+\newcommand{\ie}{\textnormal{i.e.}}
+\newcommand{\eg}{\textnormal{e.g.}}
+
+\newcommand{\of}[1]{\left( #1 \right)} 
+\newcommand{\abs}[1]{\left\lvert #1 \right\rvert}
+\newcommand{\norm}[1]{\left\| #1 \right\|}
+
+\newcommand{\sol}{\textcolor{magenta}{\bf Sol}}
+
+\newcommand{\dollar}{\$}
+\newcommand{\uniform}{\xleftarrow{\dollar}}
+
+%Macro
+\newcommand{\A}{\mathcal{A}}
+\newcommand{\E}{\mathcal{E}}
+\newcommand{\oracle}{\mathcal{O}}
+\newcommand{\ECB}{\mathsf{ECB}}
+\newcommand{\OW}{\mathsf{OW}}
+\newcommand{\IND}{\mathsf{IND}}
+\newcommand{\PRF}{\mathsf{PRF}}
+\newcommand{\PRP}{\mathsf{PRP}}
+\newcommand{\PASS}{\mathsf{PASS}}
+\newcommand{\CPA}{\mathsf{CPA}}
+\newcommand{\CCA}{\mathsf{CCA}}
+\newcommand{\CCATwo}{\mathsf{CCA2}}
+\newcommand{\Adv}{\textnormal{Adv}}
+\newcommand{\EncBlk}{\textnormal{EncBlk}}
+\newcommand{\DecBlk}{\textnormal{DecBlk}}
+\newcommand{\negl}{\textnormal{negl}}
+\newcommand{\poly}{\textnormal{poly}}
+\newcommand{\Time}{\textnormal{Time}}
+
+% Begin document
+\begin{document}
+	
+	% Title page
+	\begin{titlepage}
+		\begin{center}
+			{\Huge\textsf{\textbf{Modern Cryptography}}\par}
+			\vspace{0.5in}
+			{\Large Ji Yong-Hyeon\par}
+			\vspace{1in}
+			%\includegraphics[width=3in]{algebra.png}\par
+			\vspace{1in}
+			{\large Ji Yong-Hyeon\par}
+			{\large \today\par}
+		\end{center}
+	\end{titlepage}
+	
+	% Table of contents
+	\tableofcontents
+	
+	% Chapters
+	\mainmatter
+	
+	\chapter{Perfect and Semantic Security}
+	
+	\section{Perfect Security}
+	
+	A cryptosystem $(\mathcal{K}, \mathcal{M}, \mathcal{C}, \text{Enc}, \text{Dec})$ is said to have \textit{perfect security} if for all $m_1, m_2 \in \mathcal{M}$ and all $c \in \mathcal{C}$ such that $\Pr[M = m_1] > 0$ and $\Pr[M = m_2] > 0$, the following holds:
+	
+	\begin{equation}
+	\Pr[C = c | M = m_1] = \Pr[C = c | M = m_2]
+	\end{equation}
+	
+	\noindent where $M$ is a random variable representing the plaintext message space $\mathcal{M}$, $C$ is a random variable representing the ciphertext message space $\mathcal{C}$, and $\text{Enc}$ and $\text{Dec}$ are the encryption and decryption functions, respectively.
+	
+	\begin{enumerate}
+		\item 
+		\textbf{Non-degenerate cases}: By specifying that the probability of each plaintext message is greater than zero, we avoid degenerate cases where one or both of the messages cannot be chosen at all. Such cases would not provide a meaningful comparison when evaluating the security of a cryptosystem, since we are interested in understanding how the system behaves when different messages are encrypted and decrypted.
+		\item
+		\textbf{Uniform probability distribution}: In the context of perfect security, we usually assume that the plaintext messages are chosen from a uniform probability distribution. This means that each message in the message space $\mathcal{M}$ has an equal chance of being selected. Requiring the probabilities to be greater than zero ensures that we are considering a fair and representative sample of messages from the message space.
+		\item 
+		\textbf{Indistinguishability of ciphertexts}: The perfect security criterion states that for all $m_1, m_2 \in \mathcal{M}$ and all $c \in \mathcal{C}$, the probability of obtaining a ciphertext $c$ given a plaintext message $m_1$ should be the same as the probability of obtaining the same ciphertext $c$ given a plaintext message $m_2$. This condition is crucial for ensuring the indistinguishability of ciphertexts. If $m_1$ or $m_2$ had zero probability, the criterion would not hold, as the ciphertexts corresponding to these plaintext messages would be distinguishable, which would compromise the security of the cryptosystem.
+	\end{enumerate}
+	
+	
+	In summary, the conditions $\Pr[M = m_1] > 0$ and $\Pr[M = m_2] > 0$ are crucial for evaluating the perfect security of a cryptosystem, as they ensure that we are considering a fair and representative sample of messages and that the indistinguishability criterion is meaningful.
+	
+	\newpage
+	The probability of obtaining a ciphertext $c$ can be expressed as:
+	
+	\begin{equation}
+	\Pr[C = c] = \sum_{m' \in \mathcal{M}} \Pr[C = c | M = m']\Pr[M = m']
+	\end{equation}
+	
+	\noindent where $\mathcal{M}$ is the plaintext message space, and $M$ and $C$ are random variables representing the plaintext and ciphertext message spaces, respectively.
+	
+	To prove that the probability of obtaining a ciphertext $c$ can be expressed as:
+	
+	\begin{equation}
+	\Pr[C = c] = \sum_{m' \in \mathcal{M}} \Pr[C = c | M = m']\Pr[M = m'],
+	\end{equation}
+	
+	\noindent we can use the \textit{law of total probability}. The law of total probability states that for a partition of the sample space $A_1, A_2, \dots, A_n$, and any event $B$, the probability of $B$ can be expressed as:
+	
+	\begin{equation}
+	\Pr[B] = \sum_{i=1}^{n} \Pr[B | A_i] \Pr[A_i].
+	\end{equation}
+	
+	In our case, the sample space is partitioned by the plaintext message space $\mathcal{M} = \{m_1, m_2, \dots, m_n\}$. We want to find the probability of the event $C = c$ (a specific ciphertext being obtained), and the partition is formed by the events $M = m'$ for all $m' \in \mathcal{M}$.
+	
+	By applying the law of total probability to our problem, we get:
+	
+	\begin{align*}
+	\Pr[C = c] &= \sum_{i=1}^{n} \Pr[C = c | M = m_i] \Pr[M = m_i] \\
+	&= \sum_{m' \in \mathcal{M}} \Pr[C = c | M = m'] \Pr[M = m'],
+	\end{align*}
+	
+	which completes the proof.
+	
+	\newpage
+	\section{Semantic Security}
+	
+	\begin{tcolorbox}[colback=white,colframe=defcolor, title={\color{white}\bf Probabilistic Polynomial-Time Adversary}]
+		\begin{definition}
+			A \textbf{probabilistic polynomial-time (PPT) adversary} is an algorithm $\A$ that is allowed to use randomness in its computations and runs in time bounded by a polynomial function of the security parameter $n$. Formally, for every positive integer $n$, there exists a polynomial $p(n)$ such that the running time of $\A$ on inputs of length $n$ is bounded by $p(n)$. 
+		\end{definition}
+	\end{tcolorbox}
+	\begin{remark}
+		Given an adversary $\A$ and security parameter $n\in\N$, $\A$ is PPT if: \[
+		\exists p(n)\in\poly(n):\Time\of{\A(n)}\leq p(n)
+		\] 
+		Here, $\text{Time}(\A(n))$ denotes the running time of the adversary $\A$ on inputs of length $n$, and $\poly(n)$ represents the set of all polynomial functions in $n$.
+	\end{remark}
+	\vspace{8pt}
+	\begin{tcolorbox}[colback=white,colframe=defcolor, title={\color{white}\bf Negligible Function}]
+		\begin{definition}
+			A function $f:\N\to\R^+$ is called \textbf{negligible} if \[
+			\forall q(n)\in\poly(n):\exists N\in\N:n\geq N\implies f(n)<\frac{1}{q(n)}.
+			\] In other words, a negligible function decreases faster than the inverse of any polynomial function.
+		\end{definition}
+	\end{tcolorbox}
+	\vspace{8pt}
+	\begin{definition}[Semantic Security Game]
+		The semantic security game is a security game played between a challenger and an adversary $\A$ to evaluate the semantic security of an encryption scheme $\E$. The game proceeds as follows:
+		
+		\begin{enumerate}[label=\textbf{Stage \arabic*:}]
+			\item \textbf{Setup:}
+			The challenger generates a key pair $(sk, pk)$ using a key generation algorithm, and gives the public key $pk$ to the adversary $\A$.
+			
+			\item \textbf{Challenge:}
+			The adversary $\A$ chooses two equal-length messages $m_0$ and $m_1$ from the message space and sends them to the challenger. The challenger selects a random bit $b \in \{0, 1\}$, encrypts the chosen message $m_b$ using the public key $pk$, and sends the ciphertext $c^*$ back to the adversary $\A$.
+			
+			\item \textbf{Guess:}
+			The adversary $\A$ tries to guess the bit $b$ used by the challenger, and outputs a guess $\hat{b} \in \{0, 1\}$.
+		\end{enumerate}
+		
+		The adversary $\A$'s advantage in the semantic security game is defined as:
+		
+		\begin{align*}
+		\Adv_{\E, \A}^{\text{Semantic}} = \left| \Pr[\hat{b} = b] - \frac{1}{2} \right|
+		\end{align*}
+		
+		An encryption scheme $\E$ is considered semantically secure if the advantage of any probabilistic polynomial-time adversary $\A$ in the semantic security game is bounded by a negligible function in the security parameter $n$.
+	\end{definition}
+	
+	Let $\E$ be an encryption scheme. We say that an encryption scheme $\E$ is semantically secure if for all probabilistic polynomial-time adversaries $\A$, there exists a negligible function $\negl$ such that:
+	
+	\begin{align*}
+	\Adv_{\E, \A}^{\text{Semantic}} \leq \negl(n)
+	\end{align*}
+	
+	where $n$ is the security parameter and $\Adv_{\E, \A}^{\text{Semantic}}$ is the advantage of the adversary $\A$ in a semantic security game, defined as:
+	
+	\begin{align*}
+	\Adv_{\E, \A}^{\text{Semantic}} = \left| \Pr[\hat{b} = b] - \frac{1}{2} \right|
+	\end{align*}
+	
+	Here, $\hat{b}$ is the adversary's guess and $b$ is the actual bit used by the challenger during the challenge phase of the semantic security game.
+	
+	
+	\begin{tcolorbox}[colback=white,colframe=defcolor, title={\color{white}\bf Semantic Secure}]
+		\begin{definition}
+			s
+		\end{definition}
+	\end{tcolorbox}
+	\subsection{IND-PASS}
+	\begin{center}
+		\begin{tabular}{|c|}
+			\hline
+			\textbf{IND-PASS Game} \\
+			\hline
+			\begin{tabular}{lcl}
+				\textbf{Setup:} & & $\mathcal{P}$ generates $(pk,sk)$ \\
+				& & $\mathcal{A}$ is given $pk$ \\
+				& & $b \in {0,1}$ is chosen \\
+				& & $m_0,m_1 \in \mathcal{M}$ are chosen \\
+				\textbf{Challenge:} & & $\mathcal{A}$ sends $m_b$ to $\mathcal{P}$ \\
+				\textbf{Guess:} & & $\mathcal{A}$ outputs $b'$ \\
+			\end{tabular} \\
+			\hline
+			\begin{tabular}{l}
+				\textbf{Winning Condition:} \\
+				$b=b'$ \\
+			\end{tabular} \\
+			\hline
+		\end{tabular}
+	\end{center}
+	
+	In this game, $\mathcal{P}$ is the challenger who generates a public key $pk$ and a secret key $sk$. The adversary $\mathcal{A}$ is given the public key and must guess which message $m_b$ was encrypted by $\mathcal{P}$ after seeing the ciphertext. The winning condition is that the adversary correctly guesses the bit $b$ that was used to encrypt the message.
+
+	\subsection{IND-CPA}
+	\subsection{IND-CCA}
+	\subsection{IND-CCA2}
+	
+	\newpage
+	\chapter{Mode of Operation}
+	
+	\section{ECB (Electronic Code Book) Mode}
+
+	\begin{tcolorbox}[colback=white,colframe=thmcolor, title={\color{white}\bf }]
+		\begin{theorem}
+			For an $\ECB$ cipher's $\OW$-$\CPA$\footnote{One-Way Chosen-Plaintext Attack} adversary $\A$, there exists a block cipher's $\PRP$\footnote{Pseudo-random Permutation} adversary $\mathcal{B}$ that satisfies the following: \[
+			\Adv_{\ECB}^{\OW\text{-}\CPA}(\A;q)\leq\Adv_{\textnormal{EncBlk}}^{\PRP}(\mathcal{B})+\frac{q^l}{2^n},
+			\] where $l$ is the length of the challenge block targeted for decryption by $\A$, and $q$ is the number of oracle queries for one block of encryption operations in the $\OW$-$\CPA$ game.
+		\end{theorem}
+	\end{tcolorbox}
+	\newpage
+	\begin{proof}
+		The $\PRP$ adversary $\mathcal{B}$ randomly selects an $\OW$-$\CPA$ adversary $\A$ and engages in a $\PRP$ game with the challenger as follows:
+		\begin{table}[h]
+			\centering\begin{tabular}{ccccc}
+				\toprule[1.5pt]
+				Challenger & $\xleftrightarrow[\textnormal{game}]{\PRP}$ & Adversary $\mathcal{B}$ & $\xleftrightarrow[\textnormal{game}]{\OW\text{-}\CPA}$ & Adversary $\mathcal{A}$ \\
+				\midrule
+				$k\uniform\mathcal{K}$\\
+				$g\uniform\mathcal{P}_n$\\
+				$b\uniform\set{0,1}^n$\\
+				\midrule
+				if $b=1$, then & 
+				\multirow{3}{*}{$\xrightarrow{\oracle,\inv{\oracle}}$} & $p\uniform\of{\set{0,1}^n}^l$\\
+				$\oracle\gets\oracle^{\EncBlk(k;*)}$, & & with \\
+				else, $\oracle\gets\oracle^{g(*)}$ & &$p=p_1\parallel\cdots\parallel p_l$\\
+				\\
+				& & $\ECB$ encipher: & & \\
+				& & $p_j\to\oracle\to c_j$ for $j$ & & \\
+				\\
+				& & {$c\gets c_1\parallel\cdots\parallel c_l$} & {$\xrightarrow[]{c,\oracle}$} & 
+				$\A \xrightarrow[q]{\mathcal{O}} c$\\
+				\midrule
+				if $b=b'$, then & \multirow{3}{*}{$\xleftarrow{b'}$} & if $p=p'$, then, &\multirow{3}{*}{$\xleftarrow{p'}$} & Guess $p'$\\
+				$\mathcal{B}$ wins, & & $b'\gets 1$, & & s.t.\\
+				else $\mathcal{B}$ loses. & & else $b'\gets 0$ & & $\EncBlk(k;p')=c$\\
+				\bottomrule[1.5pt]
+			\end{tabular}
+		\caption{$\mathcal{B}$'s $\PRP$ game using $\A$.}
+		\end{table}\\
+		Note that \begin{align*}
+			\Adv_{\ECB}^{\OW\text{-}\CPA}(\A;q)&=\Pr\left[\set{\text{$\A$ wins $\OW$-$\CPA$}}\mid\oracle=\oracle^{\EncBlk(k;*)}\right]\\
+			&=\Pr\left[\set{\text{$\A$ wins $\OW$-$\CPA$}}\mid b=1\right].
+		\end{align*}
+		Then \begin{align*}
+			\Adv_{\ECB}^{\OW\text{-}\CPA}(\A;q)
+			=&\Pr\left[\set{\text{$\A$ wins $\OW$-$\CPA$}}\mid b=1\right]\\
+			&\textcolor{blue}{-\Pr\left[\set{\text{$\A$ wins $\OW$-$\CPA$}}\mid b=0\right]}\\
+			&\textcolor{red}{+\Pr\left[\set{\text{$\A$ wins $\OW$-$\CPA$}}\mid b=0\right]}\\
+			\leq&\mathcolorbox{-blue}{\abs{\Pr\left[\set{\text{$\A$ wins $\OW$-$\CPA$}}\mid b=1\right]-\Pr\left[\set{\text{$\A$ wins $\OW$-$\CPA$}}\mid b=0\right]}}\\
+			&\mathcolorbox{-red}{+\Pr\left[\set{\text{$\A$ wins $\OW$-$\CPA$}}\mid b=0\right]},
+		\end{align*} since $A-B\leq\abs{A-B}$.
+		\begin{enumerate}
+			\item[(1)] We claim that \begin{align*}
+			&\Adv_{\textnormal{EncBlk}}^{\PRP}(\mathcal{B})\\
+			=&\abs{\Pr\left[\set{\text{$\A$ wins $\OW$-$\CPA$}}\mid b=1\right]-\Pr\left[\set{\text{$\A$ wins $\OW$-$\CPA$}}\mid b=0\right]}.
+			\end{align*}
+			\begin{enumerate}
+				\item[(i)] $\oracle=\oracle^{\EncBlk(k;*)}$ ($b=1$). $\A$ wins $\OW$-$\CPA$ game.
+				\item[(ii)]
+			\end{enumerate}
+		\end{enumerate}
+	\end{proof}
+
+	% End document
+\end{document}
