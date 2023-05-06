@@ -366,12 +366,22 @@
 		\begin{enumerate}
 			\item[(1)] We claim that \begin{align*}
 			&\Adv_{\textnormal{EncBlk}}^{\PRP}(\mathcal{B})\\
-			=&\abs{\Pr\left[\set{\text{$\A$ wins $\OW$-$\CPA$}}\mid b=1\right]-\Pr\left[\set{\text{$\A$ wins $\OW$-$\CPA$}}\mid b=0\right]}.
+			=&\mathcolorbox{-blue}{\abs{\Pr\left[\set{\text{$\A$ wins $\OW$-$\CPA$}}\mid b=1\right]-\Pr\left[\set{\text{$\A$ wins $\OW$-$\CPA$}}\mid b=0\right]}}.
 			\end{align*}
 			\begin{enumerate}
 				\item[(i)] $\oracle=\oracle^{\EncBlk(k;*)}$ ($b=1$). $\A$ wins $\OW$-$\CPA$ game.
-				\item[(ii)]
-			\end{enumerate}
+				\item[(ii)] $\oracle=\oracle^{g(*)}$ ($b=0$). $\A$ loses $\OW$-$\CPA$ game.
+			\end{enumerate} Then \begin{align*}
+					&\Adv_{\textnormal{EncBlk}}^{\PRP}(\mathcal{B})\\
+					=&\Pr\left[\set{\text{$\A$ wins $\OW$-$\CPA$}}\mid b=1\right]\Pr[b=1]\\
+					&+\Pr\left[\set{\text{$\A$ loses $\OW$-$\CPA$}}\mid b=0\right]\Pr[b=0]\\
+					=&\frac{1}{2}\of{\Pr\left[\set{\text{$\A$ wins $\OW$-$\CPA$}}\mid b=1\right]+\Pr\left[\set{\text{$\A$ loses $\OW$-$\CPA$}}\mid b=0\right]}.
+				\end{align*} Hence
+				\begin{align*}
+					\Adv_{\textnormal{EncBlk}}^{\PRP}(\mathcal{B})&=2\abs{\Pr\left[\text{$\mathcal{B}$ wins $\PRP$}\right]-\frac{1}{2}}\quad\text{by definition}\\
+					&=
+				\end{align*}
+			\item[(2)]
 		\end{enumerate}
 	\end{proof}
 
