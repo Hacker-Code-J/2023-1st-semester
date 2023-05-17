@@ -198,6 +198,12 @@
 \newcommand{\GenKeyPair}{\mathsf{GenKeyPair}}
 \newcommand{\Encrypt}{\mathsf{Encrypt}}
 \newcommand{\Decrypt}{\mathsf{Decrypt}}
+\newcommand{\GenMacTag}{\mathsf{GenMacTag}}
+\newcommand{\VerifyMacTag}{\mathsf{VerifyMacTag}}
+\newcommand{\Sign}{\mathsf{Sign}}
+\newcommand{\Verify}{\mathsf{Verify}}
+\newcommand{\vaild}{\texttt{Valid}}
+\newcommand{\invaild}{\texttt{Invalid}}
 
 \renewcommand{\mod}{\operatorname{\textnormal{mod}}}
 
@@ -1917,7 +1923,29 @@
 		\end{theorem}
 	\end{tcolorbox}
 	\begin{proof}
-		content...
+		Note that the following game: \begin{table}[h]
+			\centering\begin{tabular}{ccccc}
+				\toprule[1.5pt]
+				Challenger & $\xleftrightarrow[\textnormal{game}]{\IND}$ & Adversary $\mathcal{A}$ & $\xleftrightarrow[\textnormal{game}]{\mathsf{SEM}}$ & Adversary $\mathcal{B}$ \\
+				\midrule
+				\textcolor{britishracinggreen}{$k\gets\GenKey(1^n)$}\\
+				\textcolor{blue}{$pk,sk\gets\GenKeyPair(1^n)$}\\
+				& \multirow{4}{*}{$\xleftarrow{p_0,p_1}$} & $\A$ choose $p_0,p_1$\\
+				&& such that\\
+				&& $g(p_0)\neq g(p_1)$ \\
+				&& and $\abs{p_0}=\abs{p_1}$\\
+				$b\uniform\set{0,1}$\\
+				\midrule
+				\textcolor{britishracinggreen}{$c\gets\Encrypt(k;p_b)$} & \multirow{2}{*}{$\xrightarrow{c}$} & & \multirow{2}{*}{$\xrightarrow{c}$} & \textcolor{britishracinggreen}{$t\gets g\of{\Decrypt(k;c)}$} \\
+				\textcolor{blue}{$c\gets\Encrypt(pk;p_b)$} & & & & \textcolor{blue}{$t\gets g\of{\Decrypt(sk;c)}$}\\
+				\midrule
+				if $b=b'$, then & \multirow{3}{*}{$\xleftarrow{b'}$} & if $g(p_0)=t$, then, &\multirow{3}{*}{$\xleftarrow{\hat{t}}$} & \\
+				$\mathcal{A}$ wins, & & $b'\gets 0$, & & \\
+				else $\mathcal{A}$ loses. & & else $b'\gets 1$ & & \\
+				\bottomrule[1.5pt]
+			\end{tabular}
+			\caption{$\mathcal{A}$'s $\IND$ game using $\mathcal{B}$.}
+		\end{table}
 	\end{proof}
 	
 	
@@ -1990,12 +2018,67 @@
 		content...
 	\end{proof}
 	
+	\newpage
+	\section{Authentication and Signature}
+	
+	\begin{tcolorbox}[colback=white,colframe=defcolor,arc=5pt,title={\color{white}\bf Message Authentication Code (MAC)}]
+		\begin{enumerate}[(1)]
+			\item Key Generation: $\GenKey:\N\to\mathcal{K}$; $k\gets\GenKey(1^n)$ for a security parameter $n$
+			\item Value gen: $\GenMacTag:\mathcal{K}\times\mathcal{M}\to\mathcal{T}$; $tag\gets\GenMacTag(k;m)$
+			\item Gen. Verify: $\VerifyMacTag:\mathcal{K}\times\mathcal{M}\times\mathcal{T}\to\set{\vaild,\invaild}$; $ans\gets\VerifyMacTag(k;m,tag)$
+		\end{enumerate}
+	\end{tcolorbox}
+	\vspace{8pt}
+	\begin{tcolorbox}[colback=white,colframe=defcolor,arc=5pt,title={\color{white}\bf Signature}]
+		\begin{enumerate}[(1)]
+			\item Key Generation: $\GenKeyPair:\N\to\mathcal{K}_p\times\mathcal{K}_s$; \[
+			pk,sk\gets\GenKeyPair(1^n)
+			\] for a security parameter $n$
+			\item Gen. sig.: $\Sign:\mathcal{K}_p\times\mathcal{M}\to\mathcal{S}$;
+			$$sig\gets\Sign(pk;m)$$
+			\item Gen. veri.: $\Verify:\mathcal{K}_s\times\mathcal{M}\times\mathcal{S}\to\set{\vaild,\invaild}$;
+			$$ans\gets\Verify(sk;m,sig)$$
+		\end{enumerate} We call $pk$ public key and $sk$ secret key (or private key).
+	\end{tcolorbox}
+	
 	\begin{tcolorbox}[colback=white,colframe=lemcolor,arc=5pt,title={\color{white}\bf }]
 	
 	\end{tcolorbox}
 	
 	\begin{tcolorbox}[colback=white,colframe=lemcolor,arc=5pt,title={\color{white}\bf }]
 	
+	\end{tcolorbox}
+		
+	\begin{tcolorbox}[colback=white,colframe=lemcolor,arc=5pt,title={\color{white}\bf }]
+		
+	\end{tcolorbox}
+	
+	\begin{tcolorbox}[colback=white,colframe=lemcolor,arc=5pt,title={\color{white}\bf }]
+		
+	\end{tcolorbox}
+		
+	\begin{tcolorbox}[colback=white,colframe=lemcolor,arc=5pt,title={\color{white}\bf }]
+		
+	\end{tcolorbox}
+	
+	\begin{tcolorbox}[colback=white,colframe=lemcolor,arc=5pt,title={\color{white}\bf }]
+		
+	\end{tcolorbox}
+		
+	\begin{tcolorbox}[colback=white,colframe=lemcolor,arc=5pt,title={\color{white}\bf }]
+		
+	\end{tcolorbox}
+	
+	\begin{tcolorbox}[colback=white,colframe=lemcolor,arc=5pt,title={\color{white}\bf }]
+		
+	\end{tcolorbox}
+		
+	\begin{tcolorbox}[colback=white,colframe=lemcolor,arc=5pt,title={\color{white}\bf }]
+		
+	\end{tcolorbox}
+	
+	\begin{tcolorbox}[colback=white,colframe=lemcolor,arc=5pt,title={\color{white}\bf }]
+		
 	\end{tcolorbox}
 	
 	% End document
