@@ -379,9 +379,19 @@
 				\end{align*} Hence
 				\begin{align*}
 					\Adv_{\textnormal{EncBlk}}^{\PRP}(\mathcal{B})&=2\abs{\Pr\left[\text{$\mathcal{B}$ wins $\PRP$}\right]-\frac{1}{2}}\quad\text{by definition}\\
-					&=
+					=&\big|\Pr\left[\set{\text{$\A$ wins $\OW$-$\CPA$}}\mid b=1\right]\\
+					&+\Pr\left[\set{\text{$\A$ loses $\OW$-$\CPA$}}\mid b=0\right]-1\big|\\
+					=&\big|\Pr\left[\set{\text{$\A$ wins $\OW$-$\CPA$}}\mid b=1\right]\\
+					&-\of{1-\Pr\left[\set{\text{$\A$ loses $\OW$-$\CPA$}}\mid b=0\right]}\big|\\
+					=&\big|\Pr\left[\set{\text{$\A$ wins $\OW$-$\CPA$}}\mid b=1\right]\\
+					&-\Pr\left[\set{\text{$\A$ wins $\OW$-$\CPA$}}\mid b=0\right]\big|
 				\end{align*}
-			\item[(2)]
+				\vspace{4pt}
+			\item[(2)] We claim that \[
+			\mathcolorbox{-red}{\Pr\left[\set{\text{$\A$ wins $\OW$-$\CPA$}}\mid b=0\right]}\leq\frac{q^l}{2^n}.
+			\] Note that \begin{align*}
+			\Pr[\set{\text{$\A$ loses $\OW$-$\CPA$}}\mid b=0]&
+			\end{align*}
 		\end{enumerate}
 	\end{proof}
 
