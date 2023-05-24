@@ -1,0 +1,67 @@
+
+	\begin{table}[h]
+		\centering\begin{tabular}{ccccc}
+			\toprule[1.5pt]
+			Challenger & $\xleftrightarrow[EncryptBlk]{\PRP}$ & Adversary $\mathcal{B}$ & $\xleftrightarrow[CBC\dollar]{\IND\text{-}\CPA}$ & Adversary $\mathcal{A}$ \\
+			\midrule
+			$k\gets KeyGen(1^n)$\\
+			$g\uniform\mathcal{P}_n$\\
+			$b\uniform\set{0,1}^n$\\
+			\midrule
+			if $b=1$, then & 
+			\multirow{3}{*}{$\xrightarrow{\oracle}$} & Construct & \multirow{3}{*}{$\xrightarrow{\oracle^{Encipher^{CBC\dollar}}(k;*)}$}\\
+			$\oracle\gets\oracle^{EncryptBlk(k;*)}$, & & $\oracle^{Encipher^{CBC\dollar}}(k;*)$ \\
+			else, $\oracle\gets\oracle^{g(*)}$ & & using $\oracle$ \\
+			\midrule
+			& & & \multirow{3}{*}{$\xleftarrow{p_0,p_1}$} & $\A$ chooses $l$-block\\
+			& & & & plaintexts $p_0$ and $p_1$\\
+			& & & & s.t. $p_0\neq p_0$\\
+			\midrule
+			& & $t\uniform\set{0,1}$& \multirow{3}{*}{$\xrightarrow{IV, c}$} & $\A$ tries to find\\
+			& & $p_t\to\oracle^{Encipher^{CBC\dollar}}(k;*)\to IV,c$ & & the answer within $q$\\
+			& & & & $\oracle^{Encipher^{CBC\dollar}}(k;*)$ queries\\
+			\midrule
+			if $b=b'$, then & \multirow{3}{*}{$\xleftarrow{b'}$} & if $t=t'$, then, &\multirow{3}{*}{$\xleftarrow{t'}$} & if $\A$ thinks\\
+			$\mathcal{B}$ wins, & & $b'\gets 1$, & & $Decipher^{CBC}(IV, k; c)=p_0$,\\
+			else $\mathcal{B}$ loses. & & else $b'\gets 0$ & & then $t'\gets 0$, else $t'\gets 1$\\
+			\bottomrule[1.5pt]
+		\end{tabular}
+		\caption{$\mathcal{B}$'s $\PRP$ game using $\A$.}
+	\end{table}
+
+	We will show that \[
+	\Adv_{\Pi,CBC\dollar}^{\IND\text{-}\CPA}(\A;q)\leq 2\Adv_{\Pi}^{\PRP}(\mathcal{B})+\frac{3\hat{q}^2}{2^n}
+	\] Let's denote \begin{align*}
+	\IND\text{-}\CPA_\A^+:=\text{$\A$ wins $\IND$-$\CPA$}\\
+	\IND\text{-}\CPA_\A^-:=\text{$\A$ loses $\IND$-$\CPA$}
+	\end{align*}
+	
+	\begin{enumerate}[\text{Claim} 1.]
+		\item We claim that \[
+		\boxed{\Adv_{\Pi}^{\PRP}\of{\mathcal{B}}=\abs{\Pr\left[\IND\text{-}\CPA_\A^+\mid b=1\right]-\Pr\left[\IND\text{-}\CPA_{\A}^+\mid b=0\right]}}.
+		\] 
+		$\B$ wins in the $\PRP$ game under the following two scenarios: \begin{enumerate}[(i)]
+			\item ($\oracle=\oracle^{EncryptBlk(k;*)})\land(\IND\text{-}\CPA_\A^+)$
+			\item $(\oracle=\oracle^{g(*)})\land (\IND\text{-}\CPA_\A^-)$
+		\end{enumerate} Thus \begin{align*}
+			&\Adv_{\Pi}^{\PRP}\of{\B}\\
+			=&2\abs{\Pr\left[\PRP_{\B}^+\right]-\frac{1}{2}}\\
+			=&2\abs{\of{\Pr\left[\IND\text{-}\CPA_{\A}^+\mid b=1\right]\Pr[b=1]+\Pr\left[\IND\text{-}\CPA_{\A}^-\mid b=0\right]\Pr[b=0]}-\frac{1}{2}}\\
+			=&2\abs{\frac{1}{2}\of{\Pr\left[\IND\text{-}\CPA_{\A}^+\mid b=1\right]+\Pr\left[\IND\text{-}\CPA_{\A}^-\mid b=0\right]}-\frac{1}{2}}\\
+			=&\abs{arg1}
+		\end{align*}
+		\vspace{4pt}
+		\item We claim that \[
+		\boxed{\Pr\left[\IND\text{-}\CPA_{\A}^+\mid g\uniform\mathcal{P}_n\right]=\Pr\left[\IND\text{-}\CPA-\A^+\land E^C\mid g\uniform\mathcal{F}_n\right]}.
+		\]
+		\item We claim that \[
+		\boxed{\abs{\Pr\left[\IND\text{-}\CPA_{\A}^+\mid g\uniform\mathcal{P}_n\right]-\Pr\left[\IND\text{-}\CPA_{\A}^+\mid g\uniform\mathcal{F}_n\right]}\leq\frac{\hat{q}^2}{2^{n+1}}}.
+		\]
+		\item 
+		\item We claim that \[
+		\boxed{\abs{\Pr\left[\IND\text{-}\CPA_{\A}^+\mid g\uniform\mathcal{P}_n\right]-\frac{1}{2}}\leq\frac{\hat{q}^2}{2^{n}}}.
+		\]
+		\item We claim that \[
+		\boxed{\abs{\Pr\left[\IND\text{-}\CPA_{\A}^+\mid g\uniform\mathcal{P}_n\right]-\frac{1}{2}}\leq\frac{3\hat{q}^2}{2^{n}}}.
+		\]
+	\end{enumerate}
