@@ -112,6 +112,8 @@
 
 
 %---------------------------My Preamble
+\usepackage{marvosym}
+\usepackage{stmaryrd}
 \usepackage{booktabs}
 \usepackage{multicol}
 \setlength{\columnsep}{2cm}
@@ -128,11 +130,6 @@
 %Tcolorbox
 \usepackage[most]{tcolorbox}
 \tcbset{colback=white, arc=5pt}
-%\tcbset{enhanced, colback=white,colframe=black,fonttitle=\bfseries,arc=4mm,boxrule=1pt,shadow={2mm}{-1mm}{0mm}{black!50}}
-%White box with black text and shadow
-%\begin{tcolorbox}[colback=white,colframe=black,fonttitle=\bfseries,title=Black Shadow Box,arc=4mm,boxrule=1pt,shadow={2mm}{-1mm}{0mm}{black!50}]
-%	This is a white box with black text and a subtle shadow. The shadow adds some depth and dimension to the box without overpowering the design.
-%\end{tcolorbox}
 
 %Theorem
 \newtheorem{axiom}{Axiom}[chapter]
@@ -213,6 +210,8 @@
 \newcommand{\OAEPEncode}{\mathsf{OAEPEncode}}
 \newcommand{\OAEPDecode}{\mathsf{OAEPDecode}}
 
+\newcommand{\contr}{\textup{\Lightning}}
+
 \renewcommand{\mod}{\operatorname{\textnormal{mod}}}
 
 
@@ -227,18 +226,18 @@
 			{\Large Ji Yong-Hyeon\par}
 			\vspace{1in}
 			\begin{tikzpicture}
-			\draw (0,0) circle (1cm);
-			\node at (0,0) {Data};
-			
-			\draw (2,0) circle (0.5cm) node {Key 1} -- (1,0);
-			\draw [->] (2.5,0) -- (3.5,0);
-			\draw (4,0) circle (0.5cm) node {Key 2};
-			
-			\draw [->] (0.5,0) -- (-0.5,0);
-			\draw (-1,0) circle (0.5cm) node {Key 3};
-			
-			\node [above] at (2.5,0.5) {Public Key};
-			\node [above] at (-0.5,0.5) {Private Key};
+				\draw (0,0) circle (1cm);
+				\node at (0,0) {Data};
+				
+				\draw (2,0) circle (0.5cm) node {Key 1} -- (1,0);
+				\draw [->] (2.5,0) -- (3.5,0);
+				\draw (4,0) circle (0.5cm) node {Key 2};
+				
+				\draw [->] (0.5,0) -- (-0.5,0);
+				\draw (-1,0) circle (0.5cm) node {Key 3};
+				
+				\node [above] at (2.5,0.5) {Public Key};
+				\node [above] at (-0.5,0.5) {Private Key};
 			\end{tikzpicture}\par
 			%\includegraphics[width=3in]{algebra.png}\par
 			\vspace{1in}
@@ -370,15 +369,15 @@
 		\begin{theorem}
 			Given a system of linear congruences with pairwise relatively prime moduli:
 			\begin{align*}
-			x&\equiv a_1 \pmod{m_1}\\
-			x&\equiv a_2 \pmod{m_2}\\
-			&\vdots \\
-			x&\equiv a_n \pmod{m_1},
+				x&\equiv a_1 \pmod{m_1}\\
+				x&\equiv a_2 \pmod{m_2}\\
+				&\vdots \\
+				x&\equiv a_n \pmod{m_1},
 			\end{align*}
 			
 			there exists a unique solution $x$ modulo $M = m_1m_2\cdots m_n$:
 			\begin{align*}
-			x&\equiv a_1b_1M_1+a_2b_2M_2+\cdots a_nb_nM_n\pmod{M}, \ie,\\ x&\equiv\sum_{i=1}^{n}a_ib_iM_i\pmod{M}
+				x&\equiv a_1b_1M_1+a_2b_2M_2+\cdots a_nb_nM_n\pmod{M}, \ie,\\ x&\equiv\sum_{i=1}^{n}a_ib_iM_i\pmod{M}
 			\end{align*}\[
 			\] where $M_i=M/m_i$ and $b_i$ is the inverse of $M_i$ modulo $m_i$.
 		\end{theorem}
@@ -552,8 +551,8 @@
 	a^k =\of{a^{p-1}}^t\equiv 1 \pmod{p}.
 	\]
 	Then \begin{align*}
-	a^k - 1 \equiv 0 \pmod{p}&\implies p \mid (a^k - 1)\\
-	&\implies \gcd\of{a^k-1, N}\in\set{p,N=pq}.
+		a^k - 1 \equiv 0 \pmod{p}&\implies p \mid (a^k - 1)\\
+		&\implies \gcd\of{a^k-1, N}\in\set{p,N=pq}.
 	\end{align*} If $\gcd\of{a^k-1,N}\neq N$ then \[
 	N=p\times q=\gcd\of{a^k-1,N}\times\frac{N}{\gcd\of{a^k-1,N}}.
 	\]
@@ -591,17 +590,17 @@
 	
 	\begin{example}
 		Consider the prime $65537=2^{16}+1$. Then \begin{align*}
-		15!(=2^{11}\cdot 3^6\cdot 5^3\cdot 7^2\cdot 11\cdot 13)\mod 2^{16} &= 22528&\Rightarrow p-1\nmid 15!,\\
-		16!(=2^{15}\cdot 3^6\cdot 5^3\cdot 7^2\cdot 11\cdot 13)\mod 2^{16} &= 32768&\Rightarrow p-1\nmid 16!,\\
-		17!(=2^{15}\cdot 3^6\cdot 5^3\cdot 7^2\cdot 11\cdot 13\cdot 17)\mod 2^{16} &= 32768&\Rightarrow p-1\nmid 17!,\\
-		18!(=2^{16}\cdot 3^8\cdot 5^3\cdot 7^2\cdot 11\cdot 13\cdot 17)\mod 2^{16} &= 0&\Rightarrow p-1\mid 18!,\\
-		19!(=2^{16}\cdot 3^8\cdot 5^3\cdot 7^2\cdot 11\cdot 13\cdot 17\cdot 19)\mod 2^{16} &= 0&\Rightarrow p-1\mid 19!.
+			15!(=2^{11}\cdot 3^6\cdot 5^3\cdot 7^2\cdot 11\cdot 13)\mod 2^{16} &= 22528&\Rightarrow p-1\nmid 15!,\\
+			16!(=2^{15}\cdot 3^6\cdot 5^3\cdot 7^2\cdot 11\cdot 13)\mod 2^{16} &= 32768&\Rightarrow p-1\nmid 16!,\\
+			17!(=2^{15}\cdot 3^6\cdot 5^3\cdot 7^2\cdot 11\cdot 13\cdot 17)\mod 2^{16} &= 32768&\Rightarrow p-1\nmid 17!,\\
+			18!(=2^{16}\cdot 3^8\cdot 5^3\cdot 7^2\cdot 11\cdot 13\cdot 17)\mod 2^{16} &= 0&\Rightarrow p-1\mid 18!,\\
+			19!(=2^{16}\cdot 3^8\cdot 5^3\cdot 7^2\cdot 11\cdot 13\cdot 17\cdot 19)\mod 2^{16} &= 0&\Rightarrow p-1\mid 19!.
 		\end{align*} Thus, arbitrarily choose a value for $a$, then increment $j$ from $1$, and check if the value of $\gcd\of{a^{j!}-1,N}\in(1,N)$:
 		\begin{align*}
-		1<\gcd(a^{1!}&-1,N)<N?\\
-		1<\gcd(a^{2!}&-1,N)<N?\\
-		1<\gcd(a^{3!}&-1,N)<N?\\
-		&\vdots
+			1<\gcd(a^{1!}&-1,N)<N?\\
+			1<\gcd(a^{2!}&-1,N)<N?\\
+			1<\gcd(a^{3!}&-1,N)<N?\\
+			&\vdots
 		\end{align*}
 		If $gcd(a^{j!} - 1, N) = N$, then $gcd(a^{(j+1)!} - 1, N)$ also equals $N$, so the test is stopped, a new value for $a$ is chosen, and the test proceeds.
 	\end{example}
@@ -615,11 +614,11 @@
 	\end{tcolorbox}
 	\begin{proof}
 		Since \begin{align*}
-		\gcd\of{a^{j!}-1,N}=N&\implies N\mid a^{j!}-1\\
-		&\implies a^{j!}\equiv 1\pmod{N}\\
-		&\implies \of{a^{j!}}^{j+1}\equiv 1\pmod{N}\\
-		&\implies N\mid a^{\of{j+1}!}-1\\
-		&\implies a^{\of{j+1}!}-1=Nk\quad \text{for some}\quad k\in\Z,
+			\gcd\of{a^{j!}-1,N}=N&\implies N\mid a^{j!}-1\\
+			&\implies a^{j!}\equiv 1\pmod{N}\\
+			&\implies \of{a^{j!}}^{j+1}\equiv 1\pmod{N}\\
+			&\implies N\mid a^{\of{j+1}!}-1\\
+			&\implies a^{\of{j+1}!}-1=Nk\quad \text{for some}\quad k\in\Z,
 		\end{align*} we have \[
 		\gcd\of{a^{\of{j+1}!}-1,N}=\gcd\of{Nk,N}=N.
 		\]
@@ -630,18 +629,18 @@
 	\begin{tcolorbox}[colback=white,colframe=procolor,arc=5pt,title={\color{white}\bf Existence of the Multiple of $p-1$}]
 		\begin{proposition}
 			\begin{align*}
-			\gcd\of{a^{\of{j+1}!}-1,N}&=\gcd\of{a^{\of{j+1}!}\mod N-1,N}\\
-			&=\gcd\of{\of{a^{j!}\mod N}^{j+1}-1,N}.
+				\gcd\of{a^{\of{j+1}!}-1,N}&=\gcd\of{a^{\of{j+1}!}\mod N-1,N}\\
+				&=\gcd\of{\of{a^{j!}\mod N}^{j+1}-1,N}.
 			\end{align*}
 		\end{proposition}
 	\end{tcolorbox}
 	\begin{remark}
 		We can compute $\gcd\of{a^{n!}-1,N}$ as follows: \begin{align*}
-		a_0&=a&\\
-		a_1&=a^{1!}\mod N=a_0^1\mod N&\Rightarrow 1<\gcd\of{a_1-1,N}<N?\\
-		a_2&=a^{2!}\mod N=a_1^2\mod N&\Rightarrow 1<\gcd\of{a_2-1,N}<N?\\
-		a_3&=a^{3!}\mod N=a_2^3\mod N&\Rightarrow 1<\gcd\of{a_3-1,N}<N?\\
-		&\vdots &
+			a_0&=a&\\
+			a_1&=a^{1!}\mod N=a_0^1\mod N&\Rightarrow 1<\gcd\of{a_1-1,N}<N?\\
+			a_2&=a^{2!}\mod N=a_1^2\mod N&\Rightarrow 1<\gcd\of{a_2-1,N}<N?\\
+			a_3&=a^{3!}\mod N=a_2^3\mod N&\Rightarrow 1<\gcd\of{a_3-1,N}<N?\\
+			&\vdots &
 		\end{align*}
 	\end{remark}
 	\vspace{8pt}
@@ -690,9 +689,9 @@
 		Factor 6077 using Fermat method.
 		\begin{proof}[\sol]
 			Note that $\ceil*{\sqrt{6077}}=78$. Then \begin{align*}
-			78^2-6077&=7\\
-			&\vdots\\
-			81^2-6077&=484=22^2.
+				78^2-6077&=7\\
+				&\vdots\\
+				81^2-6077&=484=22^2.
 			\end{align*}
 			Thus, $6077=\of{81+22}\of{81-21}=103\cdot 59$.
 		\end{proof}
@@ -701,20 +700,20 @@
 	\begin{tcolorbox}[colback=white,colframe=lemcolor,arc=5pt,title={\color{white}\bf }]
 		\begin{lemma}
 			Let $n\in 2\Z+1$. Define two sets: \begin{align*}
-			S_n&:=\set{(a,b)\in\Z^2:n=ab\ \text{with}\ 0<b\leq a},\\
-			T_n&:=\set{\of{u^2,v^2}\in\Z^2:n=u^2-v^2}.
+				S_n&:=\set{(a,b)\in\Z^2:n=ab\ \text{with}\ 0<b\leq a},\\
+				T_n&:=\set{\of{u^2,v^2}\in\Z^2:n=u^2-v^2}.
 			\end{align*} Then $\exists\phi:S_n\leftrightarrow T_n$. In other words, there exists a one-to-one correspondence between factorizations of $n$ into two positive integers and differences of two squares that equal $n$.
 		\end{lemma}
 	\end{tcolorbox}
 	\begin{proof}
 		Define two functions: \begin{align*}
-		f:S_n\to T_n&:f\of{\of{a,b}}=\of{\of{\frac{a+b}{2}}^2,\of{\frac{a-b}{2}}^2},\\
-		g:T_n\to S_n&:g\of{\of{u^2,v^2}}=\of{\abs{u}+\abs{v},\abs{u}-\abs{v}}.
+			f:S_n\to T_n&:f\of{\of{a,b}}=\of{\of{\frac{a+b}{2}}^2,\of{\frac{a-b}{2}}^2},\\
+			g:T_n\to S_n&:g\of{\of{u^2,v^2}}=\of{\abs{u}+\abs{v},\abs{u}-\abs{v}}.
 		\end{align*} We claim that $g\circ f=\id_{S_n}$ and $f\circ g=\id_{T_n}$:\begin{align*}
-		\of{g\circ f}(a,b)&=g\of{\of{\frac{a+b}{2}}^2,\of{\frac{a-b}{2}}^2}=\of{\abs{\frac{a+b}{2}}+\abs{\frac{a-b}{2}},\abs{\frac{a+b}{2}}-\abs{\frac{a-b}{2}}}\\
-		&=\of{{\frac{a+b}{2}}+{\frac{a-b}{2}},{\frac{a+b}{2}}-{\frac{a-b}{2}}}\\
-		&=\of{a,b},\\
-		\of{f\circ g}\of{u^2,v^2}&=f\of{\abs{u}+\abs{v},\abs{u}-\abs{v}}=\of{\abs{u}^2,\abs{v}^2}=\of{u^2,v^2}.
+			\of{g\circ f}(a,b)&=g\of{\of{\frac{a+b}{2}}^2,\of{\frac{a-b}{2}}^2}=\of{\abs{\frac{a+b}{2}}+\abs{\frac{a-b}{2}},\abs{\frac{a+b}{2}}-\abs{\frac{a-b}{2}}}\\
+			&=\of{{\frac{a+b}{2}}+{\frac{a-b}{2}},{\frac{a+b}{2}}-{\frac{a-b}{2}}}\\
+			&=\of{a,b},\\
+			\of{f\circ g}\of{u^2,v^2}&=f\of{\abs{u}+\abs{v},\abs{u}-\abs{v}}=\of{\abs{u}^2,\abs{v}^2}=\of{u^2,v^2}.
 		\end{align*}
 	\end{proof}
 	
@@ -746,8 +745,8 @@
 		Let $N\in 2\Z+1$ and $b\in\Z^+$. Then $2N+b^2$ is not square.
 		\begin{proof}
 			Note that, for any square number $\alpha$, $\alpha\mod 4\in\set{0,1}$ since \begin{align*}
-			\of{2k}^2&=4k^2\equiv 0\pmod{4}\\
-			\of{2k+1}^2&=4k^2+4k+1\equiv 1\pmod{4}.
+				\of{2k}^2&=4k^2\equiv 0\pmod{4}\\
+				\of{2k+1}^2&=4k^2+4k+1\equiv 1\pmod{4}.
 			\end{align*} Let $N=2m+1$ then \begin{itemize}
 				\item[] (Case 1) ($b=2n$) \[
 				2N+b^2=(4m+2)+4n^2\equiv 2\pmod{4}.
@@ -787,12 +786,12 @@
 	\end{tcolorbox}
 	\begin{proof}
 		\begin{align*}
-		a_i^{(p)}=a_j^{(p)}\Leftrightarrow a_i\mod p=a_j\mod p
-		&\Leftrightarrow a_i\equiv a_j\pmod{p}\\
-		&\Leftrightarrow a_i^2+c\equiv a_j^2+c\pmod{p}\\
-		&\Leftrightarrow \of{a_i^2+c\mod pq}\mod p=\of{a_j^2+c\mod pq}\mod p\\
-		&\Leftrightarrow a_{i+1}\mod p=a_{j+1}\mod p\\
-		&\Leftrightarrow a_{i+1}^{(p)}= a_{j+1}^{(p)}.
+			a_i^{(p)}=a_j^{(p)}\Leftrightarrow a_i\mod p=a_j\mod p
+			&\Leftrightarrow a_i\equiv a_j\pmod{p}\\
+			&\Leftrightarrow a_i^2+c\equiv a_j^2+c\pmod{p}\\
+			&\Leftrightarrow \of{a_i^2+c\mod pq}\mod p=\of{a_j^2+c\mod pq}\mod p\\
+			&\Leftrightarrow a_{i+1}\mod p=a_{j+1}\mod p\\
+			&\Leftrightarrow a_{i+1}^{(p)}= a_{j+1}^{(p)}.
 		\end{align*}
 	\end{proof}
 	
@@ -821,41 +820,41 @@
 	\] with $k\leq n$. Let $P(n)$ be the probability that at least two people share a birthday: \[
 	P\of{n}:=\Pr\left[\exists (i,j)\ \text{with}\ i\neq j: a_i=a_j\right].
 	\] To calculate this probability, let $P'\of{n}:=1-P\of{n}$ then \begin{align*}
-	P'\of{n}&=1-\Pr\left[\exists (i,j)\ \text{with}\ i\neq j: a_i=a_j\right]\\
-	&=\Pr\left[\forall(i,j)\ \text{with}\ i\neq j: a_i\neq a_j\right].
+		P'\of{n}&=1-\Pr\left[\exists (i,j)\ \text{with}\ i\neq j: a_i=a_j\right]\\
+		&=\Pr\left[\forall(i,j)\ \text{with}\ i\neq j: a_i\neq a_j\right].
 	\end{align*}
 	That is, $P' (n)$ be the probability that all $n$ birthdays are unique.
 	
 	\newpage
 	Assuming there are 365 possible birthdays, the probability that the first person has a unique birthday is:
 	\begin{equation*}
-	P'_1 = \frac{365}{365} = 1.
+		P'_1 = \frac{365}{365} = 1.
 	\end{equation*}
 	For the second person to have a unique birthday (different from the first person), there are 364 remaining possibilities:
 	\begin{equation*}
-	P'_2 = \frac{364}{365}.
+		P'_2 = \frac{364}{365}.
 	\end{equation*}
 	For the third person to have a unique birthday (different from the previous two), there are 363 remaining possibilities:
 	\begin{equation*}
-	P'_3 = \frac{363}{365}.
+		P'_3 = \frac{363}{365}.
 	\end{equation*}
 	Following this pattern, the probability that all $n$ birthdays are unique is:
 	\begin{equation*}
-	P'(n) = \frac{365}{365} \times \frac{364}{365} \times \cdots \times \frac{365 - (n - 1)}{365}.
+		P'(n) = \frac{365}{365} \times \frac{364}{365} \times \cdots \times \frac{365 - (n - 1)}{365}.
 	\end{equation*}
 	Thus, the probability that at least two people share a birthday is:
 	\begin{equation*}
-	P(n) = 1 - P'(n)=1-\of{\frac{365}{365}}\of{\frac{364}{365}}\cdots\of{\frac{365-(n-1)}{365}}.
+		P(n) = 1 - P'(n)=1-\of{\frac{365}{365}}\of{\frac{364}{365}}\cdots\of{\frac{365-(n-1)}{365}}.
 	\end{equation*}
 	\vspace{8pt}
 	\begin{tcolorbox}[colback=white,colframe=procolor,arc=5pt,title={\color{white}\bf Generalization of Birthday Problem}]
 		\begin{proposition}
 			Assume all birthday are equally likely, and generalize the problem a little: \textnormal{from $n$ possible birthdays, sample $k$ times with replacement}. \begin{align*}
-			P(\textnormal{a shared birthday})&=1-P(\textnormal{no shared birthdays})\\
-			&=1-P(\textnormal{all birthdays are unique})\\
-			&=1-\of{\frac{n}{n}}\of{\frac{n-1}{n}}\cdots\of{\frac{n-(k-1)}{n}}\\
-			&=1-1\cdot \prod_{i=1}^{k-1}\frac{n-i}{n}\\
-			&=1-\prod_{i=1}^{k-1}\of{1-\frac{i}{n}}.
+				P(\textnormal{a shared birthday})&=1-P(\textnormal{no shared birthdays})\\
+				&=1-P(\textnormal{all birthdays are unique})\\
+				&=1-\of{\frac{n}{n}}\of{\frac{n-1}{n}}\cdots\of{\frac{n-(k-1)}{n}}\\
+				&=1-1\cdot \prod_{i=1}^{k-1}\frac{n-i}{n}\\
+				&=1-\prod_{i=1}^{k-1}\of{1-\frac{i}{n}}.
 			\end{align*}
 		\end{proposition}
 	\end{tcolorbox}
@@ -868,28 +867,28 @@
 			%\includegraphics[width=0.95\linewidth,height=95mm]{birthday_problem.png}
 		\end{figure}
 		\begin{lstlisting}[style=sage, caption={Birthday Bound (Sage)},captionpos=t]
-		import matplotlib.pyplot as plt
-		
-		# Define a function to compute the probability of two people sharing a birthday for a given group size
-		def birthday_prob(n):
-		return 1 - prod([(365-i)/365 for i in range(n)])
-		
-		# Create a list of group sizes from 2 to 50
-		group_sizes = range(2, 51)
-		
-		# Compute the probabilities for each group size
-		probabilities = [birthday_prob(n) for n in group_sizes]
-		
-		# Plot the probabilities as a function of group size
-		plt.plot(group_sizes, probabilities)
-		plt.xlabel("Group Size")
-		plt.ylabel("Probability")
-		plt.title("Probability of Two People Sharing a Birthday")
-		
-		# Add a horizontal line at the probability of 0.5
-		plt.axhline(y=0.5, color='r', linestyle='-')
-		
-		plt.show()
+			import matplotlib.pyplot as plt
+			
+			# Define a function to compute the probability of two people sharing a birthday for a given group size
+			def birthday_prob(n):
+			return 1 - prod([(365-i)/365 for i in range(n)])
+			
+			# Create a list of group sizes from 2 to 50
+			group_sizes = range(2, 51)
+			
+			# Compute the probabilities for each group size
+			probabilities = [birthday_prob(n) for n in group_sizes]
+			
+			# Plot the probabilities as a function of group size
+			plt.plot(group_sizes, probabilities)
+			plt.xlabel("Group Size")
+			plt.ylabel("Probability")
+			plt.title("Probability of Two People Sharing a Birthday")
+			
+			# Add a horizontal line at the probability of 0.5
+			plt.axhline(y=0.5, color='r', linestyle='-')
+			
+			plt.show()
 		\end{lstlisting}
 	\end{remark}
 	\fi
@@ -905,7 +904,7 @@
 	\end{tcolorbox}
 	\begin{proof}
 		Note that \begin{align*}
-		P_{n,k}=1-\Pr[a_i\neq a_j\ \text{for all distinct}\ i,j]=1-\prod_{i=1}^{k-1}\of{1-\frac{i}{n}}.
+			P_{n,k}=1-\Pr[a_i\neq a_j\ \text{for all distinct}\ i,j]=1-\prod_{i=1}^{k-1}\of{1-\frac{i}{n}}.
 		\end{align*} Recall that Taylor series for exponential: \[
 		e^x=1+x+\frac{1}{2!}x^2+\frac{1}{3!}x^3+\cdots=\sum_{k=0}^{\infty}\frac{x^k}{k!}.
 		\] Note that $e^x\approx1+x$ for $x\in(-1,1)$:
@@ -914,22 +913,22 @@
 			%\includegraphics[scale=0.5]{approx_exp.png}
 		\end{figure}\\
 		Since $i\in[1,k-1]\subseteq[1,n)\Rightarrow-\frac{i}{n}\in\of{-1,1}\Rightarrow 1+\of{-\frac{i}{n}}\approx e^{-i/n}$, we have \begin{align*}
-		P_{n,k}=
-		1-\prod_{i=1}^{k-1}\of{1-\frac{i}{n}}
-		&\approx 1-\prod_{i=1}^{k-1}e^{-\frac{i}{n}}\\
-		&=1-e^{-1/n}\cdot e^{-2/n}\cdots e^{-(k-1)/n}\\
-		&=1-e^{-\frac{1}{n}\of{1+2+\cdots+(k-1)}}\\
-		&=1-e^{-\frac{1}{n}\cdot\frac{k\of{k-1}}{2}}\\
-		&\approx 1-e^{-\frac{k^2}{2n}}.
+			P_{n,k}=
+			1-\prod_{i=1}^{k-1}\of{1-\frac{i}{n}}
+			&\approx 1-\prod_{i=1}^{k-1}e^{-\frac{i}{n}}\\
+			&=1-e^{-1/n}\cdot e^{-2/n}\cdots e^{-(k-1)/n}\\
+			&=1-e^{-\frac{1}{n}\of{1+2+\cdots+(k-1)}}\\
+			&=1-e^{-\frac{1}{n}\cdot\frac{k\of{k-1}}{2}}\\
+			&\approx 1-e^{-\frac{k^2}{2n}}.
 		\end{align*}
 	\end{proof}
 	
 	\begin{remark}
 		Find minimum value of $k$ such that $P_{n,k}\geq 1/2$. \begin{align*}
-		P_{n,k}=1-e^{-\frac{k^2}{2n}}\geq\frac{1}{2}&\implies e^{-k^2/2n}\leq\frac{1}{2}\\
-		&\implies-\frac{k^2}{2n}\leq\ln\frac{1}{2}\\
-		&\implies (2\ln2)n\leq k^2\\
-		&\implies \ceil*{\sqrt{\of{2\ln 2}n}}\leq k.
+			P_{n,k}=1-e^{-\frac{k^2}{2n}}\geq\frac{1}{2}&\implies e^{-k^2/2n}\leq\frac{1}{2}\\
+			&\implies-\frac{k^2}{2n}\leq\ln\frac{1}{2}\\
+			&\implies (2\ln2)n\leq k^2\\
+			&\implies \ceil*{\sqrt{\of{2\ln 2}n}}\leq k.
 		\end{align*} 
 		Thus, $k\geq c\sqrt{n}$, where $c$ is a constant. That is, $O(\sqrt{n})$.
 	\end{remark}
@@ -937,11 +936,11 @@
 	\iffalse
 	\begin{remark}
 		Find the upper bound of $P_{n,k}$. \begin{align*}
-		P_{n,k}
-		&=\Pr\left[(a_1=a_2)\lor\cdots\lor(a_1=a_k)\lor(a_2=a_3)\lor\cdots\lor(a_{k-1}=a_k)\right]\\
-		&\leq\sum_{1\leq i< j\leq k}\Pr\left[a_i=a_j\right]\\
-		&=\binom{k}{2}\frac{1}{n}\\
-		&\leq\frac{k^2}{2n}.
+			P_{n,k}
+			&=\Pr\left[(a_1=a_2)\lor\cdots\lor(a_1=a_k)\lor(a_2=a_3)\lor\cdots\lor(a_{k-1}=a_k)\right]\\
+			&\leq\sum_{1\leq i< j\leq k}\Pr\left[a_i=a_j\right]\\
+			&=\binom{k}{2}\frac{1}{n}\\
+			&\leq\frac{k^2}{2n}.
 		\end{align*} Thus, the upper bound of $P_{n,k}$ is less than 1/2 when $k=\floor*{\sqrt{n}}$.
 	\end{remark}
 	\fi
@@ -961,20 +960,20 @@
 		For all $i,j\in\set{1,\cdots, k}$, we have \[
 		\Pr[a_i=b_j]=\frac{1}{n}\implies\Pr[a_i\neq b_j]=1-\frac{1}{n}.
 		\] Thus \begin{align*}
-		\Pr[A\cap B\neq\emptyset]&=1-\prod_{i=1}^k\prod_{j=1}^k\Pr[a_i\neq b_j]\\
-		&=1-\prod_{i=1}^k\prod_{j=1}^k\of{1-\frac{1}{n}}\\
-		&=1-\of{1-\frac{1}{n}}^{k^2}\\
-		&\approx 1-\of{e^{-\frac{1}{n}}}^{k^2}\\
-		&=1-e^{-\frac{k^2}{n}}.
+			\Pr[A\cap B\neq\emptyset]&=1-\prod_{i=1}^k\prod_{j=1}^k\Pr[a_i\neq b_j]\\
+			&=1-\prod_{i=1}^k\prod_{j=1}^k\of{1-\frac{1}{n}}\\
+			&=1-\of{1-\frac{1}{n}}^{k^2}\\
+			&\approx 1-\of{e^{-\frac{1}{n}}}^{k^2}\\
+			&=1-e^{-\frac{k^2}{n}}.
 		\end{align*}
 	\end{proof}
 	
 	\begin{remark}
 		Find minimum value of $k$ such that $P_{n,k}\geq 1/2$. \begin{align*}
-		P_{n,k}=1-e^{-\frac{k^2}{n}}\geq\frac{1}{2}&\implies e^{-k^2/n}\leq\frac{1}{2}\\
-		&\implies-\frac{k^2}{n}\leq\ln\frac{1}{2}\\
-		&\implies (\ln2)n\leq k^2\\
-		&\implies \ceil*{\sqrt{\of{\ln 2}n}}\leq k.
+			P_{n,k}=1-e^{-\frac{k^2}{n}}\geq\frac{1}{2}&\implies e^{-k^2/n}\leq\frac{1}{2}\\
+			&\implies-\frac{k^2}{n}\leq\ln\frac{1}{2}\\
+			&\implies (\ln2)n\leq k^2\\
+			&\implies \ceil*{\sqrt{\of{\ln 2}n}}\leq k.
 		\end{align*} 
 		Thus, $k\geq c\sqrt{n}$, where $c$ is a constant. That is, $O(\sqrt{n})$.
 	\end{remark}
@@ -1041,9 +1040,9 @@
 	P\of{\textnormal{no collision for $k$ inputs}}=\prod_{i=1}^{k-1}\of{1-\frac{i}{2^n}}.
 	\]
 	Then \begin{align*}
-	\prod_{i=1}^{k-1}\of{1-\frac{i}{2^n}}\approx e^{-\frac{k^2}{2\cdot 2^n}}\geq\frac{1}{2}
-	&\implies (2\ln2)2^n\leq k^2\\
-	&\implies \sqrt{2\ln2}\sqrt{2^n}\leq k.
+		\prod_{i=1}^{k-1}\of{1-\frac{i}{2^n}}\approx e^{-\frac{k^2}{2\cdot 2^n}}\geq\frac{1}{2}
+		&\implies (2\ln2)2^n\leq k^2\\
+		&\implies \sqrt{2\ln2}\sqrt{2^n}\leq k.
 	\end{align*}
 	For $N=O(\sqrt{2^n})$, we generate the set of input/output pairs \[
 	S=\set{\of{x_i,f\of{x_i}}}_{i=1}^N.
@@ -1060,12 +1059,12 @@
 	\begin{example}
 		Consider $160$-bit output function. Then 
 		\begin{align*}
-		\text{Memory space} &= \sqrt{2^n} \times n \times 2 \\
-		&= 2^{80} \times 160 \times 2 \\
-		&= 2^{80} \times 2^5\times 5 \times 2 \\
-		&= 10\times 2^{85}\\
-		&= 10\times 2^{82} \times 2^3 (= 10\times 2^{82}\ \text{bytes})\\
-		&= 10 \times 2^{42}\ \text{TB}.
+			\text{Memory space} &= \sqrt{2^n} \times n \times 2 \\
+			&= 2^{80} \times 160 \times 2 \\
+			&= 2^{80} \times 2^5\times 5 \times 2 \\
+			&= 10\times 2^{85}\\
+			&= 10\times 2^{82} \times 2^3 (= 10\times 2^{82}\ \text{bytes})\\
+			&= 10 \times 2^{42}\ \text{TB}.
 		\end{align*}
 	\end{example}
 	
@@ -1104,27 +1103,27 @@
 	\vspace{8pt}
 	\begin{center}
 		\begin{tikzpicture}[
-		node distance = .2cm and .3cm,
-		block/.style = {rectangle split, rectangle split parts=2, draw, anchor=center},
-		arr/.style = {-Stealth, line width=0.8pt}
-		]
-		\node[block] (A) {0\nodepart{two}$x_0$};
-		\node[block, right=of A] (B) {1\nodepart{two}$f(x_0)$};
-		\node[block, right=of B] (C) {2\nodepart{two}$(f\circ f)(x_0)=:f^2(x_0)$};
-		\node[block, right=1.5cm of C] (D) {$I$\nodepart{two}$f^I(x_0)$};
-		\node[block, right=of D] (E) {$I + 1$\nodepart{two}$f^{I + 1}(x_0)$};
-		\node[block, right=of E] (F) {$\cdots$\nodepart{two}$\cdots$};
-		\node[block, right=of F] (G) {$J$\nodepart{two}$f^{J}(x_0)$};
-		\node[draw=none, below=.7cm of C] (dots) {$\cdots$};
-		
-		\draw[arr] (A) -- (B);
-		\draw[arr] (B) -- (C);
-		\draw[arr] (C) -- (dots);
-		\draw[arr] (dots) -- (D);
-		\draw[arr] (D) -- (E);
-		\draw[arr] (E) -- (F);
-		\draw[arr] (F) -- (G);
-		\draw[arr] (G) edge[bend right=45] (D);
+			node distance = .2cm and .3cm,
+			block/.style = {rectangle split, rectangle split parts=2, draw, anchor=center},
+			arr/.style = {-Stealth, line width=0.8pt}
+			]
+			\node[block] (A) {0\nodepart{two}$x_0$};
+			\node[block, right=of A] (B) {1\nodepart{two}$f(x_0)$};
+			\node[block, right=of B] (C) {2\nodepart{two}$(f\circ f)(x_0)=:f^2(x_0)$};
+			\node[block, right=1.5cm of C] (D) {$I$\nodepart{two}$f^I(x_0)$};
+			\node[block, right=of D] (E) {$I + 1$\nodepart{two}$f^{I + 1}(x_0)$};
+			\node[block, right=of E] (F) {$\cdots$\nodepart{two}$\cdots$};
+			\node[block, right=of F] (G) {$J$\nodepart{two}$f^{J}(x_0)$};
+			\node[draw=none, below=.7cm of C] (dots) {$\cdots$};
+			
+			\draw[arr] (A) -- (B);
+			\draw[arr] (B) -- (C);
+			\draw[arr] (C) -- (dots);
+			\draw[arr] (dots) -- (D);
+			\draw[arr] (D) -- (E);
+			\draw[arr] (E) -- (F);
+			\draw[arr] (F) -- (G);
+			\draw[arr] (G) edge[bend right=45] (D);
 		\end{tikzpicture}
 	\end{center}
 	We define a sequence $\set{x_i}_{i>0}$ as follows: \[
@@ -1138,28 +1137,28 @@
 			\] with initial node $x_0\notin\img\of{f}$. Then $\exists k>I$ such that $x_k=x_{2k}$:
 			\begin{center}
 				\begin{tikzpicture}[
-				node distance = .2cm and .4cm,
-				block/.style = {rectangle split, rectangle split parts=2, draw, anchor=center},
-				arr/.style = {-Stealth, line width=0.8pt}
-				]
-				\node[block] (A) {0\nodepart{two}$x_0$};
-				\node[block, right=2.5cm of A] (B) {$I$\nodepart{two}$f^I(x_0)$};
-				\node[block, right=of B] (C) {$I + 1$\nodepart{two}$f^{I + 1}(x_0)$};
-				\node[block, right=of C] (D) {$\cdots$\nodepart{two}$\cdots$};
-				\node[block, right=of D] (E) {$k=2k$\nodepart{two}$f^{k}=f^{2k}$};
-				\node[block, right=of E] (F) {$\cdots$\nodepart{two}$\cdots$};
-				\node[block, right=of F] (G) {$J$\nodepart{two}$f^{J}(x_0)$};
-				\node[draw=none, below=.7cm of B] (dots) {$\cdots$};
-				
-				\draw[arr] (A) -- (dots);
-				\draw[arr] (dots) -- (B);
-				\draw[arr] (B) -- (C);
-				\draw[arr] (C) -- (D);
-				\draw[arr] (D) -- (E);
-				\draw[arr] (E) to[out=315, in=225, looseness=2, loop] (E);
-				\draw[arr] (E) -- (F);
-				\draw[arr] (F) -- (G);
-				\draw[arr] (G) edge[bend right=45] (C);
+					node distance = .2cm and .4cm,
+					block/.style = {rectangle split, rectangle split parts=2, draw, anchor=center},
+					arr/.style = {-Stealth, line width=0.8pt}
+					]
+					\node[block] (A) {0\nodepart{two}$x_0$};
+					\node[block, right=2.5cm of A] (B) {$I$\nodepart{two}$f^I(x_0)$};
+					\node[block, right=of B] (C) {$I + 1$\nodepart{two}$f^{I + 1}(x_0)$};
+					\node[block, right=of C] (D) {$\cdots$\nodepart{two}$\cdots$};
+					\node[block, right=of D] (E) {$k=2k$\nodepart{two}$f^{k}=f^{2k}$};
+					\node[block, right=of E] (F) {$\cdots$\nodepart{two}$\cdots$};
+					\node[block, right=of F] (G) {$J$\nodepart{two}$f^{J}(x_0)$};
+					\node[draw=none, below=.7cm of B] (dots) {$\cdots$};
+					
+					\draw[arr] (A) -- (dots);
+					\draw[arr] (dots) -- (B);
+					\draw[arr] (B) -- (C);
+					\draw[arr] (C) -- (D);
+					\draw[arr] (D) -- (E);
+					\draw[arr] (E) to[out=315, in=225, looseness=2, loop] (E);
+					\draw[arr] (E) -- (F);
+					\draw[arr] (F) -- (G);
+					\draw[arr] (G) edge[bend right=45] (C);
 				\end{tikzpicture}
 			\end{center}
 		\end{theorem}
@@ -1179,50 +1178,50 @@
 	\vspace{8pt}
 	\begin{remark}
 		We know that $\exists k>I$ such that $x_k=x_{2k}$. Since \begin{align*}
-		x_k=f(x_{k-1}),\quad x_{2k}=f(x_{2k-1}),
+			x_k=f(x_{k-1}),\quad x_{2k}=f(x_{2k-1}),
 		\end{align*} by the definition of $\set{x_i}_{i>0}$, then, we obtain $f(x_{k-1})=f(x_{2k-1})$. But $(x_{k-1},x_{2k-1})$ may not be a collision pair. \textcolor{blue}{Let $x_\alpha$ is the \underline{initial term} of a circular sequence $\set{x_j}_{j>I}$.} Since $k$ is a multiple of the period of $\lambda$ of $\set{x_j}_{j>I}$, Then, we see that \begin{align*}
-		x_\alpha&=x_{\alpha+k}\quad\because\text{$k$ is the multiple of the period of $\lambda$}\\
-		f(x_{\alpha-1})&=f(x_{\alpha+k-1})\quad\text{by the def. of $\set{x_i}_{i>0}$},\\
+			x_\alpha&=x_{\alpha+k}\quad\because\text{$k$ is the multiple of the period of $\lambda$}\\
+			f(x_{\alpha-1})&=f(x_{\alpha+k-1})\quad\text{by the def. of $\set{x_i}_{i>0}$},\\
 		\end{align*} and so $(x_{\alpha-1},x_{\alpha+k-1})$ is a clear collision pair.
 	\end{remark}
 	
 	\iffalse
 	\begin{lstlisting}[style=sage, caption={Small-Sapce Attack (Sage)},captionpos=t]
-	N = 2^13 - 1 #12-bit
-	n = floor(sqrt(N))
-	print("N = {}\nn = floor(sqrt N) = {}\n".format(N,n))
-	
-	def f(x):
-	return (x^2 + 1) % N
-	
-	# Step 1: Discover k such that x_k = x_{2k}
-	x0 = ZZ.random_element(N, 2*N) #x0 is the start node
-	x1, x2 = x0, x0
-	k = 0
-	while True :
-	k = k + 1
-	x1, x2 = f(x1), f(f(x2))
-	if x1 == x2 :
-	print ("k = {}, 2k = {}".format(k, 2*k))
-	break
-	
-	# Step 2: Find the collision pair
-	x1 , x2 = x0, x2
-	for i in [0..k]:
-	if f(x1) == f(x2):
-	print("Collision: ({}-th elt = {}, {}-th elt = {}) ".format(i, x1, k+i, x2))
-	break
-	else :
-	x1, x2 = f(x1), f(x2)
-	
-	L = [(0, x0)]
-	for j in [1..2*k]:
-	L = L + [(j, f(L[j-1][1]))]
-	
-	# list_plot(L)
-	
-	for pair in L:
-	print(pair)
+		N = 2^13 - 1 #12-bit
+		n = floor(sqrt(N))
+		print("N = {}\nn = floor(sqrt N) = {}\n".format(N,n))
+		
+		def f(x):
+		return (x^2 + 1) % N
+		
+		# Step 1: Discover k such that x_k = x_{2k}
+		x0 = ZZ.random_element(N, 2*N) #x0 is the start node
+		x1, x2 = x0, x0
+		k = 0
+		while True :
+		k = k + 1
+		x1, x2 = f(x1), f(f(x2))
+		if x1 == x2 :
+		print ("k = {}, 2k = {}".format(k, 2*k))
+		break
+		
+		# Step 2: Find the collision pair
+		x1 , x2 = x0, x2
+		for i in [0..k]:
+		if f(x1) == f(x2):
+		print("Collision: ({}-th elt = {}, {}-th elt = {}) ".format(i, x1, k+i, x2))
+		break
+		else :
+		x1, x2 = f(x1), f(x2)
+		
+		L = [(0, x0)]
+		for j in [1..2*k]:
+		L = L + [(j, f(L[j-1][1]))]
+		
+		# list_plot(L)
+		
+		for pair in L:
+		print(pair)
 	\end{lstlisting}
 	\fi	
 	
@@ -1289,8 +1288,8 @@
 	\] That is, $r,q\in\Z_m$. Then \[
 	h=g^k=g^{mq+r}\implies g^r=h\of{g^{-m}}^q.
 	\] Define two sets  \begin{align*}
-	BS &:= \set{g^i:i=0,1,\cdots, m-1},\\
-	GS &:= \set{h\of{g^{-m}}^j:j=0,1,\cdots, m-1}.
+		BS &:= \set{g^i:i=0,1,\cdots, m-1},\\
+		GS &:= \set{h\of{g^{-m}}^j:j=0,1,\cdots, m-1}.
 	\end{align*} Clearly $BS\cap GS\neq\emptyset$. Thus we can find $i,j\in\Z_m$ such that $g^i=h\of{g^{-m}}^j$. Hence we obtain  the discrete logarithm \[
 	k=mj+i.
 	\]
@@ -1336,10 +1335,10 @@
 		\vspace{4pt}
 		\item[] (Step II) Define a sequence $\set{x_j,a_j,b_j}_{j=0}^\infty=\set{g^{a_j}h^{b_j},a_j,b_j}_{j=0}^\infty$ as follows: \[
 		\of{x_j,a_j,b_j}:=\begin{cases}
-		\of{g^0h^0, 0, 0} &: j=0,\\
-		\of{x_{j-1}h, a_{j-1}, b_{j-1}+1\mod p}&: j\geq 1\ \text{and}\ x_{j-1}\in G_1,\\
-		\of{x_{j-1}^2, 2a_{j-1}\mod p, 2b_{j-1}\mod p}&: j\geq 1\ \text{and}\ x_{j-1}\in G_2,\\
-		\of{gx_{j-1}, a_{j-1}+1\mod p, b_{j-1}}&: j\geq 1\ \text{and}\ x_{j-1}\in G_3.
+			\of{g^0h^0, 0, 0} &: j=0,\\
+			\of{x_{j-1}h, a_{j-1}, b_{j-1}+1\mod p}&: j\geq 1\ \text{and}\ x_{j-1}\in G_1,\\
+			\of{x_{j-1}^2, 2a_{j-1}\mod p, 2b_{j-1}\mod p}&: j\geq 1\ \text{and}\ x_{j-1}\in G_2,\\
+			\of{gx_{j-1}, a_{j-1}+1\mod p, b_{j-1}}&: j\geq 1\ \text{and}\ x_{j-1}\in G_3.
 		\end{cases}
 		\]
 		\vspace{4pt}
@@ -1347,36 +1346,36 @@
 		\item[] (Step III) Using Floyd's cycle-finding, we find $\of{x_j,a_j,b_j}$ and $\of{x_2j,a_{2j},b_{2j}}$ such that $x_j=x_{2j}$:
 		\begin{center}
 			\begin{tikzpicture}[
-			node distance = .2cm and .3cm,
-			block/.style = {rectangle split, rectangle split parts=2, draw, anchor=center},
-			arr/.style = {-Stealth, line width=0.8pt}
-			]
-			\node[block] (A) {$0$\nodepart{two}$g^{a_0}h^{b_0}$};
-			\node[block, right=0.7cm of A] (B) {$I$\nodepart{two}$g^{a_I}h^{b_I}$};
-			\node[block, right=of B] (C) {$I+1$\nodepart{two}$g^{a_{I+1}}h^{b_{I+1}}$};
-			\node[block, right=of C] (D) {$\cdots$\nodepart{two}$\cdots$};
-			\node[block, right=of D] (E) {$k=2k$\nodepart{two}$g^{a_{k}}h^{b_{k}}=g^{a_{2k}}h^{b_{2k}}$};
-			\node[block, right=of E] (F) {$\cdots$\nodepart{two}$\cdots$};
-			\node[block, right=of F] (G) {$J$\nodepart{two}$g^{a_{J}}h^{b_{J}}$};
-			\node[draw=none, below=.7cm of B] (dots) {$\cdots$};
-			
-			\draw[arr] (A) -- (dots);
-			\draw[arr] (dots) -- (B);
-			\draw[arr] (B) -- (C);
-			\draw[arr] (C) -- (D);
-			\draw[arr] (D) -- (E);
-			\draw[arr] (E) to[out=315, in=225, looseness=2, loop] (E);
-			\draw[arr] (E) -- (F);
-			\draw[arr] (F) -- (G);
-			\draw[arr] (G) edge[bend right=45] (C);
+				node distance = .2cm and .3cm,
+				block/.style = {rectangle split, rectangle split parts=2, draw, anchor=center},
+				arr/.style = {-Stealth, line width=0.8pt}
+				]
+				\node[block] (A) {$0$\nodepart{two}$g^{a_0}h^{b_0}$};
+				\node[block, right=0.7cm of A] (B) {$I$\nodepart{two}$g^{a_I}h^{b_I}$};
+				\node[block, right=of B] (C) {$I+1$\nodepart{two}$g^{a_{I+1}}h^{b_{I+1}}$};
+				\node[block, right=of C] (D) {$\cdots$\nodepart{two}$\cdots$};
+				\node[block, right=of D] (E) {$k=2k$\nodepart{two}$g^{a_{k}}h^{b_{k}}=g^{a_{2k}}h^{b_{2k}}$};
+				\node[block, right=of E] (F) {$\cdots$\nodepart{two}$\cdots$};
+				\node[block, right=of F] (G) {$J$\nodepart{two}$g^{a_{J}}h^{b_{J}}$};
+				\node[draw=none, below=.7cm of B] (dots) {$\cdots$};
+				
+				\draw[arr] (A) -- (dots);
+				\draw[arr] (dots) -- (B);
+				\draw[arr] (B) -- (C);
+				\draw[arr] (C) -- (D);
+				\draw[arr] (D) -- (E);
+				\draw[arr] (E) to[out=315, in=225, looseness=2, loop] (E);
+				\draw[arr] (E) -- (F);
+				\draw[arr] (F) -- (G);
+				\draw[arr] (G) edge[bend right=45] (C);
 			\end{tikzpicture}
 		\end{center}
 		\vspace{4pt}
 		\item[] (Step IV) Find a collision pair!
 		\begin{align*}
-		g^{a_j}h^{b_j}=g^{a_{2j}}h^{b_{2j}} &\implies g^{a_j-a_{2j}}=h^{b_{2j}-b_j}=(g^{x})^{b_{2j}-b_j}\\
-		&\implies a_j-a_{2j}\equiv x\of{b_{2j}-b_{j}}\pmod{p}\\
-		&\implies x= \of{a_j-a_{2j}}\of{b_{2j}-b_{j}}^{-1}\mod{p}\quad\because\text{$p$ is a prime}.
+			g^{a_j}h^{b_j}=g^{a_{2j}}h^{b_{2j}} &\implies g^{a_j-a_{2j}}=h^{b_{2j}-b_j}=(g^{x})^{b_{2j}-b_j}\\
+			&\implies a_j-a_{2j}\equiv x\of{b_{2j}-b_{j}}\pmod{p}\\
+			&\implies x= \of{a_j-a_{2j}}\of{b_{2j}-b_{j}}^{-1}\mod{p}\quad\because\text{$p$ is a prime}.
 		\end{align*}
 	\end{itemize}
 	
@@ -1386,39 +1385,39 @@
 	In this chapter, we introduce three algorithms to compute the exponentiation $x^n=\underbrace{x\times\cdots\times x}_n$ (or the constant multiple $nx=\underbrace{x+\cdots+x}_n$) for an $l$-bit positive integer $n=\sum_{j=0}^{l-1}n_j2^j$ with $n_j\in\set{0,1}$ and $n_{l-1}=1$\footnote{MSB:Most Significant Bit}.
 	\begin{center}
 		\begin{tikzpicture}
-		% Parameters
-		\def\l{6} % Length of the strip (number of bits)
-		
-		% Draw rectangles for bits and labels
-		\foreach \j in {0,...,\l} {
-			\draw (\j,0) rectangle (\j+1,1);
-		}
-		
-		% Label the first two bits
-		\node at (0.5,0.5) {$n_{l-1}$};
-		\node at (1.5,0.5) {$n_{l-2}$};
-		
-		% Label the last two bits
-		\node at (5.5,0.5) {$n_1$};
-		\node at (6.5,0.5) {$n_0$};
-		
-		% Fill in the middle with \cdots
-		\node at (2.5,0.5) {$\cdots$};
-		\node at (3.5,0.5) {$\cdots$};
-		\node at (4.5,0.5) {$\cdots$};
-		
-		% Label the exponent part
-		\node[below] at (0.5,0) {$2^{l-1}$};
-		\node[below] at (1.5,0) {$2^{l-2}$};
-		\node[below] at (2.5,-.25) {$\cdots$};
-		\node[below] at (3.5,-.25) {$\cdots$};
-		\node[below] at (4.5,-.25) {$\cdots$};
-		\node[below] at (5.5,0) {$2^{1}$};
-		\node[below] at (6.5,0) {$2^{0}$};
-		
-		% Draw arrow and label n
-		\draw[->,thick] (\l+1.5,0.5) -- (\l+2.5,0.5);
-		\node[right] at (\l+2.5,0.5) {$n = \sum_{j=0}^{l-1} n_j 2^j$};
+			% Parameters
+			\def\l{6} % Length of the strip (number of bits)
+			
+			% Draw rectangles for bits and labels
+			\foreach \j in {0,...,\l} {
+				\draw (\j,0) rectangle (\j+1,1);
+			}
+			
+			% Label the first two bits
+			\node at (0.5,0.5) {$n_{l-1}$};
+			\node at (1.5,0.5) {$n_{l-2}$};
+			
+			% Label the last two bits
+			\node at (5.5,0.5) {$n_1$};
+			\node at (6.5,0.5) {$n_0$};
+			
+			% Fill in the middle with \cdots
+			\node at (2.5,0.5) {$\cdots$};
+			\node at (3.5,0.5) {$\cdots$};
+			\node at (4.5,0.5) {$\cdots$};
+			
+			% Label the exponent part
+			\node[below] at (0.5,0) {$2^{l-1}$};
+			\node[below] at (1.5,0) {$2^{l-2}$};
+			\node[below] at (2.5,-.25) {$\cdots$};
+			\node[below] at (3.5,-.25) {$\cdots$};
+			\node[below] at (4.5,-.25) {$\cdots$};
+			\node[below] at (5.5,0) {$2^{1}$};
+			\node[below] at (6.5,0) {$2^{0}$};
+			
+			% Draw arrow and label n
+			\draw[->,thick] (\l+1.5,0.5) -- (\l+2.5,0.5);
+			\node[right] at (\l+2.5,0.5) {$n = \sum_{j=0}^{l-1} n_j 2^j$};
 		\end{tikzpicture}
 	\end{center}
 	\begin{enumerate}[(1)]
@@ -1502,41 +1501,41 @@
 	\vspace{8pt}
 	
 	\textbf{Left-to-Right Binary Method} utilizes the following equation: \begin{align*}
-	(n)_l=n_{l-1}\parallel n_{l-2}\parallel\cdots\parallel n_1\parallel n_0&=\sum_{j=0}^{l-1}n_j2^j\\
-	&=n_{l-1}2^{l-1}+n_{l-2}2^{l-2}+\cdots+n_22^2+n_12+n_0\\
-	&=2\of{n_{l-1}2^{l-2}+n_{l-2}2^{l-3}+\cdots+n_22+n_1}+n_0\\
-	&=2\of{2\of{n_{l-1}2^{l-3}+n_{l-2}2^{l-4}+\cdots+n_2}+n_1}+n_0\\
-	&=2\of{\cdots 2\of{2\of{2(0)+n_{l-1}}+n_{l-2}}\cdots}+n_0.
+		(n)_l=n_{l-1}\parallel n_{l-2}\parallel\cdots\parallel n_1\parallel n_0&=\sum_{j=0}^{l-1}n_j2^j\\
+		&=n_{l-1}2^{l-1}+n_{l-2}2^{l-2}+\cdots+n_22^2+n_12+n_0\\
+		&=2\of{n_{l-1}2^{l-2}+n_{l-2}2^{l-3}+\cdots+n_22+n_1}+n_0\\
+		&=2\of{2\of{n_{l-1}2^{l-3}+n_{l-2}2^{l-4}+\cdots+n_2}+n_1}+n_0\\
+		&=2\of{\cdots 2\of{2\of{2(0)+n_{l-1}}+n_{l-2}}\cdots}+n_0.
 	\end{align*}
 	Then \begin{align*}
-	nx&=\of{\sum_{j=0}^{l-1}n_j2^j}x=2\of{\sum_{j=1}^{l-2}n_{j+1}2^j}x+n_0x,\\ x^n&=x^{\sum_{j=0}^{l-1}n_j2^j}=x^{2\sum_{j=1}^{l-2}n_j2^j+n_0}=\of{x^{\sum_{j=1}^{l-2}n_j2^j}}^2\times x^{n_0}.
+		nx&=\of{\sum_{j=0}^{l-1}n_j2^j}x=2\of{\sum_{j=1}^{l-2}n_{j+1}2^j}x+n_0x,\\ x^n&=x^{\sum_{j=0}^{l-1}n_j2^j}=x^{2\sum_{j=1}^{l-2}n_j2^j+n_0}=\of{x^{\sum_{j=1}^{l-2}n_j2^j}}^2\times x^{n_0}.
 	\end{align*}
 	\begin{proof}[Correctness of algorithm \textnormal{(Left-to-Right Binary Method)}]
 		Let \begin{align*}
-		m_l&:=0,\\
-		m_{l-1}&:=n_{l-1},\\
-		m_{l-2}&:=n_{l-2}+2n_{l-1},\quad\of{n_{l-1}\parallel n_{l-2}}\\
-		m_{l-3}&:=n_{l-3}+2n_{l-2}+2^2n_{l-1},\quad\of{n_{l-1}\parallel n_{l-2}\parallel n_{l-3}}\\
-		&\vdots\\
-		m_{0}&:=n_0+2n_1+2^2n_2+\cdots+2^{l-1}n_{l-1},\quad\of{n_{l-1}\parallel n_{l-2}\parallel n_{l-3}\parallel\cdots\parallel n_0=n}.
+			m_l&:=0,\\
+			m_{l-1}&:=n_{l-1},\\
+			m_{l-2}&:=n_{l-2}+2n_{l-1},\quad\of{n_{l-1}\parallel n_{l-2}}\\
+			m_{l-3}&:=n_{l-3}+2n_{l-2}+2^2n_{l-1},\quad\of{n_{l-1}\parallel n_{l-2}\parallel n_{l-3}}\\
+			&\vdots\\
+			m_{0}&:=n_0+2n_1+2^2n_2+\cdots+2^{l-1}n_{l-1},\quad\of{n_{l-1}\parallel n_{l-2}\parallel n_{l-3}\parallel\cdots\parallel n_0=n}.
 		\end{align*} That is, the following recurrence relation is generated: \[
 		m_j:=\begin{cases}
-		0 &: j=l\\
-		2m_{j+1}+n_j &: j=l-1,l-2,\dots, 1, 0.
+			0 &: j=l\\
+			2m_{j+1}+n_j &: j=l-1,l-2,\dots, 1, 0.
 		\end{cases}
 		\] Since $m_0 = n$, we obtain $x^n$ or $nx$ through the following process: \begin{center}
 			$x^{m_l}=x^0=1\to x^{m_{l-1}}\to x^{m_{l-2}}\to\cdots\to x^{m_1}\to x^{m_0}=x^n$,\\
 			\vspace{8pt}$
 			x^{m_j}\leftarrow x^{2m_{j+1}+n_j}=x^{2m_{j+1}}x^{n_j}=\mathcolorbox{-blue}{\of{x^{m_{j+1}}}^2x^{n_j}}=\begin{cases}
-			\of{x^{m_{j+1}}}^2 &: n_j=0\\
-			\of{x^{m_{j+1}}}^2x &: n_j=1.
+				\of{x^{m_{j+1}}}^2 &: n_j=0\\
+				\of{x^{m_{j+1}}}^2x &: n_j=1.
 			\end{cases}$
 		\end{center}\vspace{4pt}\begin{center}
 			${m_l}x=0\cdot x=0\to{m_{l-1}}x\to {m_{l-2}}x\to\cdots\to {m_1}x\to {m_0}x=nx$,\\
 			\vspace{8pt}$
 			{m_j}x\leftarrow \of{2m_{j+1}+n_j}x=\mathcolorbox{-blue}{2\of{m_{j+1}x}+n_jx}=\begin{cases}
-			2\of{m_{j+1}x} &: n_j=0\\
-			2\of{m_{j+1}x}+x &: n_j=1.
+				2\of{m_{j+1}x} &: n_j=0\\
+				2\of{m_{j+1}x}+x &: n_j=1.
 			\end{cases}$
 		\end{center}
 	\end{proof}
@@ -1545,22 +1544,22 @@
 		$x^6=x^{\texttt{0b110}}=\of{\of{\of{1}^2x}^2x}^2$ and $6x=(\texttt{0b110})x=2\of{2\of{2\of{0}+x}+x}$.
 		\begin{center}
 			\begin{tikzpicture}[mystyle/.style={draw, minimum width=2cm, minimum height=1cm, text centered}]
-			% Matrix to show the exponent bits
-			\matrix (bits) [matrix of nodes, nodes={mystyle}] {
-				$b_2$ & $b_1$ & $b_0$ \\
-				1     & 1     & 0    \\
-			};
-			
-			% Matrix to show the steps for each bit
-			\matrix (steps) [matrix of nodes, nodes={mystyle}, below=1.5cm of bits] {
-				Square: $1^2$ & Square: $x^2$ & Square: $x^6$ \\
-				Multiply: $x$ & Multiply: $x^3$ &  \\
-			};
-			
-			% Draw arrows between the exponent bits and the corresponding steps
-			\foreach \i in {1, 2, 3} {
-				\draw[->] (bits-2-\i.south) -- (steps-1-\i.north);
-			}
+				% Matrix to show the exponent bits
+				\matrix (bits) [matrix of nodes, nodes={mystyle}] {
+					$b_2$ & $b_1$ & $b_0$ \\
+					1     & 1     & 0    \\
+				};
+				
+				% Matrix to show the steps for each bit
+				\matrix (steps) [matrix of nodes, nodes={mystyle}, below=1.5cm of bits] {
+					Square: $1^2$ & Square: $x^2$ & Square: $x^6$ \\
+					Multiply: $x$ & Multiply: $x^3$ &  \\
+				};
+				
+				% Draw arrows between the exponent bits and the corresponding steps
+				\foreach \i in {1, 2, 3} {
+					\draw[->] (bits-2-\i.south) -- (steps-1-\i.north);
+				}
 			\end{tikzpicture}
 		\end{center}
 	\end{example}
@@ -1629,40 +1628,40 @@
 	\vspace{8pt}
 	
 	\textbf{Right-to-Left Binary Method} utilizes the following equation: \begin{align*}
-	x^n=x^{\sum_{j=0}^{l-1}n_j2^j}=x^{n_02^0+n_12^1+n_22^2+\cdots+n_{l-1}2^{l-1}}&=\of{x^{2^0}}^{n_0}\times \of{x^{2^1}}^{n_1}\times \of{x^{2^2}}^{n_2}\times \cdots\\
-	&=\of{x^{2^0}}^{n_0}\times \of{\of{x^{2^0}}^2}^{n_1}\times \of{\of{\of{x^{2^0}}^2}^2}^{n_2}\times \cdots
+		x^n=x^{\sum_{j=0}^{l-1}n_j2^j}=x^{n_02^0+n_12^1+n_22^2+\cdots+n_{l-1}2^{l-1}}&=\of{x^{2^0}}^{n_0}\times \of{x^{2^1}}^{n_1}\times \of{x^{2^2}}^{n_2}\times \cdots\\
+		&=\of{x^{2^0}}^{n_0}\times \of{\of{x^{2^0}}^2}^{n_1}\times \of{\of{\of{x^{2^0}}^2}^2}^{n_2}\times \cdots
 	\end{align*}
 	Then \begin{align*}
-	x^{2^0}\xrightarrow{\textnormal{squaring}}\of{x^{2^0}}^2\xrightarrow{\textnormal{squaring}}\of{\of{x^{2^0}}^2}^2\xrightarrow{\textnormal{squaring}}\cdots
+		x^{2^0}\xrightarrow{\textnormal{squaring}}\of{x^{2^0}}^2\xrightarrow{\textnormal{squaring}}\of{\of{x^{2^0}}^2}^2\xrightarrow{\textnormal{squaring}}\cdots
 	\end{align*}
 	\begin{proof}[Correctness of algorithm \textnormal{(Right-to-Left Binary Method)}]
 		Let \begin{flushright}
 			\begin{align*}
-			m_0&:= & 0,\\
-			m_{1}&:= & n_{0},\\
-			m_{2}&:= & 2n_{1}+n_{0}\\
-			m_{3}&:= & 2^2n_2+2n_{1}+n_{0}\\
-			&\vdots\\
-			m_{l}&:= &2^{l-1}n_{l-1}+2^{l-2}n_{l-2}+\cdots+2^2n_2+2n_1+n_0 .
+				m_0&:= & 0,\\
+				m_{1}&:= & n_{0},\\
+				m_{2}&:= & 2n_{1}+n_{0}\\
+				m_{3}&:= & 2^2n_2+2n_{1}+n_{0}\\
+				&\vdots\\
+				m_{l}&:= &2^{l-1}n_{l-1}+2^{l-2}n_{l-2}+\cdots+2^2n_2+2n_1+n_0 .
 			\end{align*}
 		\end{flushright} That is, the following recurrence relation is generated: \[
 		m_j:=\begin{cases}
-		0 &: j=l\\
-		2m_{j+1}+n_j &: j=l-1,l-2,\dots, 1, 0.
+			0 &: j=l\\
+			2m_{j+1}+n_j &: j=l-1,l-2,\dots, 1, 0.
 		\end{cases}
 		\] Since $m_0 = n$, we obtain $x^n$ or $nx$ through the following process: \begin{center}
 			$x^{m_l}=x^0=1\to x^{m_{l-1}}\to x^{m_{l-2}}\to\cdots\to x^{m_1}\to x^{m_0}=x^n$,\\
 			\vspace{8pt}$
 			x^{m_j}\leftarrow x^{2m_{j+1}+n_j}=x^{2m_{j+1}}x^{n_j}=\mathcolorbox{-blue}{\of{x^{m_{j+1}}}^2x^{n_j}}=\begin{cases}
-			\of{x^{m_{j+1}}}^2 &: n_j=0\\
-			\of{x^{m_{j+1}}}^2x &: n_j=1.
+				\of{x^{m_{j+1}}}^2 &: n_j=0\\
+				\of{x^{m_{j+1}}}^2x &: n_j=1.
 			\end{cases}$
 		\end{center}\vspace{4pt}\begin{center}
 			${m_l}x=0\cdot x=0\to{m_{l-1}}x\to {m_{l-2}}x\to\cdots\to {m_1}x\to {m_0}x=nx$,\\
 			\vspace{8pt}$
 			{m_j}x\leftarrow \of{2m_{j+1}+n_j}x=\mathcolorbox{-blue}{2\of{m_{j+1}x}+n_jx}=\begin{cases}
-			2\of{m_{j+1}x} &: n_j=0\\
-			2\of{m_{j+1}x}+x &: n_j=1.
+				2\of{m_{j+1}x} &: n_j=0\\
+				2\of{m_{j+1}x}+x &: n_j=1.
 			\end{cases}$
 		\end{center}
 	\end{proof}
@@ -1702,25 +1701,25 @@
 	\vspace{8pt}
 	\begin{proof}[Correctness of algorithm \textnormal{(Multiply-and-Square Method (a.k.a. Montgomery Ladder))}]	
 		For $l$-bit integer $n=\sum_{j=0}^{l-1}n_j2^j=n_{l-1}\parallel n_{l-2}\parallel\cdots\parallel n_{1}\parallel n_0$, the followings are defined: \begin{align*}
-		L_j&:=\floor*{\frac{n}{2^j}}=\of{n\gg j}=n_{l-1}\parallel\cdots\parallel n_j,\\
-		R_j&:=L_j+1
+			L_j&:=\floor*{\frac{n}{2^j}}=\of{n\gg j}=n_{l-1}\parallel\cdots\parallel n_j,\\
+			R_j&:=L_j+1
 		\end{align*} for $j=0,1,\cdots, l$. Note that \begin{align*}
-		\begin{cases}
-		L_0=\floor*{\frac{n}{2^0}}=\floor*{n}=n\\
-		R_0=L_0+1=n+1
-		\end{cases},\quad
-		\begin{cases}
-		L_l=\floor*{\frac{n}{2^l}}=0\\
-		R_l=L_l+1=1
-		\end{cases}.
+			\begin{cases}
+				L_0=\floor*{\frac{n}{2^0}}=\floor*{n}=n\\
+				R_0=L_0+1=n+1
+			\end{cases},\quad
+			\begin{cases}
+				L_l=\floor*{\frac{n}{2^l}}=0\\
+				R_l=L_l+1=1
+			\end{cases}.
 		\end{align*} Since \begin{align*}
-		L_j=(n\gg j)=n_{l-1}\parallel\cdots\parallel n_{j+1}\parallel n_j&=\of{n_{l-1}\parallel\cdots\parallel n_{j+1}\parallel 0} +n_j\\
-		&=\of{L_{j+1}\ll 1}+n_j\\
-		&=2\of{L_{j+1}}+n_j,
+			L_j=(n\gg j)=n_{l-1}\parallel\cdots\parallel n_{j+1}\parallel n_j&=\of{n_{l-1}\parallel\cdots\parallel n_{j+1}\parallel 0} +n_j\\
+			&=\of{L_{j+1}\ll 1}+n_j\\
+			&=2\of{L_{j+1}}+n_j,
 		\end{align*} we obtain \begin{align*}
-		L_j&=2L_{j+1}+n_j\\
-		&=L_{j+1}+\of{R_{j+1}-1}+n_j\quad\because R_{j+1}=L_{j+1}+1\\
-		&=2{R_{j+1}}+n_j-2\quad\because R_{j+1}=L_{j+1}+1.
+			L_j&=2L_{j+1}+n_j\\
+			&=L_{j+1}+\of{R_{j+1}-1}+n_j\quad\because R_{j+1}=L_{j+1}+1\\
+			&=2{R_{j+1}}+n_j-2\quad\because R_{j+1}=L_{j+1}+1.
 		\end{align*} Then \begin{center}
 			\begin{tabular}{l||c|c}
 				\toprule[1.2pt]
@@ -1736,11 +1735,11 @@
 		\end{center}
 		From the aforementioned equation, the following recurrence relation is derived: \[
 		\begin{cases}
-		(L_l,R_l)=(L_l,L_l+1)\leftarrow (0,1),\\\\
-		(L_j,R_j)=(L_j,L_j+1)\leftarrow\begin{cases}
-		(\textcolor{red}{2L_{j+1}},\textcolor{blue}{L_{j+1}+R_{j+1}}) &: n_j=0\\
-		(\textcolor{blue}{L_{j+1}+R_{j+1}},\textcolor{red}{2R_{j+1}}) &: n_j=1.
-		\end{cases}
+			(L_l,R_l)=(L_l,L_l+1)\leftarrow (0,1),\\\\
+			(L_j,R_j)=(L_j,L_j+1)\leftarrow\begin{cases}
+				(\textcolor{red}{2L_{j+1}},\textcolor{blue}{L_{j+1}+R_{j+1}}) &: n_j=0\\
+				(\textcolor{blue}{L_{j+1}+R_{j+1}},\textcolor{red}{2R_{j+1}}) &: n_j=1.
+			\end{cases}
 		\end{cases}
 		\]
 		Thus, \[
@@ -1752,46 +1751,46 @@
 		$x^5=x^{\texttt{0b101}}$ and $5x=(\texttt{0b101})x$. Note that $5=1\parallel 0\parallel 1$.
 		\begin{center}
 			\begin{tikzpicture}[mystyle/.style={draw, minimum width=1cm, minimum height=1cm, text centered}]
-			% Matrix to show the exponent bits
-			\matrix (bits) [matrix of nodes, nodes={mystyle}] {
-				$n_2$ & $n_1$ & $n_0$ \\
-				$1$   & $0$  & $1$   \\
-			};
-			
-			% Matrix to show the steps for each bit
-			\matrix (steps) [matrix of nodes, nodes={mystyle}, below=1.5cm of bits] {
-				$x^{0+1}=x^1$ & $x^{1\cdot 2}=x^2$ & $x^{2+3}=\mathcolorbox{-blue}{x^5}$\\
-				$x^{1\cdot 2}=x^2$ & $x^{1+2}=x^3$ & $x^{3\cdot 2}=x^6$\\
-			};
-			
-			% Draw arrows between the exponent bits and the corresponding steps
-			\foreach \i in {1, 2, 3} {
-				\draw[->] (bits-2-\i.south) -- (steps-1-\i.north);
-			}
+				% Matrix to show the exponent bits
+				\matrix (bits) [matrix of nodes, nodes={mystyle}] {
+					$n_2$ & $n_1$ & $n_0$ \\
+					$1$   & $0$  & $1$   \\
+				};
+				
+				% Matrix to show the steps for each bit
+				\matrix (steps) [matrix of nodes, nodes={mystyle}, below=1.5cm of bits] {
+					$x^{0+1}=x^1$ & $x^{1\cdot 2}=x^2$ & $x^{2+3}=\mathcolorbox{-blue}{x^5}$\\
+					$x^{1\cdot 2}=x^2$ & $x^{1+2}=x^3$ & $x^{3\cdot 2}=x^6$\\
+				};
+				
+				% Draw arrows between the exponent bits and the corresponding steps
+				\foreach \i in {1, 2, 3} {
+					\draw[->] (bits-2-\i.south) -- (steps-1-\i.north);
+				}
 			\end{tikzpicture}
 		\end{center}
 		\iffalse
 		\begin{center}
 			\begin{tikzpicture}[mystyle/.style={draw, minimum width=1cm, minimum height=1cm, text centered}]
-			% Matrix to show the exponent bits
-			\matrix (bits) [matrix of nodes, nodes={mystyle}] {
-				$n_{l-1}$ & $n_{l-2}$ & $\cdots$ & $n_1$ & $n_0$ \\
-				$1$   & $0$       & $\cdots$ & $0$   & $1$   \\
-			};
-			
-			% Matrix to show the steps for each bit
-			\matrix (steps) [matrix of nodes, nodes={mystyle}, below=1.5cm of bits] {
-				$R_0 \leftarrow 2R_0$ & $R_0 \leftarrow R_0 + R_1$ & $\cdots$ & $R_0 \leftarrow 2R_0$ & $R_0 \leftarrow 2R_0$ \\
-				$R_1 \leftarrow R_0 + R_1$ & $R_1 \leftarrow 2R_1$ & $\cdots$ & $R_1 \leftarrow R_0 + R_1$ & $R_1 \leftarrow R_0 + R_1$ \\
-			};
-			
-			% Draw arrows between the exponent bits and the corresponding steps
-			\foreach \i in {1, 2, 4, 5} {
-				\draw[->] (bits-2-\i.south) -- (steps-1-\i.north);
-			}
-			
-			% Draw dots for the middle steps
-			\draw[->, dotted] (bits-2-3.south) -- (steps-1-3.north);
+				% Matrix to show the exponent bits
+				\matrix (bits) [matrix of nodes, nodes={mystyle}] {
+					$n_{l-1}$ & $n_{l-2}$ & $\cdots$ & $n_1$ & $n_0$ \\
+					$1$   & $0$       & $\cdots$ & $0$   & $1$   \\
+				};
+				
+				% Matrix to show the steps for each bit
+				\matrix (steps) [matrix of nodes, nodes={mystyle}, below=1.5cm of bits] {
+					$R_0 \leftarrow 2R_0$ & $R_0 \leftarrow R_0 + R_1$ & $\cdots$ & $R_0 \leftarrow 2R_0$ & $R_0 \leftarrow 2R_0$ \\
+					$R_1 \leftarrow R_0 + R_1$ & $R_1 \leftarrow 2R_1$ & $\cdots$ & $R_1 \leftarrow R_0 + R_1$ & $R_1 \leftarrow R_0 + R_1$ \\
+				};
+				
+				% Draw arrows between the exponent bits and the corresponding steps
+				\foreach \i in {1, 2, 4, 5} {
+					\draw[->] (bits-2-\i.south) -- (steps-1-\i.north);
+				}
+				
+				% Draw dots for the middle steps
+				\draw[->, dotted] (bits-2-3.south) -- (steps-1-3.north);
 			\end{tikzpicture}
 		\end{center}
 		\fi
@@ -1827,25 +1826,25 @@
 	The Montgomery Ladder achieves efficiency because it requires only $2n$ elliptic curve operations (additions and doublings) for an $n$-bit scalar $k$, and it maintains a constant number of operations regardless of the value of $k$. This characteristic is particularly useful in cryptographic applications, where side-channel attacks exploiting variations in execution time or power consumption can reveal information about the secret scalar.
 	
 	\begin{tikzpicture}[mystyle/.style={draw, minimum width=2cm, minimum height=1cm, text centered}]
-	% Matrix to show the exponent bits
-	\matrix (bits) [matrix of nodes, nodes={mystyle}] {
-		$b_n$ & $b_{n-1}$ & $\cdots$ & $b_1$ & $b_0$ \\
-		1     & 0         & $\cdots$ & 1     & 1     \\
-	};
-	
-	% Matrix to show the steps for each bit
-	\matrix (steps) [matrix of nodes, nodes={mystyle}, below=1.5cm of bits] {
-		$R_0 \leftarrow 2R_0$ & $R_0 \leftarrow R_0 + R_1$ & $\cdots$ & $R_0 \leftarrow 2R_0$ & $R_0 \leftarrow 2R_0$ \\
-		$R_1 \leftarrow R_0 + R_1$ & $R_1 \leftarrow 2R_1$ &          & $R_1 \leftarrow R_0 + R_1$ & $R_1 \leftarrow R_0 + R_1$ \\
-	};
-	
-	% Draw arrows between the exponent bits and the corresponding steps
-	\foreach \i in {1, 2, 5} {
-		\draw[->] (bits-2-\i.south) -- (steps-1-\i.north);
-	}
-	
-	% Draw dots for the middle steps
-	\draw[->, dotted] (bits-2-2.south) -- (steps-1-3.north);
+		% Matrix to show the exponent bits
+		\matrix (bits) [matrix of nodes, nodes={mystyle}] {
+			$b_n$ & $b_{n-1}$ & $\cdots$ & $b_1$ & $b_0$ \\
+			1     & 0         & $\cdots$ & 1     & 1     \\
+		};
+		
+		% Matrix to show the steps for each bit
+		\matrix (steps) [matrix of nodes, nodes={mystyle}, below=1.5cm of bits] {
+			$R_0 \leftarrow 2R_0$ & $R_0 \leftarrow R_0 + R_1$ & $\cdots$ & $R_0 \leftarrow 2R_0$ & $R_0 \leftarrow 2R_0$ \\
+			$R_1 \leftarrow R_0 + R_1$ & $R_1 \leftarrow 2R_1$ &          & $R_1 \leftarrow R_0 + R_1$ & $R_1 \leftarrow R_0 + R_1$ \\
+		};
+		
+		% Draw arrows between the exponent bits and the corresponding steps
+		\foreach \i in {1, 2, 5} {
+			\draw[->] (bits-2-\i.south) -- (steps-1-\i.north);
+		}
+		
+		% Draw dots for the middle steps
+		\draw[->, dotted] (bits-2-2.south) -- (steps-1-3.north);
 	\end{tikzpicture}
 	
 	\begin{tcolorbox}[colback=white,colframe=lemcolor,arc=5pt,title={\color{white}\bf }]
@@ -1903,8 +1902,8 @@
 		\caption{$\OW$ security game.}
 	\end{table}
 	In the $\OW$ attack, the advantage of the adversary $\A$, denoted as $\Adv_{\Pi}^{\OW}(\A)$, is expressed as follows: \begin{align*}
-	\Adv_{\Pi}^{\OW}(\A)&:=\textcolor{britishracinggreen}{\Pr\left[p\gets\A\of{\Encrypt(k;p)}\right]}\\
-	&:=\textcolor{blue}{\Pr\left[p\gets\A\of{\Encrypt(pk;p)}\right]}
+		\Adv_{\Pi}^{\OW}(\A)&:=\textcolor{britishracinggreen}{\Pr\left[p\gets\A\of{\Encrypt(k;p)}\right]}\\
+		&:=\textcolor{blue}{\Pr\left[p\gets\A\of{\Encrypt(pk;p)}\right]}
 	\end{align*} where $p\uniform\mathcal{P}$, \[
 	\textcolor{britishracinggreen}{k\gets\GenKey(1^n)}\quad\text{and}\quad\textcolor{blue}{pk,sk\gets\GenKeyPair(1^n)}.
 	\]
@@ -1932,9 +1931,9 @@
 		\caption{$\IND$ security game.}
 	\end{table}	
 	$\Adv_{\Pi}^{\IND}\of{\A}$ is expressed as follows: \begin{align*}
-	\Adv_{\Pi}^{\IND}\of{\A}&:=
-	\textcolor{britishracinggreen}{2\abs{b\gets\A\of{\Encrypt(k;p_b)}-\frac{1}{2}}}\\
-	&:=\textcolor{blue}{2\abs{b\gets\A\of{\Encrypt(pk;p_b)}-\frac{1}{2}}}
+		\Adv_{\Pi}^{\IND}\of{\A}&:=
+		\textcolor{britishracinggreen}{2\abs{b\gets\A\of{\Encrypt(k;p_b)}-\frac{1}{2}}}\\
+		&:=\textcolor{blue}{2\abs{b\gets\A\of{\Encrypt(pk;p_b)}-\frac{1}{2}}}
 	\end{align*} where $b\uniform\set{0,1}$, \[
 	\textcolor{britishracinggreen}{k\gets\GenKey(1^n)}\quad\text{and}\quad\textcolor{blue}{pk,sk\gets\GenKeyPair(1^n)}.
 	\]
@@ -2072,42 +2071,42 @@
 	\begin{figure}[h!]
 		\centering
 		\begin{tikzpicture}[>=stealth',node distance=.3cm, 
-		box/.style={rectangle,draw=black,minimum size=1cm}]
-		
-		\node[] (A) {Plaintext $p$};
-		\node[box,above right=of A] (B) {$\OAEPEncode(*)$};
-		\node[right=of A] (M) {\textcolor{red}{un-keyed function}};
-		\node[right=of M] (C) {Encoded plaintext $\hat{p}$};
-		\node[right=of C] (N) {\textcolor{blue}{keyed function}};
-		\node[box,above right=of C] (D) {$\Encrypt(pk;*)$};
-		\node[right=of N] (E) {Ciphertext $c$};
-		\node[box,below=of N] (F) {$\Decrypt(sk;*)$};
-		\node[box,below right=of A] (G) {$\OAEPDecode(*)$};
-		
-		%\node[above=of B, blue] (S) {};
-		%\node[above=of D, red] (T) {};
-		%\node[below=of G, blue] (U) {un-keyed function};
-		%\node[below=of F, red] (V) {keyed function};
-		
-		\draw[->] (A) to[out=90,in=180] (B);
-		\draw[->] (B) to[out=0,in=90] (C);
-		\draw[->] (C) to[out=90,in=180] (D);
-		\draw[->] (D) to[out=0,in=90] (E);
-		\draw[->, dashed] (E) to[out=-90,in=0] (F);
-		\draw[->, dashed] (F) to[out=180,in=-90] (C);
-		\draw[->, dashed] (C) to[out=-90,in=0] (G);
-		\draw[->, dashed] (G) to[out=180,in=-90] (A);
-		
-		
-		%\draw[dashed, blue] (S) to[out=0,in=90] (C);
-		%\draw[dashed, blue] (C) to[out=-90,in=0] (U);
-		%\draw[dashed, blue] (U) to[out=180,in=-90] (A);
-		%\draw[dashed, blue] (A) to[out=90,in=180] (S);
-		
-		%\draw[dashed, red] (T) to[out=0,in=90] (E);
-		%\draw[dashed, red] (E) to[out=-90,in=0] (V);
-		%\draw[dashed, red] (V) to[out=180,in=-90] (C);
-		%\draw[dashed, red] (C) to[out=90,in=180] (T);
+			box/.style={rectangle,draw=black,minimum size=1cm}]
+			
+			\node[] (A) {Plaintext $p$};
+			\node[box,above right=of A] (B) {$\OAEPEncode(*)$};
+			\node[right=of A] (M) {\textcolor{red}{un-keyed function}};
+			\node[right=of M] (C) {Encoded plaintext $\hat{p}$};
+			\node[right=of C] (N) {\textcolor{blue}{keyed function}};
+			\node[box,above right=of C] (D) {$\Encrypt(pk;*)$};
+			\node[right=of N] (E) {Ciphertext $c$};
+			\node[box,below=of N] (F) {$\Decrypt(sk;*)$};
+			\node[box,below right=of A] (G) {$\OAEPDecode(*)$};
+			
+			%\node[above=of B, blue] (S) {};
+			%\node[above=of D, red] (T) {};
+			%\node[below=of G, blue] (U) {un-keyed function};
+			%\node[below=of F, red] (V) {keyed function};
+			
+			\draw[->] (A) to[out=90,in=180] (B);
+			\draw[->] (B) to[out=0,in=90] (C);
+			\draw[->] (C) to[out=90,in=180] (D);
+			\draw[->] (D) to[out=0,in=90] (E);
+			\draw[->, dashed] (E) to[out=-90,in=0] (F);
+			\draw[->, dashed] (F) to[out=180,in=-90] (C);
+			\draw[->, dashed] (C) to[out=-90,in=0] (G);
+			\draw[->, dashed] (G) to[out=180,in=-90] (A);
+			
+			
+			%\draw[dashed, blue] (S) to[out=0,in=90] (C);
+			%\draw[dashed, blue] (C) to[out=-90,in=0] (U);
+			%\draw[dashed, blue] (U) to[out=180,in=-90] (A);
+			%\draw[dashed, blue] (A) to[out=90,in=180] (S);
+			
+			%\draw[dashed, red] (T) to[out=0,in=90] (E);
+			%\draw[dashed, red] (E) to[out=-90,in=0] (V);
+			%\draw[dashed, red] (V) to[out=180,in=-90] (C);
+			%\draw[dashed, red] (C) to[out=90,in=180] (T);
 		\end{tikzpicture}
 		\caption{OAEP Transformation}
 	\end{figure}
@@ -2148,26 +2147,26 @@
 	
 	\begin{figure}[h!]
 		\begin{tikzpicture}[
-		block/.style={rectangle, draw, text width=2.5cm, align=center},
-		line/.style={draw, -latex}
-		]
-		\node[block] (db) {DB = lHash $\|$ PS $\|$ 01 $\|$ M};
-		\node[block, below = 2cm of db] (seed) {Seed};
-		\node[block, right = 2cm of db] (xor1) {XOR};
-		\node[block, below = 2cm of xor1] (mgf1) {MGF};
-		\node[block, left = 2cm of mgf1] (xor2) {XOR};
-		\node[block, below = 2cm of xor2] (maskedseed) {00 $\|$ MaskedSeed};
-		\node[block, right = 2cm of maskedseed] (maskeddb) {MaskedDB};
-		\node[block, below = 2cm of maskeddb] (em) {EM = 00 $\|$ MaskedSeed $\|$ MaskedDB};
-		
-		\path[line] (db) -- (xor1);
-		\path[line] (seed) -- (xor2);
-		\path[line] (seed.east) -- (mgf1.north);
-		\path[line] (mgf1) -- (xor1);
-		\path[line] (xor2) -- (maskedseed);
-		\path[line] (xor1) -- (maskeddb);
-		\path[line] (maskedseed) -- (em);
-		\path[line] (maskeddb) -- (em);
+			block/.style={rectangle, draw, text width=2.5cm, align=center},
+			line/.style={draw, -latex}
+			]
+			\node[block] (db) {DB = lHash $\|$ PS $\|$ 01 $\|$ M};
+			\node[block, below = 2cm of db] (seed) {Seed};
+			\node[block, right = 2cm of db] (xor1) {XOR};
+			\node[block, below = 2cm of xor1] (mgf1) {MGF};
+			\node[block, left = 2cm of mgf1] (xor2) {XOR};
+			\node[block, below = 2cm of xor2] (maskedseed) {00 $\|$ MaskedSeed};
+			\node[block, right = 2cm of maskedseed] (maskeddb) {MaskedDB};
+			\node[block, below = 2cm of maskeddb] (em) {EM = 00 $\|$ MaskedSeed $\|$ MaskedDB};
+			
+			\path[line] (db) -- (xor1);
+			\path[line] (seed) -- (xor2);
+			\path[line] (seed.east) -- (mgf1.north);
+			\path[line] (mgf1) -- (xor1);
+			\path[line] (xor2) -- (maskedseed);
+			\path[line] (xor1) -- (maskeddb);
+			\path[line] (maskedseed) -- (em);
+			\path[line] (maskeddb) -- (em);
 		\end{tikzpicture}
 		\caption{$\RSA$-$\OAEP$ Encoding Operation}
 	\end{figure}
@@ -2235,21 +2234,21 @@
 	\end{remark}
 	\vspace{4pt}
 	\begin{lstlisting}[style=sage, caption={Prime-Counting Function (Sage)},captionpos=t]
-	def pi (n) : return n / ln(n)
-	N = [512, 1024, 1536, 2048, 3840, 7680]
-	for n in N :
+def pi (n) : return n / ln(n)
+N = [512, 1024, 1536, 2048, 3840, 7680]
+for n in N :
 	U, L = 2^n, 2^(n-1)
 	T = pi(U) - pi(L)
 	print (n, log(T,2).n())
-	
-	'''
-	512 502.525940328866
-	1024 1013.52735542414
-	1536 1524.94286369947
-	2048 2036.52806141567
-	3840 3827.62149992868
-	7680 7666.62168788972
-	'''
+
+'''
+512 502.525940328866
+1024 1013.52735542414
+1536 1524.94286369947
+2048 2036.52806141567
+3840 3827.62149992868
+7680 7666.62168788972
+'''
 	\end{lstlisting}
 	
 	\newpage
@@ -2293,9 +2292,58 @@
 	\newpage
 	\section{Deterministic Primality Test}
 	\subsection{Naive Test}
-	
+	Let $\mathbb{P}$ represent the set of all prime numbers.
+	\vspace{4pt}
+	\begin{tcolorbox}[colback=white,colframe=lemcolor,arc=5pt,title={\color{white}\bf }]
+		\begin{lemma}
+			Every integer greater than $1$ has a prime divisor. That is, \[
+			\forall n\in\Z_{>1}:\exists p\in\mathbb{P}: p\mid n.
+			\]
+		\end{lemma}
+	\end{tcolorbox}
+	\begin{proof}
+		Define a set $S$ by \[
+		S:=\set{n\in\Z_{>1}:\left[\forall p\in\mathbb{P}:p\nmid n\right]}\subseteq\N_{>1}.
+		\] Then \begin{align*}
+			S\neq\emptyset&\implies\exists\min S=:m\quad\textnormal{by well-ordering principle}\\
+			&\implies\exists a,b\in\of{1,m}:m=ab\quad\because \forall p\in\mathbb{P}:p\notin S,\ \ie,\ \text{$m$ is composite}\\
+			&\implies a\notin S\quad\because a<m=\min S\\
+			&\implies\exists p\in\mathbb{P}:p\mid a\\
+			&\implies p\mid m\in S\quad\contr.
+		\end{align*} Thus $S$ is empty and so every integer $n\in\Z_{>1}$ has a prime divisor.
+	\end{proof}
+	\vspace{8pt}
+	\begin{tcolorbox}[colback=white,colframe=procolor,arc=5pt,title={\color{white}\bf }]
+		\begin{proposition}
+			A number $n\in\Z_{>1}$ is composite if and only if there exists a prime divisor $p$ such that $p\leq\sqrt{n}$. That is, \[
+			\exists k\in\N\setminus\set{1,n}:k\mid n\iff \exists p\in\mathbb{P}_{\leq\sqrt{n}}:p\mid n.
+			\]
+		\end{proposition}
+	\end{tcolorbox}
+	\begin{proof}
+		Let $n\in\Z_{>1}$. \begin{enumerate}
+			\item[($\Leftarrow$)] Let $p\in\mathbb{P}_{\leq\sqrt{n}}$ such that $p\mid n$. We show that $p\in\N\setminus\set{1,n}$: \[
+			p\in\mathbb{P}_{\leq\sqrt{n}}\implies 1<p\leq\sqrt{n}<n\implies p\in\N\setminus\set{1,n}.
+			\]
+			\item[($\Rightarrow$)] Let $\exists a\in\N\setminus\set{1,n}:a\mid n$ then $\exists b\in\Z$ such that $n=ab$ with $1<a\leq b<n$. We claim that $a\leq\sqrt{n}$: suppose that $a>\sqrt{n}$ then \[
+			n=ab>\sqrt{n}\sqrt{n}=n\quad\contr.
+			\] Thus $a\leq\sqrt{n}$. Since $a\in\Z_{>1}$, $a$ has a prime divisor, that is, $\exists p\in\mathbb{P}:p\mid a$. Thus \[
+			p\mid a\Rightarrow p\leq a\Rightarrow p\leq a\leq\sqrt{n}\quad\text{and}\quad p\mid a\Rightarrow p\mid ab=n.
+			\]
+		\end{enumerate}
+	\end{proof}
+	\vspace{8pt}
+	\begin{tcolorbox}[colback=white,colframe=corcolor,arc=5pt,title={\color{white}\bf Trivial Division}]
+		\begin{corollary}
+			The integer $n\in\Z_{>1}$ is prime iff $p\nmid n$ for any prime $p\leq\sqrt{n}$. That is, \[
+			\left[\forall k\in\Z_{>0}:(k\mid n)\Rightarrow (k\in\set{1,n})\right]\iff \left[p\in\mathbb{P}_{\leq\sqrt{n}}\Rightarrow p\nmid n\right].
+			\]
+		\end{corollary}
+	\end{tcolorbox}
 	\begin{algorithm}[H]
 		\caption{Naive Primality Test}
+		\BlankLine
+		\begin{multicols}{2}
 		\KwData{$n\in\Z_{>1}$}
 		\KwResult{Composite or Prime}
 		\BlankLine
@@ -2306,11 +2354,30 @@
 			\Return Compostie\;
 		}
 		\For{$j\gets 1$ \KwTo $\floor*{\frac{\sqrt{n}}{2}}$}{
+			\BlankLine
+			\Comment{$2\floor*{\sqrt{n}/2}+1\leq\sqrt{n}+1$}
+			\BlankLine
 			\If{$(2j+1)\mid n$}{
 				\Return Composite\;
 			}
 		}
 		\Return Prime\;
+		\columnbreak % Move to the next column
+		\setcounter{AlgoLine}{0}  % Reset line numbering
+		\KwData{Odd $n\in\Z_{>1}$}
+		\KwResult{Composite or Prime}
+		\BlankLine
+		\For{$j\gets 1$ \KwTo $\floor*{\frac{\sqrt{n}}{2}}$}{
+			\BlankLine
+			\Comment{$\gcd(n,2j+1)\neq 1$}
+			\BlankLine
+			\If{$n\mod 2j+1=0$}{
+				\Return Composite\;
+			}
+		}
+		\Return Prime\;
+		\end{multicols}
+		\BlankLine
 	\end{algorithm}
 	
 	\subsection{Wilson Theorem}
@@ -2319,20 +2386,62 @@
 	\begin{tcolorbox}[colback=white,colframe=thmcolor,arc=5pt,title={\color{white}\bf Wilson Theorem}]
 		\begin{theorem}
 			Let $n\in\Z_{>1}$. Then \[
-			\iff (n-1)!\equiv -1\pmod{n}.
+			\left[\forall k\in\Z_{>0
+			}:(k\mid n)\Rightarrow (k\in\set{1,n})\right]\iff (n-1)!\equiv -1\pmod{n}.
 			\]
 		\end{theorem}
 	\end{tcolorbox}
 	\begin{proof}
-		\begin{itemize}
-			\item[($\Leftarrow$)]
-			\item[($\Rightarrow$)]
+		Let $n\in\Z_{>1}$. \begin{itemize}
+			\item[($\Leftarrow$)] Let $(n-1)!\equiv -1\pmod{n}$. Suppose that $n$ is a composite, that is, $n=ab$ where $1<a\leq b<n$. Note that \[
+			a\in(1,n)\implies a\in\set{2,3,\cdots, n-1}\implies a\mid (n-1)!.
+			\]Then \begin{align*}
+				(n-1)!\equiv -1\pmod{n}&\implies n\mid (n-1)!+1\\
+				&\implies a\mid(n-1)!+1\quad\because n=ab\\
+				&\implies a\mid 1\quad\because a\mid(n-1)!\\
+				&\implies a\leq 1\quad\contr.
+			\end{align*} Thus, $n$ is a prime.
+			\item[($\Rightarrow$)] Let $n$ is a prime. Consider a finite field $\mathbb{F}_n=\set{0,1,\cdots, n-1}$. We want to find $a\in\F_{n}$ such that $a=\inv{a}$, that is, solve the equation $a^2-1=0$ over $\F_n$:
+			\begin{align*}
+				a=\pm 1\implies\begin{cases}
+					a=1\equiv 1\ (\mod{n}),\\
+					a=-1\equiv n-1\ (\mod{n}).
+				\end{cases}
+			\end{align*} Thus \begin{align*}
+				(n-1)!=\prod_{a\in\F_n^*}a
+				&=\of{\prod_{\substack{a\in\F_n^*\\ a=\inv{a}}}a}\of{\prod_{\substack{a\in\F_n^*\\ a\neq \inv{a}}}a}\\
+				&=\of{1\times(n-1)}(\underbrace{1\times\cdots\times 1}_{\frac{n-3}{2}\ \text{times}})\\
+				&=n-1\\
+				&\equiv -1\pmod{n}.
+			\end{align*}
 		\end{itemize}
 	\end{proof}
 	
 	\newpage
 	\section{Probabilistic Primality Test}
+	
+	\begin{align*}
+		\Pr\left[\mathbb{P}^C\gets T\mid n\in\mathbb{P}\right]=0\\
+		\Pr\left[\mathbb{P}\gets T\mid n\in\mathbb{P}^C\right]\geq 0\\
+	\end{align*}
+	
+	\newpage
 	\subsection{Fermat Primality Test: Application of FLT}
+	
+	\begin{tcolorbox}[colback=white,colframe=thmcolor,arc=5pt,title={\color{white}\bf Fermat's Little Theorem}]
+		\begin{theorem}
+			Let $p\in\mathbb{P}$, and let $a\in\Z_{>0}$ such that $\gcd(p,a)=1$. Then \[
+			a^{p-1}\equiv 1\pmod{p}.
+			\]
+		\end{theorem}
+	\end{tcolorbox}
+	\begin{remark}
+		\begin{align*}
+			n\in\mathbb{P}\implies\forall a\in[1,n-1]:a^{n-1}\equiv 1\pmod{n}\\
+			\exists a\in[1,n-1]:a^{n-1}\not\equiv 1\pmod{n}\implies n\in\mathbb{P}^C.
+		\end{align*}
+	\end{remark}
+	
 	
 	\begin{algorithm}[H]
 		\caption{Fermat Primality Test}
@@ -2345,7 +2454,7 @@
 			\If{$\gcd(a,n)\neq 1$}{
 				\Return Composite\;
 			}
-			\If{$a^{n-1}\not\equiv 1\mod{n}$}{
+			\If{$a^{n-1}\not\equiv 1\pmod{n}$}{
 				\Return Composite\;
 			}
 		}
@@ -2354,10 +2463,10 @@
 	\vspace{4pt}
 	\begin{remark}
 		$1^{n-1}\equiv1\pmod{n}$ and \begin{align*}
-		(n-1)^{n-1}&=\underbrace{(n-1)(n-1)\cdots(n-1)}_{n-1\ \text{times}}\\
-		&\equiv\underbrace{(-1)(-1)\cdots(-1)}_{n-1\ \text{times}}\pmod{n}\\
-		&=(-1)^{n-1}\\
-		&=-1\quad\because n-1\in 2\Z
+			(n-1)^{n-1}&=\underbrace{(n-1)(n-1)\cdots(n-1)}_{n-1\ \text{times}}\\
+			&\equiv\underbrace{(-1)(-1)\cdots(-1)}_{n-1\ \text{times}}\pmod{n}\\
+			&=(-1)^{n-1}\\
+			&=-1\quad\because n-1\in 2\Z
 		\end{align*}
 	\end{remark}
 	\vspace{4pt}
@@ -2367,24 +2476,225 @@
 		\]
 	\end{remark}
 	
+	\newpage
 	\subsection{Miller-Rabin Primality Test}
-	
-	
-	\begin{tcolorbox}[colback=white,colframe=lemcolor,arc=5pt,title={\color{white}\bf }]
-		
+	\begin{tcolorbox}[colback=white,colframe=procolor,arc=5pt,title={\color{white}\bf }]
+		\begin{proposition}
+			Let $p\in\mathbb{P}\setminus\set{2}$ be an odd prime and $a\in\set{2,\cdots,p-1}$. Then
+			\begin{enumerate}[(1)]
+				\item $a^q\equiv 1\pmod{p}$, or
+				\item $\displaystyle\bigvee_{i=0}^{l-1}\left[a^{2^iq}\equiv -1\pmod{p}\right]$,
+			\end{enumerate} where $l,q\in\Z$ such that $p=2^lq+1=q\ll l+1$ and $2\nmid q$.
+		\end{proposition}
+	\end{tcolorbox}
+	\begin{proof}
+		By Fermat's Little Theorem, we have \[
+		0\equiv a^{p-1}-1=a^{2^lq}-1\pmod{p}.
+		\] Then $a^{2^lq}-1=(a^{2^{l-1}q})^2-1^2$ is factorized as follows: \begin{align*}
+			a^{2^lq}-1&=\of{a^{2^{l-1}q}+1}\of{a^{2^{l-1}q}-1}\\
+			&=\of{a^{2^{l-1}q}+1}\of{a^{2^{l-2}q}+1}\of{a^{2^{l-2}q}-1}\\
+			&\vdots\\
+			&=\of{a^{2^{l-1}q}+1}\of{a^{2^{l-2}q}+1}\of{a^{2^{l-3}q}+1}\cdots\of{a^{2q}+1}\of{a^{q}+1}\of{a^{q}-1}.
+		\end{align*} Since $a^{2^lq}-1\equiv 0\pmod{p}$, we obtain (1) and (2).
+	\end{proof}
+	\vspace{4pt}
+	\begin{tcolorbox}[colback=white,colframe=corcolor,arc=5pt,title={\color{white}\bf Miller-Rabin's Test}]
+		\begin{corollary}
+			Let an odd integer $n=2^lq+1\in\Z_{\geq 3}$ satisfies the followings: \begin{enumerate}
+				\item $a^q\not\equiv 1\pmod{p}$, and
+				\item $\displaystyle\bigwedge_{i=0}^{l-1}\left[a^{2^iq}\not\equiv -1\pmod{p}\right]$.
+			\end{enumerate} Then $n$ is composite.
+		\end{corollary}
 	\end{tcolorbox}
 	
-	\begin{tcolorbox}[colback=white,colframe=lemcolor,arc=5pt,title={\color{white}\bf }]
-		
-	\end{tcolorbox}
+	\newpage
+	\begin{algorithm}[H]
+		\caption{Miller-Rabin Primality Test}
+		\KwData{odd $n$ and witness $k$}
+		\KwResult{Composite or Probable Prime}
+		\BlankLine
+		Compute $q$ and $l$ such that $n=2^lq+1$, where $q$ is odd\;
+		\BlankLine
+		\While{$k>0$}{
+			$k\gets k-1$\;
+			$a\uniform[2,n-2]$\;
+			\If{$\gcd(a,n)\neq 1$}{
+				\Return Composite\;
+			}
+			$a\gets a^q\mod n$\;
+			\If{$a=1$}{
+				continue to next iteration of loop\;
+			}
+			\For{$j\gets 0$ \KwTo $l-1$}{
+				\If{$a = n - 1$}{
+					continue to next iteration of outer loop\;
+				}
+				$a \leftarrow a^2 \mod n$\;
+			}
+			\Return composite\;
+		}
+		\Return Probable Prime\;
+	\end{algorithm}
 	
-	\begin{tcolorbox}[colback=white,colframe=lemcolor,arc=5pt,title={\color{white}\bf }]
-		
-	\end{tcolorbox}
+	\begin{algorithm}[H]
+		\caption{Miller-Rabin Primality Test}
+		\KwIn{a positive integer $n > 3$ and accuracy parameter $k$}
+		\KwOut{composite if $n$ is composite, probably prime otherwise}
+		\For{$i \leftarrow 1$ \KwTo $k$}{
+			Choose a random integer $a$ in the range $[2, n -2]$\;
+			$x \leftarrow a^{d} \mod n$\;
+			\If{$x = 1$ \textbf{or} $x = n - 1$}{
+				continue to next iteration of loop\;
+			}
+			\For{$r \leftarrow 1$ \KwTo $s - 1$}{
+				$x \leftarrow x^2 \mod n$\;
+				\If{$x = 1$}{
+					\Return composite\;
+				}
+				\If{$x = n - 1$}{
+					continue to next iteration of outer loop\;
+				}
+			}
+			\Return composite\;
+		}
+		\Return probably prime\;
+	\end{algorithm}
+
+	\begin{lstlisting}[style=sage, caption={Miller-Rabin Primality Test (Sage)},captionpos=t]
+def get_l(a):
+	cnt = 0
+	while true:
+		if (a&1) == 0:
+			a, cnt = a >> 1 , cnt + 1
+		else:
+			return cnt
+
+def is_composite(n, q, l, a):
+	a = power_mod(a, q, n)
+	print("a^(q) = {}".format(a))
+	if(a%n) == 1:
+		return "NOT Composite"
+	for j in [0.. l -1]:
+		print ("a^(2^{}*q) = {}".format(j,a))
+		if(a%n) == n-1:
+			return "NOT Composite"
+		a = (a^2 % n)
+	return "Composite"
+
+def is_prime_by_miller_rabin(n, k):
+	l = get_l (n -1)
+	q = (n-1) >> l
+	print("l = {}, q = {}".format(l,q))
+	while k > 0:
+		k = k - 1
+		a = ZZ.random_element(2, n-2)
+		print ("a = {}".format(a))
+		ret = is_composite(n, q, l, a)
+		if ret == "Composite":		
+			return "Composite"
+		return "Probable Prime"
+
+n = ZZ.random_element(2^40)
+# n = random_prime(10000)
+print ("n = {}".format(n))
+print (is_prime_by_miller_rabin(n,10))
+print (n.is_prime())
+
+'''
+n = 1080059945557
+l = 2, q = 270014986389
+a = 1033463656440
+a^(q) = 1080059945556
+a^(2^0*q) = 1080059945556
+Probable Prime
+True
+'''
+	\end{lstlisting}
+\newpage
+	\begin{lstlisting}[style=sage, caption={Miller-Rabin Primality Test (C)},captionpos=t]
+#include <stdio.h>
+#include <stdlib.h>
+#include <time.h>
+
+// Function to compute (base^exponent) % modulus
+unsigned long long modPow(unsigned long long base, unsigned long long exponent, unsigned long long modulus) {
+	base %= modulus;
+	unsigned long long result = 1;
+	while (exponent > 0) {
+		if (exponent & 1) result = (result * base) % modulus;
+		base = (base * base) % modulus;
+		exponent >>= 1;
+	}
+	return result;
+}
+
+// Function to perform the Miller-Rabin test for a given number (n) and a random witness (a)
+int millerTest(unsigned long long d, unsigned long long n) {
+	// Generate a random number [2, n-2].. rand() % (n-4) + 2 effectively does this
+	srand(time(0));
+	unsigned long long a = rand() % (n - 4) + 2;
+	unsigned long long x = modPow(a, d, n);
 	
-	\begin{tcolorbox}[colback=white,colframe=lemcolor,arc=5pt,title={\color{white}\bf }]
+	if (x == 1 || x == n - 1) return 1;
+	
+	// Repeat the squaring step until one of the following occurs:
+	// d becomes n-1, 
+	// (x^2) % n becomes 1
+	// (x^2) % n becomes n-1
+	while (d != n - 1) {
+		x = (x * x) % n;
+		d *= 2;
 		
+		if (x == 1) return 0;
+		if (x == n - 1) return 1;
+	}
+	
+	// Return composite
+	return 0;
+}
+
+// Function to perform the Miller-Rabin primality test for accuracy of k
+int isPrime(unsigned long long n, int k) {
+	// Corner cases
+	if (n <= 1 || n == 4) return 0;
+	if (n <= 3) return 1;
+	
+	// Reduce n-1 to (2^r)*d
+	unsigned long long d = n - 1;
+	while (d % 2 == 0) d /= 2;
+	
+	// Perform k tests
+	while (k--) if (!millerTest(d, n)) return 0;
+	
+	// Return probably prime
+	return 1;
+}
+
+int main() {
+	unsigned long long n = 561;  // Carmichael number
+	int k = 5;  // Number of iterations
+	
+	if (isPrime(n, k)) printf("%llu is probably prime.\n", n);
+	else printf("%llu is composite.\n", n);
+	
+	return 0;
+}
+	\end{lstlisting}
+	\vspace{8pt}
+	\begin{tcolorbox}[colback=white,colframe=procolor,arc=5pt,title={\color{white}\bf }]
+		\begin{proposition}
+			The Miller-Rabin primality test T, which repeats k trials, has the following properties:
+			\begin{enumerate}[(1)]
+				\item $\Pr[\mathbb{P}\gets T\mid n\in\mathbb{P}]=1$.
+				\item $\Pr[\mathbb{P}^C\gets T\mid n\in\mathbb{P}]=0$,
+				\item $\Pr[\mathbb{P}\gets T\mid n\in\mathbb{P}^C]\leq\displaystyle\frac{1}{4^k}$,
+				\item $\Pr[\mathbb{P}^C\gets T\mid n\in\mathbb{P}^C]\geq\displaystyle 1-\frac{1}{4^k}$.
+			\end{enumerate}
+		\end{proposition}
 	\end{tcolorbox}
+	\begin{proof}
+		content...
+	\end{proof}
 	
 	\begin{tcolorbox}[colback=white,colframe=lemcolor,arc=5pt,title={\color{white}\bf }]
 		
