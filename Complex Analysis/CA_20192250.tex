@@ -65,6 +65,7 @@
 \usepackage{graphicx}
 \usepackage{tikz-cd}
 \usepackage{pgfplots}
+\usetikzlibrary{arrows.meta}
 \usetikzlibrary {patterns,patterns.meta}
 \usetikzlibrary{positioning}
 \usetikzlibrary{calc}
@@ -2421,12 +2422,12 @@
 	\end{proof}
 	\vspace{4pt}
 	\begin{tcolorbox}[colback=white,colframe=corcolor,arc=5pt,title={\color{white}\bf Identity Theorem}]
-		\begin{theorem}
+		\begin{corollary}
 			Let \begin{enumerate}[(1)]
 				\item $f:D\to\C$ be a holomorphic function in a domain $D$;
 				\item $\set{z_n}_{n\in\N}$ be a sequence of distinct zeros of $f$ which converges to $z_*\in D$, and such that $n\in\N\implies f(z_n)=g(z_n)$.
 			\end{enumerate} Then $f(z)=g(z)$ for all $z\in D$.
-		\end{theorem}
+		\end{corollary}
 	\end{tcolorbox}
 	\vspace{8pt}
 	\begin{example}
@@ -2763,16 +2764,468 @@
 		\end{definition}
 	\end{tcolorbox}
 	\vspace{4pt}
+	\begin{remark}
+		We know that \[
+		\oint_{C_r}\of{\sum_{n=-\infty}^{\infty}c_n(z-z_0)^n}\ dz=\textcolor{blue}{\oint_{C_r}f(z)\ dz} = \oint_{C_r}\frac{f(z)}{(z-z_0)^{-1+1}}\ dz = 2\pi i c_{-1},
+		\] where $C_r$ is given by $C_r(t)=z_0+re^{it}$, $t\in[0,2\pi]$, and $r<R$. Note that we have \[
+		\oint_{C_r}\of{c_n(z-z_0)^n}\ dz=\begin{cases}
+			2\pi ic_{-1} & n=-1,\\
+			0 &n\neq -1.
+		\end{cases}
+		\]
+	\end{remark}
+	\vspace{4pt}
 	\begin{example}
-		content...
+		Find $\displaystyle\int_{-\infty}^\infty\frac{1}{x^2+1}\ dx$.
+		\begin{proof}[\sol]
+			Let $\displaystyle f(z)=\frac{1}{z^2+1}=\frac{1}{(z-i)(z+i)}$. \begin{center}
+				\begin{tikzpicture}[scale=1.5]
+					% draw axes
+					\draw[->] (-2,0) -- (2,0) node[right] {$\Re(z)$};
+					\draw[->] (0,-1.5) -- (0,2) node[above] {$\Im(z)$};
+					% add arrow
+					%\draw[->] (0,0) -- (1,1) node[midway, above left] {};
+					% draw point
+					\filldraw[red] (0,1) circle (1.5pt) node[anchor=south west] {$i$};
+					\filldraw[red] (0,-1) circle (1.5pt) node[anchor=south west] {$-i$};
+					\filldraw[blue] (1.5,0) circle (1pt) node[anchor=north] {$R$};
+					\filldraw[blue] (-1.5,0) circle (1pt) node[anchor=north] {$-R$};
+					%\draw[red, dashed] (0,1) circle (10pt) node[anchor=north east] {$C_r$};
+					
+					\draw[red, dashed] (.4,1) arc (0:360:.4) node[below right] {$C_r$};
+					\draw[red] (0,1) -- (-.4,1) node[midway, above] {$r$};
+					
+					\draw[line width=0.5mm, ->, thick, blue] (1.5,0) arc (0:90:1.5) node[midway, above right] {$C_R$};
+					\draw[line width=0.5mm, ->, thick, blue] (0,1.5) arc (90:180:1.5) node[midway, left] {};
+					\draw[line width=0.5mm, blue, ->] (-1.5,0) -- (0,0) node[above right] {$I_R$};
+					\draw[line width=0.5mm, blue, ->] (0,0) -- (1.5,0) node[above right] {};
+				\end{tikzpicture}
+			\end{center} \begin{align*}
+				f(z)=\frac{1}{z^2+1}&=\frac{1}{z-i}\cdot\frac{1}{z+i}\\
+				&=\frac{1}{z-i}\of{a_0+a_1(z-i)+a_2(z-i)^2+\cdots}\quad\because\text{$g(z):=\frac{1}{z+i}$ is analytic at $z=i$}
+		\end{align*} \[
+		\oint_{C=C_R+I_R}f(z)\ dz=\oint_{C_r}f(z)\ dz=2\pi i\cdot c_{-1}=2\pi i\cdot\frac{1}{2i}=\pi.
+		\]
+		\end{proof}
 	\end{example}
 	
+	\begin{tcolorbox}[colback=white,colframe=thmcolor,arc=5pt,title={\color{white}\bf Residue Theorem}]
+		\begin{theorem}
+			Let \begin{enumerate}[(1)]
+				\item $D$ be a domain;
+				\item $f$ be holomorphic in $D\setminus\set{p_1,\dots,p_k}$;
+				\item $f$ have poles at $p_1,\dots,p_k$ of order $m_1,\dots,m_k$, respectively;
+				\item $\gamma$ be a closed path in $D\setminus\set{p_1,\dots,p_k}$ and
+				\item $\gamma$ be such that for each $j=1,2,\dots, k$, $\gamma$ is $D\setminus\set{p_j}$-homotopic to a circle $C_j$ centered at $p_j$ such that the interior of $C_j$ is contained in $D$ and contains only pole $p_j$.
+			\end{enumerate} Then \[
+				\oint_\gamma f(z)\ dz = 2\pi i\sum_{j=1}^{k}\res\of{f,p_k}.
+			\]
+			\begin{center}
+				\begin{tikzpicture}[scale=.7]
+					\draw[->] (0,3) .. controls (-2,2) and (-2,0) .. (-4,0) .. controls (-4,0) and (-6,-6) .. (0,-4) .. controls (6,-6) and (4,0) .. (4,0) .. controls (4,0) and (3,3) .. cycle node[midway, above right] {$\gamma$};
+					
+					%circle
+					\draw[-, blue] ({sqrt(2)/2+1},{sqrt(2)/2+1}) arc (45:360:1) node[above right, black] {};
+					\draw[->, blue] (2,1) arc (0:45:1) node[above] {$C_1$};
+					% draw point
+					\filldraw[red] (1,1) circle (2pt) node[anchor=east, black] {$p_1$};
+					
+					%circle
+					\draw[-, blue] ({sqrt(2)/2-2},{sqrt(2)/2-2.5}) arc (45:360:1) node[above right, black] {};
+					\draw[->, blue] (-1,-2.5) arc (0:45:1) node[above] {$C_2$};
+					% draw point
+					\filldraw[red] (-2,-2.5) circle (2pt) node[anchor=east, black] {$p_2$};
+					
+					%circle
+					\draw[-, blue] ({sqrt(2)/2+2},{sqrt(2)/2-2}) arc (45:360:1) node[above right, black] {};
+					\draw[->, blue] (3,-2) arc (0:45:1) node[above] {$C_3$};
+					% draw point
+					\filldraw[red] (2,-2) circle (2pt) node[anchor=east, black] {$p_3$};
+				\end{tikzpicture}
+			\end{center}
+		\end{theorem}
+	\end{tcolorbox}
+	\begin{proof}
+		
+	\end{proof}
+	
+	\newpage
+	\section{Improper Integral using Residue}
+	\subsection{Type1 : Basic Form}
+	\begin{tcolorbox}[colback=white,colframe=defcolor,arc=5pt,title={\color{white}\bf Basic Form}]
+		Let $P(x)$ and $Q(x)$ are polynomial with $\deg Q\geq\deg P+2$. \[
+		\int_{-\infty}^{\infty}\frac{P(x)}{Q(x)}\ dx.
+		\]
+	\end{tcolorbox}
+	\vspace{4pt}
+	\begin{example}
+		Find $\displaystyle\int_{-\infty}^{\infty}\frac{1}{(x^2+1)^2}\ dx$.
+		\begin{proof}[\sol]
+			Let $f(z):=\displaystyle\frac{1}{(z^2+1)^2}=\frac{1}{(z-i)^2(z+i)^2}$, and let \[
+			f(z)=\frac{\phi(z)}{(z-i)^2},\quad\phi(z)=\frac{1}{(z+i)^2}.
+			\] Here $\phi$ is analytic at $z=i$. Note that $\phi'(z)=\frac{-2}{(z+i)^3}$. Let $C:=C_R+I_R$: \begin{center}
+				\begin{tikzpicture}[scale=1]
+					% draw axes
+					\draw[->] (-2,0) -- (2,0) node[right] {$\Re(z)$};
+					\draw[->] (0,-1.5) -- (0,2) node[above] {$\Im(z)$};
+					% add arrow
+					%\draw[->] (0,0) -- (1,1) node[midway, above left] {};
+					% draw point
+					\filldraw[red] (0,1) circle (1.5pt) node[anchor=south west] {$i$};
+					\filldraw[red] (0,-1) circle (1.5pt) node[anchor=south west] {$-i$};
+					\filldraw[blue] (1.5,0) circle (1pt) node[anchor=north] {$R$};
+					\filldraw[blue] (-1.5,0) circle (1pt) node[anchor=north] {$-R$};
+					
+					\draw[line width=0.5mm, ->, thick, blue] (1.5,0) arc (0:90:1.5) node[midway, above right] {$C_R$};
+					\draw[line width=0.5mm, ->, thick, blue] (0,1.5) arc (90:180:1.5) node[midway, left] {};
+					\draw[line width=0.5mm, blue, ->] (-1.5,0) -- (0,0) node[above right] {$I_R$};
+					\draw[line width=0.5mm, blue, ->] (0,0) -- (1.5,0) node[above right] {};
+				\end{tikzpicture}
+			\end{center} then \[
+			\oint_C f(z)\ dz=2\pi i\cdot\res(f,i)=2\pi i\cdot\phi'(i)=2\pi i\cdot\frac{1}{4i}=\frac{\pi}{2}.
+			\] Consider \[
+			\oint_C f(z)\ dz=\underbrace{\int_{C_R}f(z)\ dz}_{=(1)}+\underbrace{\int_{I_R}f(z)\ dz}_{=(2)}.
+			\] \begin{enumerate}[(1)]
+				\item Note that $\abs{f(z)}=\abs{\frac{1}{(z^2+1)^2}}\leq\frac{1}{(\abs{z}^2-1)^2}=\frac{1}{(R^2-1)^2}$. Thus \[
+				\abs{\int_{C_R}f(z)\ dz}\leq\frac{1}{(R^2-1)^2}\cdot\pi R\to 0\quad\text{as $R\to\infty$}.
+				\]
+				\item \[
+				\int_{I_R}f(z)\ dz=\int_{-R}^R f(x)\ dx=\int_{-R}^R\frac{1}{(x^2+1)^2}\ dx\to\int_{-\infty}^{\infty}\frac{1}{(x^2+1)^2}\ dx\quad\text{as $R\to\infty$}.
+				\]
+			\end{enumerate} Hence \[
+			\lim\limits_{R\to\infty}\oint_C f(z)\ dz=\int_{-\infty}^\infty\frac{1}{(x^2+1)^2}\ dx=\frac{\pi}{2}.
+			\]
+		\end{proof}
+	\end{example}
+	
+	\subsection{Type2 : Fourier Form}
+	
+	\begin{tcolorbox}[colback=white,colframe=procolor,arc=5pt,title={\color{white}\bf Jordan's Inequality}]
+		\begin{proposition}
+			\[
+			\int_0^{\pi}e^{-R\sin\theta}\ d\theta\leq\frac{\pi}{R}\quad(R>0).
+			\]
+		\end{proposition}
+	\end{tcolorbox}
+	\begin{proof}
+		\ \begin{center}
+			\begin{tikzpicture}
+				\begin{axis}[
+					axis lines = middle,
+					xlabel = $\theta$,
+					ylabel = $y$,
+					ymin=0, ymax=1.5,
+					xmin=0, xmax={pi+1},
+					xtick={0, {pi/2}, {pi}},
+					xticklabels={$0$, $\frac{\pi}{2}$, $\pi$},
+					legend pos=north east,
+					width=9cm,   % Increase the width of the plot
+					height=4cm    % Decrease the height of the plot
+					]
+					\addplot [
+					domain=0:{pi}, 
+					samples=100, 
+					color=red,
+					very thick
+					]
+					{sin(deg(x))};
+					\addlegendentry{$\sin\theta$}
+					
+					\addplot [
+					domain=0:1.5708, 
+					samples=100, 
+					color=blue,
+					very thick
+					]
+					{x};
+					\addlegendentry{$\theta$}
+					
+					\addplot [
+					domain=0:{pi+1}, 
+					samples=100, 
+					color=britishracinggreen,
+					very thick
+					]
+					{(2*x)/pi};
+					\addlegendentry{$\frac{2}{\pi}\theta$}
+				\end{axis}
+			\end{tikzpicture}
+		\end{center}
+		\begin{enumerate}[(1)]
+			\item Consider $\theta\in\left[0,\frac{\pi}{2}\right]$. Then \[
+			\frac{2}{\pi}\theta\leq\sin\theta\leq \theta\implies-\frac{2R}{\pi}\theta\geq -R\sin\theta.
+			\] Thus \begin{align*}
+				\int_0^{\pi/2}e^{-R\sin\theta}\ d\theta\leq\int_0^{\pi/2}e^{-\frac{2R}{\pi}\theta}\ d\theta&=-\frac{\pi}{2R}e^{-\frac{2R}{\pi}\theta}\bigg|_{0}^{\pi/2}\\
+				&=-\frac{\pi}{2R}\of{e^{-R}-1}\\
+				&=\frac{\pi}{2R}-\frac{\pi}{2R}e^{-R}\\
+				&<\frac{\pi}{2R}\quad\because\frac{\pi}{2R}e^{-R}>0.
+			\end{align*}
+			\item Consider $\theta\in\left[\frac{\pi}{2},\pi\right]$. Then \begin{align*}
+				\int_{\pi/2}^{\pi}e^{-R\sin\theta}\ d\theta&=\int_{\pi/2}^0e^{-R\sin(\pi-t)}(-1)dt\quad\text{by substituting $\theta=\pi-t$}\\
+				&=\int_0^{\pi/2}e^{-R\sin t}\ dt\\
+				&<\frac{\pi}{2R}\quad\text{by (1)}.
+			\end{align*}
+		\end{enumerate} Hence, by (1) and (2), \[
+		\int_0^{\pi}e^{-R\sin\theta}\ d\theta<\frac{\pi}{2R}+\frac{\pi}{2R}=\frac{\pi}{R}.
+		\]
+	\end{proof}
+
+	\begin{tcolorbox}[colback=white,colframe=lemcolor,arc=5pt,title={\color{white}\bf Jordan's Lemma}]
+		\begin{lemma}
+			Let \begin{enumerate}[(1)]
+				\item $f(z)$ is holomorphic in $\abs{z}>R_0$ and $\Im(z)\geq 0$;
+				\item $C_{R>R_0}$ satisfies $z(\theta)=Re^{i\theta}$ with $\theta\in[0,\pi]$ and
+				\item for $z\in C_R$, \[
+				\exists M_R>0:\abs{f(z)}\leq M_R\land\lim\limits_{R\to\infty} M_R=0.
+				\]
+			\end{enumerate} 
+			\begin{center}
+				\begin{tikzpicture}[scale=1]
+					\draw[white, pattern={Lines[angle=45,distance={12pt/sqrt(3)}]}, pattern color=blue] (-2,0) rectangle ++(4,2);
+					\filldraw[white] (1,0) arc (0:180:1) node[midway, left] {};
+					% draw axes
+					\draw[->] (-2,0) -- (2,0) node[right] {$\Re(z)$};
+					\draw[->] (0,-.5) -- (0,2) node[above] {$\Im(z)$};
+					
+					
+					% add arrow
+					%\draw[->] (0,0) -- (1,1) node[midway, above left] {};
+					% draw point
+					\filldraw[] (1,0) circle (1pt) node[anchor=north] {$R$};
+					\filldraw[] (-1,0) circle (1pt) node[anchor=north] {$-R$};
+					
+					\draw[line width=0.5mm, ->, thick, red] (1.5,0) arc (0:90:1.5) node[midway, above right] {$C_R$};
+					\draw[line width=0.5mm, ->, thick, red] (0,1.5) arc (90:180:1.5) node[midway, left] {};
+					\draw[line width=0.5mm, -, thick] (1,0) arc (0:180:1) node[midway, left] {};
+				\end{tikzpicture}
+			\end{center}
+			Then \[
+			\lim\limits_{R\to\infty}\int_{C_R}f(z)e^{iaz}\ dz =0
+			\] for any $a>0$.
+		\end{lemma}
+	\end{tcolorbox}
+	\begin{proof}
+		By (2), we have \[
+		\int_{C_R}f(z)e^{iaz}\ dz = \int_0^{\pi}\underbrace{f(Re^{i\theta})}_{=\text{(i)}}\cdot\underbrace{e^{iaRe^{i\theta}}}_{=\text{(ii)}}\cdot\underbrace{iRe^{i\theta}}_{=\text{(iii)}}\ d\theta.
+		\] Then \begin{enumerate}[(i)]
+			\item $\abs{\text{(i)}}=\abs{f(Re^{i\theta})}\leq M_R\to 0$ as $R\to\infty$ by (3)
+			\item $\abs{\text{(ii)}}=\abs{e^{iaR(\cos\theta+i\sin\theta)}}=\abs{e^{iaR\cos\theta}}\abs{e^{-aR\sin\theta}}=\abs{e^{-aR\sin\theta}}$.
+			\item $\abs{\text{(iii)}}=R$.
+		\end{enumerate} Thus, \begin{align*}
+			\abs{\int_{C_R}f(z)e^{iaz}\ dz}&\leq M_R\abs{\int_0^{\pi}e^{-aR\sin\theta}\ d\theta}\cdot R\\
+			&<M_R\cdot \frac{\pi}{aR}\cdot R\quad\text{by Jordan's Inequality}\\
+			&=M_R\cdot\frac{\pi}{a}\to 0\quad\text{as $R\to\infty$}
+	\end{align*}
+	\end{proof}
+	\newpage
+	\begin{tcolorbox}[colback=white,colframe=defcolor,arc=5pt,title={\color{white}\bf Fourier Form}]
+		\[
+		\int_{-\infty}^{\infty}f(x)\sin(ax)\ dx\quad\text{or}\quad\int_{-\infty}^{\infty}f(x)\cos(ax)\ dx.
+		\]
+	\end{tcolorbox}
+	\vspace{4pt}
+	\begin{example}
+		Find $\displaystyle\int_{-\infty}^{\infty}\frac{x\sin x}{x^2+4}\ dx$.
+		\begin{proof}[\sol]
+			Let $f(z):=\frac{z}{z^2+4}=\frac{z}{(z-2i)(z+2i)}$, and let $
+			f(z)e^{iz}=\frac{\phi(z)}{z-2i}$ with $\phi(z)=\frac{ze^{iz}}{z+2i}$. Here $\phi$ is analytic at $z=2i$. Let $C:=C_R+I_R$: \begin{center}
+				\begin{tikzpicture}[scale=1]
+					% draw axes
+					\draw[->] (-2,0) -- (2,0) node[right] {$\Re(z)$};
+					\draw[->] (0,-1.5) -- (0,2) node[above] {$\Im(z)$};
+					% add arrow
+					%\draw[->] (0,0) -- (1,1) node[midway, above left] {};
+					% draw point
+					\filldraw[red] (0,1) circle (1.5pt) node[anchor=south west] {$2i$};
+					\filldraw[red] (0,-1) circle (1.5pt) node[anchor=south west] {$-2i$};
+					\filldraw[blue] (1.5,0) circle (1pt) node[anchor=north] {$R$};
+					\filldraw[blue] (-1.5,0) circle (1pt) node[anchor=north] {$-R$};
+					
+					\draw[line width=0.5mm, ->, thick, blue] (1.5,0) arc (0:90:1.5) node[midway, above right] {$C_R$};
+					\draw[line width=0.5mm, ->, thick, blue] (0,1.5) arc (90:180:1.5) node[midway, left] {};
+					\draw[line width=0.5mm, blue, ->] (-1.5,0) -- (0,0) node[above right] {$I_R$};
+					\draw[line width=0.5mm, blue, ->] (0,0) -- (1.5,0) node[above right] {};
+				\end{tikzpicture}
+			\end{center} then \[
+			\res\of{f(z)e^{iz},2i}=\res\of{\frac{\phi(z)}{z-2i},2i}=\phi(2i)=\frac{2ie^{-2}}{4i}=\frac{1}{2}e^{-2}.
+			\] Consider $
+			\displaystyle\oint_C f(z)e^{iz}\ dz=\underbrace{\int_{C_R}f(z)e^{iz}\ dz}_{=(1)}+\underbrace{\int_{I_R}f(z)e^{iz}\ dz}_{=(2)}.
+			$ \begin{enumerate}[(1)]
+				\item Note that $\abs{f(z)}=\abs{\frac{z}{z^2+4}}\leq\frac{\abs{z}}{\abs{z}^2-4}=\frac{R}{R^2-4}=:M_R$. Then \[
+				\abs{f(z)}\leq M_R\quad\text{and}\quad M_R=\frac{R}{R^2-4}\to 0\quad\text{as $R\to\infty$},
+				\] and so $\lim\limits_{R\to\infty}\int_{C_R}f(z)e^{iz}\ dz=0$ by Jordan's Lemma.
+				\item \[
+				\int_{I_R}f(z)e^{iz}\ dz=\int_{-R}^R\frac{x}{x^2+4}\cos x\ dx+i\int_{-R}^R\frac{x}{x^2+4}\sin x\ dx.
+				\]
+			\end{enumerate}
+			Therefore \begin{align*}
+			\lim\limits_{R\to\infty}\oint_C f(z)e^{iz}\ dz&=\int_{-\infty}^{\infty}\frac{x}{x^2+4}\cos x\ dx+i\int_{-\infty}^{\infty}\frac{x}{x^2+4}\sin x\ dx\\
+			&=2\pi i\cdot\res\of{f(z)e^{iz}, 2i}\\
+			&=\pi e^{-2}i.
+		\end{align*} Hence \[
+		\int_{-\infty}^{\infty}\frac{x}{x^2+4}\sin x\ dx=\frac{\pi}{e^2}.
+		\]
+		\end{proof}
+	\end{example}
+	
+	\newpage
+	\subsection{Type3 : Indented Path, Half Residue}
+	
+	\begin{example}
+		Find $\displaystyle\int_{-\infty}^{\infty}\frac{\sin x}{x}\ dx$.
+		\begin{proof}[\sol]
+			Let $f(z):=\frac{1}{z}$. Consider a path $C:=C_R+L_1+C_\rho+L_2$: \begin{center}
+				\begin{tikzpicture}[scale=1.5]
+					% draw axes
+					\draw[->] (-2,0) -- (2,0) node[right] {$\Re(z)$};
+					\draw[->] (0,-.5) -- (0,2) node[above] {$\Im(z)$};
+					% add arrow
+					%\draw[->] (0,0) -- (1,1) node[midway, above left] {};
+					% draw point
+					\filldraw[red] (0,0) circle (1.5pt) node[anchor=south west] {$0$};
+					\filldraw[blue] (1.5,0) circle (1pt) node[anchor=north] {$R$};
+					\filldraw[blue] (-1.5,0) circle (1pt) node[anchor=north] {$-R$};
+					\filldraw[blue] (.5,0) circle (1pt) node[anchor=north] {$\rho$};
+					\filldraw[blue] (-.5,0) circle (1pt) node[anchor=north] {$-\rho$};
+					
+					\draw[line width=0.5mm, ->, thick, blue] (1.5,0) arc (0:90:1.5) node[midway, above right] {$C_R$};
+					\draw[line width=0.5mm, ->, thick, blue] (0,1.5) arc (90:180:1.5) node[midway, left] {};
+					\draw[line width=0.5mm, blue, ->] (-1.5,0) -- (-.5,0) node[midway, above] {$L_1$};
+					\draw[line width=0.5mm, blue, ->] (.5,0) -- (1.5,0) node[midway, above] {$L_2$};
+					
+					\draw[line width=0.5mm, <-, thick, blue] (.5,0) arc (0:90:.5) node[midway, above] {$C_\rho$};
+					\draw[line width=0.5mm, <-, thick, blue] (0,.5) arc (90:180:.5) node[midway, left] {};
+				\end{tikzpicture}
+			\end{center} where \begin{align*}
+			C_R&: z(\theta)=Re^{i\theta}\quad(\theta\in[0,\pi]),\\
+			L_1&: [-R,\rho],\\
+			L_2&: [\rho,R],\\
+			C_\rho&: z(t)=\rho e^{i(\pi-t)}\quad(t\in[0,\pi]).
+		\end{align*} Then \[
+		\oint_C f(z)e^{iz}\ dz=0
+		\] by the Cauchy-Goursat Theorem. Consider \[
+		0=\oint_C f(z)e^{iz}\ dz=\underbrace{\int_{C_R}f(z)e^{iz}\ dz}_{=(1)}+\underbrace{\int_{L_1\cup L_2}f(z)e^{iz}\ dz}_{=(2)}+\underbrace{\int_{C_\rho}f(z)e^{iz}\ dz}_{=\textcolor{blue}{(3)}}
+		\] \begin{enumerate}[(1)]
+				\item Note that $\abs{f(z)}=\abs{\frac{1}{z}}=\frac{1}{R}=:M_R$, \ie, $M_R\to 0$ as $R\to\infty$. So \[
+				\lim\limits_{R\to\infty}\int_{C_R}f(z)e^{iz}\ dz=0
+				\] by Jordan's Lemma.
+				\item \begin{align*}
+					\int_{L_1\cup L_2}f(z)e^{iz}\ dz&=\int_{L_1\cup L_2}f(z)\cos z\ dz+i\int_{L_1\cup L_2}f(z)\sin z\ dz\\
+					&=\left[\int_{-R}^{-\rho}\frac{\cos x}{x}\ dx+\int_{\rho}^{R}\frac{\cos x}{x}\ dx\right]+i\left[\int_{-R}^{-\rho}\frac{\sin x}{x}\ dx+\int_{\rho}^{R}\frac{\sin x}{x}\ dx\right]\\
+					&\to \int_{-\infty}^{\infty}\frac{\cos x}{x}dx + i\int_{-\infty}^{\infty}\frac{\sin x}{x}\ dx\quad\text{as}\quad\begin{cases}
+						R\to\infty,\\
+						\rho\to 0.
+					\end{cases}
+				\end{align*}
+				\item Note that \begin{align*}
+					f(z)e^{iz}=\frac{e^{iz}}{z}&=\frac{1}{z}\of{1+(iz)+\frac{1}{2!}(iz)^2+\frac{1}{3!}(iz)^3+\cdots}\\
+					&=\frac{1}{z}+\of{i+\frac{1}{2!}i^2z+\frac{1}{3!}i^3z^2+\cdots}\\
+					&=\frac{1}{z}+g(z),
+				\end{align*} where $\displaystyle g(z)=\sum_{n=0}^\infty \frac{1}{(n+1)!}i^{n+1}z^n$ is analytic at $z=0$. Consider \[
+				\int_{C_\rho}f(z)e^{iz}\ dz=\underbrace{\int_{C_\rho}\frac{1}{z}\ dz}_{=\text{(a)}}+\underbrace{\int_{C_\rho} g(z)\ dz}_{=\text{(b)}}.
+				\] \begin{enumerate}
+					\item \[
+					\int_{C_\rho}\frac{1}{z}\ dz=\int_0^{\pi}\frac{1}{\rho e^{i(\pi-t)}}\cdot i\rho e^{i(\pi-t)}(-1)\ dt=-i\int_0^{\pi}\ dt=-\pi i.
+					\]
+					\item Since $\exists M:\abs{g(z)}\leq M$ as $\abs{z}\leq\rho_0$, we have \[
+					\int_{C_\rho}g(z)\ dz\leq M\cdot \pi\rho\to 0\quad\text{as $\rho\to 0$}.
+					\]
+				\end{enumerate}
+			\end{enumerate}
+			Therefore, by (1), (2) and (3), we obtain \[
+			0=\lim\limits_{\substack{R\to\infty\\ \rho\to 0}}\oint_C f(z)e^{iz}\ dz=0+\int_{-\infty}^{\infty}\frac{\cos x}{x}dx + i\int_{-\infty}^{\infty}\frac{\sin x}{x}\ dx-\pi i,
+			\] and so \[
+			\int_{-\infty}^{\infty}\frac{\cos x}{x}dx + i\int_{-\infty}^{\infty}\frac{\sin x}{x}\ dx=0+\pi i\implies\boxed{\int_{-\infty}^{\infty}\frac{\sin x}{x}\ dx=\pi}.
+			\]
+		\end{proof}
+	\end{example}
+	
+	\newpage
+	\subsection{Type4 : Sine/Cosine on $[0,2\pi]$}
+	
+	\begin{tcolorbox}[colback=white,colframe=defcolor,arc=5pt,title={\color{white}\bf Sine/Cosine Form}]
+		\[
+		\int_{0}^{2\pi} F(\sin\theta,\cos\theta)\ d\theta=\oint_C F\of{\frac{z-\inv{z}}{2i},\frac{z+\inv{z}}{2}}\frac{1}{iz}\ dz
+		\] where $C$ is the unit circle, that is, $C:z(\theta)=e^{i\theta}$ with $\theta\in[0,2\pi]$.
+	\end{tcolorbox}
+	\vspace{4pt}
+	\begin{example}
+		Find $\displaystyle\int_0^{2\pi}\frac{1}{1+a\sin\theta}\ d\theta$ with $a\in(-1,1)$.
+		\begin{proof}[\sol]
+			Let $a=0$ then $\int_0^{2\pi}=\frac{1}{1+0}\ d\theta=2\pi$. Suppose that $a\neq 0$. Let $C$ be the unit circle, that is, $C:z(\theta)=e^{i\theta}$ with $\theta\in[0,2\pi]$. Then \begin{align*}
+				\int_0^{2\pi}\frac{d\theta}{1+a\sin\theta}&=\int_0^{2\pi}\frac{1}{1+a\of{\frac{e^{i\theta}-e^{-i\theta}}{2i}}}\ d\theta\\
+				&=\oint_C\frac{1}{1+a\of{\frac{(z-\inv{z})}{2i}}}\frac{1}{iz}\ dz\quad\text{by substituting $z=e^{i\theta}$}\\
+				&=\oint_C\frac{1}{\frac{2i+az-a\inv{z}}{2i}\cdot iz}\ dz\\
+				&=\oint_C\frac{2}{az^2+2iz-a}\ dz\\
+				&=\oint_C\frac{a/2}{z^2+(2i/a)z-1}\ dz\\
+				&=\oint_C\frac{a/2}{(z-z_1)(z-z_2)}\ dz,
+			\end{align*} where $z_1,z_2$ are solutions of quadratic equation $z^2+\of{\frac{2i}{a}}z-1$. We solve this equation: \begin{align*}
+			z^2+\of{\frac{2i}{a}}z-1&=0\\
+			z^2+2\frac{i}{a}z+\of{\frac{i}{a}}^2&=1+\of{\frac{i}{a}}^2\\
+			\of{z+\frac{i}{a}}^2&=\frac{a^2-1}{a^2}=-\frac{1-a^2}{a^2}\quad(\abs{a}<1)
+		\end{align*} Thus, $\displaystyle z=-\frac{i}{a}\pm\sqrt{-\frac{1-a^2}{a^2}}=-\frac{i}{a}\pm\frac{\sqrt{1-a^2}}{\abs{a}}i$. Let \[
+		z_1=\frac{-1+\sqrt{1-a^2}}{a}i,\quad z_2=\frac{-1-\sqrt{1-a^2}}{a}i.
+		\]
+		
+		\begin{center}
+			\begin{tikzpicture}[scale=1]
+				% draw axes
+				\draw[->] (-2,0) -- (2,0) node[right] {$\Re(z)$};
+				\draw[->] (0,-2) -- (0,1.5) node[above] {$\Im(z)$};
+				% add arrow
+				%\draw[->] (0,0) -- (1,1) node[midway, above left] {};
+				% draw point
+				\filldraw[red] (0,-.5) circle (1.5pt) node[anchor=south west] {$z_1$};
+				\filldraw[red] (0,-1.5) circle (1.5pt) node[anchor=south west] {$z_2$};
+				
+				\draw[line width=0.5mm, ->, thick, blue] (1,0) arc (0:45:1) node[midway, above right] {$C$};
+				\draw[line width=0.5mm, -, thick, blue] ({1*sqrt(2)/2},{1*sqrt(2)/2}) arc (45:360:1) node[midway, left] {};
+			\end{tikzpicture}
+		\end{center}
+		Thus, \begin{align*}
+			\oint_C f(z)\ dz&=\oint_C\frac{2/a}{(z-z_1)(z-z_2)}\ dz\\
+			&=\oint\frac{g(z)}{(z-z_1)}\ dz\quad\text{with}\quad g(z)=\frac{2/a}{z-z_2}\\
+			&=2\pi i\cdot \res(f,z_1).
+		\end{align*} Note that \[
+		\res(f,z_1)=\phi(z_1)=\frac{2/a}{z_1-z_2}=\frac{2/a}{\frac{2\sqrt{1-a^2}}{a}i}=\frac{1}{\sqrt{1-a^2}i}.
+		\] Hence \[
+		\int_0^{2\pi}\frac{1}{1+a\sin\theta}\ d\theta=\oint_C f(z)\ dz= 2\pi\cdot\res(f,z_1)=2\pi i\cdot\frac{1}{\sqrt{1-a^2}i}=\frac{2\pi}{\sqrt{1-a^2}}.
+		\]
+		\end{proof}
+	\end{example}
+	
+	\newpage
+	\begin{exercise}
+		\ \begin{enumerate}
+			\item Find $\displaystyle\int_{-\infty}^{\infty}\frac{\cos ax}{1+x^2}\ dx$.
+			\begin{proof}[\sol]
+				content...
+			\end{proof}
+			\vspace{8pt}
+			\item Find $\displaystyle\int_{-\infty}^{\infty}\frac{x^2}{1+x^4}\ dx$.
+			\begin{proof}[\sol]
+				content...
+			\end{proof}
+			\vspace{8pt}
+			\item Find $\displaystyle\int_{-\infty}^{\infty}\frac{x}{x^3+1}\ dx$.
+			\begin{proof}[\sol]
+				content...
+			\end{proof}
+			\vspace{8pt}
+			\item Find $\displaystyle\int_{0}^{2\pi}\frac{d\theta}{1+3\cos^2\theta}$.
+			\begin{proof}[\sol]
+				content...
+			\end{proof}
+		\end{enumerate}
+	\end{exercise}
+	
+	\newpage
 	\begin{tcolorbox}[colback=white,colframe=defcolor,arc=5pt,title={\color{white}\bf }]
 		
 	\end{tcolorbox}
-	
+
 	\begin{tcolorbox}[colback=white,colframe=defcolor,arc=5pt,title={\color{white}\bf }]
-		
+	
 	\end{tcolorbox}
 
 	\begin{tcolorbox}[colback=white,colframe=defcolor,arc=5pt,title={\color{white}\bf }]
@@ -2782,15 +3235,15 @@
 	\begin{tcolorbox}[colback=white,colframe=defcolor,arc=5pt,title={\color{white}\bf }]
 		
 	\end{tcolorbox}
-
-	\begin{tcolorbox}[colback=white,colframe=defcolor,arc=5pt,title={\color{white}\bf }]
-		
-	\end{tcolorbox}
 	
 	\begin{tcolorbox}[colback=white,colframe=defcolor,arc=5pt,title={\color{white}\bf }]
 		
 	\end{tcolorbox}
 	
+	\begin{tcolorbox}[colback=white,colframe=defcolor,arc=5pt,title={\color{white}\bf }]
+		
+	\end{tcolorbox}
+		
 	
 	\bibliographystyle{plain}
 	\bibliography{references}	
