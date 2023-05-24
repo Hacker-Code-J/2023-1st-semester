@@ -23,7 +23,7 @@
 
 % Page layout
 \usepackage{geometry}
-\geometry{a4paper,left=1.5in,right=1in,top=1in,bottom=1in,heightrounded}
+\geometry{a4paper,left=1.125in,right=.75in,top=1in,bottom=1in,heightrounded}
 \usepackage{fancyhdr}
 \fancyhf{}
 \fancyhead[LE,RO]{\thepage}
@@ -59,20 +59,36 @@
 
 \makeatletter
 \newcommand\xleftrightarrow[2][]{%
-\ext@arrow 9999{\longleftrightarrowfill@}{#1}{#2}}
+	\ext@arrow 9999{\longleftrightarrowfill@}{#1}{#2}}
 \newcommand\longleftrightarrowfill@{%
-\arrowfill@\leftarrow\relbar\rightarrow}
+	\arrowfill@\leftarrow\relbar\rightarrow}
 \makeatother
+
+%Algorithm
+\usepackage[ruled,linesnumbered]{algorithm2e}
+\usepackage{setspace}
+\usepackage{algpseudocode}
+\SetKwComment{Comment}{/* }{ */}
+\SetKw{Break}{break}
+\SetKw{Downto}{downto}
+\SetKwProg{Fn}{Function}{:}{end}
+\SetKwProg{Procedure}{procedure}{:}{end}
+\SetKwProg{Construct}{Construct}{:}{end}
+\SetKwFunction{KeyGen}{KeyGen}
 
 %---------------------------My Preamble
 \newcommand{\mathcolorbox}[2]{\colorbox{#1}{$\displaystyle #2$}}
+\usepackage{multicol}
+\setlength{\columnsep}{2cm}
+\setlength{\columnseprule}{1.25pt}
 \usepackage{multirow}
 \usepackage{enumerate}
-\usepackage{enumitem}
 \usepackage{booktabs}
+\usepackage{colortbl}
 \usepackage{graphicx}
 \usepackage{tikz-cd}
-\usetikzlibrary{shapes,positioning,decorations.pathreplacing}
+\usetikzlibrary{arrows,arrows.meta}
+\usetikzlibrary{chains,shapes,shapes.multipart,positioning,decorations.pathreplacing}
 
 \usepackage[most]{tcolorbox}
 \tcbset{colback=white, arc=5pt}
@@ -117,9 +133,9 @@
 
 %Macro
 \newcommand{\A}{\mathcal{A}}
+\newcommand{\B}{\mathcal{B}}
 \newcommand{\E}{\mathcal{E}}
 \newcommand{\oracle}{\mathcal{O}}
-\newcommand{\ECB}{\mathsf{ECB}}
 \newcommand{\OW}{\mathsf{OW}}
 \newcommand{\IND}{\mathsf{IND}}
 \newcommand{\PRF}{\mathsf{PRF}}
@@ -128,9 +144,24 @@
 \newcommand{\CPA}{\mathsf{CPA}}
 \newcommand{\CCA}{\mathsf{CCA}}
 \newcommand{\CCATwo}{\mathsf{CCA2}}
+
+\newcommand{\IV}{\mathtt{IV}}
+\newcommand{\ECB}{\mathsf{ECB}}
+\newcommand{\CBC}{\mathsf{CBC}}
+
+%Encrypt = Encode (un-keyed) + Encipher (keyed)
+\newcommand{\Encrypt}{\mathtt{Encrypt}}
+\newcommand{\Decrypt}{\mathtt{Decrypt}}
+\newcommand{\Encode}{\mathtt{Encode}}
+\newcommand{\Decode}{\mathtt{Decode}}
+\newcommand{\Encipher}{\mathtt{Encipher}}
+\newcommand{\Decipher}{\mathtt{Decipher}}
+
+\newcommand{\EncryptBlk}{\mathtt{EncryptBlk}}
+\newcommand{\DecryptBlk}{\mathtt{DecryptBlk}}
+
+
 \newcommand{\Adv}{\textnormal{Adv}}
-\newcommand{\EncBlk}{\textnormal{EncBlk}}
-\newcommand{\DecBlk}{\textnormal{DecBlk}}
 \newcommand{\negl}{\textnormal{negl}}
 \newcommand{\poly}{\textnormal{poly}}
 \newcommand{\Time}{\textnormal{Time}}
@@ -165,7 +196,7 @@
 	A cryptosystem $(\mathcal{K}, \mathcal{M}, \mathcal{C}, \text{Enc}, \text{Dec})$ is said to have \textit{perfect security} if for all $m_1, m_2 \in \mathcal{M}$ and all $c \in \mathcal{C}$ such that $\Pr[M = m_1] > 0$ and $\Pr[M = m_2] > 0$, the following holds:
 	
 	\begin{equation}
-	\Pr[C = c | M = m_1] = \Pr[C = c | M = m_2]
+		\Pr[C = c | M = m_1] = \Pr[C = c | M = m_2]
 	\end{equation}
 	
 	\noindent where $M$ is a random variable representing the plaintext message space $\mathcal{M}$, $C$ is a random variable representing the ciphertext message space $\mathcal{C}$, and $\text{Enc}$ and $\text{Dec}$ are the encryption and decryption functions, respectively.
@@ -186,7 +217,7 @@
 	The probability of obtaining a ciphertext $c$ can be expressed as:
 	
 	\begin{equation}
-	\Pr[C = c] = \sum_{m' \in \mathcal{M}} \Pr[C = c | M = m']\Pr[M = m']
+		\Pr[C = c] = \sum_{m' \in \mathcal{M}} \Pr[C = c | M = m']\Pr[M = m']
 	\end{equation}
 	
 	\noindent where $\mathcal{M}$ is the plaintext message space, and $M$ and $C$ are random variables representing the plaintext and ciphertext message spaces, respectively.
@@ -194,13 +225,13 @@
 	To prove that the probability of obtaining a ciphertext $c$ can be expressed as:
 	
 	\begin{equation}
-	\Pr[C = c] = \sum_{m' \in \mathcal{M}} \Pr[C = c | M = m']\Pr[M = m'],
+		\Pr[C = c] = \sum_{m' \in \mathcal{M}} \Pr[C = c | M = m']\Pr[M = m'],
 	\end{equation}
 	
 	\noindent we can use the \textit{law of total probability}. The law of total probability states that for a partition of the sample space $A_1, A_2, \dots, A_n$, and any event $B$, the probability of $B$ can be expressed as:
 	
 	\begin{equation}
-	\Pr[B] = \sum_{i=1}^{n} \Pr[B | A_i] \Pr[A_i].
+		\Pr[B] = \sum_{i=1}^{n} \Pr[B | A_i] \Pr[A_i].
 	\end{equation}
 	
 	In our case, the sample space is partitioned by the plaintext message space $\mathcal{M} = \{m_1, m_2, \dots, m_n\}$. We want to find the probability of the event $C = c$ (a specific ciphertext being obtained), and the partition is formed by the events $M = m'$ for all $m' \in \mathcal{M}$.
@@ -208,8 +239,8 @@
 	By applying the law of total probability to our problem, we get:
 	
 	\begin{align*}
-	\Pr[C = c] &= \sum_{i=1}^{n} \Pr[C = c | M = m_i] \Pr[M = m_i] \\
-	&= \sum_{m' \in \mathcal{M}} \Pr[C = c | M = m'] \Pr[M = m'],
+		\Pr[C = c] &= \sum_{i=1}^{n} \Pr[C = c | M = m_i] \Pr[M = m_i] \\
+		&= \sum_{m' \in \mathcal{M}} \Pr[C = c | M = m'] \Pr[M = m'],
 	\end{align*}
 	
 	which completes the proof.
@@ -240,7 +271,7 @@
 	\begin{definition}[Semantic Security Game]
 		The semantic security game is a security game played between a challenger and an adversary $\A$ to evaluate the semantic security of an encryption scheme $\E$. The game proceeds as follows:
 		
-		\begin{enumerate}[label=\textbf{Stage \arabic*:}]
+		\begin{enumerate}[\textbf{Stage}\ 1:]
 			\item \textbf{Setup:}
 			The challenger generates a key pair $(sk, pk)$ using a key generation algorithm, and gives the public key $pk$ to the adversary $\A$.
 			
@@ -254,7 +285,7 @@
 		The adversary $\A$'s advantage in the semantic security game is defined as:
 		
 		\begin{align*}
-		\Adv_{\E, \A}^{\text{Semantic}} = \left| \Pr[\hat{b} = b] - \frac{1}{2} \right|
+			\Adv_{\E, \A}^{\text{Semantic}} = \left| \Pr[\hat{b} = b] - \frac{1}{2} \right|
 		\end{align*}
 		
 		An encryption scheme $\E$ is considered semantically secure if the advantage of any probabilistic polynomial-time adversary $\A$ in the semantic security game is bounded by a negligible function in the security parameter $n$.
@@ -263,13 +294,13 @@
 	Let $\E$ be an encryption scheme. We say that an encryption scheme $\E$ is semantically secure if for all probabilistic polynomial-time adversaries $\A$, there exists a negligible function $\negl$ such that:
 	
 	\begin{align*}
-	\Adv_{\E, \A}^{\text{Semantic}} \leq \negl(n)
+		\Adv_{\E, \A}^{\text{Semantic}} \leq \negl(n)
 	\end{align*}
 	
 	where $n$ is the security parameter and $\Adv_{\E, \A}^{\text{Semantic}}$ is the advantage of the adversary $\A$ in a semantic security game, defined as:
 	
 	\begin{align*}
-	\Adv_{\E, \A}^{\text{Semantic}} = \left| \Pr[\hat{b} = b] - \frac{1}{2} \right|
+		\Adv_{\E, \A}^{\text{Semantic}} = \left| \Pr[\hat{b} = b] - \frac{1}{2} \right|
 	\end{align*}
 	
 	Here, $\hat{b}$ is the adversary's guess and $b$ is the actual bit used by the challenger during the challenge phase of the semantic security game.
@@ -304,7 +335,7 @@
 	\end{center}
 	
 	In this game, $\mathcal{P}$ is the challenger who generates a public key $pk$ and a secret key $sk$. The adversary $\mathcal{A}$ is given the public key and must guess which message $m_b$ was encrypted by $\mathcal{P}$ after seeing the ciphertext. The winning condition is that the adversary correctly guesses the bit $b$ that was used to encrypt the message.
-
+	
 	\subsection{IND-CPA}
 	\subsection{IND-CCA}
 	\subsection{IND-CCA2}
@@ -312,12 +343,12 @@
 	\newpage
 	\chapter{Mode of Operation}
 	
-	\section{ECB (Electronic Code Book) Mode}
-
+	\section{ECB (Electronic Code Book)}
+	
 	\begin{tcolorbox}[colback=white,colframe=thmcolor, title={\color{white}\bf }]
 		\begin{theorem}
 			For an $\ECB$ cipher's $\OW$-$\CPA$\footnote{One-Way Chosen-Plaintext Attack} adversary $\A$, there exists a block cipher's $\PRP$\footnote{Pseudo-random Permutation} adversary $\mathcal{B}$ that satisfies the following: \[
-			\Adv_{\ECB}^{\OW\text{-}\CPA}(\A;q)\leq\Adv_{\textnormal{EncBlk}}^{\PRP}(\mathcal{B})+\frac{q^l}{2^n},
+			\Adv_{\ECB}^{\OW\text{-}\CPA}(\A;q)\leq\Adv_{\EncryptBlk}^{\PRP}(\mathcal{B})+\frac{q^l}{2^n},
 			\] where $l$ is the length of the challenge block targeted for decryption by $\A$, and $q$ is the number of oracle queries for one block of encryption operations in the $\OW$-$\CPA$ game.
 		\end{theorem}
 	\end{tcolorbox}
@@ -335,7 +366,7 @@
 				\midrule
 				if $b=1$, then & 
 				\multirow{3}{*}{$\xrightarrow{\oracle,\inv{\oracle}}$} & $p\uniform\of{\set{0,1}^n}^l$\\
-				$\oracle\gets\oracle^{\EncBlk(k;*)}$, & & with \\
+				$\oracle\gets\oracle^{\EncryptBlk(k;*)}$, & & with \\
 				else, $\oracle\gets\oracle^{g(*)}$ & &$p=p_1\parallel\cdots\parallel p_l$\\
 				\\
 				& & $\ECB$ encipher: & & \\
@@ -346,13 +377,13 @@
 				\midrule
 				if $b=b'$, then & \multirow{3}{*}{$\xleftarrow{b'}$} & if $p=p'$, then, &\multirow{3}{*}{$\xleftarrow{p'}$} & Guess $p'$\\
 				$\mathcal{B}$ wins, & & $b'\gets 1$, & & s.t.\\
-				else $\mathcal{B}$ loses. & & else $b'\gets 0$ & & $\EncBlk(k;p')=c$\\
+				else $\mathcal{B}$ loses. & & else $b'\gets 0$ & & $\EncryptBlk(k;p')=c$\\
 				\bottomrule[1.5pt]
 			\end{tabular}
-		\caption{$\mathcal{B}$'s $\PRP$ game using $\A$.}
+			\caption{$\mathcal{B}$'s $\PRP$ game using $\A$.}
 		\end{table}\\
 		Note that \begin{align*}
-			\Adv_{\ECB}^{\OW\text{-}\CPA}(\A;q)&=\Pr\left[\set{\text{$\A$ wins $\OW$-$\CPA$}}\mid\oracle=\oracle^{\EncBlk(k;*)}\right]\\
+			\Adv_{\ECB}^{\OW\text{-}\CPA}(\A;q)&=\Pr\left[\set{\text{$\A$ wins $\OW$-$\CPA$}}\mid\oracle=\oracle^{\EncryptBlk(k;*)}\right]\\
 			&=\Pr\left[\set{\text{$\A$ wins $\OW$-$\CPA$}}\mid b=1\right].
 		\end{align*}
 		Then \begin{align*}
@@ -365,35 +396,406 @@
 		\end{align*} since $A-B\leq\abs{A-B}$.
 		\begin{enumerate}
 			\item[(1)] We claim that \begin{align*}
-			&\Adv_{\textnormal{EncBlk}}^{\PRP}(\mathcal{B})\\
-			=&\mathcolorbox{-blue}{\abs{\Pr\left[\set{\text{$\A$ wins $\OW$-$\CPA$}}\mid b=1\right]-\Pr\left[\set{\text{$\A$ wins $\OW$-$\CPA$}}\mid b=0\right]}}.
+				&\Adv_{\textnormal{EncBlk}}^{\PRP}(\mathcal{B})\\
+				=&\mathcolorbox{-blue}{\abs{\Pr\left[\set{\text{$\A$ wins $\OW$-$\CPA$}}\mid b=1\right]-\Pr\left[\set{\text{$\A$ wins $\OW$-$\CPA$}}\mid b=0\right]}}.
 			\end{align*}
 			\begin{enumerate}
-				\item[(i)] $\oracle=\oracle^{\EncBlk(k;*)}$ ($b=1$). $\A$ wins $\OW$-$\CPA$ game.
+				\item[(i)] $\oracle=\oracle^{\EncryptBlk(k;*)}$ ($b=1$). $\A$ wins $\OW$-$\CPA$ game.
 				\item[(ii)] $\oracle=\oracle^{g(*)}$ ($b=0$). $\A$ loses $\OW$-$\CPA$ game.
 			\end{enumerate} Then \begin{align*}
-					&\Adv_{\textnormal{EncBlk}}^{\PRP}(\mathcal{B})\\
-					=&\Pr\left[\set{\text{$\A$ wins $\OW$-$\CPA$}}\mid b=1\right]\Pr[b=1]\\
-					&+\Pr\left[\set{\text{$\A$ loses $\OW$-$\CPA$}}\mid b=0\right]\Pr[b=0]\\
-					=&\frac{1}{2}\of{\Pr\left[\set{\text{$\A$ wins $\OW$-$\CPA$}}\mid b=1\right]+\Pr\left[\set{\text{$\A$ loses $\OW$-$\CPA$}}\mid b=0\right]}.
-				\end{align*} Hence
-				\begin{align*}
-					\Adv_{\textnormal{EncBlk}}^{\PRP}(\mathcal{B})&=2\abs{\Pr\left[\text{$\mathcal{B}$ wins $\PRP$}\right]-\frac{1}{2}}\quad\text{by definition}\\
-					=&\big|\Pr\left[\set{\text{$\A$ wins $\OW$-$\CPA$}}\mid b=1\right]\\
-					&+\Pr\left[\set{\text{$\A$ loses $\OW$-$\CPA$}}\mid b=0\right]-1\big|\\
-					=&\big|\Pr\left[\set{\text{$\A$ wins $\OW$-$\CPA$}}\mid b=1\right]\\
-					&-\of{1-\Pr\left[\set{\text{$\A$ loses $\OW$-$\CPA$}}\mid b=0\right]}\big|\\
-					=&\big|\Pr\left[\set{\text{$\A$ wins $\OW$-$\CPA$}}\mid b=1\right]\\
-					&-\Pr\left[\set{\text{$\A$ wins $\OW$-$\CPA$}}\mid b=0\right]\big|
-				\end{align*}
-				\vspace{4pt}
+				&\Adv_{\textnormal{EncBlk}}^{\PRP}(\mathcal{B})\\
+				=&\Pr\left[\set{\text{$\A$ wins $\OW$-$\CPA$}}\mid b=1\right]\Pr[b=1]\\
+				&+\Pr\left[\set{\text{$\A$ loses $\OW$-$\CPA$}}\mid b=0\right]\Pr[b=0]\\
+				=&\frac{1}{2}\of{\Pr\left[\set{\text{$\A$ wins $\OW$-$\CPA$}}\mid b=1\right]+\Pr\left[\set{\text{$\A$ loses $\OW$-$\CPA$}}\mid b=0\right]}.
+			\end{align*} Hence
+			\begin{align*}
+				\Adv_{\textnormal{EncBlk}}^{\PRP}(\mathcal{B})&=2\abs{\Pr\left[\text{$\mathcal{B}$ wins $\PRP$}\right]-\frac{1}{2}}\quad\text{by definition}\\
+				=&\big|\Pr\left[\set{\text{$\A$ wins $\OW$-$\CPA$}}\mid b=1\right]\\
+				&+\Pr\left[\set{\text{$\A$ loses $\OW$-$\CPA$}}\mid b=0\right]-1\big|\\
+				=&\big|\Pr\left[\set{\text{$\A$ wins $\OW$-$\CPA$}}\mid b=1\right]\\
+				&-\of{1-\Pr\left[\set{\text{$\A$ loses $\OW$-$\CPA$}}\mid b=0\right]}\big|\\
+				=&\big|\Pr\left[\set{\text{$\A$ wins $\OW$-$\CPA$}}\mid b=1\right]\\
+				&-\Pr\left[\set{\text{$\A$ wins $\OW$-$\CPA$}}\mid b=0\right]\big|
+			\end{align*}
+			\vspace{4pt}
 			\item[(2)] We claim that \[
 			\mathcolorbox{-red}{\Pr\left[\set{\text{$\A$ wins $\OW$-$\CPA$}}\mid b=0\right]}\leq\frac{q^l}{2^n}.
 			\] Note that \begin{align*}
-			\Pr[\set{\text{$\A$ loses $\OW$-$\CPA$}}\mid b=0]&
+				\Pr[\set{\text{$\A$ loses $\OW$-$\CPA$}}\mid b=0]&
 			\end{align*}
 		\end{enumerate}
 	\end{proof}
+
+	\newpage
+	\section{CBC (Cipher Block Chaining)}
+	\subsection{Specifications}
+	\begin{algorithm}[H]
+		\caption{$\CBC$-$\Encrypt$, $\CBC$-$\Decrypt$}
+		\vspace{8pt}
+		\begin{multicols}{2}
+			\KwData{$\IV$, $K$, $P$}
+			\KwResult{$C$}
+			\BlankLine
+			\Procedure{$\CBC$-$\Encrypt(\IV, K; P)$}{
+				$P'\gets\Encode(P)$\;
+				\Comment{$P'=P_1\parallel\cdots\parallel P_N$}
+				$C\gets\Encipher^{\CBC}(\IV,K;P')$\;
+				\Return $C$\;
+			}
+			\BlankLine
+			\BlankLine
+			\setcounter{AlgoLine}{0}
+			\KwData{$\IV$, $K$, $P=P_1\parallel\cdots\parallel P_N$}
+			\KwResult{$C=C_1\parallel\cdots\parallel C_N$}
+			\BlankLine
+			\Procedure{$\Encipher^{\CBC}(\IV,K;P')$}{
+				$C_0\gets\IV$\;
+				\For{$i\gets 1$ \KwTo $N$}{
+					$C_i\gets\EncryptBlk(K;P_i\oplus C_{i-1})$\;
+				}
+				\Return $C=C_1\parallel\cdots\parallel C_N$\;
+			}
+			\columnbreak % Move to the next column
+			\setcounter{AlgoLine}{0}  % Reset line numbering
+			\KwData{A secret key $sk$, and a ciphertext $c$}
+			\KwResult{A ciphertext $p$ or \texttt{error}}
+			\BlankLine
+			\Comment{$sk=(d,N)$}
+			\Procedure{$\Decrypt(sk; c)$}{
+				$\hat{p}\gets c^d\mod N$\;
+				$p\gets\Decode(\hat{p})$\;
+				\If{$p=$\texttt{error}}{
+					\Return \texttt{error}\;
+				}
+				\Return $p$\;
+			}
+		\end{multicols}
+		\vspace{8pt}
+	\end{algorithm}
+	
+	
+	\begin{algorithm}[H]
+		\caption{Miller-Rabin Primality Test}
+		\KwIn{a positive integer $n > 3$ and accuracy parameter $k$}
+		\KwOut{composite if $n$ is composite, probably prime otherwise}
+		\For{$i \leftarrow 1$ \KwTo $k$}{
+			Choose a random integer $a$ in the range $[2, n -2]$\;
+			$x \leftarrow a^{d} \mod n$\;
+			\If{$x = 1$ \textbf{or} $x = n - 1$}{
+				continue to next iteration of loop\;
+			}
+			\For{$r \leftarrow 1$ \KwTo $s - 1$}{
+				$x \leftarrow x^2 \mod n$\;
+				\If{$x = 1$}{
+					\Return composite\;
+				}
+				\If{$x = n - 1$}{
+					continue to next iteration of outer loop\;
+				}
+			}
+			\Return composite\;
+		}
+		\Return probably prime\;
+	\end{algorithm}
+	
+	
+	\begin{figure}[h!]
+		\centering
+		\begin{tikzpicture}[>=stealth',node distance=1.5cm, 
+			box/.style={rectangle,draw=black,minimum size=.25cm}]
+			
+			\node[] (1) {$P_1$};
+			\node[right=of 1] (101) {};
+			\node[right=of 101] (2) {$P_2$};
+			\node[right=of 2] (102) {};
+			\node[right=of 102] (3) {$P_3$};
+			\node[below=of 1] (5) {$\oplus$};
+			\node[left=of 5] (4) {$\IV$};
+			\node[right=of 5] (103) {};
+			\node[below=of 102] (104) {};
+			\node[below=of 2] (6) {$\oplus$};
+			\node[below=of 3] (7) {$\oplus$};
+			\node[box,below=of 5] (8) {$\EncryptBlk(k;*)$};
+			\node[box,below=of 6] (9) {$\EncryptBlk(k;*)$};
+			\node[box,below=of 7] (10) {$\EncryptBlk(k;*)$};
+			\node[below=of 103] (105) {};
+			\node[below=of 104] (106) {};
+			\node[below=of 8] (107) {};
+			\node[right=of 107] (108) {};
+			\node[below=of 9] (109) {};
+			\node[] (110) {};
+			\node[below=of 10] (111) {};
+			\node[below=of 107] (11) {$C_1$};
+			\node[below=of 109] (12) {$C_2$};
+			\node[below=of 111] (13) {$C_3$};
+			
+			\draw[->] (1) to[out=-90,in=90] (5);
+			\draw[->] (2) to[out=-90,in=90] (6);
+			\draw[->] (3) to[out=-90,in=90] (7);
+			\draw[->] (4) to[out=0,in=180] (5);
+			
+			\draw[->] (5) to[out=-90,in=90] (8);
+			\draw[->] (6) to[out=-90,in=90] (9);
+			\draw[->] (7) to[out=-90,in=90] (10);
+			
+			\draw[->] (8) to[out=-90,in=90] (11);
+			\draw[->] (9) to[out=-90,in=90] (12);
+			\draw[->] (10) to[out=-90,in=90] (13);
+			
+			\draw[->] (107) to[out=0,in=180] (6);
+			\draw[->] (109) to[out=0,in=180] (7);
+		\end{tikzpicture}
+		\caption{$\CBC$}
+	\end{figure}
+	
+	\subsection{Features}
+	\begin{enumerate}[(1)]
+		\item 
+		\item 
+		\item 
+		\item Since decryption operations can handle some internal operations as $\ECB$ decryption, parallel processing is possible as follows: \begin{align*}
+			c=c_1\parallel\cdots\parallel c_n\gets\Encipher^{\CBC}
+		\end{align*}
+	\end{enumerate}
+	
+	\newpage
+	\subsection{Security}
+	\begin{table}[h]
+		\centering
+		\setlength{\tabcolsep}{2.5pt} % Remove default column spacing
+		\begin{tabular*}{\textwidth}{@{\extracolsep{\fill}}c|c|cccc|ccc}
+			\toprule[1.2pt]
+			Mode & $\IV$ & $\IND$-$\CCATwo$ & $\IND$-$\CCA$ & \cellcolor{blue!25}$\IND$-$\CPA$ & $\IND$-$\PASS$ & \cellcolor{blue!25}$\OW$-$\CCA$ & \cellcolor{blue!25}$\OW$-$\CPA$ & $\OW$-$\PASS$ \\
+			\midrule
+			\midrule
+			\multirow{3}{*}{$\CBC$} & fixed & \textcolor{red}{X} & \textcolor{red}{X} & \cellcolor{blue!25}\textcolor{red}{X} & \textcolor{blue}{O} & \cellcolor{blue!25}\textcolor{red}{X} & \cellcolor{blue!25}\textcolor{blue}{O} & \textcolor{blue}{O} \\
+			 & nonce & \textcolor{red}{X}& \textcolor{red}{X} & \cellcolor{blue!25}\textcolor{red}{X} & \textcolor{blue}{O} & \cellcolor{blue!25}\textcolor{red}{X} & \cellcolor{blue!25}\textcolor{blue}{O} & \textcolor{blue}{O} \\
+			 & random & \textcolor{red}{X} & \textcolor{red}{X} & \cellcolor{blue!25}\textcolor{blue}{O} & \textcolor{blue}{O} & \cellcolor{blue!25}\textcolor{red}{X} & \cellcolor{blue!25}\textcolor{blue}{O} & \textcolor{blue}{O} \\
+			\bottomrule[1.2pt]
+		\end{tabular*}
+		\caption{Security of $\CBC$ (\textcolor{red}{X}=insecure / \textcolor{blue}{O}=secure)}
+	\end{table}
+
+	\begin{tcolorbox}[colback=white,colframe=thmcolor, title={\color{white}\bf }]
+		\begin{theorem}
+			$\CBC$ mode is \textbf{NOT} $\OW$-$\CCA$-secure.
+		\end{theorem}
+	\end{tcolorbox}
+	\begin{proof}
+		content...
+	\end{proof}
+	\vspace{4pt}
+	\begin{tcolorbox}[colback=white,colframe=thmcolor, title={\color{white}\bf }]
+		\begin{theorem}
+			\[
+			\Adv_{\Pi, \CBC}^{\OW\text{-}\CPA}\of{\A;q}=\Adv_{\Pi, \ECB}^{\OW\text{-}\CPA}\of{\mathcal{B};ql}.
+			\]
+		\end{theorem}
+	\end{tcolorbox}
+	\begin{proof}
+		content...
+	\end{proof}
+	\begin{tcolorbox}[colback=white,colframe=corcolor, title={\color{white}\bf }]
+		\begin{corollary}
+			$\CBC$ mode is $\OW$-$\CPA$-secure.
+		\end{corollary}
+	\end{tcolorbox}
+	\begin{proof}
+		content...
+	\end{proof}
+
+	\begin{tcolorbox}[colback=white,colframe=thmcolor, title={\color{white}\bf }]
+		\begin{theorem}
+			CBC mode with fixed IV is NOT IND-CPA-secure
+		\end{theorem}
+	\end{tcolorbox}
+
+	\begin{tcolorbox}[colback=white,colframe=thmcolor, title={\color{white}\bf }]
+		\begin{theorem}
+			CBC mode with nonce IV is NOT IND-CPA-secure
+		\end{theorem}
+	\end{tcolorbox}
+
+	\newpage
+	\begin{tcolorbox}[colback=white,colframe=thmcolor, title={\color{white}\bf }]
+		\begin{theorem}
+			For a $\CBC\dollar$ encryption $\IND-\CPA$ adversary $\A$, there exists a block cipher PRP (Pseudorandom Permutation) game adversary $B$ that satisfies the following:
+		\end{theorem}
+	\end{tcolorbox}
+	\begin{proof}
+		\ 
+		\begin{table}[h]
+			\centering\begin{tabular*}{\textwidth}{@{\extracolsep{\fill}}ccccc}
+				\toprule[1.5pt]
+				Challenger & $\xleftrightarrow[EncryptBlk]{\PRP}$ & Adversary $\mathcal{B}$ & $\xleftrightarrow[CBC\dollar]{\IND\text{-}\CPA}$ & Adversary $\mathcal{A}$ \\
+				\midrule
+				$k\gets KeyGen(1^n)$\\
+				$g\uniform\mathcal{P}_n$\\
+				$b\uniform\set{0,1}^n$\\
+				\midrule
+				if $b=1$, then & 
+				\multirow{3}{*}{$\xrightarrow{\oracle}$} & Construct & \multirow{3}{*}{$\xrightarrow{\oracle^{Encipher^{CBC\dollar}}(k;*)}$}\\
+				$\oracle\gets\oracle^{EncryptBlk(k;*)}$, & & $\oracle^{Encipher^{CBC\dollar}}(k;*)$ \\
+				else, $\oracle\gets\oracle^{g(*)}$ & & using $\oracle$ \\
+				\midrule
+				& & & \multirow{3}{*}{$\xleftarrow{p_0,p_1}$} & $\A$ chooses $l$-block\\
+				& & & & plaintexts $p_0$ and $p_1$\\
+				& & & & s.t. $p_0\neq p_0$\\
+				\midrule
+				& & $t\uniform\set{0,1}$& \multirow{3}{*}{$\xrightarrow{IV, c}$} & $\A$ tries to find\\
+				& & $p_t\to\oracle^{Encipher^{CBC\dollar}}(k;*)\to IV,c$ & & the answer within $q$\\
+				& & & & $\oracle^{Encipher^{CBC\dollar}}(k;*)$ queries\\
+				\midrule
+				if $b=b'$, then & \multirow{3}{*}{$\xleftarrow{b'}$} & if $t=t'$, then, &\multirow{3}{*}{$\xleftarrow{t'}$} & if $\A$ thinks\\
+				$\mathcal{B}$ wins, & & $b'\gets 1$, & & $Decipher^{CBC}(IV, k; c)=p_0$,\\
+				else $\mathcal{B}$ loses. & & else $b'\gets 0$ & & then $t'\gets 0$, else $t'\gets 1$\\
+				\bottomrule[1.5pt]
+			\end{tabular*}
+			\caption{$\mathcal{B}$'s $\PRP$ game using $\A$.}
+		\end{table}
+		
+		We will show that \[
+		\Adv_{\Pi,CBC\dollar}^{\IND\text{-}\CPA}(\A;q)\leq 2\Adv_{\Pi}^{\PRP}(\mathcal{B})+\frac{3\hat{q}^2}{2^n}
+		\] Let's denote \begin{align*}
+			\IND\text{-}\CPA_\A^+:=\text{$\A$ wins $\IND$-$\CPA$}\\
+			\IND\text{-}\CPA_\A^-:=\text{$\A$ loses $\IND$-$\CPA$}
+		\end{align*}
+		
+		\begin{enumerate}[\text{Claim} 1.]
+			\item We claim that \[
+			\boxed{\Adv_{\Pi}^{\PRP}\of{\mathcal{B}}=\abs{\Pr\left[\IND\text{-}\CPA_\A^+\mid b=1\right]-\Pr\left[\IND\text{-}\CPA_{\A}^+\mid b=0\right]}}.
+			\] 
+			$\B$ wins in the $\PRP$ game under the following two scenarios: \begin{enumerate}[(i)]
+				\item ($\oracle=\oracle^{EncryptBlk(k;*)})\land(\IND\text{-}\CPA_\A^+)$
+				\item $(\oracle=\oracle^{g(*)})\land (\IND\text{-}\CPA_\A^-)$
+			\end{enumerate} Thus \begin{align*}
+				&\Adv_{\Pi}^{\PRP}\of{\B}\\
+				=&2\abs{\Pr\left[\PRP_{\B}^+\right]-\frac{1}{2}}\\
+				=&2\abs{\of{\Pr\left[\IND\text{-}\CPA_{\A}^+\mid b=1\right]\Pr[b=1]+\Pr\left[\IND\text{-}\CPA_{\A}^-\mid b=0\right]\Pr[b=0]}-\frac{1}{2}}\\
+				=&2\abs{\frac{1}{2}\of{\Pr\left[\IND\text{-}\CPA_{\A}^+\mid b=1\right]+\Pr\left[\IND\text{-}\CPA_{\A}^-\mid b=0\right]}-\frac{1}{2}}\\
+				=&\abs{arg1}
+			\end{align*}
+			\vspace{4pt}
+			\item We claim that \[
+			\boxed{\Pr\left[\IND\text{-}\CPA_{\A}^+\mid g\uniform\mathcal{P}_n\right]=\Pr\left[\IND\text{-}\CPA-\A^+\land E^C\mid g\uniform\mathcal{F}_n\right]}.
+			\]
+			\item We claim that \[
+			\boxed{\abs{\Pr\left[\IND\text{-}\CPA_{\A}^+\mid g\uniform\mathcal{P}_n\right]-\Pr\left[\IND\text{-}\CPA_{\A}^+\mid g\uniform\mathcal{F}_n\right]}\leq\frac{\hat{q}^2}{2^{n+1}}}.
+			\]
+			\item 
+			\item We claim that \[
+			\boxed{\abs{\Pr\left[\IND\text{-}\CPA_{\A}^+\mid g\uniform\mathcal{P}_n\right]-\frac{1}{2}}\leq\frac{\hat{q}^2}{2^{n}}}.
+			\]
+			\item We claim that \[
+			\boxed{\abs{\Pr\left[\IND\text{-}\CPA_{\A}^+\mid g\uniform\mathcal{P}_n\right]-\frac{1}{2}}\leq\frac{3\hat{q}^2}{2^{n}}}.
+			\]
+		\end{enumerate}
+	\end{proof}
+	\begin{tcolorbox}[colback=white,colframe=corcolor, title={\color{white}\bf }]
+		\begin{corollary}
+			CBC mode with random IV is IND-CPA-secure
+		\end{corollary}
+	\end{tcolorbox}
+	\begin{proof}
+		content...
+	\end{proof}
+	\newpage
+	\begin{center}
+		\begin{tikzpicture}
+			
+			% Individuals
+			\draw (0,0) circle (0.5cm) node {A};
+			\draw (3,0) circle (0.5cm) node {B};
+			\draw[shift={(7,0)}] (0,0) circle (0.5cm) node {C};
+			\draw[shift={(7,0)}] (3,0) circle (0.5cm) node {D};
+			
+			% Love vessels
+			\fill[blue!40] (-0.5,1) rectangle (0.5,1.8);
+			\draw (-0.5,1) rectangle (0.5,2);
+			\fill[blue!40] (2.5,1) rectangle (3.5,1.5);
+			\draw (2.5,1) rectangle (3.5,2);
+			\fill[blue!40, shift={(7,0)}] (-0.5,1) rectangle (0.5,2);
+			\draw[shift={(7,0)}] (-0.5,1) rectangle (0.5,2);
+			\fill[blue!40, shift={(7,0)}] (2.5,1) rectangle (3.5,1.3);
+			\draw[shift={(7,0)}] (2.5,1) rectangle (3.5,2);
+			
+			% Love matter generation and transfer (Giving love)
+			\draw[->, red, thick] (0,0.5) -- (3,1.5) node[midway, above] {Giving Love};
+			
+			% Love matter generation and reception (Receiving love)
+			\draw[->, magenta, thick, shift={(7,0)}] (3,1.5) -- (0,0.5) node[midway, above] {Receiving Love};
+			
+		\end{tikzpicture}
+	\end{center}
+
+	
+	\begin{tcolorbox}[colback=white,colframe=thmcolor, title={\color{white}\bf }]
+		
+	\end{tcolorbox}
+	
+	\begin{tcolorbox}[colback=white,colframe=thmcolor, title={\color{white}\bf }]
+		
+	\end{tcolorbox}
+	
+	\begin{tcolorbox}[colback=white,colframe=thmcolor, title={\color{white}\bf }]
+		
+	\end{tcolorbox}
+	
+	\begin{tcolorbox}[colback=white,colframe=thmcolor, title={\color{white}\bf }]
+		
+	\end{tcolorbox}
+	
+	\begin{tcolorbox}[colback=white,colframe=thmcolor, title={\color{white}\bf }]
+		
+	\end{tcolorbox}
+	
+	\begin{tcolorbox}[colback=white,colframe=thmcolor, title={\color{white}\bf }]
+		
+	\end{tcolorbox}
+	
+	\begin{tcolorbox}[colback=white,colframe=thmcolor, title={\color{white}\bf }]
+		
+	\end{tcolorbox}
+	
+	\begin{tcolorbox}[colback=white,colframe=thmcolor, title={\color{white}\bf }]
+		
+	\end{tcolorbox}
+	
+	\begin{tcolorbox}[colback=white,colframe=thmcolor, title={\color{white}\bf }]
+		
+	\end{tcolorbox}
+	
+	\begin{tcolorbox}[colback=white,colframe=thmcolor, title={\color{white}\bf }]
+		
+	\end{tcolorbox}
+	\begin{tcolorbox}[colback=white,colframe=thmcolor, title={\color{white}\bf }]
+	
+	\end{tcolorbox}
+	
+	\begin{tcolorbox}[colback=white,colframe=thmcolor, title={\color{white}\bf }]
+	
+	\end{tcolorbox}
+	\begin{tcolorbox}[colback=white,colframe=thmcolor, title={\color{white}\bf }]
+	
+	\end{tcolorbox}
+	
+	\begin{tcolorbox}[colback=white,colframe=thmcolor, title={\color{white}\bf }]
+	
+	\end{tcolorbox}
+	\begin{tcolorbox}[colback=white,colframe=thmcolor, title={\color{white}\bf }]
+	
+	\end{tcolorbox}
+	
+	\begin{tcolorbox}[colback=white,colframe=thmcolor, title={\color{white}\bf }]
+	
+	\end{tcolorbox}
+	\begin{tcolorbox}[colback=white,colframe=thmcolor, title={\color{white}\bf }]
+	
+	\end{tcolorbox}
+	
+	\begin{tcolorbox}[colback=white,colframe=thmcolor, title={\color{white}\bf }]
+	
+	\end{tcolorbox}
 
 	% End document
 \end{document}
