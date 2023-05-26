@@ -2696,6 +2696,62 @@ int main() {
 		content...
 	\end{proof}
 	
+	\newpage
+	\chapter{Elliptic Curves}
+	
+	\section{Projective Variety}
+	
+	\begin{note}{(\textbf{Affine Space}; Associativity Axiom)}
+		Let $K$ be a field, and let $\of{V,+_V,\circ}$ be a vector space over $K$. Let $\mathbb{A}$ be a set on which two mappings are defined \begin{align*}
+		+&:\mathbb{A}\times V\to\mathbb{A}\\
+		-&:\mathbb{A}\times\mathbb{A}\to V\\
+		\end{align*} satisfying the following associativity conditions: \begin{enumerate}[(\text{A}1)]
+			\item $\forall a,b\in\mathbb{A}:a+(b-a)=a$
+			\item $\forall a\in\mathbb{A}:\forall u,v\in V:(a+u)+v=p+(u+_V v)$
+			\item $\forall a,b\in\mathbb{A}:\forall u\in V:(a-b)+_V u=(a+u)-b$. Then the ordered triple $(\mathbb{A},+,-)$ is an \textbf{affine space}.
+		\end{enumerate} The affine space of demension $n$ over filed $K$ is given by \[
+	\mathbb{A}^n:=\mathbb{A}^n(K)=\set{(x_1,\cdots,x_n):x_i\in K\ \text{for}\ i\in\set{1,\cdots,n}}
+	\]
+	\end{note}
+	\vspace{8pt}
+	\subsection{Projective Line}
+	
+	\begin{tcolorbox}[colback=white,colframe=defcolor,arc=5pt,title={\color{white}\bf Projective Line}]
+		\begin{definition}
+			Let $K$ be a field. \begin{enumerate}[(1)]
+				\item 
+				\item \[
+				\mathbb{P}^1(K)=\set{S\subseteq V:\dim{S}=1}
+				\]
+				\item 
+			\end{enumerate}
+		\end{definition}
+	\end{tcolorbox}
+	
+	\begin{example}[8.2]
+		$2X+3Y+Z=0$ over $\mathbb{P}^2\of{\F_5}$. \begin{align*}
+		(*:*:1) || (*:*:0)\\
+		(*:*:1) || (*:1:0) , (*:0:0)
+		\end{align*}
+		$\begin{cases}
+			(z=0) 2x+3Y=0\\
+			(z=1) 2X+3Y+1=0
+		\end{cases}$
+		\begin{align*}
+		2X+3Y=0\\
+		6X+9Y=0\\
+		X+4Y=0\\
+		X-Y=0\\
+		X=Y
+		\end{align*}
+		\begin{align*}
+		2X+3Y+1=0\\
+		\vdots\\
+		X=Y-3\\
+		X=Y+2
+		\end{align*}
+	\end{example}
+	
 	\begin{tcolorbox}[colback=white,colframe=lemcolor,arc=5pt,title={\color{white}\bf }]
 		
 	\end{tcolorbox}
