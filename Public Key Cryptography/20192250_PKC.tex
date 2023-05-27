@@ -859,39 +859,36 @@
 		\end{proposition}
 	\end{tcolorbox}
 	
-	\iffalse
-	\newpage
 	\begin{remark}
 		When $n=365$, the lowest $k$ for which the above exceeds $0.5$ is $k=23$: \begin{figure}[ht!]
 			\centering
-			%\includegraphics[width=0.95\linewidth,height=95mm]{birthday_problem.png}
+			\includegraphics[width=0.95\linewidth,height=95mm]{birthday_problem.png}
 		\end{figure}
 		\begin{lstlisting}[style=sage, caption={Birthday Bound (Sage)},captionpos=t]
-			import matplotlib.pyplot as plt
-			
-			# Define a function to compute the probability of two people sharing a birthday for a given group size
-			def birthday_prob(n):
-			return 1 - prod([(365-i)/365 for i in range(n)])
-			
-			# Create a list of group sizes from 2 to 50
-			group_sizes = range(2, 51)
-			
-			# Compute the probabilities for each group size
-			probabilities = [birthday_prob(n) for n in group_sizes]
-			
-			# Plot the probabilities as a function of group size
-			plt.plot(group_sizes, probabilities)
-			plt.xlabel("Group Size")
-			plt.ylabel("Probability")
-			plt.title("Probability of Two People Sharing a Birthday")
-			
-			# Add a horizontal line at the probability of 0.5
-			plt.axhline(y=0.5, color='r', linestyle='-')
-			
-			plt.show()
+import matplotlib.pyplot as plt
+
+# Define a function to compute the probability of two people sharing a birthday for a given group size
+def birthday_prob(n):
+return 1 - prod([(365-i)/365 for i in range(n)])
+
+# Create a list of group sizes from 2 to 50
+group_sizes = range(2, 51)
+
+# Compute the probabilities for each group size
+probabilities = [birthday_prob(n) for n in group_sizes]
+
+# Plot the probabilities as a function of group size
+plt.plot(group_sizes, probabilities)
+plt.xlabel("Group Size")
+plt.ylabel("Probability")
+plt.title("Probability of Two People Sharing a Birthday")
+
+# Add a horizontal line at the probability of 0.5
+plt.axhline(y=0.5, color='r', linestyle='-')
+
+plt.show()
 		\end{lstlisting}
 	\end{remark}
-	\fi
 	\newpage
 	\begin{tcolorbox}[colback=white,colframe=thmcolor,arc=5pt,title={\color{white}\bf Birthday Bound}]
 		\begin{theorem}
@@ -2695,7 +2692,7 @@ int main() {
 	\begin{proof}
 		content...
 	\end{proof}
-	
+
 	\newpage
 	\chapter{Elliptic Curves}
 	
@@ -2703,15 +2700,15 @@ int main() {
 	
 	\begin{note}{(\textbf{Affine Space}; Associativity Axiom)}
 		Let $K$ be a field, and let $\of{V,+_V,\circ}$ be a vector space over $K$. Let $\mathbb{A}$ be a set on which two mappings are defined \begin{align*}
-		+&:\mathbb{A}\times V\to\mathbb{A}\\
-		-&:\mathbb{A}\times\mathbb{A}\to V\\
+			+&:\mathbb{A}\times V\to\mathbb{A}\\
+			-&:\mathbb{A}\times\mathbb{A}\to V\\
 		\end{align*} satisfying the following associativity conditions: \begin{enumerate}[(\text{A}1)]
 			\item $\forall a,b\in\mathbb{A}:a+(b-a)=a$
 			\item $\forall a\in\mathbb{A}:\forall u,v\in V:(a+u)+v=p+(u+_V v)$
 			\item $\forall a,b\in\mathbb{A}:\forall u\in V:(a-b)+_V u=(a+u)-b$. Then the ordered triple $(\mathbb{A},+,-)$ is an \textbf{affine space}.
 		\end{enumerate} The affine space of demension $n$ over filed $K$ is given by \[
-	\mathbb{A}^n:=\mathbb{A}^n(K)=\set{(x_1,\cdots,x_n):x_i\in K\ \text{for}\ i\in\set{1,\cdots,n}}
-	\]
+		\mathbb{A}^n:=\mathbb{A}^n(K)=\set{(x_1,\cdots,x_n):x_i\in K\ \text{for}\ i\in\set{1,\cdots,n}}
+		\]
 	\end{note}
 	\vspace{8pt}
 	\subsection{Projective Line}
@@ -2719,36 +2716,43 @@ int main() {
 	\begin{tcolorbox}[colback=white,colframe=defcolor,arc=5pt,title={\color{white}\bf Projective Line}]
 		\begin{definition}
 			Let $K$ be a field. \begin{enumerate}[(1)]
-				\item 
-				\item \[
+				\item In the $2$-dimensional vector space $V=K^2$ defined over the field $K$, a $1$-dimensional subspace is referred to as a \textbf{projective line}.
+				\item The set $\mathbb{P}^1(K)$ of all projective lines is called a \textit{$1$-dimensional projective space}. \[
 				\mathbb{P}^1(K)=\set{S\subseteq V:\dim{S}=1}
 				\]
-				\item 
+				\item An element of a projective space is referred to as a \textit{point}.
 			\end{enumerate}
 		\end{definition}
 	\end{tcolorbox}
 	
+	\begin{remark}[Notation]
+		The 1-dimensional subspace S of V can be defined as follows: \[
+		S=\set{\of{\lambda a,\lambda b}:\lambda\in K}\subseteq V
+		\] for some (a, b) that is not (0,0). Then $S$ is denoted as $S=(a:b)$.
+	\end{remark}
+	
+	
 	\begin{example}[8.2]
 		$2X+3Y+Z=0$ over $\mathbb{P}^2\of{\F_5}$. \begin{align*}
-		(*:*:1) || (*:*:0)\\
-		(*:*:1) || (*:1:0) , (*:0:0)
+			(*:*:1) || (*:*:0)\\
+			(*:*:1) || (*:1:0) , (*:0:0)
 		\end{align*}
 		$\begin{cases}
 			(z=0) 2x+3Y=0\\
 			(z=1) 2X+3Y+1=0
 		\end{cases}$
 		\begin{align*}
-		2X+3Y=0\\
-		6X+9Y=0\\
-		X+4Y=0\\
-		X-Y=0\\
-		X=Y
+			2X+3Y=0\\
+			6X+9Y=0\\
+			X+4Y=0\\
+			X-Y=0\\
+			X=Y
 		\end{align*}
 		\begin{align*}
-		2X+3Y+1=0\\
-		\vdots\\
-		X=Y-3\\
-		X=Y+2
+			2X+3Y+1=0\\
+			\vdots\\
+			X=Y-3\\
+			X=Y+2
 		\end{align*}
 	\end{example}
 	
