@@ -2692,7 +2692,7 @@ int main() {
 	\begin{proof}
 		content...
 	\end{proof}
-
+	
 	\newpage
 	\chapter{Elliptic Curves}
 	
@@ -2700,13 +2700,13 @@ int main() {
 	
 	\begin{note}{(\textbf{Affine Space}; Associativity Axiom)}
 		Let $K$ be a field, and let $\of{V,+_V,\circ}$ be a vector space over $K$. Let $\mathbb{A}$ be a set on which two mappings are defined \begin{align*}
-			+&:\mathbb{A}\times V\to\mathbb{A}\\
-			-&:\mathbb{A}\times\mathbb{A}\to V\\
+		+&:\mathbb{A}\times V\to\mathbb{A}\\
+		-&:\mathbb{A}\times\mathbb{A}\to V\\
 		\end{align*} satisfying the following associativity conditions: \begin{enumerate}[(\text{A}1)]
 			\item $\forall a,b\in\mathbb{A}:a+(b-a)=a$
 			\item $\forall a\in\mathbb{A}:\forall u,v\in V:(a+u)+v=p+(u+_V v)$
 			\item $\forall a,b\in\mathbb{A}:\forall u\in V:(a-b)+_V u=(a+u)-b$. Then the ordered triple $(\mathbb{A},+,-)$ is an \textbf{affine space}.
-		\end{enumerate} The affine space of demension $n$ over filed $K$ is given by \[
+		\end{enumerate} The affine space of demension $n$ over field $K$ is given by \[
 		\mathbb{A}^n:=\mathbb{A}^n(K)=\set{(x_1,\cdots,x_n):x_i\in K\ \text{for}\ i\in\set{1,\cdots,n}}
 		\]
 	\end{note}
@@ -2718,7 +2718,7 @@ int main() {
 			Let $K$ be a field. \begin{enumerate}[(1)]
 				\item In the $2$-dimensional vector space $V=K^2$ defined over the field $K$, a $1$-dimensional subspace is referred to as a \textbf{projective line}.
 				\item The set $\mathbb{P}^1(K)$ of all projective lines is called a \textit{$1$-dimensional projective space}. \[
-				\mathbb{P}^1(K)=\set{S\subseteq V:\dim{S}=1}
+				\mathbb{P}^1(K)=\set{S\subseteq V=K^2:\dim{S}=1}
 				\]
 				\item An element of a projective space is referred to as a \textit{point}.
 			\end{enumerate}
@@ -2728,37 +2728,505 @@ int main() {
 	\begin{remark}[Notation]
 		The 1-dimensional subspace S of V can be defined as follows: \[
 		S=\set{\of{\lambda a,\lambda b}:\lambda\in K}\subseteq V
-		\] for some (a, b) that is not (0,0). Then $S$ is denoted as $S=(a:b)$.
+		\] for some $(a, b)\setminus\set{(0,0)}$. Then $S$ is denoted as $S=(a:b)$. That is, \[
+		\mathbb{P}^1(K)=\set{(a:b):a,b\in K\setminus\set{0}}
+		\]
 	\end{remark}
+	\vspace{4pt}
+	\begin{example}
+		Consider $\mathbb{P}^1(\F_3)=\mathbb{P}^1(\set{0,1,2})$. Then \[
+		\begin{cases}
+		\mathcolorbox{-red}{(0:1)}\\
+		\mathcolorbox{-red}{(0:2)}\\
+		\mathcolorbox{-blue}{(1:0)}\\
+		\mathcolorbox{-green}{(1:1)}\\
+		\mathcolorbox{green}{(1:2)}\\
+		\mathcolorbox{-blue}{(2:0)}\\
+		\mathcolorbox{green}{(2:1)}\\
+		\mathcolorbox{-green}{(2:2)}
+		\end{cases}\implies\begin{cases}
+		\mathcolorbox{-red}{(0:1)}\\
+		\mathcolorbox{-blue}{(1:0)}\\
+		\mathcolorbox{-green}{(1:1)}\\
+		\mathcolorbox{green}{(2:1)}
+		\end{cases}
+		\]
+		\vspace{8pt}
+		\begin{center}
+			\begin{tikzpicture}[sibling distance=10em,
+			every node/.style = {shape=rectangle, rounded corners,
+				draw, align=center}]
+			\node {$\mathbb{P}^1(\F_3)$}
+			child { node {$(0:1)$\\ $(1:1)$\\ $(2:1)$} }
+			child { node {$\underbrace{(1:0)}_{\text{point at infinity}}$} };
+			\end{tikzpicture}\\
+			\begin{tikzpicture}[scale=1]
+			\draw[very thin,color=gray!15,step=.5] (-5,-1.5) grid (5,2.5);
+			% draw axes
+			\draw[->] (-5,0) -- (5,0) node[right] {$x$};
+			\draw[->] (0,-1.5) -- (0,2.5) node[above] {$y$};
+			%\coordinate [label=below left:0] (a) at (0,0);
+			\foreach \i in {-4,...,-2,-1,1,2,...,4}
+			\draw[] (\i,.1)--(\i,-.1) node[below] {$\i$};
+			\foreach \i in {-1,1,2}
+			\draw[] (.1,\i)--(-.1,\i) node[left] {$\i$};
+			%add straight line
+			\draw[line width=0.25mm, red] (-1.5,-1.5) -- (2.5,2.5) node[above] {$(1:1)$};
+			\draw[line width=0.25mm, red] (-3,-1.5) -- (4,2) node[above] {$(2:1)$};
+			\draw[line width=0.25mm, red] (0,-1.5) -- (0,2.5) node[above right] {$(0:1)$};
+			\draw[line width=0.25mm, red] (-5,0) -- (5,0) node[above] {$(1:0)$};
+			% draw point
+			%\filldraw[red] (0,1) circle (1.5pt) node[anchor=south west] {$i$};
+			%\filldraw[red] (0,-1) circle (1.5pt) node[anchor=south west] {$-i$};
+			%\filldraw[blue] (1.5,0) circle (1pt) node[anchor=north] {$R$};
+			%\filldraw[blue] (-1.5,0) circle (1pt) node[anchor=north] {$-R$};
+			%\draw[red, dashed] (0,1) circle (10pt) node[anchor=north east] {$C_r$};
+			
+			%\draw[red, dashed] (.4,1) arc (0:360:.4) node[below right] {$C_r$};
+			%\draw[red] (0,1) -- (-.4,1) node[midway, above] {$r$};
+			
+			%\draw[line width=0.5mm, ->, thick, blue] (1.5,0) arc (0:90:1.5) node[midway, above right] {$C_R$};
+			%\draw[line width=0.5mm, ->, thick, blue] (0,1.5) arc (90:180:1.5) node[midway, left] {};
+			%\draw[line width=0.5mm, blue, ->] (-1.5,0) -- (0,0) node[above right] {$I_R$};
+			%\draw[line width=0.5mm, blue, ->] (0,0) -- (1.5,0) node[above right] {};
+			\end{tikzpicture}
+		\end{center}
+	\end{example}
+	\vspace{4pt}
+	\begin{remark}
+		The point $S=(a:b)$ of $\mathbb{P}^1(K)$ can be denoted as follows \[
+		S=(a:b)=\begin{cases}
+			\inv{b}(a:b)=(\inv{b}a:1), &:b\neq 0\\
+			(1:0) &: b=0.
+		\end{cases}
+		\]
+	\end{remark}
+	\vspace{8pt}
+	\begin{tcolorbox}[colback=white,colframe=procolor,arc=5pt,title={\color{white}\bf }]
+		\begin{proposition}
+			\ \begin{enumerate}[(1)]
+				\item $\mathbb{P}^1(K)$ can be defined as follows: \[
+				\mathbb{P}^1(K):=\set{(c:1):c\in K}\cup\set{(1:0)}.
+				\] where $c=b^{-1}a\in K$.
+				In this context, $(1:0)$, also denoted as $\infty$, is called the \textbf{point at infinity}.
+				\item When $\abs{K}=p$, the number of points in $\mathbb{P}^1(K)$ is $\abs{\mathbb{P}^1(K)}=p+1$, among which there is one point at infinity.
+				\item The points $(c:1)$ and $(1:0)$ can each correspond to the first-degree homogeneous polynomials $X-cY=0$ and $Y=0$ defined on $\mathbb{P}^1(K)$, respectively. That is, every element of $\mathbb{P}^1(K)$ can be expressed as $aX+bY=0$ with $a,b\in K\setminus\set{0}$
+			\end{enumerate}
+		\end{proposition}
+	\end{tcolorbox}
 	
+	\subsection{Projective Plane}
 	
-	\begin{example}[8.2]
-		$2X+3Y+Z=0$ over $\mathbb{P}^2\of{\F_5}$. \begin{align*}
-			(*:*:1) || (*:*:0)\\
-			(*:*:1) || (*:1:0) , (*:0:0)
-		\end{align*}
-		$\begin{cases}
-			(z=0) 2x+3Y=0\\
-			(z=1) 2X+3Y+1=0
-		\end{cases}$
-		\begin{align*}
-			2X+3Y=0\\
-			6X+9Y=0\\
-			X+4Y=0\\
-			X-Y=0\\
-			X=Y
-		\end{align*}
-		\begin{align*}
-			2X+3Y+1=0\\
-			\vdots\\
-			X=Y-3\\
-			X=Y+2
-		\end{align*}
+	\begin{tcolorbox}[colback=white,colframe=defcolor,arc=5pt,title={\color{white}\bf Projective Plane}]
+		\begin{definition}
+			Let $K$ be a field. \begin{enumerate}[(1)]
+				\item In the $3$-dimensional vector space $V=K^3$ defined over the field $K$, a $1$-dimensional subspace is referred to as a \textbf{projective plane}.
+				\item The set $\mathbb{P}^2(K)$ of all projective planes is called a \textit{$2$-dimensional projective space}. \[
+				\mathbb{P}^2(K)=\set{S\subseteq V=K^3:\dim{S}=1}
+				\]
+				\item An element of a projective space is referred to as a \textit{point}.
+			\end{enumerate}
+		\end{definition}
+	\end{tcolorbox}
+	\vspace{4pt}
+	\begin{remark}[Notation]
+		The 1-dimensional subspace $S$ of $V$ can be defined as follows: \[
+		S=\set{\of{\lambda a,\lambda b, \lambda c}:\lambda\in K}\subseteq V
+		\] for some $(a, b, c)\setminus\set{(0,0,0)}$. Then $S$ is denoted as $S=(a:b:c)$. That is, \[
+		\mathbb{P}^2(K)=\set{(a:b:c):a,b,c\in K\setminus\set{0}}.
+		\]
+	\end{remark}
+	\vspace{4pt}
+	\begin{example}
+		Consider $\mathbb{P}^2(\F_3)=\mathbb{P}^2(\set{0,1,2})$. Then
+		\begin{center}
+			\begin{tikzpicture}[sibling distance=10em,
+			every node/.style = {shape=rectangle, rounded corners,
+				draw, align=center}]
+			\node {$\mathbb{P}^2(\F_3)$}
+			child { node {$(*:*:1)$\\ $3\times3=9$ items} }
+			child { node {$(*:*:0)$} 
+				child { node {$(*:1:0)$\\ $3$ items} }
+				child { node {$(*:0:0)$\\ $1$ item} }
+			};
+			\end{tikzpicture}
+		\end{center}
+	\end{example}
+	\vspace{4pt}
+	\begin{remark}
+		The point $S=(a:b:c)$ of $\mathbb{P}^2(K)$ can be denoted as follows \[
+		S=(a:b:c)=\begin{cases}
+		(\inv{c}a:\inv{c}b:1), &:c\neq 0\\
+		(a:b:0) &: c=0.
+		\end{cases}
+		\]
+	\end{remark}
+	\vspace{8pt}
+	\begin{tcolorbox}[colback=white,colframe=procolor,arc=5pt,title={\color{white}\bf }]
+		\begin{proposition}
+			\ \begin{enumerate}[(1)]
+				\item $\mathbb{P}^2(K)$ can be defined as follows: \[
+				\mathbb{P}^2(K):=\set{(u:v:1):u,v\in K}\cup\set{(c:1:0):c\in K}\cup\set{(1:0:0)}
+				\] where $u=c^{-1}a\in K$ and $v=c^{-1}b\in K$.
+				\item When $\abs{K}=p$, the number of points in $\mathbb{P}^2(K)$ is $\abs{\mathbb{P}^2(K)}=p^2+p+1$, among which there are $p+1$ points at infinity.
+				\item (Generalization of \#points) When $\abs{K}=p$, the number of points in $\mathbb{P}^n(K)$ is \[
+				\abs{\mathbb{P}^n(K)}=p^n+p^{n-1}+\cdots+p^2+p+1=\sum_{i=0}^np^i,
+				\] among which there are $\sum_{i=0}^{n-1}p^i$ points at infinity.
+			\end{enumerate}
+		\end{proposition}
+	\end{tcolorbox}
+	\begin{remark}
+		In $\mathbb{P}^2(K)$, points of type $(a:b:0)$ are referred to as \textbf{points at infinity}, and the set $\set{(c:1:0):c\in K}\cup\set{(1:0:0)}$ of points at infinity can be defined by the linear equation $Z=0$, therefore it is called the \textbf{line at infinity}.
+	\end{remark}
+	\begin{proof}
+		\ \begin{enumerate}[(1)]
+			\item Let $u=c^{-1}a\in K$ and $v=c^{-1}b\in K$ then \begin{align*}
+			&\mathbb{P}^2(K)\\
+			:&=\set{(u:v:1):u,v\in K}\cup\set{(a:b:0):a,b\in K}\\
+			&=\set{(u:v:1):u,v\in K}\cup\of{\bigcup_{b\in K\setminus\set{0}}\set{(a:b:0):a\in K}}\cup\set{(a:0:0):a\in K}\\
+			&=\set{(u:v:1):u,v\in K}\cup\of{\bigcup_{b\in K\setminus\set{0}}\set{(b^{-1}a:1:0):a\in K}}\cup\set{(1:0:0)}\\
+			&=\set{(u:v:1):u,v\in K}\cup\set{(c:1:0):c\in K}\cup\set{(1:0:0)}.
+			\end{align*}
+		\end{enumerate}
+	\end{proof}
+	\vspace{4pt}
+	\begin{example}
+		Consider $\mathbb{P}^2(\F_7)$.
+		\begin{center}
+			\begin{tikzpicture}[sibling distance=10em,
+			every node/.style = {shape=rectangle, rounded corners,
+				draw, align=center}]
+			\node {$\mathbb{P}^2(\F_7)$}
+			child { node {$(*:*:1)$} 
+				child { node {$(0:0:1)$\\ $\vdots$\\ $(6:6:1)$} }
+			}
+			child { node {$(*:*:0)$} 
+				child { node {$(*:1:0)$} 
+					child { node {$(0:1:0)$\\ $\vdots$\\ $(6:1:0)$} }
+				}
+				child { node {$(*:0:0)$} 
+					child { node {$(1:0:0)$} }
+				}
+			};
+			\end{tikzpicture}
+		\end{center}
 	\end{example}
 	
+	\newpage
+	\subsection{Line}
+	
+	\begin{tcolorbox}[colback=white,colframe=defcolor,arc=5pt,title={\color{white}\bf Line}]
+		\begin{definition}
+			On the projective plane $\mathbb{P}^2(K)$, the set of points satisfying the following homogeneous linear equation is called a \textbf{line}: \[
+			\alpha X+\beta Y+\gamma Z=0,\quad \alpha,\beta,\gamma\in K\setminus\set{0}.
+			\] Therefore, the line $L(\alpha,\beta,\gamma)$ can be expressed as follows: \[
+			L(\alpha,\beta,\gamma):=\set{(a:b:c)\in\mathbb{P}^2(K):\alpha a+\beta b+\gamma c=0}.
+			\]
+		\end{definition}
+	\end{tcolorbox}
+	\vspace{4pt}
+	\begin{example}
+		Find the points on the following line defined in $\mathbb{P}^2(\F_5)$. \[
+		f_1:2X+3Y+Z=0,\quad f_2:2X+2Y+3Z=0,\quad f_3:3X+Y+3Z=0,\quad f_4:Z=0.
+		\]
+		\begin{proof}[\sol]
+			\ \begin{center}
+				\begin{tikzpicture}[sibling distance=10em,
+				every node/.style = {shape=rectangle, rounded corners,
+					draw, align=center}]
+				\node {$\mathbb{P}^2(\F_5)$}
+				child { node {$(*:*:1)$} }
+				child { node {$(*:*:0)$} 
+					child { node {$(*:1:0)$} }
+					child { node {$(*:0:0)$} }
+				};
+				\end{tikzpicture}
+			\end{center} \begin{enumerate}
+				\item[$(f_1)$] $2X+3Y+Z=0$; \[
+				\begin{cases}
+				2X+3Y=0 &: Z=0\quad\cdots\cdots\text{(i)}\\
+				2X+3Y+1=0 &: Z=1\quad\cdots\cdots\text{(ii)}
+				\end{cases}
+				\] \begin{multicols}{2}
+					(i)
+					\begin{align*}
+					2X+Y&=0\\
+					6X+9Y&=0\\
+					X+4Y&=0\\
+					X-Y&=0\\
+					X&=Y
+					\end{align*}
+					%\columnbreak % Move to the next column
+					(ii)
+					\begin{align*}
+					2X+Y+1&=0\\
+					6X+9Y+3&=0\\
+					X+4Y+3&=0\\
+					X-Y+3&=0\\
+					Y&=X+3
+					\end{align*}
+				\end{multicols} Therefore, \[
+					(1:1:0)\quad\text{and}\quad\begin{cases}
+					(0:3:1)\\
+					(1:4:1)\\
+					(2:0:1)\\
+					(3:1:1)\\
+					(4:2:1).
+					\end{cases}
+				\]
+				\item[$(f_2)$] $2X+2Y+3Z=0$; \[
+				\begin{cases}
+				2X+2Y=0 &: Z=0\quad\cdots\cdots\text{(i)}\\
+				2X+2Y+3=0 &: Z=1\quad\cdots\cdots\text{(ii)}
+				\end{cases}
+				\] \begin{multicols}{2}
+					(i)
+					\begin{align*}
+					2X+2Y&=0\\
+					6X+6Y&=0\\
+					X+Y&=0\\
+					X&=-Y\\
+					X&=4Y
+					\end{align*}
+					%\columnbreak % Move to the next column
+					(ii)
+					\begin{align*}
+					2X+2Y+3&=0\\
+					6X+6Y+9&=0\\
+					X+Y+4&=0\\
+					Y&=-X-4&\\
+					Y&=4X+1
+					\end{align*}
+				\end{multicols} Therefore, \[
+				(4:1:0)\quad\text{and}\quad\begin{cases}
+				(0:1:1)\\
+				(1:0:1)\\
+				(2:4:1)\\
+				(3:3:1)\\
+				(4:2:1).
+				\end{cases}
+				\]
+				\item[$(f_3)$] $3X+Y+3Z=0$; \[
+				\begin{cases}
+				3X+Y=0 &: Z=0\quad\cdots\cdots\text{(i)}\\
+				3X+Y+3=0 &: Z=1\quad\cdots\cdots\text{(ii)}
+				\end{cases}
+				\] \begin{multicols}{2}
+					(i)
+					\begin{align*}
+					3X+Y&=0\\
+					6X+2Y&=0\\
+					X+2Y&=0\\
+					X&=3Y
+					\end{align*}
+					%\columnbreak % Move to the next column
+					(ii)
+					\begin{align*}
+					3X+Y+3&=0\\
+					Y&=-3X-3\\
+					Y&=2X+2\\
+					Y&=2(X+1)
+					\end{align*}
+				\end{multicols} Therefore, \[
+				(3:1:0)\quad\text{and}\quad\begin{cases}
+				(0:2:1)\\
+				(1:4:1)\\
+				(2:1:1)\\
+				(3:3:1)\\
+				(4:0:1).
+				\end{cases}
+				\]
+				\item[$(f_4)$] $Z=0$;  
+				\begin{center}
+					\begin{tikzpicture}[sibling distance=10em,
+					every node/.style = {shape=rectangle, rounded corners,
+						draw, align=center}]
+					\node {$Z=0$}
+					child { node {$(*:*:0)$} 
+						child { node {$(*:1:0)$} 
+							child { node {$(0:1:0)$\\ $\vdots$ \\ $(4:1:0)$} }
+						}
+						child { node {$(*:0:0)$}
+							child { node {$(1:0:0)$} }
+						}
+					};
+					\end{tikzpicture}
+				\end{center}
+				Therefore, \[
+				(1:0:0)\quad\text{and}\quad \begin{cases}
+				(0:1:0)\\
+				(1:1:0)\\
+				(2:1:0)\\
+				(3:1:0)\\
+				(4:1:0).
+				\end{cases}
+				\]
+			\end{enumerate}
+		\end{proof}
+	\end{example}
+	
+	\begin{tcolorbox}[colback=white,colframe=procolor,arc=5pt,title={\color{white}\bf }]
+		\begin{proposition}
+			Let $\abs{K}=p$. Then \begin{enumerate}[(1)]
+				\item Every line in the projective plane $\mathbb{P}^2(K)$ contains $\frac{p^2-1}{p-1}=p+1$ points.
+				\item Any two distinct lines in the projective plane $\mathbb{P}^2(K)$ intersect at exactly one point. 
+			\end{enumerate}
+		\end{proposition}
+	\end{tcolorbox}
+	\vspace{8pt}
+	\begin{tcolorbox}[colback=white,colframe=procolor,arc=5pt,title={\color{white}\bf }]
+		\begin{proposition}
+			The line passing through any two points $P=(x_1,y_1,z_1)$ and $Q=(x_2,y_2,z_2)$ in the projective plane $\mathbb{P}^2(K)$ is defined as follows:
+			\[
+			(y_2z_1-y_1z_2)X+(z_2x_1-z_1x_2)Y+(x_2y_1-x_1y_2)Z=0.
+			\] and is unique.
+		\end{proposition}
+	\end{tcolorbox}
+	
+	\newpage
+	\section{Plane Projective Curve}
+	
+	\begin{tcolorbox}[colback=white,colframe=defcolor,arc=5pt,title={\color{white}\bf Plane Projective Curve}]
+		\begin{definition}
+			The \textbf{projective plane curve} (simply projective curve) $C$ defined over the field $K$ is determined by the homogeneous polynomial \[
+			F(X, Y, Z)\in K[X, Y, Z]:F(X, Y, Z) = 0. 
+			\]
+		\end{definition}
+	\end{tcolorbox}
+	\vspace{4pt}
+	\begin{remark}[\bf Affine to Projective]
+		content...
+	\end{remark}
+	\vspace{4pt}
+	\begin{remark}[\bf Projective to Affine]
+		content...
+	\end{remark}
+	\vspace{4pt}
+	\begin{note}
+		\ \begin{center} 
+			\begin{tabular*}{\textwidth}{@{\extracolsep{\fill}}c|c|c}
+				\toprule[1.2pt]
+				Affine Curve & Projective Curve & Point at Infinity \\
+				\midrule
+				\midrule
+				$Y=aX+b$ & $Y=aX+bZ$ & $(1:a:0)$ \\
+				\hline
+				$X^2-Y^2=1$ & $X^2-Y^2=Z^2$ & $(1:\pm 1:0)$ \\
+				\hline
+				$X^2+Y^2=1$ & $X^2+Y^2=Z^2$ & $\set{(X,Y):X^2+Y^2=0}$ \\
+				\hline
+				$Y^2=X^3+aX+b$ & $Y^2Z=X^3+aXZ^2+bZ^3$ & $(0:1:0)$ \\
+				\hline
+				$X^2+Y^2=1-X^2Y^2$ & $X^2Z^2+Y^2Z^2=Z^4-X^2Y^2$ & $(1:0:0)$, $(0:1:0)$ \\
+				\bottomrule[1.2pt]
+			\end{tabular*}
+		\end{center}
+	\end{note}
+
+	\iffalse
+	\begin{center}
+		\begin{tikzpicture}
+		\begin{axis}[
+		xlabel=$x$,
+		ylabel={$y$},
+		domain=-2:2,
+		view={0}{90},
+		axis lines=center,
+		axis equal image,
+		width=8cm,
+		height=8cm,
+		]
+		\addplot3[surf,shader=interp] {sqrt(x^3 + 3*x + 2)};
+		\addplot3[surf,shader=interp] {-sqrt(x^3 + 3*x + 2)};
+		\end{axis}
+		\end{tikzpicture}
+	\end{center}
+	\fi
+	
+	\newpage
+	\section{Singularity}
+	
 	\begin{tcolorbox}[colback=white,colframe=lemcolor,arc=5pt,title={\color{white}\bf }]
 		
 	\end{tcolorbox}
+	
+	\begin{tcolorbox}[colback=white,colframe=lemcolor,arc=5pt,title={\color{white}\bf }]
+		
+	\end{tcolorbox}
+	
+	
+	\section{Genus}
+	
+	\begin{tcolorbox}[colback=white,colframe=lemcolor,arc=5pt,title={\color{white}\bf }]
+		
+	\end{tcolorbox}
+	
+	\begin{tcolorbox}[colback=white,colframe=lemcolor,arc=5pt,title={\color{white}\bf }]
+		
+	\end{tcolorbox}
+	
+	
+	\newpage
+	\section{Elliptic Curves}
+	
+	\begin{tcolorbox}[colback=white,colframe=defcolor,arc=5pt,title={\color{white}\bf Elliptic Curve}]
+		\begin{definition}
+			In $\mathbb{P}^2(K)$, an algebraic curve of genus $1$ that is non-singular is referred to as an \textbf{elliptic curve}.
+		\end{definition}	
+	\end{tcolorbox}
+	\vspace{4pt}
+	\begin{tcolorbox}[colback=white,colframe=thmcolor,arc=5pt,title={\color{white}\bf }]
+		\begin{theorem}
+			All elliptic curves are isomorphic to a Weierstrass algebraic curve in the projective plane $\mathbb{P}^2(\overline{K})$.
+		\end{theorem}
+	\end{tcolorbox}
+	\vspace{8pt}
+	\begin{note}
+		\ \begin{center}
+			\begin{tabular*}{\textwidth}{@{\extracolsep{\fill}}c||c|c}
+				\toprule[1.2pt]
+				Name & Equation & Discriminant \\
+				\midrule
+				\midrule
+				Short Weierstrass & $Y^2Z=X^3+aXZ^2+bZ^3$ & $-16(4a^3+27b^2)$ \\
+				\hline
+				Montgomery & $BY^2Z=X^3+AXZ^2+XZ^3$ & $B(A^2-4)$ \\
+				\hline
+				Edwards & $X^2Z^2+Y^2Z^2=Z^4+dX^2Y^2$ & $d(d-1)$ \\
+				\hline
+				Hessian & $X^3+Y^3+Z^3=dXYZ$ & - \\
+				\bottomrule[1.2pt]
+			\end{tabular*}
+		\end{center}
+	\end{note}
+	
+	\section{Weierstrass Curve}
+	
+	
+	\newpage
+	\chapter{Elliptic Curve Group}
+	\iffalse
+	\begin{tikzpicture}[scale=0.5]
+	% Draw the axes
+	\draw[->] (-5,0) -- (5,0) node[right] {$x$};
+	\draw[->] (0,-5) -- (0,5) node[above] {$y$};
+	
+	% Draw the elliptic curve
+	\draw plot[domain=-2:2] (\x,{sqrt(\x*\x*\x - \x + 2)});
+	\draw plot[domain=-2:2] (\x,{-sqrt(\x*\x*\x - \x + 2)});
+	
+	% Draw the points P and Q
+	\fill (-1, sqrt(-1*-1*-1 + 1 + 2)) circle (4pt) node[above left] {$P$};
+	\fill (1, sqrt(1*1*1 - 1 + 2)) circle (4pt) node[above right] {$Q$};
+	
+	% Draw the line through P and Q and the point -R
+	\draw[->, dashed] (-3, {-sqrt(-3*-3*-3 + 3 + 2)}) -- (3, {sqrt(3*3*3 - 3 + 2)}) node[right] {$-R$};
+	
+	% Draw the point R
+	\fill (3, -sqrt(3*3*3 - 3 + 2)) circle (4pt) node[below right] {$R=P+Q$};
+	
+	\end{tikzpicture}
+	\fi
 	
 	\begin{tcolorbox}[colback=white,colframe=lemcolor,arc=5pt,title={\color{white}\bf }]
 		
@@ -2780,5 +3248,20 @@ int main() {
 		
 	\end{tcolorbox}
 	
+	\begin{tcolorbox}[colback=white,colframe=lemcolor,arc=5pt,title={\color{white}\bf }]
+		
+	\end{tcolorbox}
+	
+	\begin{tikzpicture}[sibling distance=10em,
+	every node/.style = {shape=rectangle, rounded corners,
+		draw, align=center,
+		top color=white, bottom color=blue!20}]]
+	\node {Root}
+	child { node {Child 1} }
+	child { node {Child 2}
+		child { node {Grandchild 1} }
+		child { node {Grandchild 2} } };
+	\end{tikzpicture}
+		
 	% End document
 \end{document}
