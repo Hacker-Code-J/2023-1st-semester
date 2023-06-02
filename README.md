@@ -1,4 +1,4 @@
-# 2023-1st-semester
+# 2023-spring
 <div align="center">
   <img src="https://i.imgur.com/xxxxxxxxxx.png" alt="Repository Cover Image" width="100%">
 </div>
