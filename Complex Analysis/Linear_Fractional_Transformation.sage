@@ -2,21 +2,28 @@ import numpy as np
 import matplotlib.pyplot as plt
 
 # Define the domain of the transformation
-r = np.linspace(0, 1, 100)
+r = np.linspace(1e-5, 1, 100)  # start from a small positive number
 theta = np.linspace(0, np.pi/2, 100)
 R, Theta = np.meshgrid(r, theta)
 Z = R * np.exp(1j * Theta)
 
 # Define the transformation
 def transform(z):
-    z = z**4
-    #z = -1j*(z - 1)/(z + 1)
-    #z = (z - 1)**2
-    #z = z / (1 - z + 1e-12)
+    z = z**2
+    z = 1 / z
+    z = z**2
+    #z = np.exp(1j * z)
     return z
 
 # Apply the transformation
 Z_transformed = transform(Z)
+
+# Check for any NaNs or Infs in the array
+if np.any(np.isnan(Z_transformed)) or np.any(np.isinf(Z_transformed)):
+    print("Warning: Z_transformed contains NaNs or Infs.")
+
+# Replace any NaNs or Infs with a large finite number
+Z_transformed = np.nan_to_num(Z_transformed, nan=1e6, posinf=1e6, neginf=1e6)
 
 # Create the plot
 fig, ax = plt.subplots(1, 2, figsize=(12, 6))
