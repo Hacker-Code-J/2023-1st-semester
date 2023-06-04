@@ -1,15 +1,20 @@
 import numpy as np
 import matplotlib.pyplot as plt
 
+x = np.linspace(-10, 10, 400)
+y = np.linspace(0, 5, 400)
+X, Y = np.meshgrid(x, y)
+
 # Define the domain
-r = np.linspace(0, 1, 400)
-theta = np.linspace(0, np.pi/2, 400)
+r = np.linspace(0, 1, 1000)
+theta = np.linspace(0, np.pi/2, 1000)
 R, Theta = np.meshgrid(r, theta)
 Z = R * np.exp(1j*Theta)
+#Z = X + 1j * Y
 
 # Define the four transformations
-f1 = lambda z: z**2
-f2 = lambda z: 1j*np.log(z)
+f1 = lambda z: z^2
+f2 = lambda z: (-1-z) / (z-1)
 f3 = lambda z: z**2
 f4 = lambda z: (z + 1j) / (z - 1j)
 
